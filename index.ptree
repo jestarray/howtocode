@@ -1,0 +1,14 @@
+#lang pollen
+
+◊introduction.html{
+    learning_stages.html
+    installation.html
+}
+
+◊expressions.html{
+    exercise_pythag.html
+    strings.html
+    parens_error.html
+    images.html
+    rtfm.html
+}

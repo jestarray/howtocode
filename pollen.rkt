@@ -14,6 +14,11 @@
           (list (txexpr 'code empty
                         (list op)))))
 
+;todo: introduce (slide-only) content? that is invis in reading mode and only vis in slide_mode ?
+; to active slidemode, hit f12 and run the global function slide_mode()
+(define (slide . content)
+  (txexpr 'div (list '(class "slide")) content))
+
 ;(define command-char #\◊)
 (module setup racket/base
   (provide (all-defined-out))
@@ -25,8 +30,9 @@
 
 (define (root . elements)
   (txexpr 'root empty (decode-elements elements
+                                       #:exclude-tags (list 'code 'pre) ; do not do smartquotes or dashes in code blocks
                                        #:txexpr-elements-proc (compose1 decode-paragraphs)
-                                       #:string-proc (compose1 smart-dashes))))
+                                       #:string-proc (compose1 smart-quotes smart-dashes))))
 
 ;Number -> List<Number>
 ; returns a list of powers of two

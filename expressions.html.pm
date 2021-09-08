@@ -18,8 +18,8 @@ where:
 ◊ul{
     ◊li{◊code{(}}
     ◊li{◊code{+} , is the name of the ◊strong{operator}, also sometimes called a ◊strong{function}}
-    ◊li{◊code{2} , is the 1st ◊strong{argument} consumed by the operator}
-    ◊li{◊code{4} , is the 2nd ◊strong{argument} consumed by the operator}
+    ◊li{◊code{2} , is the 1st ◊strong{argument} consumed by the operator, also sometimes called ◊strong{operands}}
+    ◊li{◊code{4} , is the 2nd argument/operand}
     ◊li{◊code{)}}
 }
 
@@ -27,8 +27,10 @@ It reads: Call the + function with arguments 2 and 4
 
 The result of ◊strong{executing} the function/operation/expression is a ◊strong{value}, in this case the number 6.
 
+
 ◊h2{Evaluating Expressions in detail}
 
+Operands/Arguments can also be expressions themselves that:
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket" 
 "; problem: what does this evaluate to?

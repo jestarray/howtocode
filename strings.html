@@ -8,6 +8,48 @@
     <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
     <script src="/prism_highlight.js"></script>
     <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script>
+
+    function slide_mode(){
+        //if there isnt enough content for a slide and it looks to small, just zoom in! it also helps emphasizes the point
+        let body = document.getElementsByTagName("body")[0];
+        body.style.background = "black";
+        body.style.color = "white";
+        let all = document.getElementsByTagName("article")[0].children;
+        Array.from(all).forEach((v) => {
+            if(v.className !== "slide") {
+                v.style.display = "none";
+            }
+        });
+        let slide_points = Array.from(document.querySelectorAll(".slide"));
+        let index = 0;
+
+        function show_rev(){
+            slide_points.forEach((v, index2) => {
+                if(index2 !== index) {
+                    v.style.display = "none";
+                    v.style.background = "black";
+                } else {
+                    v.style = "";
+                }
+            })
+        }
+        show_rev(); //initialize the slideshow by hiding everything
+        window.onkeypress = (k) => {
+            if(k.key === "a") {
+                if (!(index - 1 < 0)) {
+                    index-=1;
+                }
+            } else if(k.key === "d") {
+                if (index + 1 < slide_points.length) {
+                    index+=1;
+                }
+            }
+            show_rev();
+        };
+
+    }
+    </script>
     <title>Strings</title>
 </head>
 
@@ -21,7 +63,7 @@
                 <h1>Strings</h1><h2 id="creating_a_string"><a class="anchor" href="#creating_a_string">#</a>Creating a string</h2><p>To form a string, wrap the characters in double quotes <code>""</code></p><p>here are some examples of strings:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">"hello world"
 "why do ants never get sick? because of their anty bodies"
 "こんにちは世界" ; hello world in japanese
-</code></pre><h2 id="what_are_strings?"><a class="anchor" href="#what_are_strings?">#</a>What are strings?</h2><p>A collection of characters to that can represent words, usernames and general text</p><h2 id="what_is_the_difference_between_the_number_123_and_the_string_&quot;123&quot;?"><a class="anchor" href="#what_is_the_difference_between_the_number_123_and_the_string_&quot;123&quot;?">#</a>What is the difference between the number 123 and the string "123"?</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; as you can see they are highlighted differently
+</code></pre><h2 id="what_are_strings?"><a class="anchor" href="#what_are_strings?">#</a>What are strings?</h2><p>A collection of characters to that can represent words, usernames and general text</p><h2 id="what_is_the_difference_between_the_number_123_and_the_string_&quot;123&quot;?"><a class="anchor" href="#what_is_the_difference_between_the_number_123_and_the_string_&quot;123&quot;?">#</a>What is the difference between the number 123 and the string “123”?</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; as you can see they are highlighted differently
 123 ; the number 123
 "123" ; the string 123
 </code></pre><p>The number 123 can be divided, sqrt, multipled, all the classical math operations you are familar with.<br/>The string <code>"123"</code> is for only for show.</p><p>If you try that on the string <code>"123"</code>, it will give you an error.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(+ "123" 1)
@@ -46,7 +88,7 @@
 (string-length "hello cat") ; gives 9
 ; how do you get the last character t?
 (substring "hello cat" 8) ; gives t, notice it's not 9
-</code></pre><p>This takes some getting used to and has been the cause of numerous security holes in other programming languages. Get some practice with them!</p><p>What is <code>(substring "barnicales" 0 5)</code>?<br/><details><summary>answer</summary><p>"barni"</p></details><br/>jestlearn.com</p>
+</code></pre><p>This takes some getting used to and has been the cause of numerous security holes in other programming languages. Get some practice with them!</p><p>What is <code>(substring "barnicales" 0 5)</code>?<br/><details><summary>answer</summary><p>“barni”</p></details><br/>jestlearn.com</p>
             </article>
         </main>
     </div>

@@ -7,6 +7,48 @@
     <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
 
+    <script>
+
+    function slide_mode(){
+        //if there isnt enough content for a slide and it looks to small, just zoom in! it also helps emphasizes the point
+        let body = document.getElementsByTagName("body")[0];
+        body.style.background = "black";
+        body.style.color = "white";
+        let all = document.getElementsByTagName("article")[0].children;
+        Array.from(all).forEach((v) => {
+            if(v.className !== "slide") {
+                v.style.display = "none";
+            }
+        });
+        let slide_points = Array.from(document.querySelectorAll(".slide"));
+        let index = 0;
+
+        function show_rev(){
+            slide_points.forEach((v, index2) => {
+                if(index2 !== index) {
+                    v.style.display = "none";
+                    v.style.background = "black";
+                } else {
+                    v.style = "";
+                }
+            })
+        }
+        show_rev(); //initialize the slideshow by hiding everything
+        window.onkeypress = (k) => {
+            if(k.key === "a") {
+                if (!(index - 1 < 0)) {
+                    index-=1;
+                }
+            } else if(k.key === "d") {
+                if (index + 1 < slide_points.length) {
+                    index+=1;
+                }
+            }
+            show_rev();
+        };
+
+    }
+    </script>
     <title>Common errors</title>
 </head>
 
@@ -17,7 +59,7 @@
             <div id="home"><a href="/index.html">Index</a></div>
             <div id="next"><a href="/images.html">Images</a> →</div>
             <article>
-                <h1>Common errors</h1><p>Mismatching parens, use logic, it's always (operator, arg1)</p><p>The operator will always always come first.</p><p>(+ (4) 7)</p><p>(4) ERROR: is an error because 4 is not an operator</p><p>Enable automatic parens but be warned sometimes it will insert 2 when you really just want one, but its most often the case you always want 2 auto-closed, same with quotes</p><p>It's the default setting for vscode</p><p>if you delete the starting parens, look to delete the ending one.</p><p>some students keep randomly wrapping parenthesis when things dont work and I want to emphasize that you should use logic to wrap parens.</p><p>Everything has to follow &lt;operator arg1 arg2&gt; (+ 1 2) and if you need to do more you have to come back out and wrap around... which is a bit counter intutive because we like to keep adding things at the end</p><p>Notice the language is a little kind of counter intutive because we have to go back left, wrap around parens, and add stuff, e.g<br/>4 + 5 * 3 + 2 - 1 , we can just keep adding stuff to the right but we have to implcity remember PEMDAS, multiplcation happens first</p><p>when you naturally type this out in racket it feels a little weird and grooky<br/>in racket<br/>(* 5 3) ; write this first, then go back left and wrap thoose around parens<br/>kind of weird since the lot of us are right handed and prefer just tacking things onto the right<br/>(+ 4 (* 5 3) (- 2 1))</p><p>tradeoffs! you can say you hate this but the language was designed this way for a purpose, see my first videos links if you're curious as to why parentehsis etc</p>
+                <h1>Common errors</h1><p>Mismatching parens, use logic, it’s always (operator, arg1)</p><p>The operator will always always come first.</p><p>(+ (4) 7)</p><p>(4) ERROR: is an error because 4 is not an operator</p><p>Enable automatic parens but be warned sometimes it will insert 2 when you really just want one, but its most often the case you always want 2 auto-closed, same with quotes</p><p>It’s the default setting for vscode</p><p>if you delete the starting parens, look to delete the ending one.</p><p>some students keep randomly wrapping parenthesis when things dont work and I want to emphasize that you should use logic to wrap parens.</p><p>Everything has to follow &lt;operator arg1 arg2&gt; (+ 1 2) and if you need to do more you have to come back out and wrap around... which is a bit counter intutive because we like to keep adding things at the end</p><p>Notice the language is a little kind of counter intutive because we have to go back left, wrap around parens, and add stuff, e.g<br/>4 + 5 * 3 + 2 - 1 , we can just keep adding stuff to the right but we have to implcity remember PEMDAS, multiplcation happens first</p><p>when you naturally type this out in racket it feels a little weird and grooky<br/>in racket<br/>(* 5 3) ; write this first, then go back left and wrap thoose around parens<br/>kind of weird since the lot of us are right handed and prefer just tacking things onto the right<br/>(+ 4 (* 5 3) (- 2 1))</p><p>tradeoffs! you can say you hate this but the language was designed this way for a purpose, see my first videos links if you’re curious as to why parentehsis etc</p>
             </article>
         </main>
     </div>

@@ -44,7 +44,7 @@ There are operations you can do on a string, like:
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket"
 "; combining two strings with (string-append)
-(string-append \"123\" \"1\") ; gives \"1231\")
+(string-append \"123\" \"1\") ; gives \"1231\"
 (string-append \"Good morning\" \"bob\") ; gives \"Good morningbob\"
 
 ; convert a string to a number
@@ -79,4 +79,8 @@ What is ◊code{(substring "barnicales" 0 5)}?
     ◊summary{answer}
     "barni"
 }
-jestlearn.com
+
+◊h2{Practice Problems}
+◊(define 0-indexing "https://jestlearn.com/#zero_based_indexing_string_practice")
+
+◊a[#:href 0-indexing]{Zero based indexing practice}

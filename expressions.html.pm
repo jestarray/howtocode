@@ -1,5 +1,4 @@
 #lang pollen
-
 ◊h1{Expressions and Evaluation rules}
 
 ◊h2{Rules to form an expression}
@@ -23,6 +22,8 @@ where:
     ◊li{◊code{)}}
 }
 
+Notice that spaces are used to seperate multiple arguments, NOT COMMAS as in other languages. If you type a comma, it will be an error.
+
 It reads: Call the + function with arguments 2 and 4
 
 The result of ◊strong{executing} the function/operation/expression is a ◊strong{value}, in this case the number 6.
@@ -30,7 +31,7 @@ The result of ◊strong{executing} the function/operation/expression is a ◊str
 
 ◊h2{Evaluating Expressions in detail}
 
-Operands/Arguments can also be expressions themselves that:
+Operands/Arguments can also be expressions themselves that then evaluate to a value
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket" 
 "; problem: what does this evaluate to?
@@ -67,6 +68,7 @@ Notice in the nested expression:
 "(- (+ 3 3) 2)")
 }
 after evaluating the inside: ◊code{(+ 3 3)}, we're back outside to the ◊code{-} operation, ◊code{(- 6 2)}. So in summary the rules for evaluation are left to right from inside to out.
+Also note that ◊code{(- 6 2)} follows the same structure for forming an expression ◊code{(<operator> arg1...)}
 
 ◊h2{Inexact numbers}
 
@@ -98,3 +100,36 @@ pi
 ")
 }
 )
+
+◊h2{Errors}
+
+◊code{((+ 3 4))} this an error because there is no operator in the outer parens
+◊code{(3 (+ 1 6))} this is also an error because 3 is not an operator, your cannot "3" yourself.
+
+Immediately following an opening parenthesis should ◊strong{ALWAYS} be an operator.
+We'll cover errors more extensively later but for now just remember to make sure everything must follow ◊code{(<operator> <arg1> ...)}
+
+◊h2{Practice Problems}
+◊(define practice-url "https://jestlearn.com/how_to_code/#expressions_and_evaluation_with_numbers")
+◊a[#:href practice-url]{Evaluating number expressions}
+
+◊(define infix-to-pre "https://jestlearn.com/how_to_code/#translate_infix_to_prefix_math")
+◊a[#:href infix-to-pre]{Infix to prefix math expressions}
+
+◊h2{Exercise 0 - Pythag}
+
+◊; REQUIRES RACEKT/FILE
+◊(require racket/file)
+◊(define filename "0-pythag")
+◊(define starter (string-append "starter/" filename "_starter.rkt"))
+◊;(define filepath "code/start_exercise_template.rkt")
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src starter #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(file->string starter #:mode 'text))
+}
+◊(define solution (string-append "solutions/" filename "_solution.rkt"))
+◊details{
+    ◊summary{Answer}
+    ◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src solution #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(file->string solution))
+}
+}

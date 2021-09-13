@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <title>Booleans</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/variables.html"> Variables</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+            <div id="next"><a href="/functions.html">Functions</a> →</div>
+            <article>
+                <h1>Booleans</h1><h2 id="what_are_booleans?"><a class="anchor" href="#what_are_booleans?">#</a>What are booleans?</h2><p>They are the values <code>#true</code> or <code>#false</code>, most often the result comparison functions, e.g functions that answer a question, such as <code>&gt; , &lt; , = , &lt;= , &gt;= , string=? , etc...</code>. Another term for these are “predicates”.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; examples
+(define health 100)
+(&gt; health 0) ; alive!
+(= health 0) ; dead!
+(&lt; 1 2)
+(&gt;= 3 3)
+(&lt;= 1 2)
+
+(define username "bob123")
+
+(string=? username "bob123")
+(string=? username "bob124")
+
+; becareful, it's 1 charater off from string=?
+; tests the type of:
+(string? "adsf")
+(string? 9999)
+
+(number? 9999)
+(number? "asdf")
+</code></pre><p>go hand and hand with conditional expressions like <code>if</code></p><h2 id="if_statements"><a class="anchor" href="#if_statements">#</a>If statements</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; space out for readability rather than all 1 line
+(if &lt;question&gt;  ; if either true or false, it will error
+     &lt;expression&gt; ; true branch
+     &lt;expression&gt;) ; false branch
+</code></pre><p>DrRacket also highlights in black the branch that did not run which we will go into more detail in the later sections</p><h2 id="cond_statements"><a class="anchor" href="#cond_statements">#</a>Cond statements</h2><p>Like <code>if</code> statements but can handle more than 2 cases, in some ways it’s syntactic sugar for nested <code>if</code> statements, also known as <code>else if</code> or <code>case</code> in other languages</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; space out for readability rather than all 1 line
+(cond 
+    [&lt;question&gt; &lt;answer&gt;]  ; if question evalutes to true, answer will run, otherwise keep going down until you hit the else case
+    [&lt;question&gt; &lt;answer&gt;]  ; 
+    ;... can have unlimited amount of branches
+    [else]) ; else is the catch all branch, 
+
+; example
+(define tempature 3)
+(cond 
+    [(&lt; tempature 0) "so cold"] 
+    [(&gt; 50 tempature) "still very cold"] 
+    [(&gt; 100 tempature) "burning hot!"] 
+    ;... can have unlimited amount of branches
+    [else #f]) ; else is the catch all branch, 
+</code></pre><h2 id="logical_operations"><a class="anchor" href="#logical_operations">#</a>Logical operations</h2><p>And, Not, Or, short circuting</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; logical operators
+(and #true #false #true) ; all have to be true in order to produce true, else false
+(or #true #false #true) ; only one has to be true to produce true, else false
+(not #true) ; inverts false to true and true to
+
+; short circuting to save computation
+; for and, as soon as a #false is hit SKIP checking the rest as because it will eveluate to #false anyways
+(and #false (&lt;= (+ 1 2) (+ 2 3))) 
+
+; for or, as soon as a #true is hit SKIP checking the rest as because it will eveluate to #true anyways
+(or #false (= (+ 1 1) 2) #true (= 999 99)) 
+</code></pre><h2 id="practice_problems"><a class="anchor" href="#practice_problems">#</a>Practice Problems</h2><p><a href="https://jestlearn.com/#if_bool_comparisons">If boolean comparisons</a><br/><a href="https://jestlearn.com/#if_logical">If logical</a></p>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -6,28 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
-    ◊(define has-code-block? (select 'code doc))
-    ◊when/splice[has-code-block?]{
-    <script src="/prism_highlight.js"></script>
-    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
-    }
+
     <script src="./slide_mode.js"></script>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
-    <title>◊select['h1 doc]</title>
+    <title>Stepper</title>
 </head>
 
 <body>
     <div class="container">
         <main class="main-wrapper">
-            ◊(define prev-page (previous here))
-            ◊when/splice[prev-page]{
-            <div id="prev">← <a href="/◊|prev-page|"> ◊(select 'h1 prev-page)</a></div>}
+            <div id="prev">← <a href="/parens_error.html"> Wrapping Errors</a></div>
             <div id="home"><a href="/index.html">Index</a></div>
-            ◊(define next-page (next here))
-            ◊when/splice[next-page]{
-            <div id="next"><a href="/◊|next-page|">◊(select 'h1 next-page)</a> →</div>}
+            <div id="next"><a href="/discover.html">Discovering more built ins</a> →</div>
             <article>
-                ◊(->html doc #:splice? #t)
+                <h1>Stepper</h1><p>Also known as a “debugger” is a tool that evaluates code for us in a step by step fashion for humans to understand what’s going on.</p>
             </article>
         </main>
     </div>

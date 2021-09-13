@@ -64,6 +64,16 @@ With lots of practice, you eventually don't need to physically hold out your han
 As you move up and start learning multiplication, it also starts off very slow, deliberate and rule based with little thinking involved, just doing: "count up the number of groups, fill in the blanks". These pictures and pre-filled problems act as a template, a recipe, to kick start your thinking and get you to understanding the concepts and emerging patterns.
 ◊img[#:src "/images/learn_multiplication.jpg" #:style "max-width: 100%; height: auto;"]{}
 
+We've templatized long multiplication with 2 digits or more, e.g 
+42
+91
+__
+multiply in a criss cross pattern, write the numbers below, for each criss cross move 1 point to the left, after all are done we sum up the numbers.
+
+Learning how to dance or do a martial arts move, you chunk it up into smaller pieces and start fumbling to get your body to be only fimilar with one motion at a time, chunking it up before you can then fuse them together into a swift motion.
+
+Programming requires creating formulas rather than just using them, something that is not taught very much in math because all you do is plug in numbers to formulas given to you but rarely do you get enough time to dive into how it was invented and the amount of failures it took to get to the final formula.
+
 With lots of practice, you eventually memorize the multiplcation table and don't even need to think anymore, it all happens automatically. You can answer to 5 * 2 in less than a second where as before you would have to draw it out or slow down.
 
 We're experts at basic arthimetic, we developed a strong ◊strong{intution} for when repeated addition can be rewritten to multiplication and when it can't be.
@@ -94,3 +104,5 @@ An expert artist would probably struggle to come up with an answer because it's 
 Programming tutorials are often bad at this because they are taught by people who are experts that have 1000s of calculations and pattern recognition ◊strong{going on in their head that they don't verbalize or show their work before hand.} When to use some syntactic shorthand, when to factor things out, etc, just like how you do so with basic math!
 
 How most people learned programming is by watching others and copying them and then running into walls when the copying doesnt work or staring at a blank page
+
+NASA MARS CLIMATE ORBITER ARE THE REASONS WHY WE WRITE TESTS, FIXING A PROBLEM CAN OPEN A BUG

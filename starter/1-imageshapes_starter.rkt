@@ -1,0 +1,19 @@
+(require 2htdp/image)
+; THESE ANSWERS SHOULD RESEMBLE THESE IMAGES RESPECTIVELY:
+; https://howtocode.pages.dev/images/shapes.png
+
+; PROBLEM 1: Make a Stop sign using 2htdp/image
+; use regular-polygon for the hexagon
+; https://docs.racket-lang.org/teachpack/2htdpimage.html#%28def._%28%28lib._2htdp%2Fimage..rkt%29._regular-polygon%29%29
+
+
+; PROBLEM 1.1: Make a danger/warning sign with a triangle and an exclamation mark ⚠️
+
+
+; Problem 1.2: Make a isosoleces trapezoid
+
+
+; Problem 1.3: Make a traffic light with red, yellow, and green bulbs and a black rectangular background
+
+
+; Problem 1.4: Make a red checkerboard pattern

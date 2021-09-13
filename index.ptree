@@ -1,14 +1,18 @@
 #lang pollen
 
+◊cheatsheet.html{}
 ◊introduction.html{
-    learning_stages.html
     installation.html
+    learning_stages.html
 }
 
 ◊expressions.html{
-    exercise_pythag.html
     strings.html
-    parens_error.html
     images.html
-    rtfm.html
+    variables.html
+    booleans.html
+    functions.html
+    parens_error.html
+    stepper.html
+    discover.html
 }

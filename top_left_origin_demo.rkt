@@ -1,0 +1,1 @@
+; htdw program with top left origin printing the coordinates on the screen of the mouse, pay attention to the numbers, its not like math where the x/y axis are in the center

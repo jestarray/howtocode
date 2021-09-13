@@ -30,7 +30,7 @@
 
 (define (root . elements)
   (txexpr 'root empty (decode-elements elements
-                                       #:exclude-tags (list 'code 'pre) ; do not do smartquotes or dashes in code blocks
+                                       #:exclude-tags (list 'code 'pre 'a) ; do not do smartquotes or dashes in code blocks
                                        #:txexpr-elements-proc (compose1 decode-paragraphs)
                                        #:string-proc (compose1 smart-quotes smart-dashes))))
 
@@ -86,21 +86,13 @@
                                (cond [(symbol? (car headings)) (list headings)]
                                      [else headings]) entries)))
 
-;List<List<Key,Value>> -> txexpr
-(define (summaryc attr . h)
-  (txexpr 'summary attr h))
-
 ;String String -> txexpr
 (define (q heading . content)
-  (txexpr 'details empty (append (list (summaryc (list '(class "question")) heading)) content)))
+  (txexpr 'details empty (append (list (txexpr 'summary '((class "question")) (list heading))) content)))
 
 ;String String -> txexpr
 (define (step heading . content)
-  (txexpr 'details '((open "")) (append (list (summaryc (list '(class "step")) heading)) content)))
-
-;String String -> txexpr
-(define (more-examples . content)
-  (txexpr 'details empty (append (list (summaryc (list '(class "more-examples")) "Extra Examples")) content)))
+  (txexpr 'details '((open "")) (append (list (txexpr 'summary '((class "step")) (list heading))) content)))
 
 ;accepts only the uid, not the full url
 ; https://youtu.be/fQnUTmOu3lc?t=1777
@@ -267,28 +259,46 @@
 
 (define ex '(pagetree-root (introduction.html installation.html) (misc/evolvedsimplicity.html misc/effective_education.html misc/howtowritecleancode.html misc/badui.html misc/learning_stages.html)))
 
-; List<List<Symbol>>
-; call with: (cadr ex) to get rid of 'root and 'pagetree-root
-
+; List<'page-root List<Symbol>>
+; takes a pollen ptree pageroot
 (define (generate-toc root)
-  ; Symbol -> String
-  (define (get-heading-name path)
+  ; List<Symbols> -> List<(String List<txexpr> Symbol)
+  ; returns: (list h1 (list h2s...) 'filename.html)
+  (define (get-headings path)
     (define imp (dynamic-require (string-append (symbol->string path) ".pm") 'doc))
     (define hd (select 'h1 imp))
-    (cond [(string? hd) hd]
-          [else ""]))
+    (define subs (select* 'h2 imp))
+    (cond [(string? hd) (list hd (if (list? subs) subs null) path)]
+          [else (raise-user-error (string-append "there was no h1 on: " (symbol->string path))) ""]))
+
   (define (wrap j)
-    (define heading (get-heading-name j))
-    (define file-name (trim-ext (path->string (file-name-from-path (symbol->string j)))))
-    (txexpr 'li empty (list (txexpr 'a (list (cons 'href (cons (symbol->string j) empty))) (list heading)))))
+    (define heading (first j))
+    (define filename (symbol->string (last j)))
+    (define subs (second j))
+    (define h2s (map (lambda (anc title)
+                       (define attrs (get-attrs anc))
+                       (define hashed-url (second (second attrs)))
+                       (define updated-url (string-append filename hashed-url))
+                       (define updated-attrs (list (cons 'href (list updated-url))))
+                       ; (println updated-attrs)
+                       ; (println anc)
+                       (define updated-anc (txexpr (get-tag anc) updated-attrs (list title)))
+                       ; (println updated-anc)
+                       (txexpr 'li empty (list updated-anc)))
+                     (filter-not string? subs) (filter string? subs)))
+    (txexpr 'li empty
+            (list (txexpr 'a (list (cons 'href (list filename)))
+                          (list heading
+                                (txexpr 'ul empty h2s))))))
 
   ; List<Symbol> -> txexpr
+  ; '(intro.html)
   (define (section items)
-    (define heading (get-heading-name (car items)))
-    (txexpr 'li empty (list (h2 heading) (txexpr 'ol '((start "0")) (map wrap items)))))
-  (txexpr 'ol empty (map section root)))
+    (define headings (map get-headings items))
+    (define section-heading (first (first headings)))
+    (txexpr 'li empty (list (h2 section-heading) (txexpr 'ol '((start "0")) (map wrap headings)))))
+  (txexpr 'ol '((start "0")) (map section (cdr root))))
 
-; random is exclusive
-
+(define ptree-example '((introduction.html learning_stages.html installation.html) (expressions.html exercise_pythag.html strings.html images.html rtfm.html variables.html functions.html parens_error.html stepper.html)))
 ;(generate-toc (list (list 'misc/EvolvedSimplicity.html)))
 ;(generate-toc (list (list (build-path (current-directory) "misc" "EvolvedSimplicity.html"))))

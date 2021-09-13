@@ -53,7 +53,6 @@ Instead we're going to use a language called Racket, which really only has about
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket" 
 "(<operator> <argument-1> <argument-2> ...)
-
 (+ 1 2)   
 ")
 }

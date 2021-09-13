@@ -6,19 +6,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
-
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
     <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
     <title>Images</title>
 </head>
 
 <body>
     <div class="container">
         <main class="main-wrapper">
-            <div id="prev">← <a href="/parens_error.html"> Common errors</a></div>
+            <div id="prev">← <a href="/strings.html"> Strings</a></div>
             <div id="home"><a href="/index.html">Index</a></div>
-            <div id="next"><a href="/rtfm.html">Discovering more built ins</a> →</div>
+            <div id="next"><a href="/variables.html">Variables</a> →</div>
             <article>
-                <h1>Images</h1><p>todo: trapezoid exercise, discovering more shapes! </p>
+                <h1>Images</h1><p>Racket has support for drawing images</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(require 2htdp/image) ; MANDATORY! IF NOT HERE, IT WONT WORK
+
+; basic shapes
+(triangle 100 "solid" "black")
+(right-triangle 100 100 "solid" "blue")
+(rectangle 200 100 "solid" "red")
+(square 100 "solid" "green")
+(circle 123 "solid" "orange")
+
+; basic transformations
+(rotate 45 (rectangle 200 100 "solid" "red"))
+(flip-horizontal (right-triangle 100 100 "solid" "blue"))
+(flip-vertical (right-triangle 100 100 "solid" "blue"))
+
+; combining images
+
+(overlay
+ (circle 8 "solid" "pink")
+ (circle 16 "solid" "blue")
+ (circle 24 "solid" "red")
+ (circle 32 "solid" "green"))
+
+(above
+ (circle 32 "solid" "green")
+ (rectangle 5 50 "solid" "brown"))
+
+(beside (rectangle 20 70 "solid" "blue")
+        (rectangle 20 50 "solid" "green")
+        (rectangle 20 30 "solid" "yellow")
+        (rectangle 20 10 "solid" "red"))
+
+; text-images
+(text "mcdonalds" 24 "olive")
+; different from the string mcdonalds
+
+; image properties
+(image-width (rectangle 30 40 "solid" "red"))
+(image-height (rectangle 30 40 "solid" "red"))
+
+; you can also paste in your own
+</code></pre><h2 id="exercise_1_-_image_shapes"><a class="anchor" href="#exercise_1_-_image_shapes">#</a>Exercise 1 - Image Shapes</h2><p><img src="images/shapes.png"/></p><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/1-imageshapes_starter.rkt"><code class="language-racket">(require 2htdp/image)
+; THESE ANSWERS SHOULD RESEMBLE THESE IMAGES RESPECTIVELY:
+; https://howtocode.pages.dev/images/shapes.png
+
+; PROBLEM 1: Make a Stop sign using 2htdp/image
+; use regular-polygon for the hexagon
+; https://docs.racket-lang.org/teachpack/2htdpimage.html#%28def._%28%28lib._2htdp%2Fimage..rkt%29._regular-polygon%29%29
+
+
+; PROBLEM 1.1: Make a danger/warning sign with a triangle and an exclamation mark ⚠️
+
+
+; Problem 1.2: Make a isosoleces trapezoid
+
+
+; Problem 1.3: Make a traffic light with red, yellow, and green bulbs and a black rectangular background
+
+
+; Problem 1.4: Make a red checkerboard pattern</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="solutions/1-imageshapes_solution.rkt"><code class="language-racket">(require 2htdp/image)
+; THESE ANSWERS SHOULD RESEMBLE THESE IMAGES RESPECTIVELY:
+; https://howtocode.pages.dev/images/shapes.png
+
+; PROBLEM 1: Make a Stop sign using 2htdp/image
+; use regular-polygon for the hexagon
+; https://docs.racket-lang.org/teachpack/2htdpimage.html#%28def._%28%28lib._2htdp%2Fimage..rkt%29._regular-polygon%29%29
+
+(overlay
+ (text "STOP" 20 "white")
+ (regular-polygon 25 8 "solid" "red"))
+
+; PROBLEM 1.1: Make a danger/warning sign with a triangle and an exclamation mark ⚠️
+
+(overlay
+ (text "!" 30 "black")
+ (triangle 40 "solid" "yellow"))
+
+; Problem 1.2: Make a isosoleces trapezoid
+
+(beside
+ (flip-horizontal (right-triangle 30 30 "solid" "red"))
+ (square 30 "solid" "red")
+ (right-triangle 30 30 "solid" "red"))
+
+; Problem 1.3: Make a traffic light with red, yellow, and green bulbs and a black rectangular background
+
+(overlay 
+ (above 
+  (circle 20 "solid" "red")
+  (circle 20 "solid" "yellow")
+  (circle 20 "solid" "green"))
+ (rectangle 50 130 "solid" "black"))
+
+ ; Problem 1.4: Make a red checkerboard pattern
+
+(above 
+ (beside (square 20 "solid" "red") (square 20 "solid" "black"))
+ (beside (square 20 "solid" "black") (square 20 "solid" "red")))</code></pre></details></p>
             </article>
         </main>
     </div>

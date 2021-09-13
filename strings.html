@@ -9,15 +9,16 @@
     <script src="/prism_highlight.js"></script>
     <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
     <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
     <title>Strings</title>
 </head>
 
 <body>
     <div class="container">
         <main class="main-wrapper">
-            <div id="prev">← <a href="/exercise_pythag.html"> Exercise 0 - Pythag</a></div>
+            <div id="prev">← <a href="/expressions.html"> Expressions and Evaluation rules</a></div>
             <div id="home"><a href="/index.html">Index</a></div>
-            <div id="next"><a href="/parens_error.html">Common errors</a> →</div>
+            <div id="next"><a href="/images.html">Images</a> →</div>
             <article>
                 <h1>Strings</h1><h2 id="creating_a_string"><a class="anchor" href="#creating_a_string">#</a>Creating a string</h2><p>To form a string, wrap the characters in double quotes <code>""</code></p><p>here are some examples of strings:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">"hello world"
 "why do ants never get sick? because of their anty bodies"
@@ -28,7 +29,7 @@
 </code></pre><p>The number 123 can be divided, sqrt, multipled, all the classical math operations you are familar with.<br/>The string <code>"123"</code> is for only for show.</p><p>If you try that on the string <code>"123"</code>, it will give you an error.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(+ "123" 1)
 ; ERROR: + execpts a number and not a string. 
 </code></pre><h2 id="operations_on_strings"><a class="anchor" href="#operations_on_strings">#</a>Operations on strings</h2><p>There are operations you can do on a string, like:<br/><a href="https://docs.racket-lang.org/search/index.html?q=string-append"><code>string-append</code></a> , <a href="https://docs.racket-lang.org/search/index.html?q=string-length"><code>string-length</code></a> , <a href="https://docs.racket-lang.org/search/index.html?q=string-&gt;number"><code>string-&gt;number</code></a></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; combining two strings with (string-append)
-(string-append "123" "1") ; gives "1231")
+(string-append "123" "1") ; gives "1231"
 (string-append "Good morning" "bob") ; gives "Good morningbob"
 
 ; convert a string to a number
@@ -47,7 +48,7 @@
 (string-length "hello cat") ; gives 9
 ; how do you get the last character t?
 (substring "hello cat" 8) ; gives t, notice it's not 9
-</code></pre><p>This takes some getting used to and has been the cause of numerous security holes in other programming languages. Get some practice with them!</p><p>What is <code>(substring "barnicales" 0 5)</code>?<br/><details><summary>answer</summary><p>“barni”</p></details><br/>jestlearn.com</p>
+</code></pre><p>This takes some getting used to and has been the cause of numerous security holes in other programming languages. Get some practice with them!</p><p>What is <code>(substring "barnicales" 0 5)</code>?<br/><details><summary>answer</summary><p>“barni”</p></details></p><h2 id="practice_problems"><a class="anchor" href="#practice_problems">#</a>Practice Problems</h2><p><a href="https://jestlearn.com/#zero_based_indexing_string_practice">Zero based indexing practice</a></p>
             </article>
         </main>
     </div>

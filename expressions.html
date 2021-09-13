@@ -9,22 +9,23 @@
     <script src="/prism_highlight.js"></script>
     <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
     <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
     <title>Expressions and Evaluation rules</title>
 </head>
 
 <body>
     <div class="container">
         <main class="main-wrapper">
-            <div id="prev">← <a href="/installation.html"> Installation</a></div>
+            <div id="prev">← <a href="/learning_stages.html"> Learning Stages</a></div>
             <div id="home"><a href="/index.html">Index</a></div>
-            <div id="next"><a href="/exercise_pythag.html">Exercise 0 - Pythag</a> →</div>
+            <div id="next"><a href="/strings.html">Strings</a> →</div>
             <article>
                 <h1>Expressions and Evaluation rules</h1><h2 id="rules_to_form_an_expression"><a class="anchor" href="#rules_to_form_an_expression">#</a>Rules to form an expression</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; comments are ignored and are for you to jott down notes
 #|this is a multi-line comment|#
 (&lt;operator&gt; &lt;argument-1&gt; &lt;argument-2&gt; ...)
 
 (+ 2 4) ; evaluates to the value 6! yay!
-</code></pre><p>where:</p><ul><li><code>(</code></li><li><code>+</code> , is the name of the <strong>operator</strong>, also sometimes called a <strong>function</strong></li><li><code>2</code> , is the 1st <strong>argument</strong> consumed by the operator, also sometimes called <strong>operands</strong></li><li><code>4</code> , is the 2nd argument/operand</li><li><code>)</code></li></ul><p>It reads: Call the + function with arguments 2 and 4</p><p>The result of <strong>executing</strong> the function/operation/expression is a <strong>value</strong>, in this case the number 6.</p><h2 id="evaluating_expressions_in_detail"><a class="anchor" href="#evaluating_expressions_in_detail">#</a>Evaluating Expressions in detail</h2><p>Operands/Arguments can also be expressions themselves that:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; problem: what does this evaluate to?
+</code></pre><p>where:</p><ul><li><code>(</code></li><li><code>+</code> , is the name of the <strong>operator</strong>, also sometimes called a <strong>function</strong></li><li><code>2</code> , is the 1st <strong>argument</strong> consumed by the operator, also sometimes called <strong>operands</strong></li><li><code>4</code> , is the 2nd argument/operand</li><li><code>)</code></li></ul><p>Notice that spaces are used to seperate multiple arguments, NOT COMMAS as in other languages. If you type a comma, it will be an error.</p><p>It reads: Call the + function with arguments 2 and 4</p><p>The result of <strong>executing</strong> the function/operation/expression is a <strong>value</strong>, in this case the number 6.</p><h2 id="evaluating_expressions_in_detail"><a class="anchor" href="#evaluating_expressions_in_detail">#</a>Evaluating Expressions in detail</h2><p>Operands/Arguments can also be expressions themselves that then evaluate to a value</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; problem: what does this evaluate to?
 (+ 2 4 (* 5 5) (- (+ 3 3) 2) 1)
 </code></pre><ol class="steps"><li><details open=""><summary class="step">Look from Left -&gt; Right and see if there are expressions that are not yet values</summary><p>Starting from left to right, in order for 1st + to do its job, all arguments need to be reduced to a value<br/>    <code>2, 4, 1</code> are already values but <code>(* 5 5)</code> is not a value, it’s an expression, thus we need to evaluate it resulting to 25</p></details></li><li><details open=""><summary class="step">Evaluate the sub-expressions and turn them into values</summary><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(+ 2 4 (* 5 5) (- (+ 3 3) 2) 1)
 ; turns into: 
@@ -33,7 +34,7 @@
 (+ 2 4 25         (- 6 2) 1) ; (+ 3 3) above turns into 6, notice we're back out to the substraction now
 ; turns into:
 (+ 2 4 25 4 1) ; (- 6 2) above turns into 4
-</code></pre></details></li><li><details open=""><summary class="step">Finally the + operator can do its job</summary><p>36</p></details></li></ol><p>Notice in the nested expression:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(- (+ 3 3) 2)</code></pre><p>after evaluating the inside: <code>(+ 3 3)</code>, we’re back outside to the <code>-</code> operation, <code>(- 6 2)</code>. So in summary the rules for evaluation are left to right from inside to out.</p><h2 id="inexact_numbers"><a class="anchor" href="#inexact_numbers">#</a>Inexact numbers</h2><p>Numbers like <code>pi</code> or <code>(sqrt 2)</code> are decimal numbers that go on infinitely but computers are limited in terms of memory. These numbers will be printed with a <code>#i</code> to indicate they are close but <emphasis>inexact</emphasis></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(sqrt 2)
+</code></pre></details></li><li><details open=""><summary class="step">Finally the + operator can do its job</summary><p>36</p></details></li></ol><p>Notice in the nested expression:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(- (+ 3 3) 2)</code></pre><p>after evaluating the inside: <code>(+ 3 3)</code>, we’re back outside to the <code>-</code> operation, <code>(- 6 2)</code>. So in summary the rules for evaluation are left to right from inside to out.<br/>Also note that <code>(- 6 2)</code> follows the same structure for forming an expression <code>(&lt;operator&gt; arg1...)</code></p><h2 id="inexact_numbers"><a class="anchor" href="#inexact_numbers">#</a>Inexact numbers</h2><p>Numbers like <code>pi</code> or <code>(sqrt 2)</code> are decimal numbers that go on infinitely but computers are limited in terms of memory. These numbers will be printed with a <code>#i</code> to indicate they are close but <emphasis>inexact</emphasis></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(sqrt 2)
 #i1.4142135623730951
 pi
 #i3.141592653589793
@@ -47,7 +48,51 @@ pi
 (+ 6             7 9 1)
 ; step 4: now we can add them all up:
 23
-</code></pre></details></p>
+</code></pre></details></p><h2 id="errors"><a class="anchor" href="#errors">#</a>Errors</h2><p><code>((+ 3 4))</code> this an error because there is no operator in the outer parens<br/><code>(3 (+ 1 6))</code> this is also an error because 3 is not an operator, your cannot “3” yourself.</p><p>Immediately following an opening parenthesis should <strong>ALWAYS</strong> be an operator.<br/>We’ll cover errors more extensively later but for now just remember to make sure everything must follow <code>(&lt;operator&gt; &lt;arg1&gt; ...)</code></p><h2 id="practice_problems"><a class="anchor" href="#practice_problems">#</a>Practice Problems</h2><p><a href="https://jestlearn.com/how_to_code/#expressions_and_evaluation_with_numbers">Evaluating number expressions</a></p><p><a href="https://jestlearn.com/how_to_code/#translate_infix_to_prefix_math">Infix to prefix math expressions</a></p><h2 id="exercise_0_-_pythag"><a class="anchor" href="#exercise_0_-_pythag">#</a>Exercise 0 - Pythag</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/0-pythag_starter.rkt"><code class="language-racket">#|
+PROBLEM:
+
+ |\
+ | \
+ |  \
+5|   \ ?
+ |    \
+ |     \
+ |______\
+    4
+
+Two sides of a right triangle have length 3 and 4,
+what is the length of the hypotenuse(longest side)?
+Recall the Pythagorean Theorem solves this for us:
+Reads: the square root(sqrt) of 3 * 3 + 4 * 4
+  ______________
+\/5 * 5 + 4 * 4
+
+^ Encode the math expression above
+in a BSL expression that will solve for the missing side ?
+|#</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="solutions/0-pythag_solution.rkt"><code class="language-racket">#|
+PROBLEM:
+
+ |\
+ | \
+ |  \
+3|   \ ?
+ |    \
+ |     \
+ |______\
+    4
+
+Two sides of a right triangle have length 3 and 4,
+what is the length of the hypotenuse(longest side)?
+Recall the Pythagorean Theorem solves this for us:
+Reads: the square root(sqrt) of 3 * 3 + 4 * 4
+  ______________
+\/3 * 3 + 4 * 4
+
+^ Encode the math expression above
+in a BSL expression that will solve for the missing side ?
+|#
+
+(sqrt (+ (* 5 5) (* 4 4)))</code></pre></details></p>
             </article>
         </main>
     </div>

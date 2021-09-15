@@ -49,7 +49,9 @@ There are operations you can do on a string, like:
 
 ; convert a string to a number
 (string->number \"12\")
-(string-append \"You have $\" (string->number \"12\") \" gold\") ; gives \"You have $12 gold\"
+; the other way around is useful when you want to perform
+; some calculations on a number, then spit it back out as a string
+(string-append \"You have $\" (number->string \"12\") \" gold\") ; gives \"You have $12 gold\"
 
 ; get the lengh of a string
 (string-length \"jest\") ; gives 4
@@ -63,15 +65,18 @@ And you can also ◊rk{substring}, which gets parts of a string out, though be w
     ◊(code #:class "language-racket"
 "; [inclusive, exclusive)
 ;           0123456789
-(substring \"hello cat\" 0 3) ; gives \"hell\"
+(substring \"hello cat\" 0 4) ; gives \"hello\"
 ; note that the first character is h is 0
 (substring \"hello cat\" 0 1) ; gives \"h\"
+
+(substring \"hello cat\" 4 7) ; gives \"h\"
 ; string-length however counts normally
 (string-length \"hello cat\") ; gives 9
 ; how do you get the last character t?
 (substring \"hello cat\" 8) ; gives t, notice it's not 9
 ")
 }
+
 This takes some getting used to and has been the cause of numerous security holes in other programming languages. Get some practice with them!
 
 What is ◊code{(substring "barnicales" 0 5)}?

@@ -117,7 +117,23 @@
 
 (above 
  (beside (square 20 "solid" "red") (square 20 "solid" "black"))
- (beside (square 20 "solid" "black") (square 20 "solid" "red")))</code></pre></details></p>
+ (beside (square 20 "solid" "black") (square 20 "solid" "red")))</code></pre></details></p><h2 id="top_left_origin_practice"><a class="anchor" href="#top_left_origin_practice">#</a>Top Left Origin Practice</h2><h3>Middle as origin</h3><p>In all the math you have ever done in school, the origin was in the middle and going:</p><ul><li>^ up is + <strong>positive</strong> Y</li><li>v down is - <strong>negative</strong> Y</li></ul><p><img src="images/cartesian_coordinates.png"/></p><h3>Top left as origin</h3><p>When working with computers, most often 90% of the time it starts from the top left, and the Y axis is inverted!</p><ul><li>^ up is + <strong>negative</strong> Y</li><li>v down is - <strong>positive</strong> Y</li></ul><p><img src="images/computer_coordinates.png"/></p><p>Go to https://www.desmos.com/calculator and drag 0,0 to the top left corner and invert the Y coordinates for more of a visual intution.</p><p>Get some practice here by plotting guessing some plot points:</p><p><a href="./plot_point.html">Top left origin practice with plotting points</a></p><h2 id="exercise_1.2:_place-image_center"><a class="anchor" href="#exercise_1.2:_place-image_center">#</a>Exercise 1.2: place-image center</h2><p><img src="images/fps_crosshair.webp" width="100%"/><br/>In a lot of 3D shooting games, there are crosshairs to help you aim. Your job is to put the crosshair in the center with place-image</p><p>Your result should look like this: with the + centered in the middle<br/><img src="images/center_crosshair.png"/></p><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/1.1-crosshair_starter.rkt"><code class="language-racket">(require 2htdp/image)
+
+;PROBLEM: Use (place-image) to put a crosshair,
+; that is the text of a plus +, on the CENTER of this empty-scene
+; https://jestlearn.com/images/center_crosshair.png
+(text "+" 50 "black")
+(empty-scene 200 100)</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="solutions/1.1-crosshair_solution.rkt"><code class="language-racket">(require 2htdp/image)
+
+;PROBLEM: Use (place-image) to put a crosshair, 
+; that is the text of a plus +, on the CENTER of this empty-scene
+; https://jestlearn.com/images/center_crosshair.png
+
+(place-image
+ (text "+" 50 "black")
+ (/ 200 2)
+ (/ 100 2)
+ (empty-scene 200 100))</code></pre></details></p>
             </article>
         </main>
     </div>

@@ -51,7 +51,8 @@ There are operations you can do on a string, like:
 (string->number \"12\")
 ; the other way around is useful when you want to perform
 ; some calculations on a number, then spit it back out as a string
-(string-append \"You have $\" (number->string \"12\") \" gold\") ; gives \"You have $12 gold\"
+; 2000mah phone battery
+(string-append \"You have \" (number->string (* (/ 163 2000) 100) \" gold\") ; gives \"You have 8.15% battery\"
 
 ; get the lengh of a string
 (string-length \"jest\") ; gives 4

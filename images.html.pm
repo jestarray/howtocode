@@ -51,17 +51,67 @@ Racket has support for drawing images
 
 ◊img[#:src "images/shapes.png"]{}
 ◊; REQUIRES RACEKT/FILE
-◊(require racket/file)
-◊(define filename "1-imageshapes")
-◊(define starter (string-append "starter/" filename "_starter.rkt"))
-◊;(define filepath "code/start_exercise_template.rkt")
-◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src starter #:data-download-link ""]{
-    ◊(code #:class "language-racket" ◊(file->string starter #:mode 'text))
+◊(define problem-files (starter-solution "1-imageshapes"))
+◊(define starter (car problem-files))
+◊(define solution (cadr problem-files))
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car starter) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr starter))
 }
-◊(define solution (string-append "solutions/" filename "_solution.rkt"))
+
 ◊details{
     ◊summary{Answer}
-    ◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src solution #:data-download-link ""]{
-    ◊(code #:class "language-racket" ◊(file->string solution))
+    ◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr solution))
+}
+}
+
+◊h2{Top Left Origin Practice}
+
+◊h3{Middle as origin}
+In all the math you have ever done in school, the origin was in the middle and going:
+◊ul{
+    ◊li{^ up is + ◊strong{positive} Y}
+    ◊li{v down is - ◊strong{negative} Y}
+}
+
+◊img[#:src "images/cartesian_coordinates.png"]{}
+
+
+◊h3{Top left as origin}
+When working with computers, most often 90% of the time it starts from the top left, and the Y axis is inverted!
+◊ul{
+    ◊li{^ up is + ◊strong{negative} Y}
+    ◊li{v down is - ◊strong{positive} Y}
+}
+
+◊img[#:src "images/computer_coordinates.png"]{}
+
+Go to https://www.desmos.com/calculator and drag 0,0 to the top left corner and invert the Y coordinates for more of a visual intution.
+
+Get some practice here by plotting guessing some plot points:
+
+◊a[#:href "./plot_point.html"]{Top left origin practice with plotting points}
+
+◊h2{Exercise 1.2: place-image center}
+
+◊img[#:src "images/fps_crosshair.webp" #:width "100%"]{}
+In a lot of 3D shooting games, there are crosshairs to help you aim. Your job is to put the crosshair in the center with place-image
+
+Your result should look like this: with the + centered in the middle
+◊img[#:src "images/center_crosshair.png"]{}
+
+◊(define problem-files2 (starter-solution "1.1-crosshair"))
+◊(define starter2 (car problem-files2))
+◊(define solution2 (cadr problem-files2))
+
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car starter2)#:data-download-link ""]{
+    ◊(code #:class "language-racket"
+◊(cadr starter2))
+}
+
+◊details{
+    ◊summary{Answer}
+    ◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution2) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr solution2))
 }
 }

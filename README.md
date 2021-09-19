@@ -19,3 +19,7 @@ if using vscode, type in `lz` for the lozenge character which will popup a snipp
 
 ## slide_mode:
 some pages have a slide mode, just hit f12, run slide_mode() and use "w" and "d" to move right and left
+
+
+## todo:
+size all images to use img[#:width "100%"]{} so they don't grow too big in height

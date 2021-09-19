@@ -1,9 +1,10 @@
 #lang pollen
 
-◊h1{Learning Stages}
+◊h1{Learning Effectively}
 
 ◊ptime{08/30/21}
 
+◊h2{Learning Stages}
 ◊img[#:src "/images/dreyfus.png" #:style "max-width: 100%; height: auto;"]{}
 
 ◊h2{Novice}
@@ -11,6 +12,7 @@
     ◊li{Rigid adherence to rules}
     ◊li{They need context-free rules to follow e.g., “Whenever X happens, do Y.”}
     ◊li{They don’t know how to respond to mistakes.}
+    ◊li{Don't want to learn: just want to get it done and accomplish a goal}
 }
 
 ◊h2{Advanced Beginner}
@@ -55,13 +57,14 @@ From the book ◊b{Pragmatic Thinking and Learning: Refactor Your “Wetware”}
 ◊h2{Example: Learning basic math}
 What is 4 + 4 + 4 - 5?
 
-Think back to when you were a kid, a novice, just learning how to count and add two numbers together. It was very step by step, rule based and slow. The rules were to physically hold up your hands and put a finger up each time you moved up a number, and if you ran out of fingers, write down a 10 or hold it in your head that already counted to 10 and then continue on.
+◊h2{Novice}
+Think back to when you were a kid, a novice, just learning how to count and add two numbers together. It was very step by step, rule based and slow. The rules were to ◊strong{physically} hold up your hands and put a finger up each time you moved up a number, and if you ran out of fingers, write down counts of 10 or hold it in your head that already counted to 10 and then continue on. You were also given work sheets to count the apples or something.
 
 ◊img[#:src "/images/countingonfingers.png" #:style "max-width: 100%; height: auto;"]{}
 
 With lots of practice, you eventually don't need to physically hold out your hands and count aloud, you can start holding counting in your head!
 
-As you move up and start learning multiplication, it also starts off very slow, deliberate and rule based with little thinking involved, just doing: "count up the number of groups, fill in the blanks". These pictures and pre-filled problems act as a template, a recipe, to kick start your thinking and get you to understanding the concepts and emerging patterns.
+As you move up and start learning multiplication, again it also starts off very slow, deliberate and rules based with little thinking involved, just doing: "count up the number of groups, fill in the blanks". These pictures and pre-filled problems act as a template, a recipe, to kick start your thinking and get you to understanding the concepts and emerging patterns.
 ◊img[#:src "/images/learn_multiplication.jpg" #:style "max-width: 100%; height: auto;"]{}
 
 We've templatized long multiplication with 2 digits or more, e.g 
@@ -104,5 +107,9 @@ An expert artist would probably struggle to come up with an answer because it's 
 Programming tutorials are often bad at this because they are taught by people who are experts that have 1000s of calculations and pattern recognition ◊strong{going on in their head that they don't verbalize or show their work before hand.} When to use some syntactic shorthand, when to factor things out, etc, just like how you do so with basic math!
 
 How most people learned programming is by watching others and copying them and then running into walls when the copying doesnt work or staring at a blank page
+
+Your thinking is to such a degree of complexity that you need to WRITE TO HELP YOURSELF THINK. - Larry from Chicago Writing Lab
+
+Sure you can do anything under 12x12 in an instant but what about  57 * 34? 92 * 12 * 40?
 
 NASA MARS CLIMATE ORBITER ARE THE REASONS WHY WE WRITE TESTS, FIXING A PROBLEM CAN OPEN A BUG

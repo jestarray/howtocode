@@ -4,8 +4,16 @@
 (require pollen/core)
 (require pollen/pagetree)
 
-
 (provide (all-defined-out)) ;make everything global in this file
+
+; List<List(String, String)>>
+; returns the filepath and the contents of it
+(define (starter-solution filename)
+  (define starter-fname (string-append "starter/" filename "_starter.rkt"))
+  (define solution-fname (string-append "solutions/" filename "_solution.rkt"))
+  (define file-strings (map file->string (list starter-fname solution-fname)))
+  (list (list starter-fname (car file-strings))
+        (list solution-fname (cadr file-strings))))
 
 ; string -> txexpr
 ; returns a search link to the search of the racket docs

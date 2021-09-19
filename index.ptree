@@ -3,7 +3,6 @@
 ◊cheatsheet.html{}
 ◊introduction.html{
     installation.html
-    learning_stages.html
 }
 
 ◊expressions.html{
@@ -15,4 +14,8 @@
     parens_error.html
     stepper.html
     discover.html
+}
+
+◊learning_stages.html{
+    
 }

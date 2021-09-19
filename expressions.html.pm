@@ -120,16 +120,16 @@ We'll cover errors more extensively later but for now just remember to make sure
 
 ◊; REQUIRES RACEKT/FILE
 ◊(require racket/file)
-◊(define filename "0-pythag")
-◊(define starter (string-append "starter/" filename "_starter.rkt"))
-◊;(define filepath "code/start_exercise_template.rkt")
-◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src starter #:data-download-link ""]{
-    ◊(code #:class "language-racket" ◊(file->string starter #:mode 'text))
+◊(define problem (starter-solution "0-pythag"))
+◊(define starter (car problem))
+◊(define solution (cadr problem))
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src (car starter) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr starter))
 }
-◊(define solution (string-append "solutions/" filename "_solution.rkt"))
+
 ◊details{
     ◊summary{Answer}
-    ◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src solution #:data-download-link ""]{
-    ◊(code #:class "language-racket" ◊(file->string solution))
+    ◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src (car solution) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr solution))
 }
 }

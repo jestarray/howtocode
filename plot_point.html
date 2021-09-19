@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top left origin practice</title>
+</head>
+
+<body>
+    <h1>Top Left Origin Practice</h1>
+
+    <canvas id="myCanvas" width="200" height="200" style="border:1px solid black;">
+        Your browser does not support the HTML canvas tag.</canvas>
+
+    <form>
+        <label>x: </label>
+        <input id="xpoint" type="text" placeholder="0">
+        <br>
+        <br>
+        <label>y: </label>
+        <input id="ypoint" type="text" placeholder="0">
+        <br>
+        <br>
+        <button type="button" id="submit_plot" onclick="plot_check_point()">Submit</button>
+    </form>
+
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+
+        function draw_rect(x, y, color = "green") {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, 4, 4);
+        }
+
+        // min and max are inclusive
+        function ran_int(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        const WIDTH = 200;
+        const HEIGHT = 200;
+        const CENTERX = WIDTH / 2;
+        const CENTERY = HEIGHT / 2;
+        let tries = 0;
+
+        function draw_numbers() {
+            ctx.strokeText('0', 0, 10);
+            ctx.strokeText(WIDTH.toString(), WIDTH - 20, 10);
+            ctx.strokeText(CENTERX.toString(), CENTERX, 10);
+
+            ctx.strokeText(CENTERY.toString(), 0, CENTERY);
+            ctx.strokeText(HEIGHT.toString(), 0, HEIGHT);
+        }
+
+
+        let goal_x = ran_int(0, WIDTH - 5);
+        let goal_y = ran_int(0, HEIGHT - 5);
+
+        function plot_check_point(e) {
+            console.log(goal_x, goal_y);
+            let input_x = document.getElementById("xpoint").value || 0;
+            let input_y = document.getElementById("ypoint").value || 0;
+            draw_rect(input_x, input_y, "red");
+
+            if (input_x == goal_x && input_y == goal_y) {
+                //clear canvas
+                //redraw another random green point
+                ctx.clearRect(0, 0, WIDTH, HEIGHT);
+                goal_x = ran_int(0, WIDTH - 5);
+                goal_y = ran_int(0, HEIGHT - 5);
+                draw_numbers()
+                draw_rect(goal_x, goal_y);
+                tries = 0;
+            }
+            tries += 1;
+            document.writeln(`tries ${tries}`)
+        }
+
+        document.onkeydown = (ev) => {
+            if (ev.key == "Enter") {
+                plot_check_point();
+            }
+        }
+        draw_numbers();
+        draw_rect(goal_x, goal_y);
+
+    </script>
+</body>
+
+</html>

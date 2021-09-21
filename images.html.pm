@@ -80,8 +80,8 @@ In all the math you have ever done in school, the origin was in the middle and g
 ◊h3{Top left as origin}
 When working with computers, most often 90% of the time it starts from the top left, and the Y axis is inverted!
 ◊ul{
-    ◊li{^ up is + ◊strong{negative} Y}
-    ◊li{v down is - ◊strong{positive} Y}
+    ◊li{^ up is - ◊strong{negative} Y}
+    ◊li{v down is + ◊strong{positive} Y}
 }
 
 ◊img[#:src "images/computer_coordinates.png"]{}

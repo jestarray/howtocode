@@ -40,9 +40,8 @@ Let's create a few
 ◊a[#:href "https://jestlearn.com/how_to_code/#variable_arith_evaluation"]{Math expressions with variables}
 
 ◊h2{Easier to CHANGE programs}
-Here's an example of variables making it easy to CHANGE a program:
 
-In any given program, there are shared constants, such as the name of your app, the width & height of the screen, etc.
+In any given program, there are shared constants, such as the name of your app, the width & height of the screen, etc. You can factor these out into variables making your code much easier to update and change.
 
 ◊h3{Revising Exercise 2:}
 In Practice Problem 2 with place-image, we centered a + on the middle of an image, but what happens if we CHANGE the size of the empty-scene to width: 400, height: 300?
@@ -58,6 +57,7 @@ In Practice Problem 2 with place-image, we centered a + on the middle of an imag
  (/ 400 2) ; CHANGE
  (/ 300 2) ; CHANGE
  (empty-scene 400 300)) ; CHANGE, CHANGE
+ ; total 4 changes
 ")
 }
 The above requires 4 CHANGEs! With variables we can declare constants and only CHANGE 2 places.
@@ -77,6 +77,7 @@ The above requires 4 CHANGEs! With variables we can declare constants and only C
  CENTER-X
  CENTER-Y
  (empty-scene WIDTH HEIGHT))
+ ; total 2 changes
 ")
 }
 
@@ -99,6 +100,8 @@ We could also CHANGE the entire shape by having the width and height be computed
  CENTER-X
  CENTER-Y
  SHAPE)
+ ; total 1 change for this problem
+ ; although the (shape)'s width&height can be factored out
 ")
 }
 
@@ -128,6 +131,9 @@ Here's one last example:
 Use the "Check Syntax" button to visualize where variables are being used and where they come from!
 
 ◊img[#:src "/images/check-syntax.png"]{}
+
+◊h2{Conclusion}
+In conclusion, variables give meaningful names to our data making it easier to understand code, and also allow us to make sweeping changes to our program by factoring out similar pieces of data into 1 spot.
 
 ◊h2{Pratice Problems}
 

@@ -6,6 +6,9 @@
 
 (provide (all-defined-out)) ;make everything global in this file
 
+(define (practice-url name)
+  (string-append "https://jestlearn.com/how_to_code/#" name))
+
 ; List<List(String, String)>>
 ; returns the filepath and the contents of it
 (define (starter-solution filename)

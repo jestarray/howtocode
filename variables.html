@@ -36,7 +36,7 @@
 (* 5 amount-buying) ; step 1
 (* 5 10) ; step 2
 50 ; finally becomes 50
-</code></pre><h2 id="practice"><a class="anchor" href="#practice">#</a>Practice</h2><p><a href="https://jestlearn.com/how_to_code/#variable_arith_evaluation">Math expressions with variables</a></p><h2 id="easier_to_change_programs"><a class="anchor" href="#easier_to_change_programs">#</a>Easier to CHANGE programs</h2><p>Here’s an example of variables making it easy to CHANGE a program:</p><p>In any given program, there are shared constants, such as the name of your app, the width &amp; height of the screen, etc.</p><h3>Revising Exercise 2:</h3><p>In Practice Problem 2 with place-image, we centered a + on the middle of an image, but what happens if we CHANGE the size of the empty-scene to width: 400, height: 300?</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(require 2htdp/image)
+</code></pre><h2 id="practice"><a class="anchor" href="#practice">#</a>Practice</h2><p><a href="https://jestlearn.com/how_to_code/#variable_arith_evaluation">Math expressions with variables</a></p><h2 id="easier_to_change_programs"><a class="anchor" href="#easier_to_change_programs">#</a>Easier to CHANGE programs</h2><p>In any given program, there are shared constants, such as the name of your app, the width &amp; height of the screen, etc. You can factor these out into variables making your code much easier to update and change.</p><h3>Revising Exercise 2:</h3><p>In Practice Problem 2 with place-image, we centered a + on the middle of an image, but what happens if we CHANGE the size of the empty-scene to width: 400, height: 300?</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(require 2htdp/image)
 ; if we declare constants, it makes it a breeze to CHANGE size
 ; just CHANGE the WIDTH and HEIGHT lines and everything will adapt
 
@@ -45,6 +45,7 @@
  (/ 400 2) ; CHANGE
  (/ 300 2) ; CHANGE
  (empty-scene 400 300)) ; CHANGE, CHANGE
+ ; total 4 changes
 </code></pre><p>The above requires 4 CHANGEs! With variables we can declare constants and only CHANGE 2 places.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(require 2htdp/image)
 ; if we declare constants, it makes it a breeze to CHANGE size
 ; just CHANGE the WIDTH and HEIGHT lines and everything will adapt
@@ -58,6 +59,7 @@
  CENTER-X
  CENTER-Y
  (empty-scene WIDTH HEIGHT))
+ ; total 2 changes
 </code></pre><p>We could also CHANGE the entire shape by having the width and height be computed with image-width and image-height, making the lines we need to change go down to 1 for this example:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(require 2htdp/image)
 ; with this we can easily swap out the shape in 1 line:
 ; it can be any size, rest of the code will just adapt
@@ -73,6 +75,8 @@
  CENTER-X
  CENTER-Y
  SHAPE)
+ ; total 1 change for this problem
+ ; although the (shape)'s width&amp;height can be factored out
 </code></pre><p>Here’s one last example:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; say you are creating a game and at the start of the game you want to greet your users
 ; if you wanted to CHANGE the name of your game later on to something else, like Asura
 ; you would have to edit 4 lines(or more):
@@ -89,7 +93,7 @@
 (string-append "Join Server 1 " NAME)
 (string-append "Join Server 2 " NAME)
 (string-append "Are you sure you want to leave " NAME)
-</code></pre><p>Use the “Check Syntax” button to visualize where variables are being used and where they come from!</p><p><img src="/images/check-syntax.png"/></p><h2 id="pratice_problems"><a class="anchor" href="#pratice_problems">#</a>Pratice Problems</h2><p><a href="https://jestlearn.com/how_to_code/#build_a_string">Build anagram strings</a></p>
+</code></pre><p>Use the “Check Syntax” button to visualize where variables are being used and where they come from!</p><p><img src="/images/check-syntax.png"/></p><h2 id="conclusion"><a class="anchor" href="#conclusion">#</a>Conclusion</h2><p>In conclusion, variables give meaningful names to our data making it easier to understand code, and also allow us to make sweeping changes to our program by factoring out similar pieces of data into 1 spot.</p><h2 id="pratice_problems"><a class="anchor" href="#pratice_problems">#</a>Pratice Problems</h2><p><a href="https://jestlearn.com/how_to_code/#build_a_string">Build anagram strings</a></p>
             </article>
         </main>
     </div>

@@ -26,6 +26,8 @@
         <button type="button" id="submit_plot" onclick="plot_check_point()">Submit</button>
     </form>
 
+    <p>tries: <span id="tries">0</span></p>
+
     <script>
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
@@ -61,6 +63,7 @@
         let goal_x = ran_int(0, WIDTH - 5);
         let goal_y = ran_int(0, HEIGHT - 5);
 
+        let tries_display = document.getElementById("tries");
         function plot_check_point(e) {
             console.log(goal_x, goal_y);
             let input_x = document.getElementById("xpoint").value || 0;
@@ -76,9 +79,10 @@
                 draw_numbers()
                 draw_rect(goal_x, goal_y);
                 tries = 0;
+            } else {
+                tries += 1;
             }
-            tries += 1;
-            document.writeln(`tries ${tries}`)
+            tries_display.innerHTML = tries;
         }
 
         document.onkeydown = (ev) => {

@@ -5,8 +5,8 @@
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket" 
 "(<operator> <argument-1> <argument-2> ...)
-; example:
-(+ (+ (- 4  1) 7) 9)
+; there's a bug here
+(if (or (or #true #false) (an #true #false)) (or #t #f))
 ")
 }
 
@@ -19,17 +19,17 @@ Even in this expression, ◊code{(+ 2 (+ 6 4))} the argument ◊code{(+ 6 4)} fo
 
 (4) ERROR: is an error because 4 is not an operator
 
+todo: explain error messages like if expects 3 parts, etc. BSL tries to be very error message friendly. Sometimes error messages are misleading and that's when you need to look past the error message and find the source.
 
-Enable automatic parens but be warned sometimes it will insert 2 when you really just want one, but its most often the case you always want 2 auto-closed, same with quotes
+Enable automatic parens! but be warned sometimes it will insert 2( if you type the opening parenthesis when you really just want one), but its the common case that you always want 2 auto-closed, same with quotes. You can turn this off if you don't like it.
 
-It's the default setting for vscode and many other text editors, and it's a good default because the common case is that its more beneficial to
+Once you get used to it the parenthesis are never the bottleneck to understanding or even writing code. With proper spacing and highlighting, I argue its not bad.
 
-if you delete the starting parens, look to delete the ending one.
+If you delete the starting parens, look to delete the ending one.
 
 some students keep randomly wrapping parenthesis when things dont work and I want to emphasize that you should use logic to wrap parens.
 
 Everything has to follow <operator arg1 arg2> (+ 1 2) and if you need to do more you have to come back out and wrap around... which is a bit counter intutive because we like to keep adding things at the end
-
 
 Notice the language is a little kind of counter intutive because we have to go back left, wrap around parens, and add stuff, e.g
 4 + 5 * 3 + 2 - 1 , we can just keep adding stuff to the right but we have to implcity remember PEMDAS, multiplcation happens first
@@ -40,7 +40,6 @@ in racket
 kind of weird since the lot of us are right handed and prefer just tacking things onto the right
 (+ 4 (* 5 3) (- 2 1)) 
 
-todo: explain error messages like if expects 3 parts, etc. BSL tries to be very error message friendly. Sometimes error messages are misleading and that's when you need to look past the error message and find the source.
 
 TODO: fix a lot of exercises that have buggy parenthesis, 5-10
 

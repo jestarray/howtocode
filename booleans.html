@@ -21,7 +21,7 @@
             <div id="home"><a href="/index.html">Index</a></div>
             <div id="next"><a href="/functions.html">Functions</a> →</div>
             <article>
-                <h1>Booleans</h1><h2 id="what_are_booleans?"><a class="anchor" href="#what_are_booleans?">#</a>What are booleans?</h2><p>They are the values <code>#true</code> or <code>#false</code>, most often the result comparison functions, e.g functions that answer a question, such as <code>&gt; , &lt; , = , &lt;= , &gt;= , string=? , etc...</code>. Another term for these are “predicates”.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; examples
+                <h1>Booleans</h1><h2 id="what_are_booleans?"><a class="anchor" href="#what_are_booleans?">#</a>What are booleans?</h2><p>They are the values <code>#true</code> or <code>#false</code>, most often the result comparison functions, e.g functions that answer a question, such as <code>&gt; , &lt; , = , &lt;= , &gt;= , string=? , etc...</code>. Another term for these are “predicates” and in racket you can tell whether a boolean will be produced if the name of the operator/function has a <code>?</code>.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; examples
 (define health 100)
 (&gt; health 0) ; alive!
 (= health 0) ; dead!
@@ -41,11 +41,11 @@
 
 (number? 9999)
 (number? "asdf")
-</code></pre><p>go hand and hand with conditional expressions like <code>if</code></p><h2 id="if_statements"><a class="anchor" href="#if_statements">#</a>If statements</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; space out for readability rather than all 1 line
+</code></pre><p>Booleans go hand in hand with conditional expressions like <code>if</code></p><h2 id="if_statements"><a class="anchor" href="#if_statements">#</a>If statements</h2><p><code>if</code> statements allow decisions to be made based on a question.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; space out for readability rather than all 1 line
 (if &lt;question&gt;  ; if either true or false, it will error
      &lt;expression&gt; ; true branch
      &lt;expression&gt;) ; false branch
-</code></pre><p>DrRacket also highlights in black the branch that did not run which we will go into more detail in the later sections</p><h2 id="cond_statements"><a class="anchor" href="#cond_statements">#</a>Cond statements</h2><p>Like <code>if</code> statements but can handle more than 2 cases, in some ways it’s syntactic sugar for nested <code>if</code> statements, also known as <code>else if</code> or <code>case</code> in other languages</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; space out for readability rather than all 1 line
+</code></pre><p>You may notice that DrRacket also highlights in black the branch that did not run which we will go into more detail in the later sections, don’t worry about it for now.</p><h2 id="cond_statements"><a class="anchor" href="#cond_statements">#</a>Cond statements</h2><p>Like <code>if</code> statements but can handle more than 2 cases, in some ways it’s syntactic sugar for nested <code>if</code> statements, also known as <code>else if</code> or <code>case</code> in other languages</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; space out for readability rather than all 1 line
 (cond 
     [&lt;question&gt; &lt;answer&gt;]  ; if question evalutes to true, answer will run, otherwise keep going down until you hit the else case
     [&lt;question&gt; &lt;answer&gt;]  ; 
@@ -71,7 +71,7 @@
 
 ; for or, as soon as a #true is hit SKIP checking the rest as because it will eveluate to #true anyways
 (or #false (= (+ 1 1) 2) #true (= 999 99)) 
-</code></pre><h2 id="practice_problems"><a class="anchor" href="#practice_problems">#</a>Practice Problems</h2><p><a href="https://jestlearn.com/#if_bool_comparisons">If boolean comparisons</a><br/><a href="https://jestlearn.com/#if_logical">If logical</a></p>
+</code></pre><h2 id="practice_problems"><a class="anchor" href="#practice_problems">#</a>Practice Problems</h2><p>These exercises put if statements all in 1 line because it is training you to distinguish parentheses blocks. You should absolutely space out your code for readability.</p><p><a href="https://jestlearn.com/how_to_code/#if_bool_comparisons">If boolean comparisons</a><br/><a href="https://jestlearn.com/how_to_code/#if_logical">If logical</a></p>
             </article>
         </main>
     </div>

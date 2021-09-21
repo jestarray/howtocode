@@ -87,6 +87,6 @@ What is ◊code{(substring "barnicales" 0 5)}?
 }
 
 ◊h2{Practice Problems}
-◊(define 0-indexing "https://jestlearn.com/#zero_based_indexing_string_practice")
+◊(define 0-indexing "https://jestlearn.com/how_to_code/#zero_based_indexing_string_practice")
 
 ◊a[#:href 0-indexing]{Zero based indexing practice}

@@ -2,7 +2,7 @@
 ◊h1{Booleans}
 ◊; Introduced after variables for more interesting examples
 ◊h2{What are booleans?}
-They are the values ◊code{#true} or ◊code{#false}, most often the result comparison functions, e.g functions that answer a question, such as ◊code{> , < , = , <= , >= , string=? , etc...}. Another term for these are "predicates".
+They are the values ◊code{#true} or ◊code{#false}, most often the result comparison functions, e.g functions that answer a question, such as ◊code{> , < , = , <= , >= , string=? , etc...}. Another term for these are "predicates" and in racket you can tell whether a boolean will be produced if the name of the operator/function has a ◊code{?}.
 
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket"
@@ -28,9 +28,12 @@ They are the values ◊code{#true} or ◊code{#false}, most often the result com
 (number? \"asdf\")
 ")
 }
-go hand and hand with conditional expressions like ◊code{if}
+
+Booleans go hand in hand with conditional expressions like ◊code{if}
 
 ◊h2{If statements}
+
+◊code{if} statements allow decisions to be made based on a question.
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket"
 "; space out for readability rather than all 1 line
@@ -40,7 +43,7 @@ go hand and hand with conditional expressions like ◊code{if}
 ")
 }
 
-DrRacket also highlights in black the branch that did not run which we will go into more detail in the later sections
+You may notice that DrRacket also highlights in black the branch that did not run which we will go into more detail in the later sections, don't worry about it for now.
 
 ◊h2{Cond statements}
 Like ◊code{if} statements but can handle more than 2 cases, in some ways it's syntactic sugar for nested ◊code{if} statements, also known as ◊code{else if} or ◊code{case} in other languages
@@ -85,5 +88,7 @@ And, Not, Or, short circuting
 
 ◊h2{Practice Problems}
 
-◊a[#:href "https://jestlearn.com/#if_bool_comparisons"]{If boolean comparisons}
-◊a[#:href "https://jestlearn.com/#if_logical"]{If logical}
+These exercises put if statements all in 1 line because it is training you to distinguish parentheses blocks. You should absolutely space out your code for readability.
+
+◊a[#:href "https://jestlearn.com/how_to_code/#if_bool_comparisons"]{If boolean comparisons}
+◊a[#:href "https://jestlearn.com/how_to_code/#if_logical"]{If logical}

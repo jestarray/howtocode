@@ -80,6 +80,7 @@ here is Naughty Dog studios, creator of games like The Last Of Us and Uncharted 
 John Carmack pushing Racket to be the language for VR:
 ◊(yt "ydyztGZnbNs" #:headline "Racket used for VR scripting" #:open #true)
 
+There isn't anything stopping Racket from being used in the industry so why isn't Racket used much more? Mainly because programmers keep crying over parentheses. John Carmack for those who don't know is one of the most renowned programmers in the game industry who pushed the limits of 3D computer graphics, and he tried to push Racket as a VR scripting language in 2015, but it seems that Oculus decided to pursue Javascript instead. He also mentioned if he could go back in time he would use it for the scripting language of his game Quake, which was one of the best selling video games in the 1996.
 
 ◊h2{Why all the parenthesis?}
 

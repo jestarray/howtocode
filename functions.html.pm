@@ -4,8 +4,9 @@
 Functions consume and produce values. You've been ◊strong{using} functions all along!
 A few are: 
 ◊code{string-append} that consumes 2 strings and produces them together
-◊code{rectangle} that consumes 2 numbers and strings and produces an image
+◊code{rectangle} that consumes 2 numbers and 2 strings and produces an image
 ◊code{sqrt} that consumes 1 number and produces another number
+◊code{+} to add an arbitrary amount of numbers.
 
 but we can create our own functions.
 
@@ -13,43 +14,17 @@ but we can create our own functions.
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket"
 "; creating a function
+;the function name and the argument names can be whatever you want, just has to be matching in the body
 (define (<f-name> <arg1>...)
     <body>) ; where every instance of the named args are replaced in the body.
 ")
 }
 
-◊h2{What are functions for?}
+◊h2{How are functions useful?}
 
-In the previous section on variables, we went over how you can make your program more maintable by storing constant data in variables, but sometimes that still isn't enough because you'd end up with way too many variables. Functions let us take it a step further, Let's look back to our image exercises. 
+In the previous section on variables, we went over how you can make your program more readable and maintable by storing constant data in variables, but sometimes that still isn't enough because you'd end up with way too many variables. Functions let us take it a step further by factoring out varying variables/data. Let's look back to our image exercises.
 
-You may notice that 2htdp doesn't contain a hexagon function. It's a lot of tedious typing for all the parameters, e.g solid & red
-
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"(define size1 30)
-(define size2 90)
-; all these parameters to create a red hexagon. 
-; Also unclear what this does to a stranger until they run the code
-(regular-polygon size1 8 \"solid\" \"red\")
-(regular-polygon size2 8 \"solid\" \"red\") ; copy & paste and change the size every time
-
-; if we make a function instead, we can give it a meaningful name and vary the value
-(define (red-hexagon size)
-; body will replace all instances of size with what we pass in
-    (regular-polygon size 8 \"solid\" \"red\")) 
-
-; we can create red hexagons without needing to type solid red
-; the argument, aka parameter/operand makes it easy to vary the size
-; we can also understand immediately what this will create
-(red-hexagon 30)
-(red-hexagon 60)
-(red-hexagon 90)
-")
-}
-
-Functions factor out even more redudant duplication making our code shorter and more understandable, similar to reapted addition on whole numbers like 5 + 5 + 5 + 5 can be re-written more consisely as 5 * 4 .
-
-If I were to ask you to make 10 stop signs, of varying size, 30, 60, 90, etc, it'd be a huge hastle to keep track of lot of variable names
+If I were to ask you to make 10 stop signs, of varying size, 30, 60, 90, increasing by 30 every time etc, it'd be a huge hastle to keep track of lot of variable names
 
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket"
@@ -74,36 +49,89 @@ If I were to ask you to make 10 stop signs, of varying size, 30, 60, 90, etc, it
 ")
 }
 
-We can instead create a function that will vary the size of the stop sign for us, and have the code read like its creating a stop sign
+We can instead create a function that will create the variable in a local temporary environment to vary the size of the stop sign for us, and have the code read like its creating a stop sign
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket"
-"; creating a function for stopsigns
+"; name of the function is stop-sign
+; size is a parameter that we named arbitrarily
+
 (define (stop-sign size)
     (overlay
         (text \"STOP\" (- size 5) \"white\")
         (regular-polygon size 8 \"solid\" \"red\")))
 
-(stop-sign 30)
+; no more needing to create variables
+; and copy and pasting overlay, text, and regular polygon 
+(stop-sign 30) ; all in 1 line to create a stop-sign
 (stop-sign 60)
 (stop-sign 90)
 ")
 }
-You can use Check-Syntax or the stepper to see this in action
 
-Take this example where there are way too many changing values: 
+◊h2{Exercise 2: Create a hexagon function}
+
+You may notice that 2htdp doesn't contain a hexagon function. It's a lot of tedious typing for all the parameters, e.g solid & red.
 
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket"
-"; npc merchant dialogue or some store reward member discount
-\"Hi Bob, since I've known you for 1 years, I will slice the original price of 100 coins to 75\"
-\"Hi Anna, since I've known you for 2 years, I will slice the original price of 100 coins to 50\"
-\"Hi Steve, since I've known you for 3 years, I will slice the original price of 100 coins to 25\"
-\"Hi Amanda, since you known you for 4 years, I will slice the original price of 100 coins to 0\"
-; the name, the quest number, the price are the changing values, each decreasing by 25% per year
-")
+"(define size1 30)
+(define size2 90)
+; all these parameters to create a red hexagon. 
+; Also unclear what this does to a stranger until they run the code or read docs
+(regular-polygon size1 8 \"solid\" \"red\")
+(regular-polygon size2 8 \"solid\" \"red\") ; copy & paste and change the size every time")
 }
 
-For every username you would have to type out this string when we can factor only the parts that need to change into a function, namely the username
+◊(define problem-files (starter-solution "2-redhex"))
+◊(define starter (car problem-files))
+◊(define solution (cadr problem-files))
 
-Exercise: turn the Pythagorean theorm in exercise 0 turned into a function
-Exercise: trapezoid into a function
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car starter) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr starter))
+}
+
+◊details{
+    ◊summary{Answer}
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution)]{
+    ◊(code #:class "language-racket" ◊(cadr solution))
+}
+}
+
+◊h2{Exercise 2.1: Create a trapezoid function}
+◊(define problem-trap (starter-solution "2.1-isotrapezoid"))
+◊(define starter-trap (car problem-trap))
+◊(define solution-trap (cadr problem-trap))
+
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car starter-trap) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr starter-trap))
+}
+
+◊details{
+    ◊summary{Answer}
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-trap)]{
+    ◊(code #:class "language-racket" ◊(cadr solution-trap))
+}
+}
+
+◊h2{Exercise 2.2: Create a checkerboard function}
+◊(define problem-checker (starter-solution "2.2-checkerboard"))
+◊(define starter-checker (car problem-checker))
+◊(define solution-check (cadr problem-checker))
+
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car starter-checker) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr starter-checker))
+}
+
+◊details{
+    ◊summary{Answer}
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-check)]{
+    ◊(code #:class "language-racket" ◊(cadr solution-check))
+}
+}
+
+◊h2{Conclusion}
+Functions allow us to ◊strong{re-use} and combine a set of operations which factors out duplication making our code more shorter, readable and understandable, similar to how reapted addition on whole numbers like 5 + 5 + 5 + 5 can be re-written more consisely as 5 * 4.
+
+You can use Check-Syntax or the stepper to see this in action to see variable susbtitution for functions in action.
+
+◊; todo: which one of the following function calls evaluates to <NUMBER>, where the func is random addition and subtraction, also have "error" as an answer.

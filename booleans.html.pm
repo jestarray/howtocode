@@ -40,10 +40,18 @@ Booleans go hand in hand with conditional expressions like ◊code{if}
 (if <question>  ; if either true or false, it will error
      <expression> ; true branch
      <expression>) ; false branch
+
+(if #true
+    \"I am the true branch :)\"
+    \"I am  the false branch >:(\")
 ")
 }
 
+◊h2{If Practice Problems}
+
 You may notice that DrRacket also highlights in black the branch that did not run which we will go into more detail in the later sections, don't worry about it for now.
+
+◊a[#:href "https://jestlearn.com/how_to_code/#if_bool_comparisons"]{If boolean comparisons}
 
 ◊h2{Cond statements}
 Like ◊code{if} statements but can handle more than 2 cases, in some ways it's syntactic sugar for nested ◊code{if} statements, also known as ◊code{else if} or ◊code{case} in other languages
@@ -55,16 +63,17 @@ Like ◊code{if} statements but can handle more than 2 cases, in some ways it's 
     [<question> <answer>]  ; if question evalutes to true, answer will run, otherwise keep going down until you hit the else case
     [<question> <answer>]  ; 
     ;... can have unlimited amount of branches
-    [else]) ; else is the catch all branch, 
+    [else <answer>]) ; else is the catch all branch, 
 
 ; example
-(define tempature 3)
+; james, alice, mom
+(define name \"james\")
+
 (cond 
-    [(< tempature 0) \"so cold\"] 
-    [(> 50 tempature) \"still very cold\"] 
-    [(> 100 tempature) \"burning hot!\"] 
-    ;... can have unlimited amount of branches
-    [else #f]) ; else is the catch all branch, 
+    [(string=? name \"james\") \"hey there handsome\"] 
+    [(string=? name \"alice\") \"hey girl\"] 
+    [(string=? name \"mom\") \"hello mother\"] 
+    [else (string-append name \", who the heck are you?\")]) ; else is the catch all branch, 
 ")
 }
 
@@ -83,12 +92,19 @@ And, Not, Or, short circuting
 
 ; for or, as soon as a #true is hit SKIP checking the rest as because it will eveluate to #true anyways
 (or #false (= (+ 1 1) 2) #true (= 999 99)) 
+
+; useful for combining constraints:
+(define age 11)
+(define height 5)
+
+(if (and (= age 10) (>= height 5))
+    \"yes you can ride\"
+    \"no you can't ride\")
 ")
 }
 
-◊h2{Practice Problems}
-
 These exercises put if statements all in 1 line because it is training you to distinguish parentheses blocks. You should absolutely space out your code for readability.
 
-◊a[#:href "https://jestlearn.com/how_to_code/#if_bool_comparisons"]{If boolean comparisons}
+◊h2{If Logical Practice Problems}
+
 ◊a[#:href "https://jestlearn.com/how_to_code/#if_logical"]{If logical}

@@ -11,7 +11,7 @@
     <script src="./slide_mode.js"></script>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
     <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
-    <title>Wrapping Errors</title>
+    <title>COMMON ERRORS</title>
 </head>
 
 <body>
@@ -19,9 +19,9 @@
         <main class="main-wrapper">
             <div id="prev">← <a href="/functions.html"> Functions</a></div>
             <div id="home"><a href="/index.html">Index</a></div>
-            <div id="next"><a href="/stepper.html">Stepper</a> →</div>
+            <div id="next"><a href="/discover.html">Discovering more built ins</a> →</div>
             <article>
-                <h1>Wrapping Errors</h1><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(&lt;operator&gt; &lt;argument-1&gt; &lt;argument-2&gt; ...)
+                <h1>COMMON ERRORS</h1><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(&lt;operator&gt; &lt;argument-1&gt; &lt;argument-2&gt; ...)
 ; there's a bug here
 (if (or (or #true #false) (an #true #false)) (or #t #f))
 </code></pre><p>COUNT THE PARTS TO IFS, ETC</p><p>After an open parenthesis <code>"("</code> <strong>an operator must always follow after</strong>, such as +, etc.<br/>Even in this expression, <code>(+ 2 (+ 6 4))</code> the argument <code>(+ 6 4)</code> follows the exact same structure, and its turtles all the way down.</p><p>(+ (+ (- 4  1) 7) 9)</p><p>(4) ERROR: is an error because 4 is not an operator</p><p>todo: explain error messages like if expects 3 parts, etc. BSL tries to be very error message friendly. Sometimes error messages are misleading and that’s when you need to look past the error message and find the source.</p><p>Enable automatic parens! but be warned sometimes it will insert 2( if you type the opening parenthesis when you really just want one), but its the common case that you always want 2 auto-closed, same with quotes. You can turn this off if you don’t like it.</p><p>Once you get used to it the parenthesis are never the bottleneck to understanding or even writing code. With proper spacing and highlighting, I argue its not bad.</p><p>If you delete the starting parens, look to delete the ending one.</p><p>some students keep randomly wrapping parenthesis when things dont work and I want to emphasize that you should use logic to wrap parens.</p><p>Everything has to follow &lt;operator arg1 arg2&gt; (+ 1 2) and if you need to do more you have to come back out and wrap around... which is a bit counter intutive because we like to keep adding things at the end</p><p>Notice the language is a little kind of counter intutive because we have to go back left, wrap around parens, and add stuff, e.g<br/>4 + 5 * 3 + 2 - 1 , we can just keep adding stuff to the right but we have to implcity remember PEMDAS, multiplcation happens first</p><p>when you naturally type this out in racket it feels a little weird and grooky<br/>in racket<br/>(* 5 3) ; write this first, then go back left and wrap thoose around parens<br/>kind of weird since the lot of us are right handed and prefer just tacking things onto the right<br/>(+ 4 (* 5 3) (- 2 1))</p><p>TODO: fix a lot of exercises that have buggy parenthesis, 5-10</p><p>tradeoffs! you can say you hate this but the language was designed this way for a purpose, see my first videos links if you’re curious as to why parentehsis etc</p>

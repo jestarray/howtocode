@@ -19,7 +19,7 @@
         <main class="main-wrapper">
             <div id="prev">← <a href="/booleans.html"> Booleans</a></div>
             <div id="home"><a href="/index.html">Index</a></div>
-            <div id="next"><a href="/parens_error.html">Wrapping Errors</a> →</div>
+            <div id="next"><a href="/common_errors.html">COMMON ERRORS</a> →</div>
             <article>
                 <h1>Functions</h1><p>Functions consume and produce values. You’ve been <strong>using</strong> functions all along!<br/>A few are:<br/><code>string-append</code> that consumes 2 strings and produces them together<br/><code>rectangle</code> that consumes 2 numbers and 2 strings and produces an image<br/><code>sqrt</code> that consumes 1 number and produces another number<br/><code>+</code> to add an arbitrary amount of numbers.</p><p>but we can create our own functions.</p><h2 id="how_to_create_a_function?"><a class="anchor" href="#how_to_create_a_function?">#</a>How to create a function?</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; creating a function
 ;the function name and the argument names can be whatever you want, just has to be matching in the body
@@ -63,9 +63,11 @@
 (regular-polygon size1 8 "solid" "red")
 (regular-polygon size2 8 "solid" "red") ; copy &amp; paste and change the size every time</code></pre><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2-redhex_starter.rkt"><code class="language-racket">; PROBLEM 2 red-hex
 ; Create a function who's name is "red-hexagon" with a parameter named "size", 
-; and in the body it should produce a red hexagon of varying size.</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2-redhex_solution.rkt"><code class="language-racket">; PROBLEM 2 red-hex
+; and in the body it should produce a red hexagon of varying size.
+; use it to create red hexagons of size 30 60 90</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2-redhex_solution.rkt"><code class="language-racket">; PROBLEM 2 red-hex
 ; Create a function who's name is "red-hexagon" with a parameter named "size", 
 ; and in the body it should produce a red hexagon of varying size.
+; use it to create red hexagons of size 30 60 90
 
 ; if we make a function instead, we can give it a meaningful name and vary the value
 ; use check-syntax and the stepper to see what size is substituted for.
@@ -78,30 +80,66 @@
 ; we can also understand immediately what this will create
 (red-hexagon 30)
 (red-hexagon 60)
-(red-hexagon 90)</code></pre></details></p><h2 id="exercise_2.1:_create_a_trapezoid_function"><a class="anchor" href="#exercise_2.1:_create_a_trapezoid_function">#</a>Exercise 2.1: Create a trapezoid function</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2.1-isotrapezoid_starter.rkt"><code class="language-racket">; PROBLEM 2.1 trapezoid 
+(red-hexagon 90)</code></pre></details></p><h2 id="exercise_2.1_create_a_warning_sign_function"><a class="anchor" href="#exercise_2.1_create_a_warning_sign_function">#</a>Exercise 2.1 Create a warning sign function</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2.1-warning_starter.rkt"><code class="language-racket">; PROBLEM 2.1 Warning Sign 
+; create a function named "warning-sign" that will take in a "size" parameter
+; its should produce a warning-sign given the size
+; use the function to create warning signs of size 30 60 90
+; (refer back to images 1.1 if needed)</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2.1-warning_solution.rkt"><code class="language-racket">; PROBLEM 2.1 Warning Sign 
+; create a function named "warning-sign" that will take in a "size" parameter
+; its should produce a warning-sign given the size
+; use the function to create warning signs of size 30 60 90
+; (refer back to images 1.1 if needed)
+
+(define (warning-sign size)
+    (overlay 
+        (text "!" size "black")
+        (triangle size "solid" "yellow")))
+
+(warning-sign 30)
+(warning-sign 60)
+(warning-sign 90)</code></pre></details></p><h2 id="exercise_2.2_create_a_trapezoid_function"><a class="anchor" href="#exercise_2.2_create_a_trapezoid_function">#</a>Exercise 2.2 Create a trapezoid function</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2.2-isotrapezoid_starter.rkt"><code class="language-racket">; PROBLEM 2.2 trapezoid 
 ; create a function named "trapezoid" that will take in a "size" parameter
-; it's body should produce a trapezoid given size
-; (refer back to images 1.2 if needed)</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2.1-isotrapezoid_solution.rkt"><code class="language-racket">; PROBLEM 2.1 trapezoid 
+; it should produce a trapezoid given a size
+; use the function to create trapezoids of sizes 30 60 90
+; (refer back to images 1.2 if needed)</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2.2-isotrapezoid_solution.rkt"><code class="language-racket">; PROBLEM 2.2 trapezoid 
 ; create a function named "trapezoid" that will take in a "size" parameter
-; it's body should produce a trapezoid given size
+; it should produce a trapezoid given a size
+; use the function to create trapezoids of sizes 30 60 90
 ; (refer back to images 1.2 if needed)
 
 (define (trapezoid size)
   (beside
    (flip-horizontal (right-triangle size size "solid" "red"))
    (square size "solid" "red")
-   (right-triangle size size "solid" "red")))</code></pre></details></p><h2 id="exercise_2.2:_create_a_checkerboard_function"><a class="anchor" href="#exercise_2.2:_create_a_checkerboard_function">#</a>Exercise 2.2: Create a checkerboard function</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2.2-checkerboard_starter.rkt"><code class="language-racket">; PROBLEM 2.2: Checkerboard
-; create a function named checkerboard that takes in 2 arguments, color1 and color2
-; it should produce a checkerboard pattern given the two colors
-; (refer back to images 1.4 if needed)</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2.2-checkerboard_solution.rkt"><code class="language-racket">; PROBLEM 2.2: Checkerboard
-; create a function named checkerboard that takes in 2 arguments, color1 and color2
-; it should produce a checkerboard pattern given the two colors
+   (right-triangle size size "solid" "red")))
+
+
+(trapezoid 30)
+(trapezoid 60)
+(trapezoid 90)</code></pre></details></p><h2 id="exercise_2.3:_create_a_checkerboard_function"><a class="anchor" href="#exercise_2.3:_create_a_checkerboard_function">#</a>Exercise 2.3: Create a checkerboard function</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2.3-checkerboard_starter.rkt"><code class="language-racket">; PROBLEM 2.3: Checkerboard
+; create a function named checkerboard that takes in 3 arguments, size, color1 and color2
+; it should produce a checkerboard pattern given a size and two colors
+; use the function to create checkerboard patterns of:
+    ; 30 red black
+    ; 60 purple brown
+    ; 90 white red
+; (refer back to images 1.4 if needed)</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2.3-checkerboard_solution.rkt"><code class="language-racket">; PROBLEM 2.3: Checkerboard
+; create a function named checkerboard that takes in 3 arguments, size, color1 and color2
+; it should produce a checkerboard pattern given a size and two colors
+; use the function to create checkerboard patterns of:
+    ; 30 red black
+    ; 60 purple pink 
+    ; 90 green orange
 ; (refer back to images 1.4 if needed)
 
-(define (checkerboard color1 color2)
+(define (checkerboard size color1 color2)
     (above 
-        (beside (square 40 "solid" color1) (square 40 "solid" color2))
-        (beside (square 40 "solid" color2) (square 40 "solid" color1))))</code></pre></details></p><h2 id="conclusion"><a class="anchor" href="#conclusion">#</a>Conclusion</h2><p>Functions allow us to <strong>re-use</strong> and combine a set of operations which factors out duplication making our code more shorter, readable and understandable, similar to how reapted addition on whole numbers like 5 + 5 + 5 + 5 can be re-written more consisely as 5 * 4.</p><p>You can use Check-Syntax or the stepper to see this in action to see variable susbtitution for functions in action.</p>
+        (beside (square size "solid" color1) (square size "solid" color2))
+        (beside (square size "solid" color2) (square size "solid" color1))))
+
+(checkerboard 30 "red" "black")
+(checkerboard 60 "purple" "pink")
+(checkerboard 90 "green" "orange")</code></pre></details></p><h2 id="conclusion"><a class="anchor" href="#conclusion">#</a>Conclusion</h2><p>Functions allow us to <strong>re-use</strong> and combine a set of operations which factors out duplication making our code more shorter, readable and understandable, similar to how reapted addition on whole numbers like 5 + 5 + 5 + 5 can be re-written more consisely as 5 * 4.</p><p>You can use Check-Syntax or the stepper to see this in action to see variable susbtitution for functions in action.</p>
             </article>
         </main>
     </div>

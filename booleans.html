@@ -45,21 +45,26 @@
 (if &lt;question&gt;  ; if either true or false, it will error
      &lt;expression&gt; ; true branch
      &lt;expression&gt;) ; false branch
-</code></pre><p>You may notice that DrRacket also highlights in black the branch that did not run which we will go into more detail in the later sections, don’t worry about it for now.</p><h2 id="cond_statements"><a class="anchor" href="#cond_statements">#</a>Cond statements</h2><p>Like <code>if</code> statements but can handle more than 2 cases, in some ways it’s syntactic sugar for nested <code>if</code> statements, also known as <code>else if</code> or <code>case</code> in other languages</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; space out for readability rather than all 1 line
+
+(if #true
+    "I am the true branch :)"
+    "I am  the false branch &gt;:(")
+</code></pre><h2 id="if_practice_problems"><a class="anchor" href="#if_practice_problems">#</a>If Practice Problems</h2><p>You may notice that DrRacket also highlights in black the branch that did not run which we will go into more detail in the later sections, don’t worry about it for now.</p><p><a href="https://jestlearn.com/how_to_code/#if_bool_comparisons">If boolean comparisons</a></p><h2 id="cond_statements"><a class="anchor" href="#cond_statements">#</a>Cond statements</h2><p>Like <code>if</code> statements but can handle more than 2 cases, in some ways it’s syntactic sugar for nested <code>if</code> statements, also known as <code>else if</code> or <code>case</code> in other languages</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; space out for readability rather than all 1 line
 (cond 
     [&lt;question&gt; &lt;answer&gt;]  ; if question evalutes to true, answer will run, otherwise keep going down until you hit the else case
     [&lt;question&gt; &lt;answer&gt;]  ; 
     ;... can have unlimited amount of branches
-    [else]) ; else is the catch all branch, 
+    [else &lt;answer&gt;]) ; else is the catch all branch, 
 
 ; example
-(define tempature 3)
+; james, alice, mom
+(define name "james")
+
 (cond 
-    [(&lt; tempature 0) "so cold"] 
-    [(&gt; 50 tempature) "still very cold"] 
-    [(&gt; 100 tempature) "burning hot!"] 
-    ;... can have unlimited amount of branches
-    [else #f]) ; else is the catch all branch, 
+    [(string=? name "james") "hey there handsome"] 
+    [(string=? name "alice") "hey girl"] 
+    [(string=? name "mom") "hello mother"] 
+    [else (string-append name ", who the heck are you?")]) ; else is the catch all branch, 
 </code></pre><h2 id="logical_operations"><a class="anchor" href="#logical_operations">#</a>Logical operations</h2><p>And, Not, Or, short circuting</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; logical operators
 (and #true #false #true) ; all have to be true in order to produce true, else false
 (or #true #false #true) ; only one has to be true to produce true, else false
@@ -71,7 +76,15 @@
 
 ; for or, as soon as a #true is hit SKIP checking the rest as because it will eveluate to #true anyways
 (or #false (= (+ 1 1) 2) #true (= 999 99)) 
-</code></pre><h2 id="practice_problems"><a class="anchor" href="#practice_problems">#</a>Practice Problems</h2><p>These exercises put if statements all in 1 line because it is training you to distinguish parentheses blocks. You should absolutely space out your code for readability.</p><p><a href="https://jestlearn.com/how_to_code/#if_bool_comparisons">If boolean comparisons</a><br/><a href="https://jestlearn.com/how_to_code/#if_logical">If logical</a></p>
+
+; useful for combining constraints:
+(define age 11)
+(define height 5)
+
+(if (and (= age 10) (&gt;= height 5))
+    "yes you can ride"
+    "no you can't ride")
+</code></pre><p>These exercises put if statements all in 1 line because it is training you to distinguish parentheses blocks. You should absolutely space out your code for readability.</p><h2 id="if_logical_practice_problems"><a class="anchor" href="#if_logical_practice_problems">#</a>If Logical Practice Problems</h2><p><a href="https://jestlearn.com/how_to_code/#if_logical">If logical</a></p>
             </article>
         </main>
     </div>

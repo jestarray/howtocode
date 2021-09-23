@@ -11,9 +11,9 @@
     variables.html
     booleans.html
     functions.html
-    parens_error.html
-    stepper.html
+    common_errors.html
     discover.html
+    lang_dont_matter.html
 }
 
 ◊learning_stages.html{

@@ -97,8 +97,25 @@ You may notice that 2htdp doesn't contain a hexagon function. It's a lot of tedi
 }
 }
 
-◊h2{Exercise 2.1: Create a trapezoid function}
-◊(define problem-trap (starter-solution "2.1-isotrapezoid"))
+◊h2{Exercise 2.1 Create a warning sign function}
+
+◊(define problem-warn (starter-solution "2.1-warning"))
+◊(define starter-warn (car problem-warn))
+◊(define solution-warn (cadr problem-warn))
+
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car starter-warn) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr starter-warn))
+}
+
+◊details{
+    ◊summary{Answer}
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-warn)]{
+    ◊(code #:class "language-racket" ◊(cadr solution-warn))
+}
+}
+
+◊h2{Exercise 2.2 Create a trapezoid function}
+◊(define problem-trap (starter-solution "2.2-isotrapezoid"))
 ◊(define starter-trap (car problem-trap))
 ◊(define solution-trap (cadr problem-trap))
 
@@ -113,8 +130,8 @@ You may notice that 2htdp doesn't contain a hexagon function. It's a lot of tedi
 }
 }
 
-◊h2{Exercise 2.2: Create a checkerboard function}
-◊(define problem-checker (starter-solution "2.2-checkerboard"))
+◊h2{Exercise 2.3: Create a checkerboard function}
+◊(define problem-checker (starter-solution "2.3-checkerboard"))
 ◊(define starter-checker (car problem-checker))
 ◊(define solution-check (cadr problem-checker))
 

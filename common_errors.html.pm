@@ -1,6 +1,6 @@
 #lang pollen
 
-◊h1{Wrapping Errors}
+◊h1{COMMON ERRORS}
 
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket" 

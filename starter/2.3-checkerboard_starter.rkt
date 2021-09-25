@@ -5,4 +5,4 @@
     ; 30 red black
     ; 60 purple brown
     ; 90 white red
-; (refer back to images 1.4 if needed)
+; (refer back to images 1.4 if needed) https://howtocode.pages.dev/images.html#exercise_1_image_shapes

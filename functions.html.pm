@@ -146,6 +146,16 @@ You may notice that 2htdp doesn't contain a hexagon function. It's a lot of tedi
 }
 }
 
+◊h2{Evaluation and Scope}
+
+A function will try to get all its variables from where they are closest.
+
+What happens inside a function stays inside a function.
+
+https://jestlearn.com/how_to_code/#function_evaluation_and_scope_1
+
+https://jestlearn.com/how_to_code/#function_evaluation_and_scope_2_nested
+
 ◊h2{Conclusion}
 Functions allow us to ◊strong{re-use} and combine a set of operations which factors out duplication making our code more shorter, readable and understandable, similar to how reapted addition on whole numbers like 5 + 5 + 5 + 5 can be re-written more consisely as 5 * 4.
 

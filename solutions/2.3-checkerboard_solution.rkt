@@ -5,7 +5,7 @@
     ; 30 red black
     ; 60 purple pink 
     ; 90 green orange
-; (refer back to images 1.4 if needed)
+; (refer back to images 1.4 if needed) https://howtocode.pages.dev/images.html#exercise_1_image_shapes
 
 (define (checkerboard size color1 color2)
     (above 

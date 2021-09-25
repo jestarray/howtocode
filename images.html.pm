@@ -47,7 +47,7 @@ Racket has support for drawing images
 ")
 }
 
-◊h2{Exercise 1 - Image Shapes}
+◊h2{Exercise 1 Image Shapes}
 
 ◊img[#:src "images/shapes.png"]{}
 ◊; REQUIRES RACEKT/FILE
@@ -92,7 +92,7 @@ Get some practice here by plotting guessing some plot points:
 
 ◊a[#:href "./plot_point.html"]{Top left origin practice with plotting points}
 
-◊h2{Exercise 1.2: place-image center}
+◊h2{Exercise 1.2 place-image center}
 
 ◊img[#:src "images/fps_crosshair.webp" #:width "100%"]{}
 In a lot of 3D shooting games, there are crosshairs to help you aim. Your job is to put the crosshair in the center with place-image

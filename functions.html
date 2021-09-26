@@ -61,10 +61,12 @@
 ; all these parameters to create a red hexagon. 
 ; Also unclear what this does to a stranger until they run the code or read docs
 (regular-polygon size1 8 "solid" "red")
-(regular-polygon size2 8 "solid" "red") ; copy &amp; paste and change the size every time</code></pre><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2-redhex_starter.rkt"><code class="language-racket">; PROBLEM 2 red-hex
+(regular-polygon size2 8 "solid" "red") ; copy &amp; paste and change the size every time</code></pre><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2-redhex_starter.rkt"><code class="language-racket">(require 2htdp/image)
+; PROBLEM 2 red-hex
 ; Create a function who's name is "red-hexagon" with a parameter named "size", 
 ; and in the body it should produce a red hexagon of varying size.
-; use it to create red hexagons of size 30 60 90</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2-redhex_solution.rkt"><code class="language-racket">; PROBLEM 2 red-hex
+; use it to create red hexagons of size 30 60 90</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2-redhex_solution.rkt"><code class="language-racket">(require 2htdp/image)
+; PROBLEM 2 red-hex
 ; Create a function who's name is "red-hexagon" with a parameter named "size", 
 ; and in the body it should produce a red hexagon of varying size.
 ; use it to create red hexagons of size 30 60 90
@@ -80,11 +82,13 @@
 ; we can also understand immediately what this will create
 (red-hexagon 30)
 (red-hexagon 60)
-(red-hexagon 90)</code></pre></details></p><h2 id="exercise_2.1_create_a_warning_sign_function"><a class="anchor" href="#exercise_2.1_create_a_warning_sign_function">#</a>Exercise 2.1 Create a warning sign function</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2.1-warning_starter.rkt"><code class="language-racket">; PROBLEM 2.1 Warning Sign 
+(red-hexagon 90)</code></pre></details></p><h2 id="exercise_2.1_create_a_warning_sign_function"><a class="anchor" href="#exercise_2.1_create_a_warning_sign_function">#</a>Exercise 2.1 Create a warning sign function</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2.1-warning_starter.rkt"><code class="language-racket">(require 2htdp/image)
+; PROBLEM 2.1 Warning Sign 
 ; create a function named "warning-sign" that will take in a "size" parameter
 ; its should produce a warning-sign given the size
 ; use the function to create warning signs of size 30 60 90
-; (refer back to images 1.1 if needed) https://howtocode.pages.dev/images.html#exercise_1_image_shapes</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2.1-warning_solution.rkt"><code class="language-racket">; PROBLEM 2.1 Warning Sign 
+; (refer back to images 1.1 if needed) https://howtocode.pages.dev/images.html#exercise_1_image_shapes</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2.1-warning_solution.rkt"><code class="language-racket">(require 2htdp/image)
+; PROBLEM 2.1 Warning Sign 
 ; create a function named "warning-sign" that will take in a "size" parameter
 ; its should produce a warning-sign given the size
 ; use the function to create warning signs of size 30 60 90
@@ -97,11 +101,13 @@
 
 (warning-sign 30)
 (warning-sign 60)
-(warning-sign 90)</code></pre></details></p><h2 id="exercise_2.2_create_a_trapezoid_function"><a class="anchor" href="#exercise_2.2_create_a_trapezoid_function">#</a>Exercise 2.2 Create a trapezoid function</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2.2-isotrapezoid_starter.rkt"><code class="language-racket">; PROBLEM 2.2 trapezoid 
+(warning-sign 90)</code></pre></details></p><h2 id="exercise_2.2_create_a_trapezoid_function"><a class="anchor" href="#exercise_2.2_create_a_trapezoid_function">#</a>Exercise 2.2 Create a trapezoid function</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2.2-isotrapezoid_starter.rkt"><code class="language-racket">(require 2htdp/image)
+; PROBLEM 2.2 trapezoid 
 ; create a function named "trapezoid" that will take in a "size" parameter
 ; it should produce a trapezoid given a size
 ; use the function to create trapezoids of sizes 30 60 90
-; (refer back to images 1.2 if needed) https://howtocode.pages.dev/images.html#exercise_1_image_shapes</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2.2-isotrapezoid_solution.rkt"><code class="language-racket">; PROBLEM 2.2 trapezoid 
+; (refer back to images 1.2 if needed) https://howtocode.pages.dev/images.html#exercise_1_image_shapes</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2.2-isotrapezoid_solution.rkt"><code class="language-racket">(require 2htdp/image)
+; PROBLEM 2.2 trapezoid 
 ; create a function named "trapezoid" that will take in a "size" parameter
 ; it should produce a trapezoid given a size
 ; use the function to create trapezoids of sizes 30 60 90
@@ -116,14 +122,16 @@
 
 (trapezoid 30)
 (trapezoid 60)
-(trapezoid 90)</code></pre></details></p><h2 id="exercise_2.3:_create_a_checkerboard_function"><a class="anchor" href="#exercise_2.3:_create_a_checkerboard_function">#</a>Exercise 2.3: Create a checkerboard function</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2.3-checkerboard_starter.rkt"><code class="language-racket">; PROBLEM 2.3: Checkerboard
+(trapezoid 90)</code></pre></details></p><h2 id="exercise_2.3:_create_a_checkerboard_function"><a class="anchor" href="#exercise_2.3:_create_a_checkerboard_function">#</a>Exercise 2.3: Create a checkerboard function</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2.3-checkerboard_starter.rkt"><code class="language-racket">(require 2htdp/image)
+; PROBLEM 2.3: Checkerboard
 ; create a function named checkerboard that takes in 3 arguments, size, color1 and color2
 ; it should produce a checkerboard pattern given a size and two colors
 ; use the function to create checkerboard patterns of:
     ; 30 red black
     ; 60 purple brown
     ; 90 white red
-; (refer back to images 1.4 if needed) https://howtocode.pages.dev/images.html#exercise_1_image_shapes</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2.3-checkerboard_solution.rkt"><code class="language-racket">; PROBLEM 2.3: Checkerboard
+; (refer back to images 1.4 if needed) https://howtocode.pages.dev/images.html#exercise_1_image_shapes</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/2.3-checkerboard_solution.rkt"><code class="language-racket">(require 2htdp/image)
+; PROBLEM 2.3: Checkerboard
 ; create a function named checkerboard that takes in 3 arguments, size, color1 and color2
 ; it should produce a checkerboard pattern given a size and two colors
 ; use the function to create checkerboard patterns of:

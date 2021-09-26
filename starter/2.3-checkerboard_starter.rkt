@@ -1,3 +1,4 @@
+(require 2htd/image)
 ; PROBLEM 2.3: Checkerboard
 ; create a function named checkerboard that takes in 3 arguments, size, color1 and color2
 ; it should produce a checkerboard pattern given a size and two colors

@@ -1,3 +1,4 @@
+(require 2htdp/image)
 ; PROBLEM 2.2 trapezoid 
 ; create a function named "trapezoid" that will take in a "size" parameter
 ; it should produce a trapezoid given a size

@@ -1,3 +1,4 @@
+(require 2htdp/image)
 ; PROBLEM 2.1 Warning Sign 
 ; create a function named "warning-sign" that will take in a "size" parameter
 ; its should produce a warning-sign given the size

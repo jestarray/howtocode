@@ -31,20 +31,20 @@ If I were to ask you to make 10 stop signs, of varying size, 30, 60, 90, increas
 "; creating a function
 (require 2htdp/image)
 
-(define stop1-hexsize 30)
+(define stop1-octsize 30)
 (overlay
- (text \"STOP\" (- stop1-hexsize 5) \"white\")
- (regular-polygon stop1-hexsize 8 \"solid\" \"red\"))
+ (text \"STOP\" (- stop1-octsize 5) \"white\")
+ (regular-polygon stop1-octsize 8 \"solid\" \"red\"))
 
-(define stop2-hexsize 60)
+(define stop2-octsize 60)
 (overlay
- (text \"STOP\" (- stop2-hexsize 5) \"white\")
- (regular-polygon stop2-hexsize 8 \"solid\" \"red\"))
+ (text \"STOP\" (- stop2-octsize 5) \"white\")
+ (regular-polygon stop2-octsize 8 \"solid\" \"red\"))
 
-(define stop3-hexsize 90)
+(define stop3-octsize 90)
 (overlay
- (text \"STOP\" (- stop3-hexsize 5) \"white\")
- (regular-polygon stop3-hexsize 8 \"solid\" \"red\"))
+ (text \"STOP\" (- stop3-octsize 5) \"white\")
+ (regular-polygon stop3-octsize 8 \"solid\" \"red\"))
 ; ... I can do more but i think you get the point
 ")
 }
@@ -68,21 +68,21 @@ We can instead create a function that will create the variable in a local tempor
 ")
 }
 
-◊h2{Exercise 2: Create a hexagon function}
+◊h2{Exercise 2: Create a octogon function}
 
-You may notice that 2htdp doesn't contain a hexagon function. It's a lot of tedious typing for all the parameters, e.g solid & red.
+You may notice that 2htdp/image doesn't contain a octogon function built in. It's a lot of tedious typing for all the parameters, e.g solid & red.
 
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket"
 "(define size1 30)
 (define size2 90)
-; all these parameters to create a red hexagon. 
+; all these parameters to create a red octogon. 
 ; Also unclear what this does to a stranger until they run the code or read docs
 (regular-polygon size1 8 \"solid\" \"red\")
 (regular-polygon size2 8 \"solid\" \"red\") ; copy & paste and change the size every time")
 }
 
-◊(define problem-files (starter-solution "2-redhex"))
+◊(define problem-files (starter-solution "2-redocto"))
 ◊(define starter (car problem-files))
 ◊(define solution (cadr problem-files))
 
@@ -92,7 +92,7 @@ You may notice that 2htdp doesn't contain a hexagon function. It's a lot of tedi
 
 ◊details{
     ◊summary{Answer}
-◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution)]{
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution) #:data-download-link ""]{
     ◊(code #:class "language-racket" ◊(cadr solution))
 }
 }
@@ -109,7 +109,7 @@ You may notice that 2htdp doesn't contain a hexagon function. It's a lot of tedi
 
 ◊details{
     ◊summary{Answer}
-◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-warn)]{
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-warn) #:data-download-link ""]{
     ◊(code #:class "language-racket" ◊(cadr solution-warn))
 }
 }
@@ -125,7 +125,7 @@ You may notice that 2htdp doesn't contain a hexagon function. It's a lot of tedi
 
 ◊details{
     ◊summary{Answer}
-◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-trap)]{
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-trap) #:data-download-link ""]{
     ◊(code #:class "language-racket" ◊(cadr solution-trap))
 }
 }
@@ -141,7 +141,7 @@ You may notice that 2htdp doesn't contain a hexagon function. It's a lot of tedi
 
 ◊details{
     ◊summary{Answer}
-◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-check)]{
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-check) #:data-download-link ""]{
     ◊(code #:class "language-racket" ◊(cadr solution-check))
 }
 }

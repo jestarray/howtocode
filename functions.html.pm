@@ -68,15 +68,15 @@ We can instead create a function that will create the variable in a local tempor
 ")
 }
 
-◊h2{Exercise 2: Create a octogon function}
+◊h2{Exercise 2 Create an octogon function}
 
-You may notice that 2htdp/image doesn't contain a octogon function built in. It's a lot of tedious typing for all the parameters, e.g solid & red.
+You may notice that 2htdp/image doesn't contain an octogon function built in. It's a lot of tedious typing for all the parameters, e.g solid & red.
 
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket"
 "(define size1 30)
 (define size2 90)
-; all these parameters to create a red octogon. 
+; all these parameters to create an red octogon. 
 ; Also unclear what this does to a stranger until they run the code or read docs
 (regular-polygon size1 8 \"solid\" \"red\")
 (regular-polygon size2 8 \"solid\" \"red\") ; copy & paste and change the size every time")
@@ -130,7 +130,7 @@ You may notice that 2htdp/image doesn't contain a octogon function built in. It'
 }
 }
 
-◊h2{Exercise 2.3: Create a checkerboard function}
+◊h2{Exercise 2.3 Create a checkerboard function}
 ◊(define problem-checker (starter-solution "2.3-checkerboard"))
 ◊(define starter-checker (car problem-checker))
 ◊(define solution-check (cadr problem-checker))

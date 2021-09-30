@@ -115,3 +115,11 @@ Your result should look like this: with the + centered in the middle
     ◊(code #:class "language-racket" ◊(cadr solution2))
 }
 }
+
+◊h2{Videos}
+
+◊a[#:href "https://www.youtube.com/watch?v=mEMDE9xV9NY&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=6"]{Image Basics Video}
+
+◊a[#:href "https://www.youtube.com/watch?v=-QVQBMp7jMY&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=7"]{Image Exercises video}
+
+◊a[#:href "https://www.youtube.com/watch?v=vs_9A7_HIHA&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=8"]{Top left origin video}

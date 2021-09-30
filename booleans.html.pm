@@ -108,3 +108,9 @@ These exercises put if statements all in 1 line because it is training you to di
 ◊h2{If Logical Practice Problems}
 
 ◊a[#:href "https://jestlearn.com/how_to_code/#if_logical"]{If logical}
+
+◊h2{Videos}
+
+◊a[#:href "https://www.youtube.com/watch?v=_25wDPmuCKc&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=12"]{Booleans video}
+
+◊a[#:href "https://www.youtube.com/watch?v=O8c4arZ0FW8&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=13"]{Logical Comparison video}

@@ -138,3 +138,12 @@ In conclusion, variables give meaningful names to our data making it easier to u
 ◊h2{Pratice Problems}
 
 ◊a[#:href "https://jestlearn.com/how_to_code/#build_a_string"]{Build anagram strings}
+
+◊h2{Videos}
+
+◊a[#:href "https://www.youtube.com/watch?v=WViW7y17UhE&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=9"]{Variables Video}
+
+
+◊a[#:href "https://www.youtube.com/watch?v=JpcuA0UqnfI&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=10"]{Factoring Video}
+
+◊a[#:href "https://www.youtube.com/watch?v=bGdl11zoRlc&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=11"]{Build a string video}

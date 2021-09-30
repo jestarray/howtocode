@@ -6,7 +6,14 @@
     ; 30 red black
     ; 60 purple pink 
     ; 90 green orange
-; (refer back to images 1.4 if needed) https://howtocode.pages.dev/images.html#exercise_1_image_shapes
+; (refer back to images 1.4 if needed) 
+; https://howtocode.pages.dev/images.html#exercise_1_image_shapes
+
+#|
+(above 
+ (beside (square 20 "solid" "red") (square 20 "solid" "black"))
+ (beside (square 20 "solid" "black") (square 20 "solid" "red")))
+|#
 
 (define (checkerboard size color1 color2)
     (above 

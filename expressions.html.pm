@@ -133,3 +133,10 @@ We'll cover errors more extensively later but for now just remember to make sure
     ◊(code #:class "language-racket" ◊(cadr solution))
 }
 }
+
+◊h2{Videos}
+
+◊a[#:href "https://www.youtube.com/watch?v=nBUcisbrvTo&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=3"]{Expressions Video}
+
+
+◊a[#:href "https://www.youtube.com/watch?v=Nk2mpEgc2F0&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=4"]{Infix to Prefix Video}

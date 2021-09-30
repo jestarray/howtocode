@@ -18,3 +18,7 @@ Optional:
 }
 
 ◊img[#:src "./images/racket_settings.png"]{}
+
+◊h2{Video}
+
+◊a[#:href "https://www.youtube.com/watch?v=1Lg8ti8lTMI&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=2"]{Installation Video}

@@ -54,7 +54,7 @@ We can instead create a function that will create the variable in a local tempor
     ◊(code #:class "language-racket"
 "; name of the function is stop-sign
 ; size is a parameter that we named arbitrarily
-
+; 1: encapsulates a set of operations
 (define (stop-sign size)
     (overlay
         (text \"STOP\" (- size 5) \"white\")
@@ -62,9 +62,11 @@ We can instead create a function that will create the variable in a local tempor
 
 ; no more needing to create variables
 ; and copy and pasting overlay, text, and regular polygon 
+; 2: much more meaningful name, stop-sign
 (stop-sign 30) ; all in 1 line to create a stop-sign
 (stop-sign 60)
 (stop-sign 90)
+; 3: reduced a lot of repition compared to example above
 ")
 }
 
@@ -148,17 +150,51 @@ You may notice that 2htdp/image doesn't contain an octogon function built in. It
 
 ◊h2{Evaluation and Scope}
 
-A function will try to get all its variables from where they are closest.
+A function will look for variables ◊em{inside} of itself first, and only if it can't find it, will it keep looking up until it hits the global scope, and if it still can't find it after that then it will be an error.
 
-What happens inside a function stays inside a function.
+◊pre[#:class "line-numbers match-braces rainbow-braces"]{
+    ◊(code #:class "language-racket"
+"(define z 8)
+(define t 6)
+(define v 7)
 
-https://jestlearn.com/how_to_code/#function_evaluation_and_scope_1
+(define (p k v) (- z 2 v 9 7))
+; there are two v's BUT v will be 4, NOT 7
+; and z will be 8
+(p 3 4)  ; evaluates to -14
+; NOT -17, had v been 7
+")
+}
 
-https://jestlearn.com/how_to_code/#function_evaluation_and_scope_2_nested
+A function can access global variables but the global context cannot access variables within a function. What happens inside a function stays inside a function.
+
+◊img[#:src "images/scope_tower.png"]{}
+
+You can think of it as looking for your lost kid in a huge multi-floor building. You're going to start at the first floor and then if you can't find them, you go up to floor 2, and then look around, then up and up until you hit the final floor.
+
+◊h2{Practice Function Eval and Scope}
+
+◊a[#:href "https://jestlearn.com/how_to_code/#function_evaluation_and_scope_1"]{Practice Function Eval and Scope 1}
+
+◊a[#:href "https://jestlearn.com/how_to_code/#function_evaluation_and_scope_2_nested"]{Practice Function Eval and Scope 2}
+
+Get used to looking around and resolving what variables to values.
 
 ◊h2{Conclusion}
-Functions allow us to ◊strong{re-use} and combine a set of operations which factors out duplication making our code more shorter, readable and understandable, similar to how reapted addition on whole numbers like 5 + 5 + 5 + 5 can be re-written more consisely as 5 * 4.
+Functions allow us to ◊strong{re-use} and:
+
+◊ol{
+    ◊li{combine a set of operations}
+    ◊li{give a meaningful name to the combined operations}
+    ◊li{factor out and reduce duplication}
+}
+
+thus making our code more shorter, maintainable, and readable, a little similar to how reapted addition on whole numbers like 5 + 5 + 5 + 5 can be re-written more consisely as 5 * 4.
 
 You can use Check-Syntax or the stepper to see this in action to see variable susbtitution for functions in action.
 
-◊; todo: which one of the following function calls evaluates to <NUMBER>, where the func is random addition and subtraction, also have "error" as an answer.
+◊h2{Videos}
+
+◊a[#:href "https://www.youtube.com/watch?v=OUx0gzniKg8&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=15"]{Functions Video}
+
+◊a[#:href "https://www.youtube.com/watch?v=aMtjB_OChxM&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=16"]{Function Exercies Video}

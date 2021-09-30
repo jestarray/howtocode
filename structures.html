@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
+    <title>Structures of Data</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/functions.html"> Functions</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+            <div id="next"><a href="/common_errors.html">COMMON ERRORS</a> →</div>
+            <article>
+                <h1>Structures of Data</h1><h2 id="related_data"><a class="anchor" href="#related_data">#</a>Related Data</h2><p>There’s a problem with using variables to group related data. This code will crash:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">
+(define firstname "edward")
+(define lastname "norton") ; who's last name is this?
+(define age 18)
+(define balance 99)
+(define single #true)
+
+; would need to find new names for 
+; these variables because they already exist:
+; e.g firstname2, lastname2, age2,
+(define firstname "marla")
+(define lastname "singer")
+(define age 24)
+(define balance 55)
+(define single #false)
+
+; same with these below
+(define firstname "tyler")
+(define lastname "durden")
+(define age 18)
+(define balance 0)
+(define single #false)
+</code></pre><p>Variables cant be defined with the same name so you have to rename so these have to be unique, e.g: <code>firstname2</code>, but it gets tedious when you reach a couple of people.<br/>Another problem is that there is no relationship/linking of the variables: <code> firstname, lastname, age and balance</code>. We humans know they are related to a singular person, the <code>age</code> variable is Edwards’s, not Marla’s because of their close proximity and spacing of each other, and their variable names BUT what’s really happening is these are just pieces of data floating in space like the image below. Nothings preventing anyone from moving edwards lastname variable to somewhere random and way below:</p><p><img src="images/scattered_variables.png"/></p><h2 id="structs"><a class="anchor" href="#structs">#</a>Structs</h2><p><code>Structs</code> can help us solve the problem of keeping related pieces of data together without creating a ton of variables. Structs are collections of data relating to 1 “unit” of something, e.g a person, a dog, a 2D point, etc. A real life analogy would be a drink and a straw, things that you can generally expect if you have of them, you might as well have the other.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct person (fn ln age balance single))
+
+; create instances of persons
+(define p1 (make-person "edward" "norton" 18 99 #true))
+(define p2 (make-person "marla" "singer" 24 55 #false))
+(define p3 (make-person "tyler" "durden" 18 0 #false))
+
+; to get the pieces out of a structure out:
+; aka selectors
+(person-fn p1) ; edward
+(person-ln p2) ; singer 
+(person-balance p3) ; 0 balance from tyler 
+</code></pre><h2 id="struct_definition_syntax"><a class="anchor" href="#struct_definition_syntax">#</a>Struct Definition Syntax</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct &lt;NAME&gt; (&lt;FIELDNAME&gt; ...))
+
+; to create an instance of the struct:
+(make-&lt;NAME&gt; &lt;data&gt;...)
+; where &lt;data&gt; are strings, numbers, bools or images 
+
+; which creates accessors
+(&lt;NAME&gt;-&lt;FIELDNAME&gt; &lt;INSTANCE&gt;)
+
+; and a predicate to check if its an instance of &lt;NAME&gt;
+(&lt;NAME&gt;? &lt;INSTACE&gt;) ; returns #true or #false
+</code></pre><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct person (fn ln age balance single))
+(define-struct dog (name age breed))
+(define p3 (make-person "tyler" "durden" 18 0 #false))
+(define d1 (make-dog "flipper" 7 "pug"))
+
+(dog? p3) ; false
+(dog? d1) ; true
+(dog? "yay") ; false
+</code></pre><h2 id="conclusion"><a class="anchor" href="#conclusion">#</a>Conclusion</h2><p>Structs introduce a new data type to our classic 3 <code>(numbers, strings, and booleans)</code>, just like how functions introduce a new operation to the classic <code>string-append + - *</code>. It groups units of data close together in 1 whole block.</p><h2 id="practice_problems_with_structs"><a class="anchor" href="#practice_problems_with_structs">#</a>Practice Problems with Structs</h2><p><a href="https://jestlearn.com/how_to_code/#structs">Structs practice</a></p><h2 id="exercise_3_greet"><a class="anchor" href="#exercise_3_greet">#</a>Exercise 3 Greet</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/3-greet_starter.rkt"><code class="language-racket">#| PROBLEM 3: 
+Write a function named "greet" that consumes a person and produces string for each person:
+"Hi my name is edward norton, I am 18 old and single, my balance is 99"
+"Hi my name is marla singer, I am 24 old and taken, my balance is 55"
+"Hi my name is tyler durden, I am 18 old and taken, my balance is 0"
+|#
+
+(define-struct person (fn ln age balance single))
+
+(define p1 (make-person "edward" "norton" 18 99 #true))
+(define p2 (make-person "marla" "singer" 24 55 #false))
+(define p3 (make-person "tyler" "durden" 18 0 #false))
+
+;; Person -&gt; String
+;; produces a greeting given a person
+(define (greet p)
+; WRITE CODE INSIDE HERE
+    (string-append (... p)))
+
+(greet p1)
+(greet p2)
+(greet p3)</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="solutions/3-greet_solution.rkt"><code class="language-racket">#| PROBLEM 3: 
+Write a function named "greet" that consumes a person and produces string for each person:
+"Hi my name is edward norton, I am 18 old and single, my balance is 99"
+"Hi my name is marla singer, I am 24 old and taken, my balance is 55"
+"Hi my name is tyler durden, I am 18 old and taken, my balance is 0"
+|#
+
+(define-struct person (fn ln age balance single))
+
+(define p1 (make-person "edward" "norton" 18 99 #true))
+(define p2 (make-person "marla" "singer" 24 55 #false))
+(define p3 (make-person "tyler" "durden" 18 0 #false))
+
+;; Person -&gt; String
+;; produces a greeting given a person
+(define (greet pr)
+    (string-append "Hi my name is " (person-fn pr) " " (person-ln pr) ", I am " (number-&gt;string (person-age pr)) " old and "
+    (if (person-single pr) "single" "taken") ", my balance is " (number-&gt;string (person-balance pr))))
+
+(greet p1)
+(greet p2)
+(greet p3)</code></pre></details></p>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

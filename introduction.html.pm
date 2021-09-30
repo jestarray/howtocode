@@ -99,3 +99,7 @@ Lisp is stupid with all the parens comic - https://rakhim.org/images/honestly-un
 Web Assembly using LISP s-expressions - https://en.wikipedia.org/wiki/WebAssembly
 }
 }
+
+◊h2{Video}
+
+◊a[#:href "https://www.youtube.com/watch?v=SDyfgt_uF64&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=1"]{Introduction Video}

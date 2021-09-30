@@ -3,6 +3,7 @@
 ; Create a function who's name is "red-octogon" with a parameter named "size", 
 ; and in the body it should produce a red octogon of varying size.
 ; use it to create red octogons of size 30 60 90
+; (regular-polygon size 8 "solid" "red")
 
 ; if we make a function instead, we can give it a meaningful name and vary the value
 ; use check-syntax and the stepper to see what size is substituted for.

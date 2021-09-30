@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPS</title>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="400" height="400" style="border:1px solid black;">
+        Your browser does not support the HTML canvas tag.</canvas>
+
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        let fps = 60;
+        let auto_clear = true;
+        const WIDTH = 400;
+        const HEIGHT = 400;
+        const CENTER_X = WIDTH / 2;
+        const CENTER_Y = HEIGHT / 2;
+
+        ctx.font = 'bold 64px serif';
+
+        function draw_number(num) {
+            ctx.strokeText(num, CENTER_X, CENTER_Y);
+        }
+
+        let prev = 0;
+        let counter = 1;
+
+        let desired_fps = 60;
+        let accum = 0;
+        let rect_x = 0;
+        function draw_rect(x, y, color = "green") {
+            ctx.fillStyle = color;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 4;
+            //todo: outline black it
+            ctx.strokeRect(x, y, 50, 50);
+            //reset
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "black";
+        }
+
+        function clear() {
+            ctx.clearRect(0, 0, WIDTH, HEIGHT);
+        }
+        function t(){
+            console.log("ttt")
+        }
+
+        function loop(curr) {
+            //turn off clearing
+            if(auto_clear) {
+                clear();
+            }
+            let ms = (curr - prev) / 1000;
+            prev = curr;
+
+            accum += ms;
+            //console.log(accum)
+            if(accum >= (1 / desired_fps)) {
+                // need to add back to the accum
+                //console.log(accum *  1000)
+                //console.log(desired_fps)
+                counter +=1;
+                accum = accum - (1 / desired_fps); // need to compensate for missed frames
+                //console.log(accum)
+                //accum = 0; 
+                if(counter >= 10){
+                    counter = 0;
+                }
+                //console.log(counter);
+                rect_x += WIDTH * ms;
+            }
+            draw_rect(rect_x, 300);
+            if(rect_x >= WIDTH) {
+                rect_x = 0;
+            }
+            draw_number(counter);
+            requestAnimationFrame(loop)
+        }
+        function change_fps() {
+            let input_fps = document.getElementById("input-fps").value || 60;
+
+            desired_fps = parseInt(input_fps)
+        }
+        function disable_clear() {
+            auto_clear = false;
+        }
+        function enable_clear() {
+            auto_clear = true;
+        }
+        
+        requestAnimationFrame(loop)
+    </script>
+    <form>
+        <label>FPS: </label>
+        <input id="input-fps" type="text" placeholder="60">
+        <button type="button" id="change-fps" onclick="change_fps()">Submit</button>
+        <br>
+        <label>Clearing</label>
+        <button type="button" id="clear-on" onclick="enable_clear()">On</button>
+        <button type="button" id="clear-off" onclick="disable_clear()">Off</button>
+        <br>
+        switch clearing on and off rapidly for intution of clearing after every draw
+    </form>
+</body>
+
+</html>

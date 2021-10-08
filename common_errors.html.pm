@@ -2,45 +2,98 @@
 
 ◊h1{COMMON ERRORS}
 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket" 
-"(<operator> <argument-1> <argument-2> ...)
-; there's a bug here
-(if (or (or #true #false) (an #true #false)) (or #t #f))
-")
+◊(define problem-files (starter-solution "syntaxerror"))
+◊(define starter (car problem-files))
+◊(define solution (cadr problem-files))
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src (car starter) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr starter))
 }
 
-COUNT THE PARTS TO IFS, ETC
+◊details{
+    ◊summary{Answer}
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr solution))
+}
+}
 
-After an open parenthesis ◊code{"("} ◊strong{an operator must always follow after}, such as +, etc.
-Even in this expression, ◊code{(+ 2 (+ 6 4))} the argument ◊code{(+ 6 4)} follows the exact same structure, and its turtles all the way down.
+◊h2{Syntax errors}
+Syntax errors are errors that prevent code from even running until you fix missing parentheses, spelling, etc. These are usually very easy to spot and you get a friendly error message giving you a hint on how to fix them.
 
-(+ (+ (- 4  1) 7) 9)
+A common mistake that beginners do is to randomly type more code, and ◊a[#:href "https://www.reddit.com/r/Racket/comments/pijf9w/i_need_help_with_this_code/"]{more parentheses} to brute force it to work, but this will only make things worse. Take a deep breath and be very clear on what you need to do and what the code is doing.
 
-(4) ERROR: is an error because 4 is not an operator
+Usually syntax errors are things you just learn from trial and error, and someone constantly correcting you so feel free to ask on the racket discord or comments below.
 
-todo: explain error messages like if expects 3 parts, etc. BSL tries to be very error message friendly. Sometimes error messages are misleading and that's when you need to look past the error message and find the source.
+◊h3{Tips for readability}
 
-Enable automatic parens! but be warned sometimes it will insert 2( if you type the opening parenthesis when you really just want one), but its the common case that you always want 2 auto-closed, same with quotes. You can turn this off if you don't like it.
+If you are having trouble with counting the parts up in an expression, mouse over parentheses from left to right to count the pieces needed, or space out and format your code more neatly.
 
-Once you get used to it the parenthesis are never the bottleneck to understanding or even writing code. With proper spacing and highlighting, I argue its not bad.
+If you delete the starting parens, look to delete the ending one. Think about what each set of parentheses do. 
 
-If you delete the starting parens, look to delete the ending one.
+Enable automatic parens is convient because you most often want parentheses in pairs but sometimes it's not always what you want! For example, (+ 1 1 * 3 4)) , say you wanted to add an opening one ◊code{(} in front of the ◊code{*}, be warned it will often insert 2( if you type the opening parenthesis when you really just want one), you can turn this off if you don't like it, but for me it's the common case and makes writing code more smooth.
 
-some students keep randomly wrapping parenthesis when things dont work and I want to emphasize that you should use logic to wrap parens.
+If you type a closing parens ◊code{)} when there already is a closing parens, racket won't insert unncessary ones till it reaches the end. It also will auto-match the square ones.
 
-Everything has to follow <operator arg1 arg2> (+ 1 2) and if you need to do more you have to come back out and wrap around... which is a bit counter intutive because we like to keep adding things at the end
+◊h2{Logic errors}
 
-Notice the language is a little kind of counter intutive because we have to go back left, wrap around parens, and add stuff, e.g
-4 + 5 * 3 + 2 - 1 , we can just keep adding stuff to the right but we have to implcity remember PEMDAS, multiplcation happens first
+These errors are silent and don't crash but the program is misbehaving.
 
-when you naturally type this out in racket it feels a little weird and grooky
-in racket
-(* 5 3) ; write this first, then go back left and wrap thoose around parens
-kind of weird since the lot of us are right handed and prefer just tacking things onto the right
-(+ 4 (* 5 3) (- 2 1)) 
+◊h3{Problem 1}
 
+◊(define problem-files-buggy (starter-solution "buggy_logic1"))
+◊(define starter-buggy (car problem-files-buggy))
+◊(define solution-buggy (cadr problem-files-buggy))
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src (car starter-buggy) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr starter-buggy))
+}
 
-TODO: fix a lot of exercises that have buggy parenthesis, 5-10
+◊details{
+    ◊summary{Answer}
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-buggy) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr solution-buggy))
+}
+}
 
-tradeoffs! you can say you hate this but the language was designed this way for a purpose, see my first videos links if you're curious as to why parentehsis etc
+◊h3{Problem 2}
+◊(define problem-files-buggy2 (starter-solution "buggy_logic2"))
+◊(define starter-buggy2 (car problem-files-buggy2))
+◊(define solution-buggy2 (cadr problem-files-buggy2))
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src (car starter-buggy2) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr starter-buggy2))
+}
+
+◊details{
+    ◊summary{Answer}
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-buggy2) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr solution-buggy2))
+}
+}
+
+◊h3{Problem 3}
+◊(define problem-files-buggy3 (starter-solution "buggy_logic3"))
+◊(define starter-buggy3 (car problem-files-buggy3))
+◊(define solution-buggy3 (cadr problem-files-buggy3))
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src (car starter-buggy3) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr starter-buggy3))
+}
+
+◊details{
+    ◊summary{Answer}
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-buggy3) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr solution-buggy3))
+}
+}
+
+◊h3{Problem 3}
+◊(define problem-files-buggy4 (starter-solution "buggy_logic4"))
+◊(define starter-buggy4 (car problem-files-buggy4))
+◊(define solution-buggy4 (cadr problem-files-buggy4))
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src (car starter-buggy4) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr starter-buggy4))
+}
+
+◊details{
+    ◊summary{Answer}
+◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-buggy4) #:data-download-link ""]{
+    ◊(code #:class "language-racket" ◊(cadr solution-buggy4))
+}
+}

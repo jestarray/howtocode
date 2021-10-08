@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
-
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
     <script src="./slide_mode.js"></script>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
     <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
-    <title>Cheat Sheet</title>
+    <title>Syntax Cheat Sheet</title>
 </head>
 
 <body>
@@ -20,7 +21,80 @@
             <div id="home"><a href="/index.html">Index</a></div>
             <div id="next"><a href="/introduction.html">Introduction</a> →</div>
             <article>
-                <h1>Cheat Sheet</h1><p>todo:<br/>htdp cheat sheet<br/>enum, itemzations, etc</p><p>For people who have already programmed before<br/>https://docs.racket-lang.org/racket-cheat/index.html</p>
+                <h1>Syntax Cheat Sheet</h1><p><a href="https://docs.racket-lang.org/htdp-langs/beginner.html">Racket BSL docs</a></p><h2 id="basic_data_types"><a class="anchor" href="#basic_data_types">#</a>basic data types</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">123 ; numbers
+"yayy" ; strings
+#false #true ; booleans
+</code></pre><h2 id="expressions"><a class="anchor" href="#expressions">#</a>expressions</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES:
+(&lt;operator&gt; &lt;argument-1&gt; &lt;argument-2&gt; ...)
+
+;; examples: 
+(+ 2 4)
+
+(+ 2 4 (* 3 6 (+ 1 1)))
+</code></pre><h2 id="define_variables"><a class="anchor" href="#define_variables">#</a>define variables</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES
+(define &lt;NAME&gt; &lt;VALUE&gt;)
+
+;; examples:
+(define poo 3)
+(define name "bob")
+(define x (/ 100 2))
+</code></pre><h2 id="if_and_cond"><a class="anchor" href="#if_and_cond">#</a>if and cond</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES
+(if &lt;BOOL-EXPRESSION&gt; &lt;TRUE-EXPRESSION&gt; &lt;FALSE-EXPRESSION&gt;)
+
+;; examples:
+(if (string=? "hi" "bye") "yarr" "meow")  ; produces meow
+(if (&gt;= 3 0) (+ 1 1) (+ 4 3))  ; produces 2
+
+;; cond
+(cond [&lt;QUESTION&gt; &lt;ANSWER&gt;]
+      ...
+      [else &lt;ANSWER&gt;])
+
+;; examples:
+(define ran-num 3)
+
+(cond [(&lt; ran-num 3) "&lt;3 looks like a heart"]
+      [(= ran-num 3) "these numbies are equal"]
+      [else 1234])
+;; produces: 
+"these numbies are equal" ; 
+</code></pre><h2 id="functions"><a class="anchor" href="#functions">#</a>functions</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES
+
+(define (&lt;NAME&gt; &lt;ARG-NAME1&gt; ...)
+    &lt;BODY&gt;)
+
+;; examples: 
+(define (area-of-circle r)
+    (* pi r r))
+
+(define (greet name)
+    (string-append "Hey " name))
+</code></pre><h2 id="structs"><a class="anchor" href="#structs">#</a>structs</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES
+(define-struct &lt;NAME&gt; (&lt;FIELD-NAMES ...))
+
+; creating INSTANCE 
+(make-&lt;NAME&gt; &lt;DATA&gt; ...)
+
+; get pieces out
+(&lt;NAME&gt;-&lt;FIELD-NAME&gt; &lt;INSTANCE&gt;)
+
+; test instance type
+(&lt;NAME&gt;? &lt;DATA&gt;)
+
+;; examples:
+(define-struct dog (name age breed))
+
+; create an instance of a dog
+(define d1 (make-dog "flipper" 5 "pug"))
+
+; get the pieces out
+(dog-name d1) ; produces flipper
+(dog-age d1) ; produces 5
+
+; test instances
+(dog? d1) ; produces true
+(dog? 321) ; produces false
+</code></pre><p>For people who have already programmed before, here is the more <strong>advanced</strong> <a href="https://docs.racket-lang.org/racket-cheat/index.html">quick reference card</a>.</p>
             </article>
         </main>
     </div>

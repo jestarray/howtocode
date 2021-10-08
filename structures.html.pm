@@ -112,3 +112,7 @@ Structs introduce a new data type to our classic 3 ◊code{(numbers, strings, an
     ◊(code #:class "language-racket" ◊(cadr solution-check))
 }
 }
+
+◊h2{Videos}
+
+◊a[#:href "https://www.youtube.com/watch?v=EZBmgp2QCuA&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=19"]{Intro to Structs}

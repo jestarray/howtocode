@@ -41,6 +41,8 @@ Where did you get that from?
 How did you come up with that? 
 How did you know when to do that? 
 
+How do you "come up" with this stuff?
+
 These are questions that pop up in every field when you're a ◊strong{novice} at anything.
 
 In the field of art for example:

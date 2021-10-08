@@ -21,10 +21,144 @@
             <div id="home"><a href="/index.html">Index</a></div>
             <div id="next"><a href="/discover.html">Discovering more built ins</a> →</div>
             <article>
-                <h1>COMMON ERRORS</h1><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(&lt;operator&gt; &lt;argument-1&gt; &lt;argument-2&gt; ...)
-; there's a bug here
-(if (or (or #true #false) (an #true #false)) (or #t #f))
-</code></pre><p>COUNT THE PARTS TO IFS, ETC</p><p>After an open parenthesis <code>"("</code> <strong>an operator must always follow after</strong>, such as +, etc.<br/>Even in this expression, <code>(+ 2 (+ 6 4))</code> the argument <code>(+ 6 4)</code> follows the exact same structure, and its turtles all the way down.</p><p>(+ (+ (- 4  1) 7) 9)</p><p>(4) ERROR: is an error because 4 is not an operator</p><p>todo: explain error messages like if expects 3 parts, etc. BSL tries to be very error message friendly. Sometimes error messages are misleading and that’s when you need to look past the error message and find the source.</p><p>Enable automatic parens! but be warned sometimes it will insert 2( if you type the opening parenthesis when you really just want one), but its the common case that you always want 2 auto-closed, same with quotes. You can turn this off if you don’t like it.</p><p>Once you get used to it the parenthesis are never the bottleneck to understanding or even writing code. With proper spacing and highlighting, I argue its not bad.</p><p>If you delete the starting parens, look to delete the ending one.</p><p>some students keep randomly wrapping parenthesis when things dont work and I want to emphasize that you should use logic to wrap parens.</p><p>Everything has to follow &lt;operator arg1 arg2&gt; (+ 1 2) and if you need to do more you have to come back out and wrap around... which is a bit counter intutive because we like to keep adding things at the end</p><p>Notice the language is a little kind of counter intutive because we have to go back left, wrap around parens, and add stuff, e.g<br/>4 + 5 * 3 + 2 - 1 , we can just keep adding stuff to the right but we have to implcity remember PEMDAS, multiplcation happens first</p><p>when you naturally type this out in racket it feels a little weird and grooky<br/>in racket<br/>(* 5 3) ; write this first, then go back left and wrap thoose around parens<br/>kind of weird since the lot of us are right handed and prefer just tacking things onto the right<br/>(+ 4 (* 5 3) (- 2 1))</p><p>TODO: fix a lot of exercises that have buggy parenthesis, 5-10</p><p>tradeoffs! you can say you hate this but the language was designed this way for a purpose, see my first videos links if you’re curious as to why parentehsis etc</p>
+                <h1>COMMON ERRORS</h1><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/syntaxerror_starter.rkt"><code class="language-racket">; (&lt;operator&gt; &lt;argument-1&gt; &lt;argument-2&gt; ...)
+; PROBLEM: each line of code contains errors try and fix em
+; comment out line if you don't know how
+; use the cheatsheet:
+; https://howtocode.pages.dev/cheatsheet.html
+
+(if (or (or #true #false) (and #true #false) (+ 1 1)) (+ 4 2))
+
+(define v ("name")
+(cond [((string=? v "name") #true)])
+
+((+ 4 4))
+
+(string-append "I am " 21 " years old")
+
+(+ 1 5 - 3 9)
+
+(define fx (+ 1 2 "1"))
+
+(fx)
+
+(define (g a)
+  (+ a 1) (g 5))</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="solutions/syntaxerror_solution.rkt"><code class="language-racket">; (&lt;operator&gt; &lt;argument-1&gt; &lt;argument-2&gt; ...)
+; PROBLEM: each line of code contains errors try and fix em
+; comment out line if you don't know how
+; use the cheatsheet:
+; https://howtocode.pages.dev/cheatsheet.html
+
+; missing parts, we can only presume that
+; (+ 1 1) needs to be outside the or
+(if (or (or #true #false) (and #true #false)) (+ 1 1) (+ 4 2))
+
+; too many parenthesis
+; missing closing parens 
+(define v "name")
+; too many parentheses
+(cond [(string=? v "name") #true])
+
+; too many parens, 8 is not an operation
+(+ 4 4)
+
+; string-append cannot take a number
+; so you have to convert it
+(string-append "I am " (number-&gt;string 21) " years old")
+
+; to little parens, + only takes numbers
+(+ 1 5 (- 3 9))
+
+(define fx (+ 1 2 1))
+
+; this is not a function
+fx 
+
+; someone accidently wrapped the function call
+(define (g a)
+  (+ a 1))
+
+(g 5)</code></pre></details></p><h2 id="syntax_errors"><a class="anchor" href="#syntax_errors">#</a>Syntax errors</h2><p>Syntax errors are errors that prevent code from even running until you fix missing parentheses, spelling, etc. These are usually very easy to spot and you get a friendly error message giving you a hint on how to fix them.</p><p>A common mistake that beginners do is to randomly type more code, and <a href="https://www.reddit.com/r/Racket/comments/pijf9w/i_need_help_with_this_code/">more parentheses</a> to brute force it to work, but this will only make things worse. Take a deep breath and be very clear on what you need to do and what the code is doing.</p><p>Usually syntax errors are things you just learn from trial and error, and someone constantly correcting you so feel free to ask on the racket discord or comments below.</p><h3>Tips for readability</h3><p>If you are having trouble with counting the parts up in an expression, mouse over parentheses from left to right to count the pieces needed, or space out and format your code more neatly.</p><p>If you delete the starting parens, look to delete the ending one. Think about what each set of parentheses do.</p><p>Enable automatic parens is convient because you most often want parentheses in pairs but sometimes it’s not always what you want! For example, (+ 1 1 * 3 4)) , say you wanted to add an opening one <code>(</code> in front of the <code>*</code>, be warned it will often insert 2( if you type the opening parenthesis when you really just want one), you can turn this off if you don’t like it, but for me it’s the common case and makes writing code more smooth.</p><p>If you type a closing parens <code>)</code> when there already is a closing parens, racket won’t insert unncessary ones till it reaches the end. It also will auto-match the square ones.</p><h2 id="logic_errors"><a class="anchor" href="#logic_errors">#</a>Logic errors</h2><p>These errors are silent and don’t crash but the program is misbehaving.</p><h3>Problem 1</h3><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/buggy_logic1_starter.rkt"><code class="language-racket">; PROBLEM BUGGY 1: 
+; there is a bug in this program, get all the tests to pass
+
+(check-expect (is-dead? 4) #false)
+(check-expect (is-dead? 0) #true)
+(check-expect (is-dead? -1) #true)
+
+; ONLY CHANGE CODE BELOW THIS LINE
+
+(define (is-dead? hp)
+    (= hp 0))
+</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="solutions/buggy_logic1_solution.rkt"><code class="language-racket">; PROBLEM BUGGY 1: 
+; there is a bug in this program, get all the tests to pass
+
+(check-expect (is-dead? 4) #false)
+(check-expect (is-dead? 0) #true)
+(check-expect (is-dead? -1) #true)
+
+; ONLY CHANGE CODE BELOW THIS LINE
+
+(define (is-dead? hp)
+    (&lt;= hp 0))
+</code></pre></details></p><h3>Problem 2</h3><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/buggy_logic2_starter.rkt"><code class="language-racket">; PROBLEM BUGGY 2
+; there is a bug in this program, a user is trying to login:
+
+(check-expect (login "Bob123") "sucessful login")
+(check-expect (login "bob123") "sucessful login")
+(check-expect (login "alice137") "user not found")
+
+; ONLY CHANGE CODE BELOW THIS LINE
+
+(define (login user)
+    (if (string=? user "bob123")
+        "sucessful login"
+        "user not found"))</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="solutions/buggy_logic2_solution.rkt"><code class="language-racket">; PROBLEM BUGGY 2
+; there is a bug in this program, a user is trying to login:
+
+(check-expect (login "Bob123") "sucessful login")
+(check-expect (login "bob123") "sucessful login")
+(check-expect (login "alice137") "user not found")
+
+; ONLY CHANGE CODE BELOW THIS LINE
+
+(define (login user)
+    (if (string=? (string-lowercase user) "bob123")
+        "sucessful login"
+        "user not found"))</code></pre></details></p><h3>Problem 3</h3><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/buggy_logic3_starter.rkt"><code class="language-racket">; PROBLEM BUGGY 3: THERE IS A BUG IN THIS CODE
+(check-expect (area 4 4) 16)
+(check-expect (area 2 4) 8)
+
+; ONLY CHANGE CODE BELOW THIS LINE
+
+(define (area w h)
+    (* w w))</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="solutions/buggy_logic3_solution.rkt"><code class="language-racket">; PROBLEM BUGGY 3: THERE IS A BUG IN THIS CODE
+(check-expect (area 4 4) 16)
+(check-expect (area 2 4) 8)
+
+; ONLY CHANGE CODE BELOW THIS LINE
+
+(define (area w h)
+    (* w h))</code></pre></details></p><h3>Problem 3</h3><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/buggy_logic4_starter.rkt"><code class="language-racket">; PROBLEM BUGGY 4: THERE IS A BUG IN THIS CODE:
+(check-expect (18-or-older? 4) #false)
+(check-expect (18-or-older? 17) #false)
+(check-expect (18-or-older? 18) #true)
+(check-expect (18-or-older? 19) #true)
+(check-expect (18-or-older? 22) #true)
+
+; ONLY CHANGE CODE BELOW THIS LINE
+
+(define (18-or-older? age)
+    (&gt; age 18))</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="solutions/buggy_logic4_solution.rkt"><code class="language-racket">; PROBLEM BUGGY 4: THERE IS A BUG IN THIS CODE:
+(check-expect (18-or-older? 4) #false)
+(check-expect (18-or-older? 17) #false)
+(check-expect (18-or-older? 18) #true)
+(check-expect (18-or-older? 19) #true)
+(check-expect (18-or-older? 22) #true)
+
+; ONLY CHANGE CODE BELOW THIS LINE
+
+(define (18-or-older? age)
+    (&gt;= age 18))</code></pre></details></p>
             </article>
         </main>
     </div>

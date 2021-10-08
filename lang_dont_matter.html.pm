@@ -1,11 +1,9 @@
 #lang pollen
 
-◊h1{The language does not matter, compare with python}
+◊h1{Aside: The language does not matter, compare with Python}
 
-Most often than not the programming language does not matter, and I want to re-iterate this one last time by showing some python syntax contrasted with racket:
+If you decide to pursue programming as a career, depending on your job, you're expected to learn and adapt to varying amounts of programming languages quickly. As I said before, variables, functions, ifs, etc are universal to every programming language and I just want to demonstrate how easy it is to hop languages.
 
-https://www.programming-idioms.org/
+◊a[#:href "https://www.programming-idioms.org/idiom/4/create-a-function"]{Square function in many languages} (Scheme is  Racket)
 
-Like I said, variables, functions, ifs, datatypes like numbers, strings, booleans, are universal to every programming language.
-
-It's not hard to jump after you learn one.
+You may argue, "Wow, the code in other languages looks so much cleaner without all the parentheses!", which is fine, this course isn't about which syntax looks better, but again, they have quite the number of rules that need to be remembered compared to our one: (+ 1 2).

@@ -224,3 +224,12 @@ a:focus {
   text-decoration: none;
   background-size: 100% 2px;
 }
+
+/*  taken from github */
+.mycode {
+    padding: .2em .4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: rgba(175,184,193,0.2);
+    border-radius: 6px;
+}

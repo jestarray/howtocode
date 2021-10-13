@@ -86,7 +86,7 @@
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket" 
 ";; RULES
-(define-struct <NAME> (<FIELD-NAMES ...))
+(define-struct <NAME> (<FIELD-NAMES> ...))
 
 ; creating INSTANCE 
 (make-<NAME> <DATA> ...)

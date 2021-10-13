@@ -43,7 +43,7 @@
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket" 
 ";; RULES
-(if <BOOL-EXPRESSION> <TRUE-EXPRESSION> <FALSE-EXPRESSION>)
+(if <BOOL-EXPRESSION> <EXPRESSION> <EXPRESSION>)
 
 ;; examples:
 (if (string=? \"hi\" \"bye\") \"yarr\" \"meow\")  ; produces meow

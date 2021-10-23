@@ -51,7 +51,7 @@ Booleans go hand in hand with conditional expressions like ◊code{if}
 
 You may notice that DrRacket also highlights in black the branch that did not run which we will go into more detail in the later sections, don't worry about it for now.
 
-◊a[#:href "https://jestlearn.com/how_to_code/#if_bool_comparisons"]{If boolean comparisons}
+◊a[#:href ◊(practice-url "if_bool_comparisons")]{If boolean comparisons}
 
 ◊h2{Cond statements}
 Like ◊code{if} statements but can handle more than 2 cases, in some ways it's syntactic sugar for nested ◊code{if} statements, also known as ◊code{else if} or ◊code{case} in other languages
@@ -107,7 +107,7 @@ These exercises put if statements all in 1 line because it is training you to di
 
 ◊h2{If Logical Practice Problems}
 
-◊a[#:href "https://jestlearn.com/how_to_code/#if_logical"]{If logical}
+◊a[#:href ◊(practice-url "if_logical")]{If logical}
 
 ◊h2{Videos}
 

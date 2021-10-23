@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
+    <title>How to Design Functions Example</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/learning_stages.html"> Learning Effectively</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+            <div id="next"><a href="/htdf_problemsets.html">How to Design Functions Problem Sets</a> →</div>
+            <article>
+                <h1>How to Design Functions Example</h1><h2 id="double_a_number"><a class="anchor" href="#double_a_number">#</a>Double a number</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; PROBLEM: Write a function double that produces double of a number
+
+;; 1. Function Description (signature, purpose, stub)
+
+; double: (Number -&gt; Number)
+; produces 2 times the given number
+; (define (double n) 0) ; make sure stub matches the signature! Used to make sure the tests run
+
+;; 2. Functional Examples (aka tests, elaborate the concrete)
+(check-expect (double 2) 4)
+(check-expect (double 3) 9) ; the test is wrong here 
+(check-expect (double 1.3) (* 2 1.3))
+
+;; 3. Template/Sketch/Outline
+; (define (double n)
+;    (... n))
+
+;; 4. Code
+(define (double n)
+    (* 2 n))
+
+;; 5. Test, review, and refactor(ctrl+i to auto format code, clean up)
+</code></pre><h2 id="inches_to_centimeters"><a class="anchor" href="#inches_to_centimeters">#</a>Inches to Centimeters</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; PROBLEM: Write a function double that produces double of a number
+;; requires domain knowledge, look up the formula!!
+
+;; 1. Function Description (signature, purpose, stub)
+
+; inches-&gt;centi: (Number -&gt; Number)
+; converts units in iches to centimeters
+; (define (inches-&gt;centi n) 0) ; make sure stub matches the signature! Used to make sure the tests run
+
+;; 2. Functional Examples (aka tests, elaborate the concrete)
+(check-expect (inches-&gt;centi 2) (* 2 2.54))
+(check-expect (inches-&gt;centi 1.3) (* 1.3 2.54))
+
+;; 3. Template/Sketch/Outline
+; (define (inches-&gt;centi n)
+;    (... n))
+
+;; 4. Code
+(define (inches-&gt;centi n)
+    (* 2.54 n))
+
+;; 5. Test, review, and refactor(ctrl+i to auto format code, clean up)
+</code></pre><h2 id="fahrenheit_to_celsius"><a class="anchor" href="#fahrenheit_to_celsius">#</a>Fahrenheit to Celsius</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; PROBLEM: Write a function that converts fahrenheit to celcius
+;; requires domain knowledge, look up the formula!!
+; °C = (°F - 32) x 5/9 
+
+;; 1. Function Description (signature, purpose, stub)
+
+; fah-&gt;cel: (Number -&gt; Number)
+; converts a given tempature measured in fahrenheit to celsius
+; (define (fah-&gt;cel n) 0) ; make sure stub matches the signature! Used to make sure the tests run
+
+;; 2. Functional Examples (aka tests, elaborate the concrete)
+(check-expect (fah-&gt;cel 113) 46)
+
+;; 3. Template/Sketch/Outline
+; (define (fah-&gt;cel n)
+;    (... n))
+
+;; 4. Code
+(define (fah-&gt;cel n)
+    (* (- n 32) (/ 5 9)))
+
+;; 5. Test, review, and refactor(ctrl+i to auto format code, clean up)
+</code></pre>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

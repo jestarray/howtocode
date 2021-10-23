@@ -174,9 +174,9 @@ You can think of it as looking for your lost kid in a huge multi-floor building.
 
 ◊h2{Practice Function Eval and Scope}
 
-◊a[#:href "https://jestlearn.com/how_to_code/#function_evaluation_and_scope_1"]{Practice Function Eval and Scope 1}
+◊a[#:href ◊(practice-url "function_evaluation_and_scope_1")]{Practice Function Eval and Scope 1}
 
-◊a[#:href "https://jestlearn.com/how_to_code/#function_evaluation_and_scope_2_nested"]{Practice Function Eval and Scope 2}
+◊a[#:href ◊(practice-url "function_evaluation_and_scope_2_nested")]{Practice Function Eval and Scope 2}
 
 Get used to looking around and resolving what variables to values.
 

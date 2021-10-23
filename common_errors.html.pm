@@ -23,33 +23,7 @@ A common mistake that beginners do is to randomly type more code, and ◊a[#:hre
 
 Usually syntax errors are things you just learn from trial and error, and someone constantly correcting you so feel free to ask on the racket discord or comments below.
 
-◊h3{Tips for readability}
 
-If you are having trouble with counting the parts up in an expression, mouse over parentheses from left to right to count the pieces needed, or space out and format your code more neatly, like so:
-
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"
-(+ 1 1(* 3 2)(- 5 4)) ; no formatted well
-
-(+ 1 1 (* 3 2) (- 5 4)) ; much easier on the eyes
-")
-}
-
-If you delete the starting parens, look to delete the ending one. Think about what each set of parentheses do.
-
-Enable automatic parens is convient because you most often want parentheses in pairs but sometimes it's not always what you want! For example, (+ 1 1 * 3 4)) , say you wanted to add an opening one ◊code{(} in front of the ◊code{*}, be warned it will often insert 2( if you type the opening parenthesis when you really just want one), you can turn this off if you don't like it, but for me it's the common case and makes writing code more smooth.
-
-If you type a closing parens ◊code{)} when there already is a closing parens, racket won't insert unncessary ones till it reaches the end. It also will auto-match the square ones.
-
-Parentheses matter! Be aware of where parentheses wrap around, as it could drastically effect the outcome of a program, aside from creating errors:
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"
-(+ 2 (* 6 1 3 9)) ; 164
-(+ 2 (* 6 1 3) 9) ; 29 
-")
-}
 
 ◊h2{Logic errors}
 
@@ -115,3 +89,7 @@ These errors are silent meaning they can be hard to find since they don't crash,
     ◊(code #:class "language-racket" ◊(cadr solution-buggy4))
 }
 }
+
+◊h2{Videos}
+
+◊a[#:href "https://youtu.be/D799OanbrYk"]{Common Erorrs}

@@ -61,12 +61,12 @@
 (image-height (rectangle 30 40 "solid" "red"))
 
 ; you can also paste in your own
-</code></pre><h2 id="exercise_1_image_shapes"><a class="anchor" href="#exercise_1_image_shapes">#</a>Exercise 1 Image Shapes</h2><p><img src="images/shapes.png"/></p><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/1-imageshapes_starter.rkt"><code class="language-racket">(require 2htdp/image)
+</code></pre><h2 id="exercise_1.0_to_1.4_image_shapes"><a class="anchor" href="#exercise_1.0_to_1.4_image_shapes">#</a>Exercise 1.0 to 1.4 Image Shapes</h2><p><img src="images/shapes.png"/></p><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/1-imageshapes_starter.rkt"><code class="language-racket">(require 2htdp/image)
 ; THESE ANSWERS SHOULD RESEMBLE THESE IMAGES RESPECTIVELY:
 ; https://howtocode.pages.dev/images/shapes.png
 
 ; PROBLEM 1: Make a Stop sign using 2htdp/image
-; use regular-polygon for the hexagon
+; use regular-polygon for the hexagon 🛑
 ; https://docs.racket-lang.org/teachpack/2htdpimage.html#%28def._%28%28lib._2htdp%2Fimage..rkt%29._regular-polygon%29%29
 
 
@@ -76,7 +76,7 @@
 ; Problem 1.2: Make a isosoleces trapezoid
 
 
-; Problem 1.3: Make a traffic light with red, yellow, and green bulbs and a black rectangular background
+; Problem 1.3: Make a traffic light with red, yellow, and green bulbs and a black rectangular background 🚦
 
 
 ; Problem 1.4: Make a red checkerboard pattern</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="solutions/1-imageshapes_solution.rkt"><code class="language-racket">(require 2htdp/image)
@@ -84,7 +84,7 @@
 ; https://howtocode.pages.dev/images/shapes.png
 
 ; PROBLEM 1: Make a Stop sign using 2htdp/image
-; use regular-polygon for the hexagon
+; use regular-polygon for the hexagon 🛑
 ; https://docs.racket-lang.org/teachpack/2htdpimage.html#%28def._%28%28lib._2htdp%2Fimage..rkt%29._regular-polygon%29%29
 
 (overlay
@@ -104,7 +104,7 @@
  (square 30 "solid" "red")
  (right-triangle 30 30 "solid" "red"))
 
-; Problem 1.3: Make a traffic light with red, yellow, and green bulbs and a black rectangular background
+; Problem 1.3: Make a traffic light with red, yellow, and green bulbs and a black rectangular background 🚦
 
 (overlay 
  (above 
@@ -121,13 +121,13 @@
 
 ;PROBLEM: Use (place-image) to put a crosshair,
 ; that is the text of a plus +, on the CENTER of this empty-scene
-; https://jestlearn.com/images/center_crosshair.png
+; https://howtocode.pages.dev/images/center_crosshair.png
 (text "+" 50 "black")
 (empty-scene 200 100)</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="solutions/1.1-crosshair_solution.rkt"><code class="language-racket">(require 2htdp/image)
 
 ;PROBLEM: Use (place-image) to put a crosshair, 
 ; that is the text of a plus +, on the CENTER of this empty-scene
-; https://jestlearn.com/images/center_crosshair.png
+; https://howtocode.pages.dev/images/center_crosshair.png
 
 ; 100 50 is also a valid solution
 ; letting racket do the division (/ 200 2) for us is overall better

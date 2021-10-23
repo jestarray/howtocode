@@ -3,7 +3,7 @@
 ; https://howtocode.pages.dev/images/shapes.png
 
 ; PROBLEM 1: Make a Stop sign using 2htdp/image
-; use regular-polygon for the hexagon
+; use regular-polygon for the hexagon 🛑
 ; https://docs.racket-lang.org/teachpack/2htdpimage.html#%28def._%28%28lib._2htdp%2Fimage..rkt%29._regular-polygon%29%29
 
 (overlay
@@ -23,7 +23,7 @@
  (square 30 "solid" "red")
  (right-triangle 30 30 "solid" "red"))
 
-; Problem 1.3: Make a traffic light with red, yellow, and green bulbs and a black rectangular background
+; Problem 1.3: Make a traffic light with red, yellow, and green bulbs and a black rectangular background 🚦
 
 (overlay 
  (above 

@@ -95,7 +95,7 @@ Structs introduce a new data type to our classic 3 ◊code{(numbers, strings, an
 
 ◊h2{Practice Problems with Structs}
 
-◊a[#:href "https://jestlearn.com/how_to_code/#structs"]{Structs practice}
+◊a[#:href ◊(practice-url "structs")]{Structs practice}
 
 ◊h2{Exercise 3 Greet}
 ◊(define problem-checker (starter-solution "3-greet"))

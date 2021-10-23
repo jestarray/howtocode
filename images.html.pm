@@ -47,7 +47,7 @@ Racket has support for drawing images
 ")
 }
 
-◊h2{Exercise 1 Image Shapes}
+◊h2{Exercise 1.0 to 1.4 Image Shapes}
 
 ◊img[#:src "images/shapes.png"]{}
 ◊; REQUIRES RACEKT/FILE

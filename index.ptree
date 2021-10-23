@@ -1,6 +1,8 @@
 #lang pollen
 
-◊cheatsheet.html{}
+◊cheatsheet.html{
+    htdp_templates.html
+}
 ◊introduction.html{
     installation.html
 }
@@ -13,10 +15,14 @@
     functions.html
     structures.html
     common_errors.html
-    discover.html
-    lang_dont_matter.html
+    tips.html 
+    ◊; lang_dont_matter.html
 }
 
 ◊learning_stages.html{
     ◊; dreyfus_math.html
+}
+
+◊htdf_example.html{
+    htdf_problemsets.html
 }

@@ -37,7 +37,7 @@ Let's create a few
 }
 
 ◊h2{Practice}
-◊a[#:href "https://jestlearn.com/how_to_code/#variable_arith_evaluation"]{Math expressions with variables}
+◊a[#:href ◊(practice-url "variable_arith_evaluation")]{Math expressions with variables}
 
 ◊h2{Easier to CHANGE programs}
 
@@ -137,7 +137,7 @@ In conclusion, variables give meaningful names to our data making it easier to u
 
 ◊h2{Pratice Problems}
 
-◊a[#:href "https://jestlearn.com/how_to_code/#build_a_string"]{Build anagram strings}
+◊a[#:href ◊(practice-url "build_a_string")]{Build anagram strings}
 
 ◊h2{Videos}
 

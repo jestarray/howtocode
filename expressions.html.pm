@@ -110,11 +110,9 @@ Immediately following an opening parenthesis should ◊strong{ALWAYS} be an oper
 We'll cover errors more extensively later but for now just remember to make sure everything must follow ◊code{(<operator> <arg1> ...)}
 
 ◊h2{Practice Problems}
-◊(define practice-url "https://jestlearn.com/how_to_code/#expressions_and_evaluation_with_numbers")
-◊a[#:href practice-url]{Evaluating number expressions}
+◊a[#:href ◊(practice-url "expressions_and_evaluation_with_numbers")]{Evaluating number expressions}
 
-◊(define infix-to-pre "https://jestlearn.com/how_to_code/#translate_infix_to_prefix_math")
-◊a[#:href infix-to-pre]{Infix to prefix math expressions}
+◊a[#:href ◊(practice-url "infix_to_prefix_math")]{Infix to prefix math expressions}
 
 ◊h2{Exercise 0 - Pythag}
 

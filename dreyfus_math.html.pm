@@ -3,7 +3,17 @@
 ◊h1{The Design Recipe Rational}
 
 ◊h2{Example: Learning Basic Math}
-What is 4 + 4 + 4 - 5?
+
+Pause and try and solve these 4 basic arithmetic problems on screen ◊strong{without using a calculator}:
+
+3 * 4 = ?
+6 * 3 = ?
+13 * 5 = ?
+97 * 48 = ?
+
+Notice how the first 2 come instantly because you were drilled to memorize the 12x12 times table at a young age. The last two didn't come as instantly. I can do 13 * 5 in my head, but once it gets to higer and higher numbers, I slow down, ◊strong{the problem reaches such a degree of complexity that I need to write things down to help myself think}.
+
+Let's take a look at the journey it took you to get to the mastery level of doing basic arithmetic fast:
 
 ◊h2{Novice}
 Think back to when you were a kid, a novice, just learning how to count and add two numbers together. It was very step by step, rule based and slow. The rules were to ◊strong{physically} hold up your hands and put a finger up each time you moved up a number, and if you ran out of fingers, write down counts of 10 or hold it in your head that already counted to 10 and then continue on.
@@ -16,7 +26,7 @@ With lots of practice, you eventually don't need to physically hold out your han
 
 ◊img[#:src "/images/learn_multiplication.jpg" #:style "max-width: 100%; height: auto;"]{}
 
-As you move up and start learning multiplication, again it also starts off very slow, deliberate and rules based with little thinking involved. You'd fill out worksheets just doing: "count up the number of groups, fill in the blanks". These pictures and pre-filled problems act as a template, a recipe of sorts to kick start your thinking and get you understanding the concepts and emerging patterns.
+As you move up and start learning multiplication, again it also starts off very slow, deliberate and rules based with little thinking involved. You'd fill out worksheets just doing: "count up the number of groups, fill in the blanks". These pictures and pre-filled problems act as a template/outlines, a recipe of sorts to kick start your thinking and get you understanding the concepts and emerging patterns.
 
 With lots of practice, you eventually memorize the 12x12 multiplcation table and don't even need to think anymore, it all happens automatically. 
 

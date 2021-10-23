@@ -2,7 +2,7 @@
 
 ;PROBLEM: Use (place-image) to put a crosshair, 
 ; that is the text of a plus +, on the CENTER of this empty-scene
-; https://jestlearn.com/images/center_crosshair.png
+; https://howtocode.pages.dev/images/center_crosshair.png
 
 ; 100 50 is also a valid solution
 ; letting racket do the division (/ 200 2) for us is overall better

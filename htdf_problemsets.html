@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
+    <title>How to Design Functions Problem Sets</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/htdf_example.html"> How to Design Functions Example</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+
+            <article>
+                <h1>How to Design Functions Problem Sets</h1><h3><a href="https://jestlearn.com/how_to_code">Submit your assignment at: jestlearn.com/how_to_code</a></h3><p><details><summary class="question">Exercise 4-formalize</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/4-formalize_starter.rkt" data-download-link=""><code class="language-racket">#| PROBLEM 4: Formalize
+On smartphones, whenever you text someone it will auto-capitalize the first letter of a word, e.g:
+"hey guys" -&gt; "Hey guys"
+"oh no she didn't" -&gt; "Oh no she didn't"
+"where u at?" -&gt; "Where u at?"
+Write a function that will capitalize the first letter of a sentence
+|#
+
+#|
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template/Sketch/Outline ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/4-formalize_solution.rkt" data-download-link=""><code class="language-racket">#| PROBLEM 4: Formalize
+On smartphones, whenever you text someone it will auto-capitalize the first letter of a word, e.g:
+"hey guys" -&gt; "Hey guys"
+"oh no she didn't" -&gt; "Oh no she didn't"
+"where u at?" -&gt; "Where u at?"
+Write a function that will capitalize the first letter of a sentence
+|#
+
+#|
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ✅
+    2. Examples (aka check-expect, elaborate the concrete) ✅
+    3. Template/Sketch/Outline ✅
+    4. Code body ✅
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ✅
+|#
+
+; formalize: (String -&gt; String)
+; produces a string capitalizing the first letter
+; (define (formalize txt) "") stub
+(check-expect (formalize "hey guys") "Hey guys")
+(check-expect (formalize "where u at?") "Where u at?")
+
+; template 
+; (define (formalize txt)
+;    (... txt))
+
+(define (formalize txt)
+   (string-append (string-upcase (substring txt 0 1)) (substring txt 1 (string-length txt))))</code></pre></details></p></details></p>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

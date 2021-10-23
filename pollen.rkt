@@ -10,13 +10,49 @@
   (string-append "https://jestlearn.com/how_to_code/#" name))
 
 ; List<List(String, String)>>
-; returns the filepath and the contents of it
+; returns (Filepath, Contents)
 (define (starter-solution filename)
+  ; Path -> String
+  ; returns the file string with the first 3 lines if it contains racket teaching lang metadata
+  (define (strip-meta path)
+    (define contents (file->lines path #:line-mode 'any))
+    (cond [(<= (length contents) 3) contents]
+          [else
+           (define third-line (third contents))
+           (define has-metadata? (and (>= (string-length third-line) 8) (string=? (substring third-line 0 7) "#reader")))
+           (string-join (if has-metadata?
+                            (drop contents 3)
+                            contents) "\n")]))
+
   (define starter-fname (string-append "starter/" filename "_starter.rkt"))
+  ; (println (file->string starter-fname))
+  ; (println (strip-meta starter-fname))
+  ; (println (file->lines starter-fname #:line-mode 'return-linefeed))
   (define solution-fname (string-append "solutions/" filename "_solution.rkt"))
-  (define file-strings (map file->string (list starter-fname solution-fname)))
-  (list (list starter-fname (car file-strings))
-        (list solution-fname (cadr file-strings))))
+  (define file-contents (map strip-meta (list starter-fname solution-fname)))
+  (list (list starter-fname (car file-contents))
+        (list solution-fname (cadr file-contents))))
+
+
+; String String -> txexpr
+; creates codeblocks
+(define (code-block contents download-path)
+  (txexpr 'pre
+          (list '(class "line-numbers match-braces rainbow-braces") (list 'data-src download-path) '(data-download-link ""))
+          (list (txexpr 'code '((class "language-racket")) (list contents)))))
+
+; String -> txexpr
+(define (code-problem filename)
+  (define files (starter-solution filename))
+  (define starter (car files))
+  (define starter-path (car starter))
+  (define starter-contents (cadr starter))
+  (define solution (cadr files))
+  (define solu-path (car solution))
+  (define solu-contents (cadr solution))
+  ;todo: add option to keep the Q block open?
+  (q (string-append "Exercise " filename) (code-block starter-contents starter-path) (q "Answer" (code-block solu-contents solu-path)))
+  )
 
 ; string -> txexpr
 ; returns a search link to the search of the racket docs

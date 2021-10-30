@@ -21,50 +21,427 @@
             <div id="home"><a href="/index.html">Index</a></div>
 
             <article>
-                <h1>How to Design Functions Problem Sets</h1><h3><a href="https://jestlearn.com/how_to_code">Submit your assignment at: jestlearn.com/how_to_code</a></h3><p><details><summary class="question">Exercise 4-formalize</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/4-formalize_starter.rkt" data-download-link=""><code class="language-racket">#| PROBLEM 4: Formalize
-On smartphones, whenever you text someone it will auto-capitalize the first letter of a word, e.g:
-"hey guys" -&gt; "Hey guys"
-"oh no she didn't" -&gt; "Oh no she didn't"
-"where u at?" -&gt; "Where u at?"
-Write a function that will capitalize the first letter of a sentence
-|#
-
-#|
+                <h1>How to Design Functions Problem Sets</h1><h3><a href="https://jestlearn.com/how_to_code">Submit your assignment at: jestlearn.com/how_to_code</a></h3><p><details><summary class="question">Exercise 4-string-first</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/4-string-first_starter.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 HTDF STEPS: Turn all ❌ into ✅ for each step you complete
     1. Signature, purpose, stub ❌
     2. Examples (aka check-expect, elaborate the concrete) ❌
-    3. Template/Sketch/Outline ❌
+    3. Template(aka Sketch/Outline) ❌
     4. Code body ❌
     5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
-|#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/4-formalize_solution.rkt" data-download-link=""><code class="language-racket">#| PROBLEM 4: Formalize
+|#
+
+#| PROBLEM 4: string-first
+Design the function string-first, which extracts the first character from a non-empty string. Don’t worry about empty strings
+|#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/4-string-first_solution.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 4: string-first
+Design the function string-first, which extracts the first character from a non-empty string. Don’t worry about empty strings
+|#
+
+; string-first: (String -&gt; String)
+; extracts the first character from a non-empty-string
+
+(check-expect (string-first "boo") "b")
+(check-expect (string-first "dog") "d")
+; stub (define (string-first st) "")
+
+(define (string-first st)
+  (substring st 0 1))</code></pre></details></p></details><br/><details><summary class="question">Exercise 4.1-string-last</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/4.1-string-last_starter.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 4.1: string-last
+Design the function string-last, which extracts the last character from a non-empty string.
+|#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/4.1-string-last_solution.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 4.1: string-last
+Design the function string-last, which extracts the last character from a non-empty string.
+|#
+
+; string-last: (String -&gt; String)
+; extracts the last character from a non-empty string
+(check-expect (string-last "ah") "h")
+(check-expect (string-last "barn") "n")
+; stub (define (string-last st) "")
+
+(define (string-last st)
+  (substring st (sub1 (string-length st))))</code></pre></details></p></details><br/><details><summary class="question">Exercise 4.2-string-rest</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/4.2-string-rest_starter.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 4.2: string-rest
+Design the function string-rest, which produces a string like the given one with the first character removed.
+|#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/4.2-string-rest_solution.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 4.2: string-rest
+Design the function string-rest, which produces a string like the given one with the first character removed.
+|#
+
+; string-rest: (String -&gt; String)
+; produces the given string with the first character removed
+(check-expect (string-rest "woah") "oah")
+(check-expect (string-rest "omg") "mg")
+; (define (string-rest st) "")
+
+(define (string-rest st)
+  (substring st 1 (string-length st)))</code></pre></details></p></details><br/><details><summary class="question">Exercise 4.3-string-remove-last</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/4.3-string-remove-last_starter.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 4.3: string-remove-last
+Design the function string-remove-last, which produces a string like the given one with the last character removed.
+|#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/4.3-string-remove-last_solution.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 4.3: string-remove-last
+Design the function string-remove-last, which produces a string like the given one with the last character removed.
+|#
+
+; string-remove-last: (String -&gt; String)
+; produce a given string with the last character removed
+(check-expect (string-remove-last "hello") "hell")
+(check-expect (string-remove-last "cat") "ca")
+; stub (define (string-remove-last st) "")
+
+(define (string-remove-last st)
+  (substring st 0 (sub1 (string-length st))))</code></pre></details></p></details><br/><details><summary class="question">Exercise 4.4-formalize</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/4.4-formalize_starter.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 4.4: Formalize
 On smartphones, whenever you text someone it will auto-capitalize the first letter of a word, e.g:
 "hey guys" -&gt; "Hey guys"
 "oh no she didn't" -&gt; "Oh no she didn't"
 "where u at?" -&gt; "Where u at?"
-Write a function that will capitalize the first letter of a sentence
+Design a function that will capitalize the first letter of a sentence
 |#
-
-#|
+</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/4.4-formalize_solution.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 HTDF STEPS: Turn all ❌ into ✅ for each step you complete
     1. Signature, purpose, stub ✅
     2. Examples (aka check-expect, elaborate the concrete) ✅
-    3. Template/Sketch/Outline ✅
+    3. Template(aka Sketch/Outline) ✅
     4. Code body ✅
     5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ✅
 |#
 
+#| PROBLEM 4.4: Formalize
+On smartphones, whenever you text someone it will auto-capitalize the first letter of a word, e.g:
+"hey guys" -&gt; "Hey guys"
+"oh no she didn't" -&gt; "Oh no she didn't"
+"where u at?" -&gt; "Where u at?"
+Write a function that will capitalize the first letter of a sentence
+|#
 ; formalize: (String -&gt; String)
 ; produces a string capitalizing the first letter
-; (define (formalize txt) "") stub
 (check-expect (formalize "hey guys") "Hey guys")
 (check-expect (formalize "where u at?") "Where u at?")
+; (define (formalize txt) "") stub
 
 ; template 
 ; (define (formalize txt)
 ;    (... txt))
 
 (define (formalize txt)
-   (string-append (string-upcase (substring txt 0 1)) (substring txt 1 (string-length txt))))</code></pre></details></p></details></p>
+   (string-append (string-upcase (substring txt 0 1)) (substring txt 1 (string-length txt))))</code></pre></details></p></details><br/><details><summary class="question">Exercise 5-image-area</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/5-image-area_starter.rkt" data-download-link=""><code class="language-racket">(require 2htdp/image)
+#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 5: image-area 
+Design a function that consumes an image and produces the area of that image, e.g how many pixels it takes up. Note: The formula for area is width * height
+|#
+</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/5-image-area_solution.rkt" data-download-link=""><code class="language-racket">(require 2htdp/image)
+#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ✅
+    2. Examples (aka check-expect, elaborate the concrete) ✅
+    3. Template(aka Sketch/Outline) ✅
+    4. Code body ✅
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ✅
+|#
+
+#| PROBLEM 5: image-area 
+Design a function that consumes an image and produces the area of that image, e.g how many pixels it takes up. Note: The formula for area is width * height
+|#
+
+; image-area: (Image -&gt; Number)
+; produces how many pixels an image occupies on the screen
+
+(check-expect (image-area (square 5 "solid" "red")) 25)
+(check-expect (image-area (rectangle 2 4 "solid" "red")) 8)
+; (define (image-area img) 0)
+
+; template
+; (define (image-area img)
+;    (... img))
+
+(define (image-area img)
+    (* (image-width img) (image-height img)))</code></pre></details></p></details><br/><details><summary class="question">Exercise 5.1-red-x</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/5.1-red-x_starter.rkt" data-download-link=""><code class="language-racket">(require 2htdp/image)
+#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 5: red-x
+Design a function named "red-x" that produces an image of a red "X" given a size,
+without using (text). HINT: use rectangle and rotate
+|#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/5.1-red-x_solution.rkt" data-download-link=""><code class="language-racket">(require 2htdp/image)
+#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ✅
+    2. Examples (aka check-expect, elaborate the concrete) ✅
+    3. Template(aka Sketch/Outline) ✅
+    4. Code body ✅
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ✅
+|#
+
+#| PROBLEM 5: red-x
+Design a function named "red-x" that produces an image of a red "X" given a size,
+without using (text). HINT: use rectangle and rotate
+|#
+; red-x (Number -&gt; Image)
+; produces a red "X" given a size
+
+(check-expect (red-x 20) (overlay
+                          (rotate 45 (rectangle 5 20 "solid" "red"))
+                          (rotate -45 (rectangle 5 20 "solid" "red"))))
+
+; (define (red-x size) (empty-scene 100 100))
+#;
+(define (red-x size)
+  (... size))
+
+(define (red-x size)
+  (overlay
+   (rotate 45 (rectangle 5 size "solid" "red"))
+   (rotate -45 (rectangle 5 size "solid" "red"))))</code></pre></details></p></details><br/><details><summary class="question">Exercise 5.2-cancel</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/5.2-cancel_starter.rkt" data-download-link=""><code class="language-racket">(require 2htdp/image)
+#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 5.2: cancel
+Design a function that puts a red-x over an image indicating it is canceled.
+You may want to re-use your code from "red-x"
+|#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/5.2-cancel_solution.rkt" data-download-link=""><code class="language-racket">(require 2htdp/image)
+#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 5.2: cancel
+Design a function that puts a red-x over an image indicating it is canceled.
+You may want to re-use your code from "red-x"
+|#
+
+; red-x (Number -&gt; Image)
+; produces a red "X" given a size
+(define (red-x size)
+  (overlay
+   (rotate 45 (rectangle 5 size "solid" "red"))
+   (rotate -45 (rectangle 5 size "solid" "red"))))
+
+; cancel: (Image -&gt; Image)
+; produces a given image with red-x on top
+(check-expect (cancel (text "todays party" 100 "black"))
+              (overlay
+               (red-x (image-width (text "todays party" 100 "black")))
+               (text "todays party" 100 "black")))
+
+; (define (cancel img) (empty-scene 100 100))
+
+(define (cancel img)
+  (overlay
+   (red-x (image-width img))
+   img))</code></pre></details></p></details><br/><details><summary class="question">Exercise 6-ensure-question</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/6-ensure-question_starter.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 6: ensure-question
+Design a function that consumes a string, and adds "?" 
+to the end unless the string already ends in "?".
+|#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/6-ensure-question_solution.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ✅
+    2. Examples (aka check-expect, elaborate the concrete) ✅
+    3. Template(aka Sketch/Outline) ✅
+    4. Code body ✅
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ✅
+|#
+
+#| PROBLEM 6: ensure-question
+Design a function that consumes a string, and adds "?" 
+to the end unless the string already ends in "?".
+|#
+
+; ensure-question (String -&gt; String)
+; add ? to end of str unless it already ends in ?
+(check-expect (ensure-question "Hello") "Hello?")
+(check-expect (ensure-question "OK?") "OK?")
+
+;(define (ensure-question str) ;stub
+;  "str")
+
+;(define (ensure-question str) ; template
+;  (... str))
+
+(define (ensure-question str)
+  (if (string=? (substring str (- (string-length str) 1)) "?")
+      str
+      (string-append str "?")))</code></pre></details></p></details><br/><details><summary class="question">Exercise 6.1-punctuate</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/6.1-punctuate_starter.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(aka Sketch/Outline) ❌
+    4. Code body ❌
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ❌
+|#
+
+#| PROBLEM 6.1: punctuate
+
+Design a function that consumes an unpuctuated sentence and adds a question mark(?) if the sentence is a question, otherwise add a period.
+HINT: Assume a sentence is a question if it contains the words "who, what, where, how"
+
+examples:
+"what time is it" -&gt; "what time is it?"
+"How are you" -&gt; "How are you?"
+"who are you" -&gt; "who are you?"
+"where am i?" -&gt; "where am i?"
+"i'm hungry" -&gt; "i'm hungry."
+|#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/6.1-punctuate_solution.rkt" data-download-link=""><code class="language-racket">#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+HTDF STEPS: Turn all ❌ into ✅ for each step you complete
+    1. Signature, purpose, stub ✅
+    2. Examples (aka check-expect, elaborate the concrete) ✅
+    3. Template(aka Sketch/Outline) ✅
+    4. Code body ✅
+    5. Test, review, and refactor(clean up your code! ctrl+i to auto-format) ✅
+|#
+
+#| PROBLEM 6.1: punctuate
+
+Design a function that consumes an unpuctuated sentence and adds a question mark(?) if the sentence is a question, otherwise add a period.
+HINT: Assume a sentence is a question if it contains the words "who, what, where, how"
+
+examples:
+"what time is it" -&gt; "what time is it?"
+"How are you" -&gt; "How are you?"
+"who are you" -&gt; "who are you?"
+"where am i?" -&gt; "where am i?"
+"i'm hungry" -&gt; "i'm hungry."
+|#
+
+; punctuate: (String -&gt; String)
+; produces the given string with a "?" if it is a sentence, otherwise a "."
+(check-expect (punctuate "what time is it") "what time is it?")
+(check-expect (punctuate "How are you") "How are you?")
+(check-expect (punctuate "i'm hungry") "i'm hungry.")
+
+; (define (punctuate str) "")
+
+; TEMPLATE:
+#;
+(define (punctuate str)
+  (cond [(... str) ...]
+        [else ...]))
+
+(define (punctuate str)
+  (cond [(or
+          (string-contains-ci? "how" str)
+          (string-contains-ci? "what" str)
+          (string-contains-ci? "who" str)
+          (string-contains-ci? "where" str))
+         (string-append str "?")]
+        [else
+         (string-append str ".")]))</code></pre></details></p></details></p>
             </article>
         </main>
     </div>

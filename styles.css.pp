@@ -227,6 +227,11 @@ a:focus {
   background-size: 100% 2px;
 }
 
+img {
+    width: 100%;
+    height: auto;
+}
+
 /*  taken from github */
 .mycode {
     padding: .2em .4em;

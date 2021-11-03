@@ -52,4 +52,4 @@
     ◊li{Know when to deviate from rules}
 }
 
-From the book ◊strong{Pragmatic Thinking and Learning: Refactor Your “Wetware”}, a summary of ◊strong{Dreyfus model of skill acuisition}.
+From the book ◊strong{Pragmatic Thinking and Learning: Refactor Your “Wetware”}, a summary of ◊strong{Dreyfus model of skill aquisition}.

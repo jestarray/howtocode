@@ -10,13 +10,9 @@
 
 ◊; 13, 14, 18, 19, 20  of htdp book
 
-◊(code-problem "4-string-first")
-◊(code-problem "4.1-string-last")
-◊(code-problem "4.2-string-rest")
-◊(code-problem "4.3-string-remove-last")
-◊(code-problem "4.4-formalize")
-◊(code-problem "5-image-area")
-◊(code-problem "5.1-red-x")
-◊(code-problem "5.2-cancel")
-◊(code-problem "6-ensure-question")
-◊(code-problem "6.1-punctuate")
+◊(code-problem "4.0-less-than-5")
+◊(code-problem "5.0-string-first")
+◊(code-problem "5.1-string-last")
+◊(code-problem "5.2-string-rest")
+◊(code-problem "5.3-string-remove-last")
+◊(code-problem "5.4-formalize")

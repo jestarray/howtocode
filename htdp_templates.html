@@ -21,7 +21,19 @@
             <div id="home"><a href="/index.html">Index</a></div>
             <div id="next"><a href="/introduction.html">Introduction</a> →</div>
             <article>
-                <h1>Templates and Outlines</h1><p>Templates, or as I’d like to call them, “outlines”, is the bare minimum baseline to kickstart writing a function. It’s akin to laying out all your tools neatly before picking which one to use, or like an artist drawing a rough outline/sketch as a baseline. If you’ve tried visual block based languages like <a href="https://scratch.mit.edu/">Scratch</a>, it lays out all the blocks for you that you can use, and this is what tempaltes accomplish, to gather all the puzzle pieces we can use, as the alternative is staring at a blank page stunned. As you program more and more, you’ll be able to template problems in your head.</p><h2 id="enum"><a class="anchor" href="#enum">#</a>Enum</h2><p>Enums list all finite possibilities of a given catatgorey of data you want to represent</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; A TrafficLight is one of the following Strings:
+                <h1>Templates and Outlines</h1><p>Templates, or as I’d like to call them, “outlines”, is the bare minimum baseline to kickstart writing a function. It’s akin to laying out all your tools neatly before picking which one to use, or like an artist drawing a rough outline/sketch as a baseline. If you’ve tried visual block based languages like <a href="https://scratch.mit.edu/">Scratch</a>, it lays out all the blocks for you that you can use, and this is what tempaltes accomplish, to gather all the available puzzle pieces(e.g parameters and basic structure) we can use, as the alternative is staring at a blank page stunned. As you program more and more, you’ll be able to template problems in your head.</p><h2 id="simple_base_data(concrete)"><a class="anchor" href="#simple_base_data(concrete)">#</a>Simple Base Data(concrete)</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define (&lt;FUN-BASE-TEMPLATE&gt; arg1)
+  (... arg1))
+
+; double: (Number -&gt; Number)
+; produces double the given number
+
+(check-expect (double 2) 4)
+(check-expect (double 3.5) 10)
+; stub (define (double n) 0)
+
+(define (double n)
+  (... n))
+</code></pre><h2 id="enum"><a class="anchor" href="#enum">#</a>Enum</h2><p>Enums list all finite possibilities of a given catatgorey of data you want to represent</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; A TrafficLight is one of the following Strings:
 ; – "red"
 ; – "green"
 ; – "yellow"
@@ -33,7 +45,7 @@
   (cond
     [... st ...]
     [... st ...]
-    [... st ...))
+    [... st ...]))
 
 ; traffic-light-next: (TrafficLight -&gt; TrafficLight)
 ; yields the next state given current state st
@@ -101,7 +113,18 @@
 ;             /
 ;            /
 ;       COMBINATION
-</code></pre>
+</code></pre><h2 id="data_driven_templates"><a class="anchor" href="#data_driven_templates">#</a>Data Driven Templates</h2><table><caption></caption><thead><th>Type of Data</th><br/><th>cond question (if applicable)</th><br/><th>Body or cond answer(if applicable)</th></thead><br/><tbody><tr><td><p><strong>Base Generic</strong><br/>  </p><ul><li>Number</li><li>String</li><li>Boolean</li><li>Image</li></ul></td><br/><td><p>Appropriate Predicate</p><ul><li><code>(number? x)</code></li><li><code>(string? x)</code></li><li><code>(boolean? x)</code></li><li><code>(image? x)</code></li><li><code>(and (&lt;= 0 x) (&lt; x 10))</code></li></ul></td><br/><td>Expression that operates on the parameter.<br/>(... x)</td></tr><br/><tr><td><p><strong>Base Concrete</strong><br/>  </p><ul><li><code>"red"</code></li><li><code>#f</code></li><li><code>empty</code></li><li><code>5</code></li><li><code>etc</code></li></ul></td><br/><td><p>Appropriate Predicate</p><ul><li><code>(string=? x "red")</code></li><li><code>(false? x)</code></li><li><code>(empty? x)</code></li><li><code>(= x 5)</code></li></ul></td><br/><td>Expression that operates on the parameter.<br/>(... x)</td></tr><br/><tr><td><p><strong>One of</strong><br/>  </p><ul><li><code>enum</code></li><li><code>union(aka itemization)</code></li></ul></td><br/><td></td><br/><td><p>Cond with one clause per subclass of one of.</p><pre><code>(cond [&lt;question1&gt; &lt;answer1&gt;]
+      [&lt;question2&gt; &lt;answer2&gt;])</code></pre><p>Where each question and answer expression is formed by following the rule in the question or answer column of this table for the corresponding case. A detailed derivation of a template for a one-of type appears below.</p><p>Always use else for the last question for itemizations and large enumerations. Normal enumerations should not use else.</p><p>Note that in a mixed data itemization, such as</p><pre><code>;; Measurement is one of:
+;; - "high"
+;; - "low"
+;; - Number</code></pre><p>the cond questions must be guarded with an appropriate type predicate. In particular, the first cond question for Measurement must be</p><pre><code>(and (string? m)
+     (string=? m "high"))</code></pre><p>where the call to string? guards the call to string=?. This will protect string=? from ever receiving a number as an argument.</p></td></tr><br/><tr><td><p><strong>Compound</strong><br/>  </p><ul><li><code>Position</code></li><li><code>Firework</code></li><li><code>Ball</code></li><li><code>cons</code></li><li><code>etc</code></li></ul></td><br/><td><ul><li><code>(posn? x)</code></li><li><code>(firework? x)</code></li><li><code>(ball? x)</code></li><li><code>(cons? x)</code></li><li><code>etc</code></li></ul></td><br/><td><p>All selectors.</p><pre><code>(... (posn-x x) (posn-y x))
+(... (firework-y x) (firework-color x))
+(... (ball-x x) (ball-dx x))
+(... (first x) (rest x))
+etc.</code></pre><p>Then consider the result type of each selector call and wrap the accessor expression appropriately using the table with that type. So for example, if after adding all the selectors you have:</p><pre><code>(... (game-ball g) ;produces Ball
+     (game-paddle g)) ;produces Paddle</code></pre><p>Then, because both Ball and Paddle are non-primitive types (types that you yourself defined in a data definition) the reference rule (immediately below) says that you should add calls to those types’ template functions as follows:</p><pre><code>(... (fn-for-ball (game-ball g))
+     (fn-for-paddle (game-paddle g)))</code></pre></td></tr><br/><tr><td><strong>Other Non-Base Type Reference</strong></td><br/><td><p>Predicates come from: define-struct</p><ul><li><code>(firework? x)</code></li><li><code>(person? x)</code></li></ul></td><br/><td><p>Call to other types template function</p><ul><li><code>(fn-for-firework x)</code></li><li><code>(fn-for-person x)</code></li></ul></td></tr><br/><tr><td><strong>Self Reference</strong></td><br/><td></td><br/><td>From natural recursion with call to this type’s template function<br/><code>(fn-for-ls (rest ls))</code></td></tr><br/><tr><td><strong>Mutal Reference</strong><br/>Note: form and group all templates in mutual reference cycle together</td><br/><td></td><br/><td>Call to other type’s template function:<br/><code>(fn-for-lod (dir-subdirs d)</code><br/><code>(fn-for-dir (first lod))</code></td></tr></tbody></table>
             </article>
         </main>
     </div>

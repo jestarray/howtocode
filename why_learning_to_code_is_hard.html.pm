@@ -63,7 +63,7 @@ You pulled it out of nowhere! Said the beginning student learning multiplication
 
 Learning in many other fields have entire slews of visualizations and guidance whereas teaching programming is often just tossing you into the lions den with not much guidance and wishing you good luck.
 
-◊h2{The Design Recipe}
+◊h2{The Design Recipe Rational}
 The Design Recipe is the ◊strong{implicit thinking process made explict}, that every programmer does automatically in their head in a matter seconds to solve problems, similar to how you do multiplication implicity in your head in a matter of seconds. You would not teach a 7 year old multiplication by saying  ◊em{"oh yeah, it's just ◊strong{obvious}, you just do this in your head"}, and this is what most coding/programming tutorials are often bad at, because they are taught by people who are experts(hopefully) that have 1000s of calculations and pattern recognitions from experience, ◊strong{going on in their head that they don't verbalize or show how they got there.} Novices and beginners often want the percise steps for how to do everything. ◊strong{What's obvious to me is not going to be "obvious" to you, and only by practicing will you develop a sense of what "obviousness" is.}
 
 ◊img[#:src "images/dreyfus.png" #:style "max-width: 100%; height: auto"]{}

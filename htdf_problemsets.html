@@ -34,38 +34,38 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
-#| PROBLEM: less-than-5
-Design the function named 'less-than-5' that determines if a strings length is less than 5
-|#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/4.0-less-than-5_solution.rkt" data-download-link=""><code class="language-racket">(define PNAME 'less-than-5)
+#| PROBLEM: less-than-5?
+Design the function named 'less-than-5?' that determines if a strings length is less than 5
+|#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/4.0-less-than-5_solution.rkt" data-download-link=""><code class="language-racket">(define PNAME 'less-than-5?)
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 HTDF STEPS: Turn all ❌ into ✅ for each step you complete
-    1. Signature, purpose, stub ❌
-    2. Examples (aka check-expect, elaborate the concrete) ❌
-    3. Template(aka Sketch/Outline) ❌
-    4. Code body ❌
-    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+    1. Signature, purpose, stub ✅
+    2. Examples (aka check-expect, elaborate the concrete) ✅
+    3. Template(aka Sketch/Outline) ✅
+    4. Code body ✅
+    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
-#| PROBLEM: less-than-5
-Design the function named 'less-than-5' that determines if a strings length is less than 5
+#| PROBLEM: less-than-5?
+Design the function named 'less-than-5?' that determines if a strings length is less than 5
 |#
 
 ; less-than-5: (String -&gt; Boolean)
 ; produces true whether the length of the string is less than 5
 
-(check-expect (less-than-5 "bob") #true)
-(check-expect (less-than-5 "meow") #true)
-(check-expect (less-than-5 "steam") #false)
-(check-expect (less-than-5 "hungry") #false)
+(check-expect (less-than-5? "bob") #true)
+(check-expect (less-than-5? "meow") #true)
+(check-expect (less-than-5? "steam") #false)
+(check-expect (less-than-5? "hungry") #false)
 
 #;
-(define (less-than-5 str)
+(define (less-than-5? str)
     (... str))
 
-(define (less-than-5 str)
+(define (less-than-5? str)
     (&lt; (string-length str) 5))</code></pre></details></p></details><br/><details><summary class="question">Exercise 5.0-string-first</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/5.0-string-first_starter.rkt" data-download-link=""><code class="language-racket">(define PNAME 'string-first)
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
@@ -80,22 +80,28 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
 |#
 
 #| PROBLEM: string-first
-Design the function named 'string-first', which extracts the first character from a non-empty string. Don’t worry about empty strings
+Design the function named 'string-first', which extracts the first character from a non-empty string. 
+Don’t worry about empty strings
+For example:
+"dog" -&gt; "d"
 |#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/5.0-string-first_solution.rkt" data-download-link=""><code class="language-racket">(define PNAME 'string-first)
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 HTDF STEPS: Turn all ❌ into ✅ for each step you complete
-    1. Signature, purpose, stub ❌
-    2. Examples (aka check-expect, elaborate the concrete) ❌
-    3. Template(aka Sketch/Outline) ❌
-    4. Code body ❌
-    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+    1. Signature, purpose, stub ✅
+    2. Examples (aka check-expect, elaborate the concrete) ✅
+    3. Template(aka Sketch/Outline) ✅
+    4. Code body ✅
+    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
 #| PROBLEM: string-first
-Design the function named 'string-first', which extracts the first character from a non-empty string. Don’t worry about empty strings
+Design the function named 'string-first', which extracts the first character from a non-empty string. 
+Don’t worry about empty strings
+For example:
+"dog" -&gt; "d"
 |#
 
 ; string-first: (String -&gt; String)
@@ -124,26 +130,30 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
 
 #| PROBLEM: string-last
 Design the function named 'string-last', which extracts the last character from a non-empty string.
+Example:
+"hey" -&gt; "y"
 |#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/5.1-string-last_solution.rkt" data-download-link=""><code class="language-racket">(define PNAME 'string-last)
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 HTDF STEPS: Turn all ❌ into ✅ for each step you complete
-    1. Signature, purpose, stub ❌
-    2. Examples (aka check-expect, elaborate the concrete) ❌
-    3. Template(aka Sketch/Outline) ❌
-    4. Code body ❌
-    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+    1. Signature, purpose, stub ✅
+    2. Examples (aka check-expect, elaborate the concrete) ✅
+    3. Template(aka Sketch/Outline) ✅
+    4. Code body ✅
+    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
 #| PROBLEM: string-last
 Design the function 'string-last', which extracts the last character from a non-empty string.
+Example:
+"hey" -&gt; "y"
 |#
 
 ; string-last: (String -&gt; String)
 ; extracts the last character from a non-empty string
-(check-expect (string-last "ah") "h")
+(check-expect (string-last "hey") "y")
 (check-expect (string-last "barn") "n")
 
 #;
@@ -166,21 +176,25 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
 
 #| PROBLEM: string-rest
 Design the function 'string-rest', which produces a string like the given one with the first character removed.
+Example:
+"room" -&gt; "oom"
 |#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/5.2-string-rest_solution.rkt" data-download-link=""><code class="language-racket">(define PNAME 'string-rest)
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 HTDF STEPS: Turn all ❌ into ✅ for each step you complete
-    1. Signature, purpose, stub ❌
-    2. Examples (aka check-expect, elaborate the concrete) ❌
-    3. Template(aka Sketch/Outline) ❌
-    4. Code body ❌
-    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+    1. Signature, purpose, stub ✅
+    2. Examples (aka check-expect, elaborate the concrete) ✅
+    3. Template(aka Sketch/Outline) ✅
+    4. Code body ✅
+    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
 #| PROBLEM: string-rest
 Design the function 'string-rest', which produces a string like the given one with the first character removed.
+Example:
+"room" -&gt; "oom"
 |#
 
 ; string-rest: (String -&gt; String)
@@ -207,35 +221,44 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
 |#
 
 #| PROBLEM: string-remove-last
-Design the function 'string-remove-last', which produces a string like the given one with the last character removed.
+Design the function 'string-remove-last', which produces a string like the given one with the last 
+character removed.
+NOTE: In the case of the empty string, produce an empty string
+"hello" -&gt; "hell"
 |#</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/5.3-string-remove-last_solution.rkt" data-download-link=""><code class="language-racket">(define PNAME 'string-remove-last)
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 HTDF STEPS: Turn all ❌ into ✅ for each step you complete
-    1. Signature, purpose, stub ❌
-    2. Examples (aka check-expect, elaborate the concrete) ❌
-    3. Template(aka Sketch/Outline) ❌
-    4. Code body ❌
-    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+    1. Signature, purpose, stub ✅
+    2. Examples (aka check-expect, elaborate the concrete) ✅
+    3. Template(aka Sketch/Outline) ✅
+    4. Code body ✅
+    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
 #| PROBLEM: string-remove-last
-Design the function 'string-remove-last', which produces a string like the given one with the last character removed.
+Design the function 'string-remove-last', which produces a string like the given one with the last 
+character removed.
+NOTE: In the case of the empty string, produce an empty string
+"hello" -&gt; "hell"
 |#
 
 ; string-remove-last: (String -&gt; String)
 ; produce a given string with the last character removed
 (check-expect (string-remove-last "hello") "hell")
 (check-expect (string-remove-last "cat") "ca")
+(check-expect (string-remove-last "") "")
 
 #;
 (define (string-remove-last st)
   (... st))
 
 (define (string-remove-last st)
-  (substring st 0 (sub1 (string-length st))))</code></pre></details></p></details><br/><details><summary class="question">Exercise 5.4-formalize</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/5.4-formalize_starter.rkt" data-download-link=""><code class="language-racket">(define PNAME 'formalize)
+  (if (zero? (string-length st))
+      ""  
+      (substring st 0 (sub1 (string-length st)))))</code></pre></details></p></details><br/><details><summary class="question">Exercise 5.4-formalize</summary><pre class="line-numbers match-braces rainbow-braces" data-src="starter/5.4-formalize_starter.rkt" data-download-link=""><code class="language-racket">(define PNAME 'formalize)
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 TEMPLATES: https://howtocode.pages.dev/htdp_templates
@@ -249,32 +272,58 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
 |#
 
 #| PROBLEM: formalize
+We have provided helper functions: string-first, string-rest, from the previous problem, use them!
+
 On smartphones, whenever you text someone it will auto-capitalize the first letter of a word, e.g:
 "hey guys" -&gt; "Hey guys"
 "where u at?" -&gt; "Where u at?"
 "wotcha doin" -&gt; "Wotcha doin"
-Design a function named 'formalize' that will capitalize the first letter of a sentence
+Design a function named 'formalize' that will capitalize the first letter of a sentence. Assume that 
+a string is not empty.
 |#
-</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/5.4-formalize_solution.rkt" data-download-link=""><code class="language-racket">(define PNAME 'formalize)
+
+; string-first: (String -&gt; String)
+; extracts the first character from a non-empty-string
+(define (string-first st)
+  (substring st 0 1))
+
+; string-rest: (String -&gt; String)
+; produces the given string with the first character removed
+(define (string-rest st)
+  (substring st 1 (string-length st)))</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-src="solutions/5.4-formalize_solution.rkt" data-download-link=""><code class="language-racket">(define PNAME 'formalize)
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 HTDF STEPS: Turn all ❌ into ✅ for each step you complete
-    1. Signature, purpose, stub ❌
-    2. Examples (aka check-expect, elaborate the concrete) ❌
-    3. Template(aka Sketch/Outline) ❌
-    4. Code body ❌
-    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+    1. Signature, purpose, stub ✅
+    2. Examples (aka check-expect, elaborate the concrete) ✅
+    3. Template(aka Sketch/Outline) ✅
+    4. Code body ✅
+    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
 #| PROBLEM: formalize
+We have provided helper functions: string-first, string-rest, from the previous problem, use them!
+
 On smartphones, whenever you text someone it will auto-capitalize the first letter of a word, e.g:
 "hey guys" -&gt; "Hey guys"
 "where u at?" -&gt; "Where u at?"
 "wotcha doin" -&gt; "Wotcha doin"
-Design a function named 'formalize' that will capitalize the first letter of a sentence
+Design a function named 'formalize' that will capitalize the first letter of a sentence. Assume that 
+a string is not empty.
 |#
+
+; string-first: (String -&gt; String)
+; extracts the first character from a non-empty-string
+(define (string-first st)
+  (substring st 0 1))
+
+; string-rest: (String -&gt; String)
+; produces the given string with the first character removed
+(define (string-rest st)
+  (substring st 1 (string-length st)))
+
 ; formalize: (String -&gt; String)
 ; produces a string capitalizing the first letter
 (check-expect (formalize "hey guys") "Hey guys")
@@ -285,7 +334,7 @@ Design a function named 'formalize' that will capitalize the first letter of a s
 ;    (... txt))
 
 (define (formalize txt)
-   (string-append (string-upcase (substring txt 0 1)) (substring txt 1 (string-length txt))))</code></pre></details></p></details></p>
+   (string-append (string-upcase (string-first txt)) (string-rest txt)))</code></pre></details></p></details></p>
             </article>
         </main>
     </div>

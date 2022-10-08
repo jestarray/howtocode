@@ -15,10 +15,22 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
 |#
 
 #| PROBLEM: formalize
+We have provided helper functions: string-first, string-rest, from the previous problem, use them!
+
 On smartphones, whenever you text someone it will auto-capitalize the first letter of a word, e.g:
 "hey guys" -> "Hey guys"
 "where u at?" -> "Where u at?"
 "wotcha doin" -> "Wotcha doin"
-Design a function named 'formalize' that will capitalize the first letter of a sentence
+Design a function named 'formalize' that will capitalize the first letter of a sentence. Assume that 
+a string is not empty.
 |#
 
+; string-first: (String -> String)
+; extracts the first character from a non-empty-string
+(define (string-first st)
+  (substring st 0 1))
+
+; string-rest: (String -> String)
+; produces the given string with the first character removed
+(define (string-rest st)
+  (substring st 1 (string-length st)))

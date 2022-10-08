@@ -14,6 +14,6 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
-#| PROBLEM: less-than-5
-Design the function named 'less-than-5' that determines if a strings length is less than 5
+#| PROBLEM: less-than-5?
+Design the function named 'less-than-5?' that determines if a strings length is less than 5
 |#

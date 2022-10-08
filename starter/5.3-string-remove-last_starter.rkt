@@ -15,5 +15,8 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
 |#
 
 #| PROBLEM: string-remove-last
-Design the function 'string-remove-last', which produces a string like the given one with the last character removed.
+Design the function 'string-remove-last', which produces a string like the given one with the last 
+character removed.
+NOTE: In the case of the empty string, produce an empty string
+"hello" -> "hell"
 |#

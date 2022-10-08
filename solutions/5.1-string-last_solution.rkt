@@ -7,20 +7,22 @@ CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 HTDF STEPS: Turn all ❌ into ✅ for each step you complete
-    1. Signature, purpose, stub ❌
-    2. Examples (aka check-expect, elaborate the concrete) ❌
-    3. Template(aka Sketch/Outline) ❌
-    4. Code body ❌
-    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+    1. Signature, purpose, stub ✅
+    2. Examples (aka check-expect, elaborate the concrete) ✅
+    3. Template(aka Sketch/Outline) ✅
+    4. Code body ✅
+    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
 #| PROBLEM: string-last
 Design the function 'string-last', which extracts the last character from a non-empty string.
+Example:
+"hey" -> "y"
 |#
 
 ; string-last: (String -> String)
 ; extracts the last character from a non-empty string
-(check-expect (string-last "ah") "h")
+(check-expect (string-last "hey") "y")
 (check-expect (string-last "barn") "n")
 
 #;

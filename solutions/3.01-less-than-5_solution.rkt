@@ -15,7 +15,7 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
 |#
 
 #| PROBLEM: less-than-5?
-Design the function named 'less-than-5?' that determines if a strings length is less than 5
+Design a function named 'less-than-5?' that determines if a strings length is less than 5
 |#
 
 ; less-than-5: (String -> Boolean)

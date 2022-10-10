@@ -15,7 +15,7 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
 |#
 
 #| PROBLEM: string-rest
-Design the function 'string-rest', which produces a string like the given one with the first character removed.
+Design a function 'string-rest', which produces a string like the given one with the first character removed.
 Example:
 "room" -> "oom"
 |#

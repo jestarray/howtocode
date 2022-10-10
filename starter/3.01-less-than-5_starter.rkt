@@ -1,7 +1,7 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 5.2-string-rest_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-(define PNAME 'string-rest)
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 4.0-less-than-5_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(define PNAME 'less-than-5)
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 TEMPLATES: https://howtocode.pages.dev/htdp_templates
@@ -14,8 +14,6 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
-#| PROBLEM: string-rest
-Design the function 'string-rest', which produces a string like the given one with the first character removed.
-Example:
-"room" -> "oom"
+#| PROBLEM: less-than-5?
+Design a function named 'less-than-5?' that determines if a strings length is less than 5
 |#

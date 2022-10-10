@@ -15,7 +15,7 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
 |#
 
 #| PROBLEM: string-last
-Design the function 'string-last', which extracts the last character from a non-empty string.
+Design a function 'string-last', which extracts the last character from a non-empty string.
 Example:
 "hey" -> "y"
 |#

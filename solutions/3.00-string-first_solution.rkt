@@ -15,7 +15,7 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
 |#
 
 #| PROBLEM: string-first
-Design the function named 'string-first', which extracts the first character from a non-empty string. 
+Design a function named 'string-first', which extracts the first character from a non-empty string. 
 Don’t worry about empty strings
 For example:
 "dog" -> "d"

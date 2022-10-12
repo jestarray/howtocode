@@ -27,10 +27,16 @@
                 #f)]
            [else #f])) (directory-list starter-dir)))
 
-(define gen-handin-dir (build-path curr-dir "HANDIN-GRADERS-TEMP"))
+(define gen-handin-dir (build-path curr-dir "../handin/handin-assignments"))
 
-(delete-directory/files gen-handin-dir #:must-exist? #f)
 (make-directory* gen-handin-dir)
+; delete only directories
+
+(for ([file-or-dir (directory-list gen-handin-dir)])
+  (define full-path (build-path gen-handin-dir file-or-dir))
+  (when (directory-exists? full-path)
+    (delete-directory/files full-path #:must-exist? #f)
+    ))
 
 (define (read-thing-from-file f)
   (define (read-thing source)
@@ -290,6 +296,25 @@
                         (hints ,@hint-funcs))) *valid-assignments-and-hints*))
          (copy-file grader-path (build-path problem-dir "checker.rkt") #t)]))
 
+(define assignment-folders
+  (filter-map
+   (lambda (file-or-dir)
+     (define full-path (build-path gen-handin-dir file-or-dir))
+     (if (directory-exists? full-path)
+         (path->string file-or-dir)
+         #f)) (directory-list gen-handin-dir)))
+
+(define config-file
+  `((allow-new-users #t)
+    (allow-change-info #t)
+    (active-dirs (,@assignment-folders))))
+
+(call-with-output-file
+    (build-path gen-handin-dir "config.rktd")
+  (lambda (out)
+    (writeln config-file out)) #:exists 'replace)
+
+; goes into jestlearn server
 (call-with-output-file "VALID-ASSIGNMENTS.json"
   (lambda (out)
     (displayln (jsexpr->string

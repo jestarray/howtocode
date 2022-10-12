@@ -27,7 +27,7 @@
                 #f)]
            [else #f])) (directory-list starter-dir)))
 
-(define gen-handin-dir (build-path curr-dir "../handin/handin-assignments"))
+(define gen-handin-dir (build-path curr-dir "../handin/htc-autograder"))
 
 (make-directory* gen-handin-dir)
 ; delete only directories

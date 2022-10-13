@@ -55,7 +55,9 @@
 (post:
  (add-score-to-report!)
  (write-report)
- (define final-score (last (file->lines "../tester-report-#f.txt")))
+ (define username (first users))
+ (define report-path (string-append "../" username "-report-#f.txt"))
+ (define final-score (last (file->lines report-path)))
 
  (call-with-output-file "../grade" (lambda (out)
                                      ;remove 'Final Score:' and prettifies it to just a fraction

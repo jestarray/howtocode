@@ -320,11 +320,4 @@
     (displayln (jsexpr->string
                 (sort *valid-assignments-and-hints*
                       (lambda (a b)
-                        ; title->num: (Hash -> Number)
-                        ; must have 'name field, converts it to a number
-                        (define (title->num hsh)
-                          (define num-str (first (string-split (hash-ref hsh 'name) "-")))
-                          (if (= (string-length num-str) 3)
-                              (string->number (string-replace num-str "." ".0")) ; prepend zero
-                              (string->number num-str)))
-                        (< (title->num a) (title->num b))))) out)) #:exists 'replace)
+                        (string<=? (hash-ref a 'name) (hash-ref b 'name))))) out)) #:exists 'replace)

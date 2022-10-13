@@ -20,7 +20,7 @@ Design a function named 'pig-latin', translates english to piglatin.
 Pig latin is a dumb language to modify words to sound funny. There are many pig-latin rules but
 for now assume it is just taking the first letter of the word and adding an "ay" at the end.
 For example:
-"dog" -> "goday"
+"dog" -> "ogday"
 "happy" -> "appyhay"
 Assume that the string is never empty
 |#

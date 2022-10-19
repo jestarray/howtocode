@@ -15,7 +15,6 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
 |#
 
 #| PROBLEM:
-Design a function 'can-ride?' that consumes an age and whether or not said person is with an
-adult, and determines if a person can ride the rollercoaster. You can only ride it if you are over
-the age of 12 or have a parent with you!
+Design a function 'can-ride?' that consumes an age and whether or not an adult is with you.
+You can only ride this rollercoaster if you are 12 or older or have an adult with you!
 |#

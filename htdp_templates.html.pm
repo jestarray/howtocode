@@ -117,17 +117,17 @@ Notice you will see an ◊code{=} (equal sign) where there are ◊code{[]} (squa
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket"
 "; NumberGrade is a Natural number that falls into one of:
-; (80, 100]
-; (60, 80]
-; (40, 60]
-; (20, 40]
-; [0, 20]
+;- (80, 100]
+;- (60, 80]
+;- (40, 60]
+;- (20, 40]
+;- [0, 20]
 ; interp.
-; (80, 100] means A
-; (60, 80] means B
-; (40, 60] means C
-; (20, 40] means D
-; [0, 20] means F
+;- (80, 100] means A
+;- (60, 80] means B
+;- (40, 60] means C
+;- (20, 40] means D
+;- [0, 20] means F
 
 (define ng1 80)
 

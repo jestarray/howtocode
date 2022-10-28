@@ -48,17 +48,17 @@ HINT: https://howtocode.pages.dev/htdp_templates#interval_cheatsheet
 |#
 
 ; NumberGrade is a Natural number that falls into one of:
-; (80, 100]
-; (60, 80]
-; (40, 60]
-; (20, 40]
-; [0, 20]
+;- (80, 100]
+;- (60, 80]
+;- (40, 60]
+;- (20, 40]
+;- [0, 20]
 ; interp.
-; (80, 100] means A
-; (60, 80] means B
-; (40, 60] means C
-; (20, 40] means D
-; [0, 20] means F
+;- (80, 100] means A
+;- (60, 80] means B
+;- (40, 60] means C
+;- (20, 40] means D
+;- [0, 20] means F
 
 (define ng1 80)
 

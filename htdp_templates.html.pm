@@ -41,9 +41,9 @@ Enums list all finite possibilities of a given catatgorey of data you want to re
 ; TEMPLATE should match amount of cases in the type above, in this case 3 branches:
 (define (<FUN-ENUM-TEMPLATE> st)
   (cond
-    [... st ...]
-    [... st ...]
-    [... st ...]))
+    [string=? st ...]
+    [string=? st ...]
+    [string=? st ...]))
 
 ; traffic-light-next: (TrafficLight -> TrafficLight)
 ; yields the next state given current state st
@@ -75,6 +75,70 @@ Use an interval when the information to be represented is numbers within a certa
 
 (define (fn-for-countdown cd)
   (... cd))
+")}
+
+◊h2{Interval cheatsheet}
+The boolean expression to test whether a number falls ◊strong{within} a given interval:
+◊table{
+  ◊thead{
+    ◊th{Interval}
+    ◊th{Expression}
+    ◊th{Meaning}
+  }
+  ◊tbody{
+    ◊tr{
+      ◊td{[0, 100]}
+      ◊td{◊code{(and (>= n 0) (<= n 100))}}
+      ◊td{◊strong{Include} both 0 and 100}
+    }
+    ◊tr{
+      ◊td{[0, 100)}
+      ◊td{◊code{(and (>= n 0) (< n 100))}}
+      ◊td{Include 0 but ◊strong{exclude} 100}
+    }
+    ◊tr{
+      ◊td{(0, 100]}
+      ◊td{◊code{(and (> n 0) (<= n 100))}}
+      ◊td{◊strong{Exclude} 0 but ◊strong{Include} 100}
+    }
+    ◊tr{
+      ◊td{(0, 100)}
+      ◊td{◊code{(and (> n 0) (< n 100))}}
+      ◊td{◊strong{Exclude} both 0 and 100}
+    }
+  }
+  ◊caption{
+Notice you will see an ◊code{=} (equal sign) where there are ◊code{[]} (square braces)
+  }
+}
+
+◊h2{Sets of Intervals}
+
+◊pre[#:class "line-numbers match-braces rainbow-braces"]{
+    ◊(code #:class "language-racket"
+"; NumberGrade is a Natural number that falls into one of:
+; (80, 100]
+; (60, 80]
+; (40, 60]
+; (20, 40]
+; [0, 20]
+; interp.
+; (80, 100] means A
+; (60, 80] means B
+; (40, 60] means C
+; (20, 40] means D
+; [0, 20] means F
+
+(define ng1 80)
+
+; numgrade-temp: (NumberGrade -> ???)
+(define (numgrade-temp num)
+  (cond
+    [(and (> num 80) (<= num 100)) ...]
+    [(and (> num 60) (<= num 80)) ...]
+    [(and (> num 40) (<= num 60)) ...]
+    [(and (> num 20) (<= num 40)) ...]
+    [(and (>= num 0) (<= num 20)) ...]))
 ")}
 
 ◊; aka Itemization

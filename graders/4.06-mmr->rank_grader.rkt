@@ -2,7 +2,6 @@
 
 (require handin-server/grading-utils
          handin-server/sandbox
-         2htdp/image
          racket/runtime-path
          racket/file
          racket/list
@@ -13,7 +12,7 @@
 (define-runtime-path here ".")
 (define-values (base final dir?) (split-path (simplify-path here)))
 
-(define ASSIGNMENT-NAME 'image-larger?)
+(define ASSIGNMENT-NAME 'mmr->rank)
 (define markup-prefix ";;> ")
 
 (define-runtime-path override "../overridden-collects/")
@@ -44,14 +43,31 @@
                                          "\n")) |#
         ;(add-report-line! (get-submission-timestamp))
         (!test PNAME ASSIGNMENT-NAME) ; EVERY FILE MUST HAVE THIS ONTOP OF FILE
-        (!procedure image-larger? 2)
+        (!procedure mmr->rank 1)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
-        (set-test-max-score! 4)
-(@test "1" "failed" (image-larger? (rectangle 4 4 "solid" "red") (rectangle 4 4 "solid" "red")) #false 1)
-(@test "2" "failed" (image-larger? (rectangle 7 4 "solid" "red") (rectangle 4 4 "solid" "red")) #true 1)
-(@test "3" "failed" (image-larger? (rectangle 4 4 "solid" "red") (rectangle 7 4 "solid" "red")) #false 1)
-(@test "4" "failed" (image-larger? (rectangle 7 4 "solid" "red") (rectangle 7 5 "solid" "red")) #false 1)
+        (set-test-max-score! 14)
+(define BRONZE "Bronze")
+(define SILVER "Silver")
+(define GOLD "Gold")
+(define PLATINUM "Platinum")
+(define DIAMOND "Diamond")
+
+(@test "1" "err" (mmr->rank 0) BRONZE 1)
+(@test "2" "err" (mmr->rank 500) BRONZE 1)
+(@test "3" "err" (mmr->rank 1149) BRONZE 1)
+(@test "4" "err" (mmr->rank 1150) SILVER 1)
+(@test "5" "err" (mmr->rank 1200) SILVER 1)
+(@test "6" "err" (mmr->rank 1499) SILVER 1)
+(@test "7" "err" (mmr->rank 1500) GOLD 1)
+(@test "8" "err" (mmr->rank 1600) GOLD 1)
+(@test "9" "err" (mmr->rank 1849) GOLD 1)
+(@test "10" "err" (mmr->rank 1850) PLATINUM 1)
+(@test "11" "err" (mmr->rank 2000) PLATINUM 1)
+(@test "12" "err" (mmr->rank 2199) PLATINUM 1)
+(@test "13" "err" (mmr->rank 2200) DIAMOND 1)
+(@test "14" "err" (mmr->rank 3000) DIAMOND 1)
+
         ; (println submission)
         )
 (post:

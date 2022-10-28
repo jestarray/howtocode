@@ -77,7 +77,7 @@
 
 (define (root . elements)
   (txexpr 'root empty (decode-elements elements
-                                       #:exclude-tags (list 'code 'pre 'a) ; do not do smartquotes or dashes in code blocks
+                                       #:exclude-tags (list 'code 'pre 'a 'table) ; do not do smartquotes or dashes in code blocks or tables
                                        #:txexpr-elements-proc (compose1 decode-paragraphs)
                                        #:string-proc (compose1 smart-quotes smart-dashes))))
 

@@ -97,22 +97,6 @@ Structs introduce a new data type to our classic 3 ◊code{(numbers, strings, an
 
 ◊a[#:href ◊(practice-url "structs")]{Structs practice}
 
-◊h2{Exercise 3 Greet}
-◊(define problem-checker (starter-solution "3-greet"))
-◊(define starter-checker (car problem-checker))
-◊(define solution-check (cadr problem-checker))
-
-◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car starter-checker) #:data-download-link ""]{
-    ◊(code #:class "language-racket" ◊(cadr starter-checker))
-}
-
-◊details{
-    ◊summary{Answer}
-◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car solution-check) #:data-download-link ""]{
-    ◊(code #:class "language-racket" ◊(cadr solution-check))
-}
-}
-
 ◊h2{Videos}
 
 ◊a[#:href "https://www.youtube.com/watch?v=EZBmgp2QCuA&list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&index=19"]{Intro to Structs}

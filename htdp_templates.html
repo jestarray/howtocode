@@ -43,9 +43,9 @@
 ; TEMPLATE should match amount of cases in the type above, in this case 3 branches:
 (define (&lt;FUN-ENUM-TEMPLATE&gt; st)
   (cond
-    [... st ...]
-    [... st ...]
-    [... st ...]))
+    [string=? st ...]
+    [string=? st ...]
+    [string=? st ...]))
 
 ; traffic-light-next: (TrafficLight -&gt; TrafficLight)
 ; yields the next state given current state st
@@ -67,6 +67,44 @@
 
 (define (fn-for-countdown cd)
   (... cd))
+</code></pre><h2 id="interval_cheatsheet"><a class="anchor" href="#interval_cheatsheet">#</a>Interval cheatsheet</h2><p>The boolean expression to test whether a number falls <strong>within</strong> a given interval:</p><table><caption></caption><thead><th>Interval</th>
+<th>Expression</th>
+<th>Meaning</th></thead>
+<tbody><tr><td>[0, 100]</td>
+<td><code>(and (&gt;= n 0) (&lt;= n 100))</code></td>
+<td><strong>Include</strong> both 0 and 100</td></tr>
+<tr><td>[0, 100)</td>
+<td><code>(and (&gt;= n 0) (&lt; n 100))</code></td>
+<td>Include 0 but <strong>exclude</strong> 100</td></tr>
+<tr><td>(0, 100]</td>
+<td><code>(and (&gt; n 0) (&lt;= n 100))</code></td>
+<td><strong>Exclude</strong> 0 but <strong>Include</strong> 100</td></tr>
+<tr><td>(0, 100)</td>
+<td><code>(and (&gt; n 0) (&lt; n 100))</code></td>
+<td><strong>Exclude</strong> both 0 and 100</td></tr></tbody>
+<caption>Notice you will see an <code>=</code> (equal sign) where there are <code>[]</code> (square braces)</caption></table><h2 id="sets_of_intervals"><a class="anchor" href="#sets_of_intervals">#</a>Sets of Intervals</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; NumberGrade is one of:
+; (80, 100]
+; (60, 80]
+; (40, 60]
+; (20, 40]
+; [0, 20]
+; interp.
+; (80, 100] = A
+; (60, 80] =  B
+; (40, 60] =  C
+; (20, 40] =  D
+; [0, 20] = F
+
+(define e1 80)
+
+; numgrade-temp: (NumberGrade -&gt; ???)
+(define (numgrade-temp num)
+  (cond
+    [(and (&gt; num 80) (&lt;= num 100)) ...]
+    [(and (&gt; num 60) (&lt;= num 80)) ...]
+    [(and (&gt; num 40) (&lt;= num 60)) ...]
+    [(and (&gt; num 20) (&lt;= num 40)) ...]
+    [(and (&gt;= num 0) (&lt;= num 20)) ...]))
 </code></pre><h2 id="union"><a class="anchor" href="#union">#</a>Union</h2><p>Union(aka itemization) describes the case when there are two or more different <strong>types</strong> of data.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; ValidID is one of:
 ; #false
 ; Number
@@ -113,18 +151,98 @@
 ;             /
 ;            /
 ;       COMBINATION
-</code></pre><h2 id="data_driven_templates"><a class="anchor" href="#data_driven_templates">#</a>Data Driven Templates</h2><table><caption></caption><thead><th>Type of Data</th><br/><th>cond question (if applicable)</th><br/><th>Body or cond answer(if applicable)</th></thead><br/><tbody><tr><td><p><strong>Base Generic</strong><br/>  </p><ul><li>Number</li><li>String</li><li>Boolean</li><li>Image</li></ul></td><br/><td><p>Appropriate Predicate</p><ul><li><code>(number? x)</code></li><li><code>(string? x)</code></li><li><code>(boolean? x)</code></li><li><code>(image? x)</code></li><li><code>(and (&lt;= 0 x) (&lt; x 10))</code></li></ul></td><br/><td>Expression that operates on the parameter.<br/>(... x)</td></tr><br/><tr><td><p><strong>Base Concrete</strong><br/>  </p><ul><li><code>"red"</code></li><li><code>#f</code></li><li><code>empty</code></li><li><code>5</code></li><li><code>etc</code></li></ul></td><br/><td><p>Appropriate Predicate</p><ul><li><code>(string=? x "red")</code></li><li><code>(false? x)</code></li><li><code>(empty? x)</code></li><li><code>(= x 5)</code></li></ul></td><br/><td>Expression that operates on the parameter.<br/>(... x)</td></tr><br/><tr><td><p><strong>One of</strong><br/>  </p><ul><li><code>enum</code></li><li><code>union(aka itemization)</code></li></ul></td><br/><td></td><br/><td><p>Cond with one clause per subclass of one of.</p><pre><code>(cond [&lt;question1&gt; &lt;answer1&gt;]
-      [&lt;question2&gt; &lt;answer2&gt;])</code></pre><p>Where each question and answer expression is formed by following the rule in the question or answer column of this table for the corresponding case. A detailed derivation of a template for a one-of type appears below.</p><p>Always use else for the last question for itemizations and large enumerations. Normal enumerations should not use else.</p><p>Note that in a mixed data itemization, such as</p><pre><code>;; Measurement is one of:
+</code></pre><h2 id="data_driven_templates"><a class="anchor" href="#data_driven_templates">#</a>Data Driven Templates</h2><table><caption></caption><thead><th>Type of Data</th>
+<th>cond question (if applicable)</th>
+<th>Body or cond answer(if applicable)</th></thead>
+<tbody><tr><td><strong>Base Generic</strong>
+  <ul><li>Number</li>
+<li>String</li>
+<li>Boolean</li>
+<li>Image</li></ul></td>
+<td>Appropriate Predicate
+<ul><li><code>(number? x)</code></li>
+<li><code>(string? x)</code></li>
+<li><code>(boolean? x)</code></li>
+<li><code>(image? x)</code></li>
+<li><code>(and (&lt;= 0 x) (&lt; x 10))</code></li></ul></td>
+<td>Expression that operates on the parameter.
+(... x)</td></tr>
+<tr><td><strong>Base Concrete</strong>
+  <ul><li><code>"red"</code></li>
+<li><code>#f</code></li>
+<li><code>empty</code></li>
+<li><code>5</code></li>
+<li><code>etc</code></li></ul></td>
+<td>Appropriate Predicate
+<ul><li><code>(string=? x "red")</code></li>
+<li><code>(false? x)</code></li>
+<li><code>(empty? x)</code></li>
+<li><code>(= x 5)</code></li></ul></td>
+<td>Expression that operates on the parameter.
+(... x)</td></tr>
+<tr><td><strong>One of</strong>
+  <ul><li><code>enum</code></li>
+<li><code>union(aka itemization)</code></li></ul></td>
+<td></td>
+<td>        Cond with one clause per subclass of one of.
+<pre><code>(cond [&lt;question1&gt; &lt;answer1&gt;]
+      [&lt;question2&gt; &lt;answer2&gt;])</code></pre>
+
+Where each question and answer expression is formed by following the rule in the question or answer column of this table for the corresponding case. A detailed derivation of a template for a one-of type appears below.
+
+Always use else for the last question for itemizations and large enumerations. Normal enumerations should not use else.
+
+Note that in a mixed data itemization, such as
+
+<pre><code>;; Measurement is one of:
 ;; - "high"
 ;; - "low"
-;; - Number</code></pre><p>the cond questions must be guarded with an appropriate type predicate. In particular, the first cond question for Measurement must be</p><pre><code>(and (string? m)
-     (string=? m "high"))</code></pre><p>where the call to string? guards the call to string=?. This will protect string=? from ever receiving a number as an argument.</p></td></tr><br/><tr><td><p><strong>Compound</strong><br/>  </p><ul><li><code>Position</code></li><li><code>Firework</code></li><li><code>Ball</code></li><li><code>cons</code></li><li><code>etc</code></li></ul></td><br/><td><ul><li><code>(posn? x)</code></li><li><code>(firework? x)</code></li><li><code>(ball? x)</code></li><li><code>(cons? x)</code></li><li><code>etc</code></li></ul></td><br/><td><p>All selectors.</p><pre><code>(... (posn-x x) (posn-y x))
+;; - Number</code></pre>
+the cond questions must be guarded with an appropriate type predicate. In particular, the first cond question for Measurement must be
+
+<pre><code>(and (string? m)
+     (string=? m "high"))</code></pre>
+where the call to string? guards the call to string=?. This will protect string=? from ever receiving a number as an argument.</td></tr>
+<tr><td><strong>Compound</strong>
+  <ul><li><code>Position</code></li>
+<li><code>Firework</code></li>
+<li><code>Ball</code></li>
+<li><code>cons</code></li>
+<li><code>etc</code></li></ul></td>
+<td><ul><li><code>(posn? x)</code></li>
+<li><code>(firework? x)</code></li>
+<li><code>(ball? x)</code></li>
+<li><code>(cons? x)</code></li>
+<li><code>etc</code></li></ul></td>
+<td>All selectors.
+<pre><code>(... (posn-x x) (posn-y x))
 (... (firework-y x) (firework-color x))
 (... (ball-x x) (ball-dx x))
 (... (first x) (rest x))
-etc.</code></pre><p>Then consider the result type of each selector call and wrap the accessor expression appropriately using the table with that type. So for example, if after adding all the selectors you have:</p><pre><code>(... (game-ball g) ;produces Ball
-     (game-paddle g)) ;produces Paddle</code></pre><p>Then, because both Ball and Paddle are non-primitive types (types that you yourself defined in a data definition) the reference rule (immediately below) says that you should add calls to those types’ template functions as follows:</p><pre><code>(... (fn-for-ball (game-ball g))
-     (fn-for-paddle (game-paddle g)))</code></pre></td></tr><br/><tr><td><strong>Other Non-Base Type Reference</strong></td><br/><td><p>Predicates come from: define-struct</p><ul><li><code>(firework? x)</code></li><li><code>(person? x)</code></li></ul></td><br/><td><p>Call to other types template function</p><ul><li><code>(fn-for-firework x)</code></li><li><code>(fn-for-person x)</code></li></ul></td></tr><br/><tr><td><strong>Self Reference</strong></td><br/><td></td><br/><td>From natural recursion with call to this type’s template function<br/><code>(fn-for-ls (rest ls))</code></td></tr><br/><tr><td><strong>Mutal Reference</strong><br/>Note: form and group all templates in mutual reference cycle together</td><br/><td></td><br/><td>Call to other type’s template function:<br/><code>(fn-for-lod (dir-subdirs d)</code><br/><code>(fn-for-dir (first lod))</code></td></tr></tbody></table>
+etc.</code></pre>
+Then consider the result type of each selector call and wrap the accessor expression appropriately using the table with that type. So for example, if after adding all the selectors you have:
+<pre><code>(... (game-ball g) ;produces Ball
+     (game-paddle g)) ;produces Paddle</code></pre>
+Then, because both Ball and Paddle are non-primitive types (types that you yourself defined in a data definition) the reference rule (immediately below) says that you should add calls to those types' template functions as follows:
+<pre><code>(... (fn-for-ball (game-ball g))
+     (fn-for-paddle (game-paddle g)))</code></pre></td></tr>
+<tr><td><strong>Other Non-Base Type Reference</strong></td>
+<td>Predicates come from: define-struct
+<ul><li><code>(firework? x)</code></li>
+<li><code>(person? x)</code></li></ul></td>
+<td>Call to other types template function
+<ul><li><code>(fn-for-firework x)</code></li>
+<li><code>(fn-for-person x)</code></li></ul></td></tr>
+<tr><td><strong>Self Reference</strong></td>
+<td></td>
+<td>From natural recursion with call to this type's template function
+<code>(fn-for-ls (rest ls))</code></td></tr>
+<tr><td><strong>Mutal Reference</strong>
+Note: form and group all templates in mutual reference cycle together</td>
+<td></td>
+<td>Call to other type's template function:
+<code>(fn-for-lod (dir-subdirs d)</code>
+<code>(fn-for-dir (first lod))</code></td></tr></tbody></table>
             </article>
         </main>
     </div>

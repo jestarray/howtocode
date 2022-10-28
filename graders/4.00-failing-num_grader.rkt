@@ -2,7 +2,6 @@
 
 (require handin-server/grading-utils
          handin-server/sandbox
-         2htdp/image
          racket/runtime-path
          racket/file
          racket/list
@@ -13,7 +12,7 @@
 (define-runtime-path here ".")
 (define-values (base final dir?) (split-path (simplify-path here)))
 
-(define ASSIGNMENT-NAME 'image-larger?)
+(define ASSIGNMENT-NAME 'failing-num?)
 (define markup-prefix ";;> ")
 
 (define-runtime-path override "../overridden-collects/")
@@ -44,14 +43,16 @@
                                          "\n")) |#
         ;(add-report-line! (get-submission-timestamp))
         (!test PNAME ASSIGNMENT-NAME) ; EVERY FILE MUST HAVE THIS ONTOP OF FILE
-        (!procedure image-larger? 2)
+        (!procedure failing-num? 1)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
         (set-test-max-score! 4)
-(@test "1" "failed" (image-larger? (rectangle 4 4 "solid" "red") (rectangle 4 4 "solid" "red")) #false 1)
-(@test "2" "failed" (image-larger? (rectangle 7 4 "solid" "red") (rectangle 4 4 "solid" "red")) #true 1)
-(@test "3" "failed" (image-larger? (rectangle 4 4 "solid" "red") (rectangle 7 4 "solid" "red")) #false 1)
-(@test "4" "failed" (image-larger? (rectangle 7 4 "solid" "red") (rectangle 7 5 "solid" "red")) #false 1)
+
+(@test "1" "err" (failing-num? 90) #false 1)
+(@test "2" "err" (failing-num? 41) #false 1)
+(@test "3" "err" (failing-num? 40) #true 1)
+(@test "4" "err" (failing-num? 39) #true 1)
+
         ; (println submission)
         )
 (post:

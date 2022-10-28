@@ -74,49 +74,7 @@
 (dog? p3) ; false
 (dog? d1) ; true
 (dog? "yay") ; false
-</code></pre><h2 id="conclusion"><a class="anchor" href="#conclusion">#</a>Conclusion</h2><p>Structs introduce a new data type to our classic 3 <code>(numbers, strings, and booleans)</code>, just like how functions introduce a new operation to the classic <code>string-append + - *</code>. It groups units of data close together in 1 whole block.</p><h2 id="practice_problems_with_structs"><a class="anchor" href="#practice_problems_with_structs">#</a>Practice Problems with Structs</h2><p><a href="https://jestlearn.com/how_to_code/#structs">Structs practice</a></p><h2 id="exercise_3_greet"><a class="anchor" href="#exercise_3_greet">#</a>Exercise 3 Greet</h2><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/3-greet_starter.rkt"><code class="language-racket">#| PROBLEM 3: 
-Write a function named "greet" that consumes a person and produces string for each person:
-"Hi my name is edward norton, I am 18 old and single, my balance is 99"
-"Hi my name is marla singer, I am 24 old and taken, my balance is 55"
-"Hi my name is tyler durden, I am 18 old and taken, my balance is 0"
-|#
-
-(define-struct person (fn ln age balance single))
-
-(define p1 (make-person "edward" "norton" 18 99 #true))
-(define p2 (make-person "marla" "singer" 24 55 #false))
-(define p3 (make-person "tyler" "durden" 18 0 #false))
-
-;; Person -&gt; String
-;; produces a greeting given a person
-(define (greet p)
-; WRITE CODE INSIDE HERE
-    (string-append (... p)))
-
-(greet p1)
-(greet p2)
-(greet p3)</code></pre><p><details><summary>Answer</summary><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="solutions/3-greet_solution.rkt"><code class="language-racket">#| PROBLEM 3: 
-Write a function named "greet" that consumes a person and produces string for each person:
-"Hi my name is edward norton, I am 18 old and single, my balance is 99"
-"Hi my name is marla singer, I am 24 old and taken, my balance is 55"
-"Hi my name is tyler durden, I am 18 old and taken, my balance is 0"
-|#
-
-(define-struct person (fn ln age balance single))
-
-(define p1 (make-person "edward" "norton" 18 99 #true))
-(define p2 (make-person "marla" "singer" 24 55 #false))
-(define p3 (make-person "tyler" "durden" 18 0 #false))
-
-;; Person -&gt; String
-;; produces a greeting given a person
-(define (greet pr)
-    (string-append "Hi my name is " (person-fn pr) " " (person-ln pr) ", I am " (number-&gt;string (person-age pr)) " old and "
-    (if (person-single pr) "single" "taken") ", my balance is " (number-&gt;string (person-balance pr))))
-
-(greet p1)
-(greet p2)
-(greet p3)</code></pre></details></p><h2 id="videos"><a class="anchor" href="#videos">#</a>Videos</h2><p><a href="https://www.youtube.com/watch?v=EZBmgp2QCuA&amp;list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&amp;index=19">Intro to Structs</a></p>
+</code></pre><h2 id="conclusion"><a class="anchor" href="#conclusion">#</a>Conclusion</h2><p>Structs introduce a new data type to our classic 3 <code>(numbers, strings, and booleans)</code>, just like how functions introduce a new operation to the classic <code>string-append + - *</code>. It groups units of data close together in 1 whole block.</p><h2 id="practice_problems_with_structs"><a class="anchor" href="#practice_problems_with_structs">#</a>Practice Problems with Structs</h2><p><a href="https://jestlearn.com/how_to_code/#structs">Structs practice</a></p><h2 id="videos"><a class="anchor" href="#videos">#</a>Videos</h2><p><a href="https://www.youtube.com/watch?v=EZBmgp2QCuA&amp;list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&amp;index=19">Intro to Structs</a></p>
             </article>
         </main>
     </div>

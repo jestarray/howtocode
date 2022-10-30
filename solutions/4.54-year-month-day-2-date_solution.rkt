@@ -106,5 +106,7 @@ and use it here to finish this function.
 
 (define (year-month-day->date y m d order form)
   (cond
-    [(string=? order "MDY") (string-append (format-month m form) " " (number->string d) ", " (number->string y))]
-    [(string=? order "DMY") (string-append (number->string d) " " (format-month m form) " " (number->string y))]))
+    [(string=? order "MDY") 
+    (string-append (format-month m form) " " (number->string d) ", " (number->string y))]
+    [(string=? order "DMY") 
+    (string-append (number->string d) " " (format-month m form) " " (number->string y))]))

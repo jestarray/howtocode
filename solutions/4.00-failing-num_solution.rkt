@@ -36,7 +36,7 @@ Follow the design recipe for data and write the data definitions for "NumberGrad
 
 #| Problem 4.00B:
 Use the data definition you wrote above and design a "failing-num?" function that
-consumes a NumberGrade and produces whether or not the given NumberGrade is a failing.
+consumes a NumberGrade and produces whether or not the given NumberGrade is failing.
 Assume that 40 or below is failing
 |#
 

@@ -62,6 +62,8 @@ HINT: https://howtocode.pages.dev/htdp_templates#interval_cheatsheet
 (define ng1 80)
 
 #| Problem B:
+Notice How the data design recipe is already done.
+
 Design a "num->letter" function that consumes a NumberGrade 
 and produces a LetterGrade based on the following intervals
 described by the interpretation.

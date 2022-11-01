@@ -8,10 +8,10 @@ TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 Turn all ❌ into ✅ for each step you complete
 == Data ==
-    1. Data Description❌
-    2. Interpretation❌
-    3. Data Examples❌
-    4. A function template that processes this data❌
+    1. Data Description✅
+    2. Interpretation✅
+    3. Data Examples✅
+    4. A function template that processes this data✅
 == Functions ==
     1. Signature, purpose, stub ❌
     2. Examples (aka check-expect, elaborate the concrete) ❌
@@ -50,6 +50,8 @@ Turn all ❌ into ✅ for each step you complete
     [(string=? lg F) ...]))
 
 #| Problem 4.02:
+Notice How the data design recipe is already done.
+
 Use the data definition you wrote above and design a "bump-up" function 
 that consumes a LetterGrade and produces a LetterGrade 1 rank above.
 |#

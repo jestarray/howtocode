@@ -15,8 +15,9 @@ Turn all ❌ into ✅ for each step you complete
 == Functions ==
     1. Signature, purpose, stub ❌
     2. Examples (aka check-expect, elaborate the concrete) ❌
-    3. Code body ❌
-    4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+    3. Template(from data)?❌
+    4. Code body ❌
+    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
 ; LetterGrade is one of:
@@ -67,4 +68,7 @@ Notice How the data design recipe is already done.
 Design a "num->letter" function that consumes a NumberGrade 
 and produces a LetterGrade based on the following intervals
 described by the interpretation.
+Example:
+94 -> "A"
+25 -> "D"
 |#

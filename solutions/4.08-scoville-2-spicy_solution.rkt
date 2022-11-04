@@ -61,20 +61,17 @@ Turn all ❌ into ✅ for each step you complete
 ; [300,000, infinity] means Extremely Hot
 ; <examples are skipped>
 
-#|Problem:
+#|PROBLEM A:
 Customers are angry at how inaccurate SpicyDescriptions are as
 taste buds vary. The company has decided to measure their food
-using scoville units and then translate that to a SpicyDescription
-as number measurements do not lie. 
+using scoville units and then translate that to a SpicyDescription,
+as number measurements do not lie.
 
 You are given the data descriptions of "Scoville" and "SpicyDescription" above.
-Write a "scoville->spicy" that consumes Scoville and produces a SpicyDescription
-based on the interpretation of Scoville.
+Notice how some steps of the desgin recipe are done for "Scoville".
 
-HINT: Notice how some steps of the desgin recipe are done for "Scoville".
-Finish writing the template for Scoville following:
-https://howtocode.pages.dev/htdp_templates#interval_cheatsheet
-and use the template to then write the function following the functions recipe.
+Finish writing the template for the "Scoville" data definition following.
+HINT: https://howtocode.pages.dev/htdp_templates#interval_cheatsheet
 |#
 
 (define (scoville-temp sco)
@@ -85,6 +82,14 @@ and use the template to then write the function following the functions recipe.
     [(and (>= sco 30000) (< sco 100000)) ...]
     [(and (>= sco 100000) (< sco 300000)) ...]
     [(>= sco 300000) ...]))
+
+#|PROBLEM B:
+Write a "scoville->spicy" that consumes Scoville and produces a SpicyDescription
+based on the interpretation of Scoville.
+For example:
+30 -> "Not Spicy"
+14569-> "Medium"
+|#
 
 ; scoville->spicy : (Scoville -> SpicyDescription)
 ; produces the english description of how spicy something is

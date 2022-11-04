@@ -20,19 +20,19 @@ Turn all ❌ into ✅ for each step you complete
     4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
-#| Problem 4.00A:
+#| PROBLEM 4.00A:
 A number grade often written in red to indicate performance on
 an assignment is a number between [0 to 100] inclusive.
 Follow the design recipe for data and write the data definitions for "NumberGrade"
 |#
 
-#| Problem 4.00B:
+#| PROBLEM 4.00B:
 Use the data definition you wrote above and design a "failing-num?" function that
 consumes a NumberGrade and produces whether or not the given NumberGrade is failing.
 Assume that 40 or below is failing
 |#
 
-#| Problem 4.00C:
+#| PROBLEM 4.00C:
 Grades in the USA sometimes use letters: A, B, C, D, F
 Follow the design recipe for data and write the data definitions for "LetterGrade"
 |#

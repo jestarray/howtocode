@@ -43,7 +43,7 @@ Turn all ❌ into ✅ for each step you complete
     [(string=? r PLATINUM) ...]
     [(string=? r DIAMOND) ...]))
 
-#| Problem A:
+#| PROBLEM A:
 Alongside the metal named rankings, games also use "MMR"(match making rating)
 to more accurately describe the range of a players skill. 
 MMR is usually a number between 0 to infinity with a set of the following intervals:
@@ -58,7 +58,7 @@ Write a data definition for "MMR" following the design recipe for data.
 HINT: https://howtocode.pages.dev/htdp_templates#interval_cheatsheet
 |#
 
-#| Problem B:
+#| PROBLEM B:
 Design the function "mmr->rank" that consumes an MMR and produces the equivalent Rank
 based on the following criteria:
     Bronze: Between 0 and 1149

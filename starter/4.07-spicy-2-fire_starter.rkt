@@ -20,7 +20,7 @@ Turn all ❌ into ✅ for each step you complete
     4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
-#|Problem A:
+#|PROBLEM A:
 A company has a digital self order food menu tablet in their store.
 The menu has a description of how spicy some foods are. The descriptions are
 Not Spicy, Mild, Medium, Hot, Extra Hot, Extremely Hot.
@@ -29,7 +29,7 @@ Write the data definition for "SpicyDescription"
 following the design recipe for data.
 |#
 
-#|Problem B:
+#|PROBLEM B:
 You get complaints by customers who cannot read english because
 they do not understand the "SpicyDescription". You come up with
 the genius idea to mimic the 5 star⭐ rating system but with  

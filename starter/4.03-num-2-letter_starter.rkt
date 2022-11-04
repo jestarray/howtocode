@@ -41,7 +41,7 @@ Turn all ❌ into ✅ for each step you complete
     [(string=? lg D) ...]
     [(string=? lg F) ...]))
 
-#| Problem A:
+#| PROBLEM A:
 Notice how the "NumberGrade" data definition below has been revised to describe
 in more detail, sets on intervals. Write a template for "NumberGrade".
 HINT: https://howtocode.pages.dev/htdp_templates#interval_cheatsheet
@@ -62,7 +62,7 @@ HINT: https://howtocode.pages.dev/htdp_templates#interval_cheatsheet
 
 (define ng1 80)
 
-#| Problem B:
+#| PROBLEM B:
 Notice How the data design recipe is already done.
 
 Design a "num->letter" function that consumes a NumberGrade 

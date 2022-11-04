@@ -19,14 +19,14 @@
  (text "!" 30 "black")
  (triangle 40 "solid" "yellow"))
 
-; Problem 1.2: Make a isosoleces trapezoid
+; PROBLEM 1.2: Make a isosoleces trapezoid
 
 (beside
  (flip-horizontal (right-triangle 30 30 "solid" "red"))
  (square 30 "solid" "red")
  (right-triangle 30 30 "solid" "red"))
 
-; Problem 1.3: Make a traffic light with red, yellow, and green bulbs and a black rectangular background 🚦
+; PROBLEM 1.3: Make a traffic light with red, yellow, and green bulbs and a black rectangular background 🚦
 
 (overlay 
  (above 
@@ -35,7 +35,7 @@
   (circle 20 "solid" "green"))
  (rectangle 50 130 "solid" "black"))
 
- ; Problem 1.4: Make a red checkerboard pattern
+ ; PROBLEM 1.4: Make a red checkerboard pattern
 
 (above 
  (beside (square 20 "solid" "red") (square 20 "solid" "black"))

@@ -20,7 +20,7 @@ Turn all ❌ into ✅ for each step you complete
     4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
-#| Problem:
+#| PROBLEM:
 Rankings in various games like Chess, League of Legends, Rocket League, use 
 metal names to showcase rankings. 
 A rank can be either(ordered from worst to best):
@@ -52,7 +52,7 @@ Write the data definition for "Rank" following the design recipe for data.
     [(string=? r PLATINUM) ...]
     [(string=? r DIAMOND) ...]))
 
-#| Problem:
+#| PROBLEM:
 Use the data definition you wrote above and design a "give-reward?" function 
 that determines whether or not a rank is eligible for an award.
 Rewards are only given to those gold or higher

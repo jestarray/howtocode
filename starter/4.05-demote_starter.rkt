@@ -43,7 +43,7 @@ Turn all ❌ into ✅ for each step you complete
         [(string=? r PLATINUM) ...]
         [(string=? r DIAMOND) ...]))
 
-#| Problem:
+#| PROBLEM:
 Using the data definition from the previous problem "Rank"
 Design a function "demote" that consumes a rank and
 produces the rank below it. For example:

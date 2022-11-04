@@ -49,7 +49,7 @@ Turn all ❌ into ✅ for each step you complete
     [(string=? lg D) ...]
     [(string=? lg F) ...]))
 
-#| Problem 4.02:
+#| PROBLEM 4.02:
 Use the data definition you wrote above and design a "bump-up" function 
 that consumes a LetterGrade and produces a LetterGrade 1 rank above.
 |#

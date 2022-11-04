@@ -49,7 +49,7 @@ Turn all ❌ into ✅ for each step you complete
     [(string=? lg D) ...]
     [(string=? lg F) ...]))
 
-#| Problem 4.01:
+#| PROBLEM 4.01:
 Use the data definition you wrote above and design a "failing-letter?" function that
 consumes a LetterGrade and produces whether or not the given LetterGrade is a failing grade.
 Assume that D or below is failing.

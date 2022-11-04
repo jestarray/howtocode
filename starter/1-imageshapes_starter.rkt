@@ -13,10 +13,10 @@
 ; PROBLEM 1.1: Make a danger/warning sign with a triangle and an exclamation mark ⚠️
 
 
-; Problem 1.2: Make a isosoleces trapezoid
+; PROBLEM 1.2: Make a isosoleces trapezoid
 
 
-; Problem 1.3: Make a traffic light with red, yellow, and green bulbs and a black rectangular background 🚦
+; PROBLEM 1.3: Make a traffic light with red, yellow, and green bulbs and a black rectangular background 🚦
 
 
-; Problem 1.4: Make a red checkerboard pattern
+; PROBLEM 1.4: Make a red checkerboard pattern

@@ -41,7 +41,7 @@ Turn all ❌ into ✅ for each step you complete
     [(string=? lg D) ...]
     [(string=? lg F) ...]))
 
-#| Problem A:
+#| PROBLEM A:
 Notice how the "NumberGrade" data definition below has been revised to describe
 in more detail, sets on intervals. Write a template for "NumberGrade".
 HINT: https://howtocode.pages.dev/htdp_templates#interval_cheatsheet
@@ -70,7 +70,7 @@ HINT: https://howtocode.pages.dev/htdp_templates#interval_cheatsheet
     [(and (> num 20) (<= num 40)) ...]
     [(and (>= num 0) (<= num 20)) ...]))
 
-#| Problem B:
+#| PROBLEM B:
 Design a "num->letter" function that consumes a NumberGrade 
 and produces a LetterGrade based on the following intervals
 described by the interpretation.

@@ -50,10 +50,12 @@ Turn all ❌ into ✅ for each step you complete
     [(string=? m "November") ...]
     [(string=? m "December") ...]))
 
-#|PROBLEM:
+#|PROBLEM A:
 Notice how some parts of the data definitions recipe
 have been done for "Month". Finish writing the template.
+|#
 
+#|PROBLEM B:
 Design the function "fall?" that decides whether the 
 given month is between [September and November].
 |#

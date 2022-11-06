@@ -70,7 +70,7 @@ as number measurements do not lie.
 You are given the data descriptions of "Scoville" and "SpicyDescription" above.
 Notice how some steps of the desgin recipe are done for "Scoville".
 
-Finish writing the template for the "Scoville" data definition following.
+Finish writing the template for the "Scoville" data definition. 
 HINT: https://howtocode.pages.dev/htdp_templates#interval_cheatsheet
 |#
 

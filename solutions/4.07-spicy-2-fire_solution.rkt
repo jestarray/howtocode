@@ -55,13 +55,13 @@ following the design recipe for data.
     [(string=? desc EXTREMELY-HOT) ...]))
 
 #|PROBLEM B:
-You get complaints by customers who cannot read english because
-they do not understand the "SpicyDescription". You come up with
+You get complaints by non-english speaking customers about how
+they cannot understand "SpicyDescription". You come up with
 the genius idea to mimic the 5 star⭐ rating system but with  
 the fire emoji 🔥 instead.
 
 Design a function "spicy->fire" that consumes SpicyDescription
-and produces a string of chilipeppers in an increasing amount
+and produces a string of fire emojis in an increasing amount
 corresponding to the "SpicyDescription" data definition following
 the design recipe for functions.
 

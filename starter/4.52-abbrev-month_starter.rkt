@@ -55,4 +55,6 @@ Design the function "abbrev-month" that produces the next month
 after the given one. For example:
 given "September" produce "Sep"
 given "January" produce "Jan"
+
+HINT: consider using substring
 |#

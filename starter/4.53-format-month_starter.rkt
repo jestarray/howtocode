@@ -38,12 +38,19 @@ Turn all ❌ into ✅ for each step you complete
 ; - "long"
 ; - "short"
 
-#|PROBLEM:
+#|PROBLEM A:
 Notice this problem introduces the "MonthFormat" data defintion
 with some parts of the design recipe done already. Finish the template.
+|#
 
-Design the function "format-month" that when given "short",
-produces the abbreviated name of the month, "long" otherwise.
+#|PROBLEM B:
+Design the function "format-month" that when given a Month and
+a MonthFormat, say "short", produce the abbreviated name of
+the month, otherwise produce the full version.
+
+For example:
+given: "December" "long" , produce: "December"
+given: "December" "short" , produce: "Dec"
 
 Copy over the "abbrev-month" function you wrote
 in the previous exercise and use it as part of your solution.

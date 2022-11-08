@@ -38,27 +38,34 @@ Turn all ❌ into ✅ for each step you complete
 ; - "long"
 ; - "short"
 
+#|PROBLEM A:
+Notice this problem introduces the "MonthFormat" data defintion
+with some parts of the design recipe done already. Finish the template.
+|#
+
 (define (month-format-temp mf)
   (cond
     [(string=? mf "long") ...]
     [(string=? mf "short") ...]))
-
-#|PROBLEM:
-Notice this problem introduces the "MonthFormat" data defintion
-with some parts of the design recipe done already. Finish the template.
-
-Design the function "format-month" that when given "short",
-produces the abbreviated name of the month, "long" otherwise.
-
-Copy over the "abbrev-month" function you wrote
-in the previous exercise and use it as part of your solution.
-|#
 
 ; abbrev-month: (Month -> String)
 ; produces the abbreviated version of the month
 ; (check-expect (abbrev-month "Janurary") "Jan")
 (define (abbrev-month m)
   (substring m 0 3))
+
+#|PROBLEM B:
+Design the function "format-month" that when given a Month and
+a MonthFormat, say "short", produce the abbreviated name of
+the month, otherwise produce the full version.
+
+For example:
+given: "December" "long" , produce: "December"
+given: "December" "short" , produce: "Dec"
+
+Copy over the "abbrev-month" function you wrote
+in the previous exercise and use it as part of your solution.
+|#
 
 ; format-month : (Month MonthFormat -> String)
 ; abbreviates Month to three letters or not based on MathFormat

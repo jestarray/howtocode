@@ -90,11 +90,12 @@ Turn all ❌ into ✅ for each step you complete
 #|PROBLEM:
 Notice how some elements of the design recipe
 have been completed. Finish the design of
-the "days-between" below.
+the function "days-between" below, which
+consumes 2 dates and produces the days between them.
 
 The word “between” here means that there are 
 2 days between yesterday and tomorrow, not 1 or 3 days.
-Basically we include the current today and tomorrow, thus 2 days.
+Basically we include the current today and yesterday, thus 2 days.
 
 HINT: Above you're provided with the function "year-month-day->days"
 which is a problem you should have done previously.

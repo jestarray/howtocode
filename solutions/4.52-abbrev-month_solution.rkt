@@ -51,8 +51,9 @@ Turn all ❌ into ✅ for each step you complete
     [(string=? m "December") ...]))
 
 #|PROBLEM:
-Design the function "abbrev-month" that produces the next month
-after the given one. For example:
+Design the function "abbrev-month" that shortens
+the spelling of the month like the example below.
+For example:
 given "September" produce "Sep"
 given "January" produce "Jan"
 

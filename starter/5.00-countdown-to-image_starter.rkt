@@ -45,5 +45,5 @@ Write the function "countdown->image" that consumes a CountDown
 and produces an Image, for example:
 #false should produce an empty-image
 Numbers should produce the image of the number(use text)
-"complete" should produce "Happy New Years🎉!!!"
+"complete" should produce the image: "Happy New Years🎉!!!"
 |#

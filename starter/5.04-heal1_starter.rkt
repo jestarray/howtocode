@@ -28,7 +28,7 @@ character. The only thing that matters about their health is:
 - if they are alive then they can have 0 or more extra lives
 
 Design a data definition called Health to represent the health of your
-character.
+character. You must use at least 2 types of data!
 |#
 
 #|PROBLEM B:

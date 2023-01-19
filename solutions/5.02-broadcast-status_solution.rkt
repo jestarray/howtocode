@@ -25,9 +25,7 @@ You are designing a program to track a rocket's journey as it descends
 100 kilometers to Earth. You are only interested in the descent from 
 100 kilometers to touchdown. Once the rocket has landed it is done.
 
-Design a data definition to represent the rocket's remaining descent. 
-Call it RocketDescent. Use a mixed data union to clearly
-distinguish the case of when has shutdown and the journey is over. 
+Given the data definition for RocketDescent, finish writing the template for the function
 |#
 
 ; RocketDescent is one of:
@@ -43,7 +41,7 @@ distinguish the case of when has shutdown and the journey is over.
 
 (define (rocket-descent-temp rd)
   (cond [(number? rd) (... rd)]
-         [(boolean? rd) (...)])) 
+         [(boolean? rd) (...)])) ; could be else!
 
 
 #|PROBLEM B:
@@ -62,4 +60,4 @@ Call your function "broadcast-status"
 
 (define (broadcast-status rd)
   (cond [(number? rd) (string-append "Altitude is " (number->string rd) " kms.")]
-         [(boolean? rd) "The rocket has landed!"])) 
+         [else "The rocket has landed!"])) 

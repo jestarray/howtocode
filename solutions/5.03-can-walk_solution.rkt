@@ -29,7 +29,7 @@ walk
 stop
 
 Write the data definition for WalkLight that represents these
-three states using at least 2 type.
+three states using at least 2 types.
 |#
 
 ; A WalkLight is one of:
@@ -50,7 +50,7 @@ three states using at least 2 type.
 #|PROBLEM B:
 A City has hired you to detect when a WalkLight is walkable
 so that it can play a "walk" sound so help the blind.
-You are tasked with the detection onl!
+You are tasked with the detection only!
 
 Design a function called "can-walk?" that consumes a WalkLight
 and produces whether the pedestrian can walk accross or not.

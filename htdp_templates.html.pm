@@ -164,6 +164,166 @@ Union(aka itemization) describes the case when there are two or more different �
         [(number? x) #true]))
 ")}
 
+◊h2{big-bang World Apps}
+World apps are interactive applications that can respond to keyboard presses, mouse events, and draw images quickly for things like games, animations, etc.
+
+◊i{Note that you can paste in your own images into DrRacket, but for the most part we will be using emoji because when opening the racket file with a text editor(e.g notepad) other than DrRacket, it will display weirdly.}
+
+◊i{big-bang programs are somewhat hard to autograde so please do not be discouraged by scores and self access yourself}
+
+Domain analysis (use a piece of paper or ◊a[#:href "https://tldraw.com"]{tldraw.com})
+◊ol{
+  ◊li{Sketch program scenarios}
+  ◊li{Identify constant information}
+  ◊li{Identify changing information}
+  ◊li{Identify big-bang options}
+}
+
+◊table{
+  ◊thead{
+    ◊th{If your app needs to:}
+    ◊th{Then it needs this clause:}
+  }
+  ◊tbody{
+    ◊tr{
+      ◊td{Update automatically as time passes}
+      ◊td{◊a[#:href "https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._on-tick%29%29"]{on-tick}}
+    }
+    ◊tr{
+      ◊td{Display something ◊strong{(absolutely required)}}
+      ◊td{◊a[#:href "https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._to-draw%29%29"]{to-draw}}
+    }
+    ◊tr{
+      ◊td{Change in response to a keyboard press}
+      ◊td{◊a[#:href "https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._on-key%29%29"]{on-key}}
+    }
+    ◊tr{
+      ◊td{Change in response to mouse events}
+      ◊td{◊a[#:href "https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._on-mouse%29%29"]{on-mouse}}
+    }
+    ◊tr{
+      ◊td{Stop automatically}
+      ◊td{◊a[#:href "https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._stop-when%29%29"]{stop-when}}
+    }
+  }
+}
+
+◊pre[#:class "line-numbers match-braces rainbow-braces"]{
+    ◊(code #:class "language-racket"
+"(require 2htdp/image)
+(require 2htdp/universe)
+
+; My world program  (make this more specific)
+
+; =================
+; CONSTANTS:
+
+
+; =================
+#| Data definitions:
+1. Data Description❌
+2. Interpretation❌
+3. Data Examples❌
+4. A function template that processes this data❌
+|#
+; WS is ... (give WS a better name)
+
+
+
+; =================
+#| Functions:
+1. Signature, purpose, stub ❌
+2. Examples (aka check-expect, elaborate the concrete) ❌
+3. Template(from data)?❌
+3. Code body ❌
+4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+|#
+
+; WS -> WS
+; start the world with ...
+; 
+(define (main ws)
+  (big-bang ws                   ; WS
+            [on-tick   tock]     ; WS -> WS
+            [to-draw   render]   ; WS -> Image
+            [stop-when ...]      ; WS -> Boolean
+            [on-mouse  ...]      ; WS Integer Integer MouseEvent -> WS
+            [on-key    ...]))    ; WS KeyEvent -> WS
+
+; WS -> WS
+; produce the next ...
+; TODO!
+(define (tock ws) ...)
+
+
+; WS -> Image
+; render ... 
+; TODO!
+(define (render ws) ...)
+")}
+
+◊details{
+  ◊summary{Mushroom Walk Example}
+◊pre[#:class "line-numbers match-braces rainbow-braces"]{
+    ◊(code #:class "language-racket"
+"(require 2htdp/image)
+(require 2htdp/universe)
+
+; A mushroom that walks off the screen like the Goomba in Mario
+
+; =================
+; CONSTANTS:
+(define MUSH-IMG (text \"🍄\" 50 \"brown\"))
+(define WIDTH 500)
+(define HEIGHT 400)
+(define CENTER-Y (/ HEIGHT 2))
+(define BG (empty-scene WIDTH HEIGHT))
+(define SPEED 4)
+
+; =================
+#| Data definitions:
+1. Data Description✅
+2. Interpretation✅
+3. Data Examples✅
+4. A function template that processes this data✅
+|#
+; Mushroom is a Number
+; interp. represents x position of the mushroom in screen coordinates
+(define (mush-temp m)
+  (... m))
+
+; =================
+#| Functions:
+1. Signature, purpose, stub ✅
+2. Examples (aka check-expect, elaborate the concrete) ✅
+3. Template(from data)?✅
+3. Code body ✅
+4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
+|#
+
+; Mushroom -> Mushroom
+; start the world with ...
+; 
+(define (main m)
+  (big-bang m                    ; Mushroom
+            [on-tick   tock]     ; Mushroom -> Mushroom
+            [to-draw   render])) ; Mushroom -> Image
+
+; Mushroom -> Mushroom 
+; move the mushroom forward by SPEED
+(check-expect (tock 0) (+ 0 SPEED))
+(check-expect (tock 2) (+ 2 SPEED))
+
+(define (tock m)
+  (+ m SPEED))
+
+; Mushroom -> Image
+; draws the mushroom moving forward
+(define (render m)
+  (place-image MUSH-IMG m CENTER-Y BG))
+")}
+}
+
 ◊h2{Compound Data aka Structs}
 
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{

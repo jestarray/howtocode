@@ -120,7 +120,123 @@
 (define (pull-over-id-check? x)
   (cond [(boolean? x) #false]
         [(number? x) #true]))
-</code></pre><h2 id="compound_data_aka_structs"><a class="anchor" href="#compound_data_aka_structs">#</a>Compound Data aka Structs</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct person (name age))
+</code></pre><h2 id="big-bang_world_apps"><a class="anchor" href="#big-bang_world_apps">#</a>big-bang World Apps</h2><p>World apps are interactive applications that can respond to keyboard presses, mouse events, and draw images quickly for things like games, animations, etc.</p><p><i>Note that you can paste in your own images into DrRacket, but for the most part we will be using emoji because when opening the racket file with a text editor(e.g notepad) other than DrRacket, it will display weirdly.</i></p><p><i>big-bang programs are somewhat hard to autograde so please do not be discouraged by scores and self access yourself</i></p><p>Domain analysis (use a piece of paper or <a href="https://tldraw.com">tldraw.com</a>)</p><ol><li>Sketch program scenarios</li><li>Identify constant information</li><li>Identify changing information</li><li>Identify big-bang options</li></ol><table><caption></caption><thead><th>If your app needs to:</th>
+<th>Then it needs this clause:</th></thead>
+<tbody><tr><td>Update automatically as time passes</td>
+<td><a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._on-tick%29%29">on-tick</a></td></tr>
+<tr><td>Display something <strong>(absolutely required)</strong></td>
+<td><a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._to-draw%29%29">to-draw</a></td></tr>
+<tr><td>Change in response to a keyboard press</td>
+<td><a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._on-key%29%29">on-key</a></td></tr>
+<tr><td>Change in response to mouse events</td>
+<td><a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._on-mouse%29%29">on-mouse</a></td></tr>
+<tr><td>Stop automatically</td>
+<td><a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._stop-when%29%29">stop-when</a></td></tr></tbody></table><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(require 2htdp/image)
+(require 2htdp/universe)
+
+; My world program  (make this more specific)
+
+; =================
+; CONSTANTS:
+
+
+; =================
+#| Data definitions:
+1. Data Description❌
+2. Interpretation❌
+3. Data Examples❌
+4. A function template that processes this data❌
+|#
+; WS is ... (give WS a better name)
+
+
+
+; =================
+#| Functions:
+1. Signature, purpose, stub ❌
+2. Examples (aka check-expect, elaborate the concrete) ❌
+3. Template(from data)?❌
+3. Code body ❌
+4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+|#
+
+; WS -&gt; WS
+; start the world with ...
+; 
+(define (main ws)
+  (big-bang ws                   ; WS
+            [on-tick   tock]     ; WS -&gt; WS
+            [to-draw   render]   ; WS -&gt; Image
+            [stop-when ...]      ; WS -&gt; Boolean
+            [on-mouse  ...]      ; WS Integer Integer MouseEvent -&gt; WS
+            [on-key    ...]))    ; WS KeyEvent -&gt; WS
+
+; WS -&gt; WS
+; produce the next ...
+; TODO!
+(define (tock ws) ...)
+
+
+; WS -&gt; Image
+; render ... 
+; TODO!
+(define (render ws) ...)
+</code></pre><p><details><summary>Mushroom Walk Example</summary><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(require 2htdp/image)
+(require 2htdp/universe)
+
+; A mushroom that walks off the screen like the Goomba in Mario
+
+; =================
+; CONSTANTS:
+(define MUSH-IMG (text "🍄" 50 "brown"))
+(define WIDTH 500)
+(define HEIGHT 400)
+(define CENTER-Y (/ HEIGHT 2))
+(define BG (empty-scene WIDTH HEIGHT))
+(define SPEED 4)
+
+; =================
+#| Data definitions:
+1. Data Description✅
+2. Interpretation✅
+3. Data Examples✅
+4. A function template that processes this data✅
+|#
+; Mushroom is a Number
+; interp. represents x position of the mushroom in screen coordinates
+(define (mush-temp m)
+  (... m))
+
+; =================
+#| Functions:
+1. Signature, purpose, stub ✅
+2. Examples (aka check-expect, elaborate the concrete) ✅
+3. Template(from data)?✅
+3. Code body ✅
+4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
+|#
+
+; Mushroom -&gt; Mushroom
+; start the world with ...
+; 
+(define (main m)
+  (big-bang m                    ; Mushroom
+            [on-tick   tock]     ; Mushroom -&gt; Mushroom
+            [to-draw   render])) ; Mushroom -&gt; Image
+
+; Mushroom -&gt; Mushroom 
+; move the mushroom forward by SPEED
+(check-expect (tock 0) (+ 0 SPEED))
+(check-expect (tock 2) (+ 2 SPEED))
+
+(define (tock m)
+  (+ m SPEED))
+
+; Mushroom -&gt; Image
+; draws the mushroom moving forward
+(define (render m)
+  (place-image MUSH-IMG m CENTER-Y BG))
+</code></pre></details></p><h2 id="compound_data_aka_structs"><a class="anchor" href="#compound_data_aka_structs">#</a>Compound Data aka Structs</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct person (name age))
 ; Person is (make-ball String Number)
 ; interp. a person comrpises of a name and age
 

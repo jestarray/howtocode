@@ -169,14 +169,30 @@ World apps are interactive applications that can respond to keyboard presses, mo
 
 ◊i{Note that you can paste in your own images into DrRacket, but for the most part we will be using emoji because when opening the racket file with a text editor(e.g notepad) other than DrRacket, it will display weirdly.}
 
-◊i{big-bang programs are somewhat hard to autograde so please do not be discouraged by scores and self access yourself}
+◊i{big-bang programs are somewhat hard to autograde so please do not be discouraged by scores and self grade yourself comparing it to my solution}
 
-Domain analysis (use a piece of paper or ◊a[#:href "https://tldraw.com"]{tldraw.com})
 ◊ol{
-  ◊li{Sketch program scenarios}
-  ◊li{Identify constant information}
-  ◊li{Identify changing information}
-  ◊li{Identify big-bang options}
+  ◊li{
+    ◊ol{
+      ◊li{◊h3{Domain analysis (use a piece of paper or ◊a[#:href "https://tldraw.com"]{tldraw.com})}}
+      ◊li{Sketch program scenarios}
+      ◊li{Identify constant information}
+      ◊li{Identify changing information}
+      ◊li{Identify big-bang options}
+    }
+  }
+
+  ◊li{
+    ◊ol{
+      ◊li{◊h3{Build the actual program}}
+      ◊li{Constants (based on 1.2 above)}
+      ◊li{Data definitions using HtDD (based on 1.3 above)}
+      ◊li{Functions using HtDF}
+      ◊li{main first (based on 1.3, 1.4 and 2.2 above)}
+      ◊li{todo list entriesfor big-bang handlers}
+      ◊li{Work through wish list until done}
+    }
+  }
 }
 
 ◊table{
@@ -323,6 +339,35 @@ Domain analysis (use a piece of paper or ◊a[#:href "https://tldraw.com"]{tldra
   (place-image MUSH-IMG m CENTER-Y BG))
 ")}
 }
+
+◊h3{Key and Mouse Handlers}
+The ◊code{on-key} and ◊code{on-mouse} handler function templates are handled specially. The ◊code{on-key} function is templated according to its second argument, a KeyEvent, using the large enumeration rule. The ◊code{on-mouse} function is templated according to its MouseEvent argument, also using the large enumeration rule. So, for example, for a key handler function that has a special behaviour when the space key is pressed but does nothing for any other key event the following would be the template:
+
+◊pre[#:class "line-numbers match-braces rainbow-braces"]{
+    ◊(code #:class "language-racket"
+"; handle-key: (WorldState KeyEvent) -> WorldState
+; todo: do something when a key is pressed
+(define (handle-key ws ke)
+  (cond [(key=? ke \"x\") (... ws)]
+        [else 
+         (... ws)]))
+"
+)}
+
+Similarly the template for a mouse handler function that has special behavior for mouse clicks but ignores all other mouse events would be:
+
+◊pre[#:class "line-numbers match-braces rainbow-braces"]{
+    ◊(code #:class "language-racket"
+"; handle-mouse: (WorldState Number Number MouseEvent) -> WorldState
+; todo: do something when the mouse moves or clicks
+(define (handle-mouse ws x y me)
+  (cond [(mouse=? me \"button-down\") (... ws x y)]
+        [else
+         (... ws x y)]))
+"
+)}
+
+For more information on the ◊a[#:href "https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28tech._world._keyevent%29"]{KeyEvent} and ◊a[#:href "https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28tech._world._mouseevent%29"]{MouseEvent} large enumerations see the DrRacket help desk.
 
 ◊h2{Compound Data aka Structs}
 

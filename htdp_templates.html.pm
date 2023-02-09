@@ -187,10 +187,12 @@ World apps are interactive applications that can respond to keyboard presses, mo
       ◊li{◊h3{Build the actual program}}
       ◊li{Constants (based on 1.2 above)}
       ◊li{Data definitions using HtDD (based on 1.3 above)}
-      ◊li{Functions using HtDF}
-      ◊li{main first (based on 1.3, 1.4 and 2.2 above)}
-      ◊li{todo list entriesfor big-bang handlers}
-      ◊li{Work through wish list until done}
+      ◊li{Functions using HtDF
+        ◊ol{
+         ◊li{main first (based on 1.3, 1.4 and 2.2 above)}
+         ◊li{todo list entries for big-bang handlers}
+        }}
+      ◊li{Work through todo list until done}
     }
   }
 }
@@ -224,12 +226,13 @@ World apps are interactive applications that can respond to keyboard presses, mo
   }
 }
 
+◊h3{HTDW Template}
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket"
 "(require 2htdp/image)
 (require 2htdp/universe)
 
-; My world program  (make this more specific)
+; My world program does ... (make this more specific)
 
 ; =================
 ; CONSTANTS:
@@ -255,7 +258,7 @@ World apps are interactive applications that can respond to keyboard presses, mo
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
-; WS -> WS
+; main: (WS -> WS)
 ; start the world with ...
 ; 
 (define (main ws)
@@ -266,13 +269,13 @@ World apps are interactive applications that can respond to keyboard presses, mo
             [on-mouse  ...]      ; WS Integer Integer MouseEvent -> WS
             [on-key    ...]))    ; WS KeyEvent -> WS
 
-; WS -> WS
+; tock: (WS -> WS)
 ; produce the next ...
 ; TODO!
 (define (tock ws) ...)
 
 
-; WS -> Image
+; render: (WS -> Image)
 ; render ... 
 ; TODO!
 (define (render ws) ...)
@@ -317,24 +320,26 @@ World apps are interactive applications that can respond to keyboard presses, mo
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
-; Mushroom -> Mushroom
+; main: (Mushroom -> Mushroom)
 ; start the world with ...
 ; 
 (define (main m)
-  (big-bang m                    ; Mushroom
-            [on-tick   tock]     ; Mushroom -> Mushroom
-            [to-draw   render])) ; Mushroom -> Image
+  (big-bang m                        ; Mushroom
+            [on-tick   advance-mush] ; Mushroom -> Mushroom
+            [to-draw   render]))     ; Mushroom -> Image
 
-; Mushroom -> Mushroom 
+; advance-mush: (Mushroom -> Mushroom)
 ; move the mushroom forward by SPEED
 (check-expect (tock 0) (+ 0 SPEED))
 (check-expect (tock 2) (+ 2 SPEED))
 
-(define (tock m)
+(define (advance-mush m)
   (+ m SPEED))
 
-; Mushroom -> Image
+; render: (Mushroom -> Image)
 ; draws the mushroom moving forward
+(check-expect (render WIDTH) (place-image MUSH-IMG WIDTH CENTER-Y BG))
+
 (define (render m)
   (place-image MUSH-IMG m CENTER-Y BG))
 ")}

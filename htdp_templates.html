@@ -120,7 +120,7 @@
 (define (pull-over-id-check? x)
   (cond [(boolean? x) #false]
         [(number? x) #true]))
-</code></pre><h2 id="big-bang_world_apps"><a class="anchor" href="#big-bang_world_apps">#</a>big-bang World Apps</h2><p>World apps are interactive applications that can respond to keyboard presses, mouse events, and draw images quickly for things like games, animations, etc.</p><p><i>Note that you can paste in your own images into DrRacket, but for the most part we will be using emoji because when opening the racket file with a text editor(e.g notepad) other than DrRacket, it will display weirdly.</i></p><p><i>big-bang programs are somewhat hard to autograde so please do not be discouraged by scores and self grade yourself comparing it to my solution</i></p><ol><li><ol><li><h3>Domain analysis (use a piece of paper or <a href="https://tldraw.com">tldraw.com</a>)</h3></li><li>Sketch program scenarios</li><li>Identify constant information</li><li>Identify changing information</li><li>Identify big-bang options</li></ol></li><li><ol><li><h3>Build the actual program</h3></li><li>Constants (based on 1.2 above)</li><li>Data definitions using HtDD (based on 1.3 above)</li><li>Functions using HtDF</li><li>main first (based on 1.3, 1.4 and 2.2 above)</li><li>todo list entriesfor big-bang handlers</li><li>Work through wish list until done</li></ol></li></ol><table><caption></caption><thead><th>If your app needs to:</th>
+</code></pre><h2 id="big-bang_world_apps"><a class="anchor" href="#big-bang_world_apps">#</a>big-bang World Apps</h2><p>World apps are interactive applications that can respond to keyboard presses, mouse events, and draw images quickly for things like games, animations, etc.</p><p><i>Note that you can paste in your own images into DrRacket, but for the most part we will be using emoji because when opening the racket file with a text editor(e.g notepad) other than DrRacket, it will display weirdly.</i></p><p><i>big-bang programs are somewhat hard to autograde so please do not be discouraged by scores and self grade yourself comparing it to my solution</i></p><ol><li><ol><li><h3>Domain analysis (use a piece of paper or <a href="https://tldraw.com">tldraw.com</a>)</h3></li><li>Sketch program scenarios</li><li>Identify constant information</li><li>Identify changing information</li><li>Identify big-bang options</li></ol></li><li><ol><li><h3>Build the actual program</h3></li><li>Constants (based on 1.2 above)</li><li>Data definitions using HtDD (based on 1.3 above)</li><li><p>Functions using HtDF</p><ol><li>main first (based on 1.3, 1.4 and 2.2 above)</li><li>todo list entries for big-bang handlers</li></ol></li><li>Work through todo list until done</li></ol></li></ol><table><caption></caption><thead><th>If your app needs to:</th>
 <th>Then it needs this clause:</th></thead>
 <tbody><tr><td>Update automatically as time passes</td>
 <td><a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._on-tick%29%29">on-tick</a></td></tr>
@@ -131,10 +131,10 @@
 <tr><td>Change in response to mouse events</td>
 <td><a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._on-mouse%29%29">on-mouse</a></td></tr>
 <tr><td>Stop automatically</td>
-<td><a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._stop-when%29%29">stop-when</a></td></tr></tbody></table><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(require 2htdp/image)
+<td><a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._stop-when%29%29">stop-when</a></td></tr></tbody></table><h3>HTDW Template</h3><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(require 2htdp/image)
 (require 2htdp/universe)
 
-; My world program  (make this more specific)
+; My world program does ... (make this more specific)
 
 ; =================
 ; CONSTANTS:
@@ -160,7 +160,7 @@
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
-; WS -&gt; WS
+; main: (WS -&gt; WS)
 ; start the world with ...
 ; 
 (define (main ws)
@@ -171,13 +171,13 @@
             [on-mouse  ...]      ; WS Integer Integer MouseEvent -&gt; WS
             [on-key    ...]))    ; WS KeyEvent -&gt; WS
 
-; WS -&gt; WS
+; tock: (WS -&gt; WS)
 ; produce the next ...
 ; TODO!
 (define (tock ws) ...)
 
 
-; WS -&gt; Image
+; render: (WS -&gt; Image)
 ; render ... 
 ; TODO!
 (define (render ws) ...)
@@ -216,24 +216,26 @@
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
-; Mushroom -&gt; Mushroom
+; main: (Mushroom -&gt; Mushroom)
 ; start the world with ...
 ; 
 (define (main m)
-  (big-bang m                    ; Mushroom
-            [on-tick   tock]     ; Mushroom -&gt; Mushroom
-            [to-draw   render])) ; Mushroom -&gt; Image
+  (big-bang m                        ; Mushroom
+            [on-tick   advance-mush] ; Mushroom -&gt; Mushroom
+            [to-draw   render]))     ; Mushroom -&gt; Image
 
-; Mushroom -&gt; Mushroom 
+; advance-mush: (Mushroom -&gt; Mushroom)
 ; move the mushroom forward by SPEED
 (check-expect (tock 0) (+ 0 SPEED))
 (check-expect (tock 2) (+ 2 SPEED))
 
-(define (tock m)
+(define (advance-mush m)
   (+ m SPEED))
 
-; Mushroom -&gt; Image
+; render: (Mushroom -&gt; Image)
 ; draws the mushroom moving forward
+(check-expect (render WIDTH) (place-image MUSH-IMG WIDTH CENTER-Y BG))
+
 (define (render m)
   (place-image MUSH-IMG m CENTER-Y BG))
 </code></pre></details></p><h3>Key and Mouse Handlers</h3><p>The <code>on-key</code> and <code>on-mouse</code> handler function templates are handled specially. The <code>on-key</code> function is templated according to its second argument, a KeyEvent, using the large enumeration rule. The <code>on-mouse</code> function is templated according to its MouseEvent argument, also using the large enumeration rule. So, for example, for a key handler function that has a special behaviour when the space key is pressed but does nothing for any other key event the following would be the template:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; handle-key: (WorldState KeyEvent) -&gt; WorldState

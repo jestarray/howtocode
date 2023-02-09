@@ -197,6 +197,7 @@ World apps are interactive applications that can respond to keyboard presses, mo
   }
 }
 
+◊h3{big-bang options}
 ◊table{
   ◊thead{
     ◊th{If your app needs to:}

@@ -192,7 +192,7 @@
 (define WIDTH 500)
 (define HEIGHT 400)
 (define CENTER-Y (/ HEIGHT 2))
-(define BG (empty-scene WIDTH HEIGHT))
+(define BG (empty-scene WIDTH HEIGHT "light blue"))
 (define SPEED 4)
 
 ; =================
@@ -217,17 +217,40 @@
 |#
 
 ; main: (Mushroom -&gt; Mushroom)
-; start the world with ...
-; 
+; start the world with 0
 (define (main m)
   (big-bang m                        ; Mushroom
+            [on-key handle-key]      ; Mushroom KeyEvent -&gt; Mushroom 
+            [on-mouse handle-mouse]  ; Mushroom Number Number MouseEvent -&gt; Mushroom
             [on-tick   advance-mush] ; Mushroom -&gt; Mushroom
             [to-draw   render]))     ; Mushroom -&gt; Image
 
+; handle-key: (Mushroom KeyEvent -&gt; Mushroom)
+; upon pressing space or "a" key, reset the mushroom position to 0
+(check-expect (handle-key 123 " ") 0) ; reset when space is hit 
+(check-expect (handle-key 456 "a") 0) ; reset when a is hit
+
+(define (handle-key m ke)
+  (cond [(key=? ke " ") 0]
+        [(key=? ke "a") 0]
+        [else 
+         m]))
+
+; handle-mouse: (Mushroom Number Number MouseEvent -&gt; Mushroom)
+; set the mushroom x pos to that of the mouse x pos
+(check-expect (handle-mouse 123 250 375 "button-down") 250)
+(check-expect (handle-mouse 123 250 375 "button-up") 123)
+(check-expect (handle-key 456 "x") 456) ; don't do anything to mushroom x
+
+(define (handle-mouse m mousex mousey me)
+  (cond [(mouse=? me "button-down") mousex]
+        [else
+         m]))
+
 ; advance-mush: (Mushroom -&gt; Mushroom)
 ; move the mushroom forward by SPEED
-(check-expect (tock 0) (+ 0 SPEED))
-(check-expect (tock 2) (+ 2 SPEED))
+(check-expect (advance-mush 0) (+ 0 SPEED))
+(check-expect (advance-mush 2) (+ 2 SPEED))
 
 (define (advance-mush m)
   (+ m SPEED))
@@ -238,18 +261,18 @@
 
 (define (render m)
   (place-image MUSH-IMG m CENTER-Y BG))
-</code></pre></details></p><h3>Key and Mouse Handlers</h3><p>The <code>on-key</code> and <code>on-mouse</code> handler function templates are handled specially. The <code>on-key</code> function is templated according to its second argument, a KeyEvent, using the large enumeration rule. The <code>on-mouse</code> function is templated according to its MouseEvent argument, also using the large enumeration rule. So, for example, for a key handler function that has a special behaviour when the space key is pressed but does nothing for any other key event the following would be the template:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; handle-key: (WorldState KeyEvent) -&gt; WorldState
+</code></pre></details></p><h3>Key and Mouse Handlers</h3><p>The <code>on-key</code> and <code>on-mouse</code> handler function templates are handled specially. The <code>on-key</code> function is templated according to its second argument, a KeyEvent, using the large enumeration rule. The <code>on-mouse</code> function is templated according to its MouseEvent argument, also using the large enumeration rule. So, for example, for a key handler function that has a special behaviour when the space key is pressed but does nothing for any other key event the following would be the template:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; handle-key: (WorldState KeyEvent -&gt; WorldState)
 ; todo: do something when a key is pressed
 (define (handle-key ws ke)
   (cond [(key=? ke "x") (... ws)]
         [else 
          (... ws)]))
-</code></pre><p>Similarly the template for a mouse handler function that has special behavior for mouse clicks but ignores all other mouse events would be:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; handle-mouse: (WorldState Number Number MouseEvent) -&gt; WorldState
+</code></pre><p>Similarly the template for a mouse handler function that has special behavior for mouse clicks but ignores all other mouse events would be:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; handle-mouse: (WorldState Number Number MouseEvent -&gt; WorldState)
 ; todo: do something when the mouse moves or clicks
-(define (handle-mouse ws x y me)
-  (cond [(mouse=? me "button-down") (... ws x y)]
+(define (handle-mouse ws mousex mousey me)
+  (cond [(mouse=? me "button-down") (... ws mousex mousey)]
         [else
-         (... ws x y)]))
+         (... ws mousex mousey)]))
 </code></pre><p>For more information on the <a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28tech._world._keyevent%29">KeyEvent</a> and <a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28tech._world._mouseevent%29">MouseEvent</a> large enumerations see the DrRacket help desk.</p><h2 id="compound_data_aka_structs"><a class="anchor" href="#compound_data_aka_structs">#</a>Compound Data aka Structs</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct person (name age))
 ; Person is (make-ball String Number)
 ; interp. a person comrpises of a name and age

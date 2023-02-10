@@ -297,7 +297,7 @@ World apps are interactive applications that can respond to keyboard presses, mo
 (define WIDTH 500)
 (define HEIGHT 400)
 (define CENTER-Y (/ HEIGHT 2))
-(define BG (empty-scene WIDTH HEIGHT))
+(define BG (empty-scene WIDTH HEIGHT \"light blue\"))
 (define SPEED 4)
 
 ; =================
@@ -322,17 +322,40 @@ World apps are interactive applications that can respond to keyboard presses, mo
 |#
 
 ; main: (Mushroom -> Mushroom)
-; start the world with ...
-; 
+; start the world with 0
 (define (main m)
   (big-bang m                        ; Mushroom
+            [on-key handle-key]      ; Mushroom KeyEvent -> Mushroom 
+            [on-mouse handle-mouse]  ; Mushroom Number Number MouseEvent -> Mushroom
             [on-tick   advance-mush] ; Mushroom -> Mushroom
             [to-draw   render]))     ; Mushroom -> Image
 
+; handle-key: (Mushroom KeyEvent -> Mushroom)
+; upon pressing space or \"a\" key, reset the mushroom position to 0
+(check-expect (handle-key 123 \" \") 0) ; reset when space is hit 
+(check-expect (handle-key 456 \"a\") 0) ; reset when a is hit
+
+(define (handle-key m ke)
+  (cond [(key=? ke \" \") 0]
+        [(key=? ke \"a\") 0]
+        [else 
+         m]))
+
+; handle-mouse: (Mushroom Number Number MouseEvent -> Mushroom)
+; set the mushroom x pos to that of the mouse x pos
+(check-expect (handle-mouse 123 250 375 \"button-down\") 250)
+(check-expect (handle-mouse 123 250 375 \"button-up\") 123)
+(check-expect (handle-key 456 \"x\") 456) ; don't do anything to mushroom x
+ 
+(define (handle-mouse m mousex mousey me)
+  (cond [(mouse=? me \"button-down\") mousex]
+        [else
+         m]))
+
 ; advance-mush: (Mushroom -> Mushroom)
 ; move the mushroom forward by SPEED
-(check-expect (tock 0) (+ 0 SPEED))
-(check-expect (tock 2) (+ 2 SPEED))
+(check-expect (advance-mush 0) (+ 0 SPEED))
+(check-expect (advance-mush 2) (+ 2 SPEED))
 
 (define (advance-mush m)
   (+ m SPEED))
@@ -351,7 +374,7 @@ The ◊code{on-key} and ◊code{on-mouse} handler function templates are handled
 
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket"
-"; handle-key: (WorldState KeyEvent) -> WorldState
+"; handle-key: (WorldState KeyEvent -> WorldState)
 ; todo: do something when a key is pressed
 (define (handle-key ws ke)
   (cond [(key=? ke \"x\") (... ws)]
@@ -364,12 +387,12 @@ Similarly the template for a mouse handler function that has special behavior fo
 
 ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
     ◊(code #:class "language-racket"
-"; handle-mouse: (WorldState Number Number MouseEvent) -> WorldState
+"; handle-mouse: (WorldState Number Number MouseEvent -> WorldState)
 ; todo: do something when the mouse moves or clicks
-(define (handle-mouse ws x y me)
-  (cond [(mouse=? me \"button-down\") (... ws x y)]
+(define (handle-mouse ws mousex mousey me)
+  (cond [(mouse=? me \"button-down\") (... ws mousex mousey)]
         [else
-         (... ws x y)]))
+         (... ws mousex mousey)]))
 "
 )}
 

@@ -241,6 +241,11 @@ World apps are interactive applications that can respond to keyboard presses, mo
 
 ; =================
 #| Data definitions:
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+TEMPLATES: https://howtocode.pages.dev/htdp_templates
+ASK FOR HELP: https://discord.com/invite/6Zq8sH5
+Turn all ❌ into ✅ for each step you complete
+
 1. Data Description❌
 2. Interpretation❌
 3. Data Examples❌
@@ -264,11 +269,12 @@ World apps are interactive applications that can respond to keyboard presses, mo
 ; 
 (define (main ws)
   (big-bang ws                   ; WS
+            [on-mouse  ...]      ; WS Integer Integer MouseEvent -> WS
+            [on-key    ...]      ; WS KeyEvent -> WS
             [on-tick   tock]     ; WS -> WS
             [to-draw   render]   ; WS -> Image
             [stop-when ...]      ; WS -> Boolean
-            [on-mouse  ...]      ; WS Integer Integer MouseEvent -> WS
-            [on-key    ...]))    ; WS KeyEvent -> WS
+))
 
 ; tock: (WS -> WS)
 ; produce the next ...
@@ -302,6 +308,11 @@ World apps are interactive applications that can respond to keyboard presses, mo
 
 ; =================
 #| Data definitions:
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+TEMPLATES: https://howtocode.pages.dev/htdp_templates
+ASK FOR HELP: https://discord.com/invite/6Zq8sH5
+Turn all ❌ into ✅ for each step you complete
+
 1. Data Description✅
 2. Interpretation✅
 3. Data Examples✅

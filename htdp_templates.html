@@ -142,6 +142,11 @@
 
 ; =================
 #| Data definitions:
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+TEMPLATES: https://howtocode.pages.dev/htdp_templates
+ASK FOR HELP: https://discord.com/invite/6Zq8sH5
+Turn all ❌ into ✅ for each step you complete
+
 1. Data Description❌
 2. Interpretation❌
 3. Data Examples❌
@@ -165,11 +170,12 @@
 ; 
 (define (main ws)
   (big-bang ws                   ; WS
+            [on-mouse  ...]      ; WS Integer Integer MouseEvent -&gt; WS
+            [on-key    ...]      ; WS KeyEvent -&gt; WS
             [on-tick   tock]     ; WS -&gt; WS
             [to-draw   render]   ; WS -&gt; Image
             [stop-when ...]      ; WS -&gt; Boolean
-            [on-mouse  ...]      ; WS Integer Integer MouseEvent -&gt; WS
-            [on-key    ...]))    ; WS KeyEvent -&gt; WS
+))
 
 ; tock: (WS -&gt; WS)
 ; produce the next ...
@@ -197,6 +203,11 @@
 
 ; =================
 #| Data definitions:
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+TEMPLATES: https://howtocode.pages.dev/htdp_templates
+ASK FOR HELP: https://discord.com/invite/6Zq8sH5
+Turn all ❌ into ✅ for each step you complete
+
 1. Data Description✅
 2. Interpretation✅
 3. Data Examples✅

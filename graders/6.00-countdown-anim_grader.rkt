@@ -13,7 +13,7 @@
 (define-runtime-path here ".")
 (define-values (base final dir?) (split-path (simplify-path here)))
 
-(define ASSIGNMENT-NAME 'heal1)
+(define ASSIGNMENT-NAME 'countdown-anim)
 (define markup-prefix ";;> ")
 
 (define-runtime-path override "../overridden-collects/")
@@ -44,13 +44,20 @@
                                          "\n")) |#
         ;(add-report-line! (get-submission-timestamp))
         (!test PNAME ASSIGNMENT-NAME) ; EVERY FILE MUST HAVE THIS ONTOP OF FILE
-        (!procedure heal1 1)
+        (!procedure update-cd 1)
+        (!procedure handle-key 2)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
-        (set-test-max-score! 2)
+        (set-test-max-score! 7)
 
-(@test "1" "err" (heal1 #false) #false 1)
-(@test "2" "err" (heal1 0) 1 1)
+(@test "update-cd#1" "err" (update-cd 10) 9 1)
+(@test "update-cd#2" "err" (update-cd 5) 4 1)
+(@test "update-cd#3" "err" (update-cd 1) 0 1)
+(@test "update-cd#4" "err" (update-cd 0) 0 1)
+
+(@test "handle-key#1" "err" (handle-key 10 "r") 10 1)
+(@test "handle-key#2" "err" (handle-key 0 "r") 10 1)
+(@test "handle-key#3" "err" (handle-key 3 "x") 3 1)
 
 
         ; (println submission)

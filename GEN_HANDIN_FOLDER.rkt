@@ -30,9 +30,12 @@
 (define gen-handin-dir (build-path curr-dir "../handin/htc-autograder"))
 
 (make-directory* gen-handin-dir)
-; delete only directories
 
+#;
 (for ([file-or-dir (directory-list gen-handin-dir)])
+; delete only directories
+; todo: only delete and replace grader files?
+; warn if a folder is not valid, e.g out of date because moved problem number or renamed
   (define full-path (build-path gen-handin-dir file-or-dir))
   (when (directory-exists? full-path)
     (delete-directory/files full-path #:must-exist? #f)
@@ -321,3 +324,7 @@
                 (sort *valid-assignments-and-hints*
                       (lambda (a b)
                         (string<=? (hash-ref a 'name) (hash-ref b 'name))))) out)) #:exists 'replace)
+
+(define overridden-collects-dir (build-path gen-handin-dir "overriden-collects"))
+(delete-directory/files overridden-collects-dir)
+(copy-directory/files "./overriden-collects" overridden-collects-dir)

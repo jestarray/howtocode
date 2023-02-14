@@ -13,7 +13,7 @@
 (define-runtime-path here ".")
 (define-values (base final dir?) (split-path (simplify-path here)))
 
-(define ASSIGNMENT-NAME 'countdown-anim)
+(define ASSIGNMENT-NAME 'traffic-light-anim)
 (define markup-prefix ";;> ")
 
 (define-runtime-path override "../overridden-collects/")
@@ -45,21 +45,21 @@
         ;(add-report-line! (get-submission-timestamp))
         (!test PNAME ASSIGNMENT-NAME) ; EVERY FILE MUST HAVE THIS ONTOP OF FILE
         (!procedure main 1)
-        (!procedure update-cd 1)
-        (!procedure handle-key 2)
+        (!procedure next-light 1)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
-        (set-test-max-score! 7)
+        (set-test-max-score! 9)
 
-(@test "update-cd#1" "err" (update-cd 10) 9 1)
-(@test "update-cd#2" "err" (update-cd 5) 4 1)
-(@test "update-cd#3" "err" (update-cd 1) 0 1)
-(@test "update-cd#4" "err" (update-cd 0) 0 1)
+(@test "next-light#1" "err" (next-light "red") "green" 1)
+(@test "next-light#2" "err" (next-light "yellow") "red" 1)
+(@test "next-light#3" "err" (next-light "green") "yellow" 1)
 
-(@test "handle-key#1" "err" (handle-key 10 "r") 10 1)
-(@test "handle-key#2" "err" (handle-key 0 "r") 10 1)
-(@test "handle-key#3" "err" (handle-key 3 "x") 3 1)
-
+(@test "handle-key#1" "err" (handle-key "red" "n") "green" 1)
+(@test "handle-key#2" "err" (handle-key "yellow" "n") "red" 1)
+(@test "handle-key#3" "err" (handle-key "green" "n") "yellow" 1)
+(@test "handle-key#4" "err" (handle-key "red" "x") "red" 1)
+(@test "handle-key#5" "err" (handle-key "yellow" "x") "yellow" 1)
+(@test "handle-key#6" "err" (handle-key "green" "x") "green" 1)
 
         ; (println submission)
         )

@@ -15,7 +15,7 @@ state data definition should be an enumeration.
 We have done part of this problem in 4.01 but try and do it all over here.
 Use the strings "red", "yellow" and "green" to represent the WorldState.
 
-For the images of a traffic-light, try and use overlay and circle
+The images of traffic lights have been provided as constants below.
 
 Remember to follow the HtDW recipe! Be sure to do a proper domain 
 analysis before starting to work on the code file.

@@ -15,7 +15,7 @@ state data definition should be an enumeration.
 We have done part of this problem in 4.01 but try and do it all over here.
 Use the strings "red", "yellow" and "green" to represent the WorldState.
 
-For the images of a traffic-light, try and use overlay and circle
+The images of traffic lights have been provided below.
 
 Remember to follow the HtDW recipe! Be sure to do a proper domain 
 analysis before starting to work on the code file.
@@ -31,6 +31,36 @@ the state of the traffic light
 ; =================
 ; CONSTANTS:
 
+(define RADIUS 20) ; of each light
+
+(define BACKGROUND (rectangle (* 2.5 RADIUS)
+                              (* 6.5 RADIUS)
+                              "solid"
+                              "black"))
+
+(define RED-LIGHT
+  (overlay (above 
+            (circle RADIUS "solid"   "red")
+            (circle RADIUS "outline" "yellow")
+            (circle RADIUS "outline" "green")
+            )
+           BACKGROUND))
+
+(define YELLOW-LIGHT
+  (overlay (above 
+            (circle RADIUS "outline" "red")
+            (circle RADIUS "solid"   "yellow")
+            (circle RADIUS "outline" "green")
+            )
+           BACKGROUND))
+
+(define GREEN-LIGHT
+  (overlay (above 
+            (circle RADIUS "outline" "red")
+            (circle RADIUS "outline" "yellow")
+            (circle RADIUS "solid"   "green")
+            )
+           BACKGROUND))
 
 ; =================
 #| Data definitions:

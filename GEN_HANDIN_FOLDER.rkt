@@ -303,7 +303,8 @@
   (filter-map
    (lambda (file-or-dir)
      (define full-path (build-path gen-handin-dir file-or-dir))
-     (if (directory-exists? full-path)
+     (if (and (directory-exists? full-path)
+              (not (bytes=? #"overriden-collects" (path->bytes file-or-dir))))
          (path->string file-or-dir)
          #f)) (directory-list gen-handin-dir)))
 

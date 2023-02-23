@@ -326,5 +326,5 @@
                         (string<=? (hash-ref a 'name) (hash-ref b 'name))))) out)) #:exists 'replace)
 
 (define overridden-collects-dir (build-path gen-handin-dir "overriden-collects"))
-(delete-directory/files overridden-collects-dir)
+(delete-directory/files overridden-collects-dir #:must-exist? #f)
 (copy-directory/files "./overriden-collects" overridden-collects-dir)

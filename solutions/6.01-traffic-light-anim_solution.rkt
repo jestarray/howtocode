@@ -23,7 +23,7 @@ analysis before starting to work on the code file.
 
 #| OPTIONAL CHALLENGE PROBLEM B:
 Upon finishing PROBLEM A, design a 'handle-key' function that will also advance
-the state of the traffic light
+the state of the traffic light upon pressing the 'n' key
 |#
 
 

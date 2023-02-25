@@ -49,15 +49,10 @@
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
         (set-test-max-score! 4)
 
-(define OFF #false)
-(define RED "red")
-(define YELLOW "yellow")
-(define GREEN "green")
-
 (@test "1" "err" (next-light #false) #false 1)
-(@test "2" "err" (next-light RED) GREEN 1)
-(@test "3" "err" (next-light YELLOW) RED 1)
-(@test "4" "err" (next-light GREEN) YELLOW 1)
+(@test "2" "err" (next-light "red") "green" 1)
+(@test "3" "err" (next-light "yellow") "red" 1)
+(@test "4" "err" (next-light "green") "yellow" 1)
         ; (println submission)
         )
 (post:

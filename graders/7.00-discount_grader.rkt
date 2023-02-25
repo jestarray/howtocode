@@ -6,13 +6,14 @@
          racket/file
          racket/list
          racket/string
+         2htdp/image
          (only-in racket/list remove-duplicates)
          )
 
 (define-runtime-path here ".")
 (define-values (base final dir?) (split-path (simplify-path here)))
 
-(define ASSIGNMENT-NAME 'demote)
+(define ASSIGNMENT-NAME 'discount)
 (define markup-prefix ";;> ")
 
 (define-runtime-path override "../overridden-collects/")
@@ -43,17 +44,17 @@
                                          "\n")) |#
         ;(add-report-line! (get-submission-timestamp))
         (!test PNAME ASSIGNMENT-NAME) ; EVERY FILE MUST HAVE THIS ONTOP OF FILE
-        (!procedure demote 1)
+        (!procedure discount? 1)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
-        (set-test-max-score! 5)
+        (set-test-max-score! 4)
 
-(@test "1" "err" (demote "Diamond") "Platinum" 1)
-(@test "2" "err" (demote "Platinum") "Gold" 1)
-(@test "3" "err" (demote "Gold") "Silver" 1)
-(@test "4" "err" (demote "Silver") "Bronze" 1)
-(@test "5" "err" (demote "Bronze") "Bronze" 1)
+(define-struct person [fn ln age disabled])
 
+(@test "1" "err" (discount? (make-person "Morty" "Smith" 12 #false)) #false 1)
+(@test "2" "err" (discount? (make-person "Jessica" "Lee" 12 #true)) #true 1)
+(@test "3" "err" (discount? (make-person "Lisa" "Su" 65 #false)) #true 1)
+(@test "4" "err" (discount? (make-person "Bob" "Smith" 61 #true)) #true 1)
         ; (println submission)
         )
 (post:

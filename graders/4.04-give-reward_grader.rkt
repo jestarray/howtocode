@@ -47,17 +47,12 @@
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
         (set-test-max-score! 5)
-(define BRONZE "Bronze")
-(define SILVER "Silver")
-(define GOLD "Gold")
-(define PLATINUM "Platinum")
-(define DIAMOND "Diamond")
 
-(@test "1" "err" (give-reward? BRONZE) #false 1)
-(@test "2" "err" (give-reward? SILVER) #false 1)
-(@test "3" "err" (give-reward? GOLD) #true 1)
-(@test "4" "err" (give-reward? PLATINUM) #true 1)
-(@test "5" "err" (give-reward? DIAMOND) #true 1)
+(@test "1" "err" (give-reward? "Bronze") #false 1)
+(@test "2" "err" (give-reward? "Silver") #false 1)
+(@test "3" "err" (give-reward? "Gold") #true 1)
+(@test "4" "err" (give-reward? "Platinum") #true 1)
+(@test "5" "err" (give-reward? "Diamond") #true 1)
         ; (println submission)
         )
 (post:

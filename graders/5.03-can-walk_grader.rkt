@@ -49,14 +49,12 @@
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
         (set-test-max-score! 5)
 
-(define WALK "walk")
-(define STOP "stop")
 
-(@test "1" "err" (can-walk? WALK) #true 1)
+(@test "1" "err" (can-walk? "walk") #true 1)
 (@test "2" "err" (can-walk? 10) #true 1)
 (@test "3" "err" (can-walk? 5) #true 1)
 (@test "4" "err" (can-walk? 0) #true 1)
-(@test "5" "err" (can-walk? STOP) #false 1)
+(@test "5" "err" (can-walk? "stop") #false 1)
 
         ; (println submission)
         )

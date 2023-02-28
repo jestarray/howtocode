@@ -1,7 +1,7 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 7.00-discount_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-(define PNAME 'discount?)
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 7.01-who-taller_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(define PNAME 'who-taller?)
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 TEMPLATES: https://howtocode.pages.dev/htdp_templates
@@ -22,15 +22,16 @@ Turn all ❌ into ✅ for each step you complete
 |#
 
 #|PROBLEM A:
-Design a data definition to represent properties of a person and if they are disabled.
-For example:
-| FirstName | LastName | Age | Disabled |
-|-----------|----------|-----|----------|
-| "Morty"   | "Smith"  |  12 | #false   |
-| "Jessica" | "Lee"    |  12 | #true    |
-| "Lisa"    | "Su"     |  65 | #false   |
-| "Bob"     | "Smith"  |  61 | #true    |
+Design a compound data definition to model properties of people, call it 'person'. 
+
+Example people:
+| firstname | lastname | height(in cm) |
+|-----------|----------|---------------|
+| "Joe"     | "Smith"  |           100 |
+| "Lisa"    | "Su"     |           120 |
+| "Jack"    | "Lee"    |           120 |
 |#
 
 #|PROBLEM B:
-Design a function 'discount?' that produces #true if the given person is 60 or older, or is disabled |#
+Design a function 'who-taller?' that consumes 2 persons and produces the first name of whoever is taller 
+If both are the same height, produce the second persons first name.|#

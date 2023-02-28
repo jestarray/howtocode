@@ -13,7 +13,7 @@
 (define-runtime-path here ".")
 (define-values (base final dir?) (split-path (simplify-path here)))
 
-(define ASSIGNMENT-NAME 'discount?)
+(define ASSIGNMENT-NAME 'who-taller?)
 (define markup-prefix ";;> ")
 
 (define-runtime-path override "../overridden-collects/")
@@ -44,17 +44,17 @@
                                          "\n")) |#
         ;(add-report-line! (get-submission-timestamp))
         (!test PNAME ASSIGNMENT-NAME) ; EVERY FILE MUST HAVE THIS ONTOP OF FILE
-        (!procedure discount? 1)
+        (!procedure who-taller? 2)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
-        (set-test-max-score! 4)
+        (set-test-max-score! 3)
 
-(define-struct person [fn ln age disabled])
+(define-struct person [fn ln height])
 
-(@test "1" "err" (discount? (make-person "Morty" "Smith" 12 #false)) #false 1)
-(@test "2" "err" (discount? (make-person "Jessica" "Lee" 12 #true)) #true 1)
-(@test "3" "err" (discount? (make-person "Lisa" "Su" 65 #false)) #true 1)
-(@test "4" "err" (discount? (make-person "Bob" "Smith" 61 #true)) #true 1)
+(@test "1" "err" (who-taller? (make-person "joe" "smith" 100) (make-person "lisa" "su" 120)) "lisa" 1)
+(@test "2" "err" (who-taller? (make-person "lisa" "su" 120) (make-person "joe" "smith" 100)) "lisa" 1)
+(@test "3" "err" (who-taller? (make-person "lisa" "su" 120) (make-person "jack" "lee" 120)) "jack" 1)
+
         ; (println submission)
         )
 (post:

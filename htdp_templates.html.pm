@@ -4,6 +4,28 @@
 
 Templates, or as I'd like to call them, "outlines", is the bare minimum baseline to kickstart writing a function. It's akin to laying out all your tools neatly before picking which one to use, or like an artist drawing a rough outline/sketch as a baseline. If you've tried visual block based languages like ◊a[#:href "https://scratch.mit.edu/"]{Scratch}, it lays out all the blocks for you that you can use, and this is what tempaltes accomplish, to gather all the available puzzle pieces(e.g parameters and basic structure) we can use, as the alternative is staring at a blank page stunned. As you program more and more, you'll be able to template problems in your head.
 
+◊h2{Design Recipe Cheatsheet}
+◊pre{◊code{
+#|
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+TEMPLATES: https://howtocode.pages.dev/htdp_templates
+ASK FOR HELP: https://discord.com/invite/6Zq8sH5
+Turn all ❌ into ✅ for each step you complete
+== Data ==
+    1. Data Description❌
+        1B. if using define-struct, write all accessor signatures❌
+    2. Interpretation❌
+    3. Data Examples❌
+    4. A function template that processes this data❌
+== Functions ==
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect, elaborate the concrete) ❌
+    3. Template(from data)?❌
+    3. Code body ❌
+    4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+|#
+}}
+
 ◊; TypeOf , instead of "atomic non-distinct" ,general, broad
 
 ◊;  InstanceOf , instead of "atomic distinct", specific, narrow

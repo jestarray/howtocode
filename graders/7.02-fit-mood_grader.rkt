@@ -13,7 +13,7 @@
 (define-runtime-path here ".")
 (define-values (base final dir?) (split-path (simplify-path here)))
 
-(define ASSIGNMENT-NAME 'discount?)
+(define ASSIGNMENT-NAME 'fit-mood?)
 (define markup-prefix ";;> ")
 
 (define-runtime-path override "../overridden-collects/")
@@ -44,17 +44,16 @@
                                          "\n")) |#
         ;(add-report-line! (get-submission-timestamp))
         (!test PNAME ASSIGNMENT-NAME) ; EVERY FILE MUST HAVE THIS ONTOP OF FILE
-        (!procedure discount? 1)
+        (!procedure fit-mood? 3)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
         (set-test-max-score! 4)
 
-(define-struct person [fn ln age disabled])
+(@test "1" "err" (fit-mood? (make-movie "Wreck it Ralph" 101 "g" "comedy") 136 "action") #false 1) ; within timelimit but not genre
+(@test "2" "err" (fit-mood? (make-movie "The Matrix" 136 "r" "action") 136 "action") #true 1) ; within timelimt and genre
+(@test "3" "err" (fit-mood? (make-movie "Fight Club" 139 "r" "action") 136 "action") #false 1) ; not within timelimt and but within genre
+(@test "4" "err" (fit-mood? (make-movie "Gone Girl" 149 "r" "drama") 136 "action") #false 1) ; not within timelimt and not within genre
 
-(@test "1" "err" (discount? (make-person "Morty" "Smith" 12 #false)) #false 1)
-(@test "2" "err" (discount? (make-person "Jessica" "Lee" 12 #true)) #true 1)
-(@test "3" "err" (discount? (make-person "Lisa" "Su" 65 #false)) #true 1)
-(@test "4" "err" (discount? (make-person "Bob" "Smith" 61 #true)) #true 1)
         ; (println submission)
         )
 (post:

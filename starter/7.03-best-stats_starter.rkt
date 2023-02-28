@@ -1,7 +1,7 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 7.00-discount_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-(define PNAME 'discount?)
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 7.03-best-status_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(define PNAME 'best-stats)
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 TEMPLATES: https://howtocode.pages.dev/htdp_templates
@@ -22,15 +22,19 @@ Turn all ❌ into ✅ for each step you complete
 |#
 
 #|PROBLEM A:
-Design a data definition to represent properties of a person and if they are disabled.
-For example:
-| FirstName | LastName | Age | Disabled |
-|-----------|----------|-----|----------|
-| "Morty"   | "Smith"  |  12 | #false   |
-| "Jessica" | "Lee"    |  12 | #true    |
-| "Lisa"    | "Su"     |  65 | #false   |
-| "Bob"     | "Smith"  |  61 | #true    |
+Design a data definition to model properties of an item in a video game. Name your data 'item'.
+
+|   name   | attack | defense | price|
+|----------|--------|---------|------|
+| "spear"  |     10 |      20 |   31 |
+| "sword"  |     20 |       5 |   43 |
+| "sheild" |      5 |      40 |   25 |
+| "dagger" |      5 |       5 |   10 |
+| "knife"  |      5 |       5 |   5  |
 |#
 
 #|PROBLEM B:
-Design a function 'discount?' that produces #true if the given person is 60 or older, or is disabled |#
+Design a function 'best-stats' that produces the name of the item with the most COMBINED stats
+Combined stat should only include attack and defense points. 
+If equal, produce the name of the second given item
+|#

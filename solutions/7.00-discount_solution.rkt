@@ -1,7 +1,7 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 7.00-eligible_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-(define PNAME 'discount)
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 7.00-discount_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(define PNAME 'discount?)
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 TEMPLATES: https://howtocode.pages.dev/htdp_templates
@@ -9,6 +9,7 @@ ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 Turn all ❌ into ✅ for each step you complete
 == Data ==
     1. Data Description✅
+        1B. if using define-struct, write all accessor signatures✅
     2. Interpretation✅
     3. Data Examples✅
     4. A function template that processes this data✅
@@ -23,11 +24,12 @@ Turn all ❌ into ✅ for each step you complete
 #|PROBLEM A:
 Design a data definition to represent properties of a person and if they are disabled.
 For example:
-FirstName LastName Age Disabled
-"Morty"   "Smith"  12  #false
-"Jessica" "Lee"    12  #true
-"Lisa"    "Su"     65  #false
-"Bob"     "Smith"  61  #true
+| FirstName | LastName | Age | Disabled |
+|-----------|----------|-----|----------|
+| "Morty"   | "Smith"  |  12 | #false   |
+| "Jessica" | "Lee"    |  12 | #true    |
+| "Lisa"    | "Su"     |  65 | #false   |
+| "Bob"     | "Smith"  |  61 | #true    |
 |#
 
 (define-struct person [fn ln age disabled])
@@ -42,7 +44,7 @@ FirstName LastName Age Disabled
 ; person-ln: (Person -> String)
 ; person-age: (Person -> Number)
 ; person-disabled: (Person -> Boolean)
-; person?: (Person -> Boolean)
+; person?: (Any -> Boolean)
 
 (define p1 (make-person "Morty" "Smith" 12 #false))
 (define p2 (make-person "Jessica" "Lee" 12 #true))

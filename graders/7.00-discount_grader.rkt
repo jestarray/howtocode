@@ -47,7 +47,7 @@
         (!procedure discount? 1)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
-        (set-test-max-score! 4)
+        (set-test-max-score! 6)
 
 (define-struct person [fn ln age disabled])
 
@@ -55,6 +55,8 @@
 (@test "2" "err" (discount? (make-person "Jessica" "Lee" 12 #true)) #true 1)
 (@test "3" "err" (discount? (make-person "Lisa" "Su" 65 #false)) #true 1)
 (@test "4" "err" (discount? (make-person "Bob" "Smith" 61 #true)) #true 1)
+(@test "5" "err" (discount? (make-person "Jack" "Sparrow" 60 #false)) #true 1)
+(@test "6" "err" (discount? (make-person "Tom" "Bradey" 60 #true)) #true 1)
         ; (println submission)
         )
 (post:

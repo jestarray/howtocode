@@ -50,6 +50,8 @@ For example:
 (define p2 (make-person "Jessica" "Lee" 12 #true))
 (define p3 (make-person "Lisa" "Su" 65 #false))
 (define p4 (make-person "Bob" "Smith" 61 #true))
+(define p5 (make-person "Jack" "Sparrow" 60 #true))
+(define p6 (make-person "Tom" "Bradey" 60 #false))
 
 (define (person-temp ps)
   (...
@@ -68,6 +70,8 @@ Design a function 'discount?' that produces #true if the given person is 60 or o
 (check-expect (discount? p2) #true)
 (check-expect (discount? p3) #true)
 (check-expect (discount? p4) #true)
+(check-expect (discount? p5) #true)
+(check-expect (discount? p6) #true)
 
 ; (define (discount? ps) #false)
 

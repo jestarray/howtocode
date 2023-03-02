@@ -49,7 +49,7 @@
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
         (set-test-max-score! 3)
 
-(define-struct person [fn ln height])
+; (define-struct person [fn ln height])
 
 (@test "1" "err" (who-taller? (make-person "joe" "smith" 100) (make-person "lisa" "su" 120)) "lisa" 1)
 (@test "2" "err" (who-taller? (make-person "lisa" "su" 120) (make-person "joe" "smith" 100)) "lisa" 1)

@@ -47,11 +47,11 @@
         (!procedure best-stats 2)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
-        (set-test-max-score! 4)
+        (set-test-max-score! 3)
 
-(@test "1" "err" (best-stats spear knife) "spear" 1)
-(@test "2" "err" (best-stats knife spear) "spear" 1)
-(@test "3" "err" (best-stats knife dagger) "dagger" 1)
+(@test "1" "err" (best-stats (make-item "spear" 10 20 31) (make-item "knife" 5 5 5)) "spear" 1)
+(@test "2" "err" (best-stats (make-item "knife" 5 5 5) (make-item "spear" 10 20 31)) "spear" 1)
+(@test "3" "err" (best-stats (make-item "knife" 5 5 5) (make-item "dagger" 5 5 10)) "dagger" 1)
 
         ; (println submission)
         )

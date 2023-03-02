@@ -49,7 +49,7 @@
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
         (set-test-max-score! 6)
 
-(define-struct person [fn ln age disabled])
+; (define-struct person [fn ln age disabled])
 
 (@test "1" "err" (discount? (make-person "Morty" "Smith" 12 #false)) #false 1)
 (@test "2" "err" (discount? (make-person "Jessica" "Lee" 12 #true)) #true 1)

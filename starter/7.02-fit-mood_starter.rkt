@@ -23,7 +23,7 @@ Turn all ❌ into ✅ for each step you complete
 
 #|PROBLEM A:
 Design a data definition to represent a movie, including  
-title, duration, rating, and year released.
+title, duration, rating, and genre. 
 
 To help you to create some examples, find some interesting movie facts below: 
 | title             | duration(mins) | rating | genre    |

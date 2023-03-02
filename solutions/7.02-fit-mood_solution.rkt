@@ -39,7 +39,7 @@ To help you to create some examples, find some interesting movie facts below:
 
 (define-struct movie [title duration rating genre])
 ; Movie is (make-movie String Natural Natural)
-; interp. a movie with its title, duration in minutes, and year released.
+; interp. a movie with its title, duration in minutes, and genre.
 
 ; movie-title: (Movie -> String)
 ; movie-duration: (Movie -> Natural)

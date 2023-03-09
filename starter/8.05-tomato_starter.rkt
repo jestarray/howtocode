@@ -21,7 +21,7 @@ Reset the position of the tomato to the start when the 'r' key is pressed.
 
 ; =================
 ; CONSTANTS:
-(define TOMATO-IMG (text "🍅" 40 "solid" "red"))
+(define TOMATO-IMG (text "🍅" 40 "red"))
 
 ; =================
 #| Data definitions:

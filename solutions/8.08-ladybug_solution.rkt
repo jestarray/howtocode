@@ -10,7 +10,8 @@
 
 #|PROBLEM A:
 Design a world program that walks a ladybug back and forth, from left to right, and then back
-from right to left. The lady bug should also change their facing direction based on the walking
+from right to left when it hits the left and right edge respectively. 
+The lady bug should also render the facing direction based on the walking
 direction.
 
 Call your struct lady
@@ -20,8 +21,8 @@ HINT: We have provided you the lady bug image facing left and right as constants
 
 ; =================
 ; CONSTANTS:
-(define LEFT-IMG enemy-bug)
-(define RIGHT-IMG (flip-horizontal enemy-bug))
+(define RIGHT-IMG enemy-bug)
+(define LEFT-IMG (flip-horizontal enemy-bug))
 
 (define WIDTH 400)
 (define HEIGHT 200)
@@ -92,13 +93,13 @@ Turn all ❌ into ✅ for each step you complete
 ; draw the lady bug in the correct position and facing direction
 (check-expect (render l0)
               (place-image
-               LEFT-IMG
+               RIGHT-IMG
                0
                CENTER-Y
                BG))
 (check-expect (render (make-lady 400 (- SPEED)))
               (place-image
-               RIGHT-IMG
+               LEFT-IMG 
                400
                CENTER-Y
                BG))
@@ -106,8 +107,8 @@ Turn all ❌ into ✅ for each step you complete
 (define (render ws)
   (place-image
    (if (positive? (lady-vx ws))
-       LEFT-IMG
-       RIGHT-IMG)
+       RIGHT-IMG
+       LEFT-IMG)
    (lady-x ws)
    CENTER-Y
    BG))

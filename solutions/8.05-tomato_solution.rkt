@@ -7,9 +7,9 @@
 (require 2htdp/universe)
 
 #|PROBLEM A:
-Design a world program that rolls a tomoato from the left side of the screen to right.
+Design a world program that rolls a tomato from the left side of the screen to right.
 Use '🍅' with (text) for an image of a tomato.
-Call your compound data 'tomoato'
+Call your compound data 'tomato'
 
 NOTE: Even though this problem can be done without compound data, please use a struct def
 to represent position and angle of rotation

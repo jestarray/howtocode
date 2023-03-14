@@ -12,13 +12,15 @@ Your text editor should have the following functionality:
  - when you type, characters should be inserted on the left side of the cursor 
  - when you press the left and right arrow keys, the cursor should move accordingly  
  - when you press backspace (or delete on a mac), the last character on the left of 
-   the cursors should be deleted
+   the cursor should be deleted
 
 HINT: We have done some helper functions for this problem.
-string-last(3.01)
-string-rest(3.02)
-string-remove-last(3.03)
-string-first(produces first character of string)
+string-last(3.01): produces ONLY the last character of given string(handle empty strings)
+string-rest(3.02): produces all BUT the first character of given string(handle empty strings)
+string-remove-last(3.03): produces all BUT the last character of given string(handle empty strings)
+string-first(produces ONLY the first character of given string, handle empty strings)
+
+NOTE: That the constants and data definitions have been provided for you, complete the functions step
 |#
 
 ; =================
@@ -39,10 +41,10 @@ TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 Turn all ❌ into ✅ for each step you complete
 
-1. Data Description❌
-2. Interpretation❌
-3. Data Examples❌
-4. A function template that processes this data❌
+1. Data Description✅
+2. Interpretation✅
+3. Data Examples✅
+4. A function template that processes this data✅
 |#
 
 (define-struct editor (pre post))
@@ -61,11 +63,11 @@ Turn all ❌ into ✅ for each step you complete
 
 ; =================
 #| Functions:
-1. Signature, purpose, stub ❌
-2. Examples (aka check-expect, elaborate the concrete) ❌
-3. Template(from data)?❌
-3. Code body ❌
-4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+1. Signature, purpose, stub ✅
+2. Examples (aka check-expect, elaborate the concrete) ✅
+3. Template(from data)?✅
+3. Code body ✅
+4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
 ; main: (WS -> WS)

@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 6.00-countdown-anim_starte) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 6.00-countdown-anim_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (define PNAME 'countdown-anim)
 (require 2htdp/image)
 (require 2htdp/universe)
@@ -62,12 +62,12 @@ Turn all ❌ into ✅ for each step you complete
 ; 
 (define (main ws)
   (big-bang ws                   ; WS
-            [on-mouse  ...]      ; WS Integer Integer MouseEvent -> WS
-            [on-key    ...]      ; WS KeyEvent -> WS
-            [on-tick   update-cd]     ; WS -> WS
-            [to-draw   render]   ; WS -> Image
-            [stop-when ...]      ; WS -> Boolean
-))
+    [on-mouse  ...]      ; WS Integer Integer MouseEvent -> WS
+    [on-key    ...]      ; WS KeyEvent -> WS
+    [on-tick   update-cd]     ; WS -> WS
+    [to-draw   render]   ; WS -> Image
+    [stop-when ...]      ; WS -> Boolean
+    ))
 
 
 ; update-cd: (WS -> WS)

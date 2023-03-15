@@ -52,12 +52,12 @@ Turn all ❌ into ✅ for each step you complete
 ; 
 (define (main ws)
   (big-bang ws                   ; WS
-            [on-mouse  ...]      ; WS Integer Integer MouseEvent -> WS
-            [on-key    ...]      ; WS KeyEvent -> WS
-            [on-tick   tock]     ; WS -> WS
-            [to-draw   render]   ; WS -> Image
-            [stop-when ...]      ; WS -> Boolean
-))
+    [on-mouse  ...]      ; WS Integer Integer MouseEvent -> WS
+    [on-key    ...]      ; WS KeyEvent -> WS
+    [on-tick   tock]     ; WS -> WS
+    [to-draw   render]   ; WS -> Image
+    [stop-when ...]      ; WS -> Boolean
+    ))
 
 ; tock: (WS -> WS)
 ; produce the next ...

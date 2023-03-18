@@ -15,10 +15,10 @@ Your text editor should have the following functionality:
    the cursor should be deleted
 
 HINT: We have done some helper functions for this problem.
+string-first(3.00): produces ONLY the first character of given string(handle empty strings)
 string-last(3.01): produces ONLY the last character of given string(handle empty strings)
 string-rest(3.02): produces all BUT the first character of given string(handle empty strings)
 string-remove-last(3.03): produces all BUT the last character of given string(handle empty strings)
-string-first(produces ONLY the first character of given string, handle empty strings)
 
 NOTE: That the constants and data definitions have been provided for you, complete the functions step
 |#
@@ -26,12 +26,12 @@ NOTE: That the constants and data definitions have been provided for you, comple
 ; =================
 ; CONSTANTS:
 (define WIDTH 300)
-(define HEIGHT 24)
+(define HEIGHT 32)
 (define BG (empty-scene WIDTH HEIGHT))
 
 (define CURSOR (rectangle 2 HEIGHT "solid" "red"))
 
-(define TEXT-SIZE 16)
+(define TEXT-SIZE 24)
 (define TEXT-COLOR "black")
 
 ; =================
@@ -57,8 +57,8 @@ Turn all ❌ into ✅ for each step you complete
 
 #;
 (define (fn-for-editor e)
-  (... (editor-pre e)
-       (editor-post e)))
+  (... (editor-pre ed)
+       (editor-post ed)))
 
 
 ; =================

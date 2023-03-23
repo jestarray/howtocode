@@ -65,7 +65,7 @@ Here is a table in the main ways they differ:
         ◊tr{
             ◊td{◊code{has-choco?}}
             ◊td{◊code{false}}
-            ◊td{◊code{(string=? (first flavs) \"chocolate\")}}
+            ◊td{◊code{(string=? (first flavs) "chocolate")}}
             ◊td{◊code{(if <condition> #true <recurse>)}}
         }
         ◊tr{

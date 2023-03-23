@@ -26,3 +26,7 @@
 ◊htdf_example.html{
     htdf_problemsets.html
 }
+
+◊lists.html{
+    data_directed_design.html
+}

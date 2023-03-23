@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
+    <title>Data Directed Design</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/lists.html"> Lists</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+
+            <article>
+                <h1>Data Directed Design</h1><p>The structure of the code should mirror the structure of the data.</p><h2 id="union_data"><a class="anchor" href="#union_data">#</a>Union data</h2><p><img src="images/dd_union_arrows.png"/></p><h2 id="structural_recursion"><a class="anchor" href="#structural_recursion">#</a>Structural Recursion</h2><p><img src="images/dd_selfref_arrows.png"/><br/>Notice the <code>...</code> in the template for <code>ListOfString</code>. There are only two main places you need to be focusing on, the base case, and how to contribute/combine to it.</p><p>Consider the following 3 recursive functions:<br/><code>has-choco? sum-prices count-items</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; Notice the similarities between 3 recursive functions
+
+; has-choco?: (ListOfString -&gt; Boolean)
+; produces #true if the list contains "chocolate" 
+(check-expect (has-choco? empty) #false)
+(check-expect (has-choco? (cons "vanilla" (cons "chocolate" empty))) #true)
+(define (has-choco? flavs)
+  (cond
+    [(empty? flavs) #false]
+    [else
+     (if (string=? (first flavs) "chocolate")
+         #true
+         (has-choco? (rest flavs)))]))
+
+; sum-prices (ListOfNumber -&gt; Number)
+; produces the combined sum total of all the numbers in the given list
+(check-expect (sum-prices empty) 0)
+(check-expect (sum-prices (cons 3.22 (cons 4 empty))) (+ 4 3.22))
+(define (sum-prices nums)
+  (cond
+    [(empty? nums) 0]
+    [else
+     (+  (first nums)
+         (sum-prices (rest nums)))]))
+
+; count-items: (ListOfNumber -&gt; Number)
+; produces the COUNT of how many numbers are in the list
+(check-expect (count-items empty) 0)
+(check-expect (count-items (cons 3.22 (cons 4 empty))) 2)
+(define (count-items nums)
+  (cond
+    [(empty? nums) 0]
+    [else
+     (+ 1
+        (count-items (rest nums)))]))
+</code></pre><p>Here is a table in the main ways they differ:</p><table><caption></caption><thead><th>Function</th>
+<th>Base</th>
+<th>Contribution of first</th>
+<th>Combination</th></thead>
+<tbody><tr><td><code>has-choco?</code></td>
+<td><code>false</code></td>
+<td><code>(string=? (first flavs) \"chocolate\")</code></td>
+<td><code>(if &lt;condition&gt; #true &lt;recurse&gt;)</code></td></tr>
+<tr><td><code>sum-prices</code></td>
+<td><code>0</code></td>
+<td>itself</td>
+<td><code>+</code></td></tr>
+<tr><td><code>count-items</code></td>
+<td><code>0</code></td>
+<td>1</td>
+<td><code>+</code></td></tr></tbody></table>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

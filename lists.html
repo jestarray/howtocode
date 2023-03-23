@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
+    <title>Lists</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/htdf_problemsets.html"> How to Design Functions Problem Sets</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+            <div id="next"><a href="/data_directed_design.html">Data Directed Design</a> →</div>
+            <article>
+                <h1>Lists</h1><h2 id="the_problem"><a class="anchor" href="#the_problem">#</a>The Problem</h2><p>We have data that we don’t know the size of upfront. Say we want to average the grades of all 3 students in our class.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; average-3-grades: (Number Numer Number -&gt; Number)
+(define (average s1 s2 s3)
+    (/ (+ s1 s2 s3) 3))
+
+; average-4-grades: (Number Numer Number Number -&gt; Number)
+; need to re-write to handle 4 numbers
+(define (average s1 s2 s3 s4)
+    (/ (+ s1 s2 s3 s4) 4))
+</code></pre><p>What if we have 4 or more? We’d have to keep rewriting our code to handle an <strong>arbitrary</strong> amount of students! Lists will make it so we don’t have to. Or consider our ripple program in 8.07. How many times does the user click?</p><h2 id="what_is_a_list?"><a class="anchor" href="#what_is_a_list?">#</a>What is a list?</h2><p>A list is a kind of <strong>compound value</strong>, an object that Racket treats as a single value but that nevertheless contains other values inside itself. Imagine a shopping list—you write “milk, eggs, cheese” on a piece of paper, then fold up the paper and put it in your pocket. While it’s folded up, you can think of the list as a single entity. It’s only later, at the store, where you need to go “into” the list and retrieve the individual pieces of information it contains.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;empty and '() are exactly the same, you can imagine (define empty '())
+empty
+'()
+
+(define stuff (cons #false empty)) ; 1 element list
+(define grocceries (cons "eggs" (cons "chips" empty)))
+(define numbers-ls (cons 4 (cons 3 (cons 6 empty))))
+(define imgs (cons (square 30 "solid" "red") 
+                (cons (circle 30 "solid" "red") empty)))
+(define op (cons (* 2 4) (cons 3 (cons (* 3 9) empty))))
+
+; first: (ListOfAny -&gt; Any)
+; produces the first value of a non-empty list
+(first stuff) ; produces #false
+(first grocceries) ; produces "eggs"
+(first numbers-ls) ; produces 4
+
+; rest: (ListOfAny -&gt; ListOfAny|empty)
+; produces a list with the first element excluded
+(rest stuff) ; produces empty
+(rest grocceries) ; produces (cons "chips" empty)
+(rest numbers-ls) ; produces (cons 3 (cons 6 empty))
+
+; empty: (Any -&gt; Boolean)
+(empty? 123) ; produces #false
+(empty? grocceries) ; produces #false
+(empty? empty) ; produces #true
+
+; length: (ListOfAny -&gt; Number)
+; produces the total amount of items in a list
+(length stuff) ; produces 1
+(length grocceries) ; produces 2
+(length op) ; produces 3
+</code></pre><h2 id="nested_diagram"><a class="anchor" href="#nested_diagram">#</a>Nested Diagram</h2><p><img src="images/list_nest.png" style="width: auto"/></p><figure style="width: initial;"><img src="images/dolls.png" style="width: auto">
+</img>
+<figcaption><a href="https://commons.wikimedia.org/wiki/File:Matryoshka_transparent.png">User:Fanghongderivative Matryoshka Dolls CC BY-SA</a></figcaption></figure><h2 id="box_and_pointer_diagram"><a class="anchor" href="#box_and_pointer_diagram">#</a>Box and Pointer Diagram</h2><p>Box and pointer diagrams are much more common as they take up less space and are easier to follow as the amount of items increases.<br/><img src="images/list_train.png" style="width: auto"/></p><figure style="width: initial"><img src="images/flying_scotsman_train.jpg" style="width: auto"/>
+<figcaption><a href="https://commons.wikimedia.org/wiki/File:%27Flying_Scotsman%27_(40944346730).jpg" style="width: auto; text-align: center;">Peter Trimming from Croydon, England, CC BY 2.0</a></figcaption></figure><h2 id="concept_check"><a class="anchor" href="#concept_check">#</a>Concept Check</h2><p>What should this produce? <code>(cons (+ 1 1) (cons 1 empty))</code></p><ul><li>a.<code>3</code></li><li>b.<code>2</code></li><li>c.<code>(cons 3 empty)</code></li><li>d.<code>(cons 2 (cons 1 empty))</code></li></ul><p><details><summary>answer</summary><p> d</p></details></p><p>GIVEN THIS:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define L1 (cons "James" (cons "Alice" (cons "Bob" empty))))
+(define L2 (cons 1 empty))
+</code></pre><p>What is the value produced by the expression <code>(first L1)</code>?</p><ul><li>a. <code>(cons "James Alice Bob" empty)</code></li><li>b. <code>(cons "Alice" (cons "Bob" empty))</code></li><li>c. <code>(cons "Bob" empty)</code></li><li>d. <code>"James"</code></li><li>e. <code>"Bob"</code></li><li>f. <code>empty</code></li></ul><p><details><summary>answer</summary><p> d</p></details></p><p>What is the value produced by the expression <code>(rest L1)</code>?</p><ul><li>a. <code>(cons "James Alice Bob" empty)</code></li><li>b. <code>(cons "Alice" (cons "Bob" empty))</code></li><li>c. <code>(cons "Bob" empty)</code></li><li>d. <code>"James"</code></li><li>e. <code>"Bob"</code></li><li>f. <code>empty</code></li></ul><p><details><summary>answer</summary><p> b</p></details></p><p>What is the value produced by the expression <code>(empty? L2)</code>?</p><ul><li>a.<code>(cons 1 empty)</code></li><li>b.<code>empty</code></li><li>c.<code>#true</code></li><li>d.<code>#false</code></li></ul><p><details><summary>answer</summary><p> d</p></details></p><p>What is the value produced by the expression <code>(empty? (rest L2))</code>?</p><ul><li>a.<code>(cons 1 empty)</code></li><li>b.<code>empty</code></li><li>c.<code>#true</code></li><li>d.<code>#false</code></li></ul><p><details><summary>answer</summary><p> c</p></details></p><p>How many elements does this list have? <code>(cons 4 empty)</code></p><ul><li>a. <code>1</code></li><li>b. <code>2</code></li><li>c. <code>3</code></li><li>d. <code>4</code></li></ul><p><details><summary>answer</summary><p> a</p></details></p><p>Write a function swap that consumes a two-element list and produces a new two-element list containing the elements of the original list in the opposite order. For example, (swap (cons 3 (cons 2 empty))) produces (cons 2 (cons 3 empty)).</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; swap: (ListOfAny -&gt; ListOfAny)
+; consumes a two element list and swaps their order
+(check-expect (swap (cons 3 (cons 2 empty)))
+              (cons 2 (cons 3 empty)))
+
+(define (swap ls)
+    (... ls))
+</code></pre><p><details><summary>answer</summary><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define (swap ls)
+    (cons (first (rest ls)) 
+        (cons (first ls) empty)))
+</code></pre></details></p>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

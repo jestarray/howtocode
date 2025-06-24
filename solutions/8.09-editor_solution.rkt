@@ -70,13 +70,13 @@ Turn all ❌ into ✅ for each step you complete
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
-; main: (WS -> WS)
+; main: (WorldState -> WorldState)
 ; start the world with ...
 ; 
 (define (main ws)
-  (big-bang ws                   ; WS
-    [on-key    handle-key]      ; WS KeyEvent -> WS
-    [to-draw   render]   ; WS -> Image
+  (big-bang ws                   ; WorldState
+    [on-key    handle-key]      ; WorldState KeyEvent -> WorldState
+    [to-draw   render]   ; WorldState -> Image
     ))
 
 ; string-last: (String -> String)
@@ -107,7 +107,7 @@ Turn all ❌ into ✅ for each step you complete
       ""
       (substring str 0 1)))
 
-; handle-key: (WS KeyEvent -> WS)
+; handle-key: (WorldState KeyEvent -> WorldState)
 ; produce the editor
 (check-expect (handle-key mid "\b") (make-editor "he" "guys"))
 (check-expect (handle-key end "left") (make-editor "hey guy" "s"))
@@ -136,7 +136,7 @@ Turn all ❌ into ✅ for each step you complete
     [else
      ws]))
 
-; render: (WS -> Image)
+; render: (WorldState -> Image)
 (check-expect (render mid)
               (overlay
                (beside (text "hey" TEXT-SIZE TEXT-COLOR)

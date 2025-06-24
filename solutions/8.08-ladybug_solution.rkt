@@ -63,33 +63,33 @@ Turn all ❌ into ✅ for each step you complete
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
-; main: (WS -> WS)
+; main: (Lady -> Lady)
 ; start the world with (main (make-lady 0 0))
-(define (main ws)
-  (big-bang ws
-    [on-tick   tock]     ; WS -> WS
-    [to-draw   render]   ; WS -> Image
+(define (main ld)
+  (big-bang ld
+    [on-tick   tock]     ; Lady ->Lady 
+    [to-draw   render]   ; Lady -> Image
     ))
 
-; tock: (WS -> WS)
+; tock: (Lady -> Lady)
 ; produce the ladybug moving by vx until it hits the right edge
 (check-expect (tock l0) (make-lady (+ SPEED 0) SPEED))
 (check-expect (tock (make-lady 500 SPEED)) (make-lady WIDTH (- SPEED)))
 (check-expect (tock (make-lady -4 (- SPEED))) (make-lady 0 SPEED))
 
-(define (tock ws)
+(define (tock ld)
   (cond
-    [(> (lady-x ws) WIDTH)
-     (make-lady WIDTH (* -1 (lady-vx ws)))]
-    [(< (lady-x ws) 0)
-     (make-lady 0 (* -1 (lady-vx ws)))]
+    [(> (lady-x ld) WIDTH)
+     (make-lady WIDTH (* -1 (lady-vx ld)))]
+    [(< (lady-x ld) 0)
+     (make-lady 0 (* -1 (lady-vx ld)))]
     [else
      (make-lady 
-      (+ (lady-x ws) (lady-vx ws))
-      (lady-vx ws))]))
+      (+ (lady-x ld) (lady-vx ld))
+      (lady-vx ld))]))
 
 
-; render: (WS -> Image)
+; render: (Lady -> Image)
 ; draw the lady bug in the correct position and facing direction
 (check-expect (render l0)
               (place-image
@@ -104,11 +104,11 @@ Turn all ❌ into ✅ for each step you complete
                CENTER-Y
                BG))
 
-(define (render ws)
+(define (render ld)
   (place-image
-   (if (positive? (lady-vx ws))
+   (if (positive? (lady-vx ld))
        RIGHT-IMG
        LEFT-IMG)
-   (lady-x ws)
+   (lady-x ld)
    CENTER-Y
    BG))

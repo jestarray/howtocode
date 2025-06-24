@@ -62,17 +62,17 @@ Turn all ❌ into ✅ for each step you complete
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
-; main: (WS -> WS)
+; main: (WorldState -> WorldState)
 ; start the world with (main (make-ripple 0 0 0))
 ; 
 (define (main ws)
-  (big-bang ws                   ; WS
-    [on-mouse  handle-mouse]      ; WS Integer Integer MouseEvent -> WS
-    [on-tick   tock]     ; WS -> WS
-    [to-draw   render]   ; WS -> Image
+  (big-bang ws                   ; WorldState
+    [on-mouse  handle-mouse]      ; WorldState Integer Integer MouseEvent -> WorldState
+    [on-tick   tock]     ; WorldState -> WorldState
+    [to-draw   render]   ; WorldState -> Image
     ))
 
-; tock: (WS -> WS)
+; tock: (WorldState -> WorldState)
 ; produce a ripple that grows in radius
 (check-expect (tock (make-ripple 0 0 2))
               (make-ripple 0 0 (+ 2 RIPPLE-GROWTH)))
@@ -83,7 +83,7 @@ Turn all ❌ into ✅ for each step you complete
    (+ (ripple-radius ws) RIPPLE-GROWTH)))
 
 
-; render: (WS -> Image)
+; render: (WorldState -> Image)
 ; draw the given ripple
 (check-expect (render (make-ripple 30 20 25))
               (place-image
@@ -99,7 +99,7 @@ Turn all ❌ into ✅ for each step you complete
    (ripple-y ws)
    BG))
 
-; handle-mouse: (WS Number Number MouseEvent -> WS)
+; handle-mouse: (WorldState Number Number MouseEvent -> WorldState)
 ; produce the ripple at where the mouse is if user clicked
 (check-expect (handle-mouse (make-ripple 1 2 3) 32 42 "button-down")
               (make-ripple 32 42 0))

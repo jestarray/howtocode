@@ -45,25 +45,25 @@ Turn all ❌ into ✅ for each step you complete
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
-; main: (WS -> WS)
+; main: (WorldState -> WorldState)
 ; start the world with ...
 ; 
 (define (main ws)
-  (big-bang ws                   ; WS
-    [on-mouse  ...]      ; WS Integer Integer MouseEvent -> WS
-    [on-key    ...]      ; WS KeyEvent -> WS
-    [on-tick   tock]     ; WS -> WS
-    [to-draw   render]   ; WS -> Image
-    [stop-when ...]      ; WS -> Boolean
+  (big-bang ws                   ; WorldState
+    [on-mouse  ...]      ; WorldState Integer Integer MouseEvent -> WorldState
+    [on-key    ...]      ; WorldState KeyEvent -> WorldState
+    [on-tick   tock]     ; WorldState -> WorldState
+    [to-draw   render]   ; WorldState -> Image
+    [stop-when ...]      ; WorldState -> Boolean
     ))
 
-; tock: (WS -> WS)
+; tock: (WorldState -> WorldState)
 ; produce the next ...
 ; TODO!
 (define (tock ws) ...)
 
 
-; render: (WS -> Image)
+; render: (WorldState -> Image)
 ; render ... 
 ; TODO!
 (define (render ws) ...)

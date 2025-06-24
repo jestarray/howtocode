@@ -74,7 +74,7 @@ Turn all ❌ into ✅ for each step you complete
 3. Data Examples❌
 4. A function template that processes this data❌
 |#
-; WS is ... (give WS a better name)
+; WorldState is ... (give WorldState a better name)
 
 
 
@@ -87,25 +87,25 @@ Turn all ❌ into ✅ for each step you complete
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
-; main: (WS -> WS)
+; main: (WorldState -> WorldState)
 ; start the world with ...
 ; 
 (define (main ws)
-  (big-bang ws                   ; WS
-    [on-mouse  ...]      ; WS Integer Integer MouseEvent -> WS
-    [on-key    ...]      ; WS KeyEvent -> WS
-    [on-tick   next-light]     ; WS -> WS
-    [to-draw   render]   ; WS -> Image
-    [stop-when ...]      ; WS -> Boolean
+  (big-bang ws                   ; WorldState
+    [on-mouse  ...]      ; WorldState Integer Integer MouseEvent -> WorldState
+    [on-key    ...]      ; WorldState KeyEvent -> WorldState
+    [on-tick   next-light]     ; WorldState -> WorldState
+    [to-draw   render]   ; WorldState -> Image
+    [stop-when ...]      ; WorldState -> Boolean
     ))
 
-; next-light (WS -> WS)
+; next-light (WorldState -> WorldState)
 ; produce the next ...
 ; TODO!
 (define (next-light ws) ...)
 
 
-; render: (WS -> Image)
+; render: (WorldState -> Image)
 ; render ... 
 ; TODO!
 (define (render ws) ...)

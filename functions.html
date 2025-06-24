@@ -24,8 +24,7 @@
                 <h1>Functions</h1><p>Functions consume and produce values. You’ve been <strong>using</strong> functions all along!<br/>A few are:<br/><code>string-append</code> that consumes 2 strings and produces them together<br/><code>rectangle</code> that consumes 2 numbers and 2 strings and produces an image<br/><code>sqrt</code> that consumes 1 number and produces another number<br/><code>+</code> to add an arbitrary amount of numbers.</p><p>but we can create our own functions.</p><h2 id="how_to_create_a_function?"><a class="anchor" href="#how_to_create_a_function?">#</a>How to create a function?</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; creating a function
 ;the function name and the argument names can be whatever you want, just has to be matching in the body
 (define (&lt;f-name&gt; &lt;arg1&gt;...)
-    &lt;body&gt;) ; where every instance of the named args are replaced in the body.
-</code></pre><h2 id="how_are_functions_useful?"><a class="anchor" href="#how_are_functions_useful?">#</a>How are functions useful?</h2><p>In the previous section on variables, we went over how you can make your program more readable and maintable by storing constant data in variables, but sometimes that still isn’t enough because you’d end up with way too many variables. Functions let us take it a step further by factoring out varying variables/data. Let’s look back to our image exercises.</p><p>If I were to ask you to make 10 stop signs, of varying size, 30, 60, 90, increasing by 30 every time etc, it’d be a huge hastle to keep track of lot of variable names</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; creating a function
+    &lt;body&gt;) ; where every instance of the named args are replaced in the body.</code></pre><h2 id="how_are_functions_useful?"><a class="anchor" href="#how_are_functions_useful?">#</a>How are functions useful?</h2><p>In the previous section on variables, we went over how you can make your program more readable and maintable by storing constant data in variables, but sometimes that still isn’t enough because you’d end up with way too many variables. Functions let us take it a step further by factoring out varying variables/data. Let’s look back to our image exercises.</p><p>If I were to ask you to make 10 stop signs, of varying size, 30, 60, 90, increasing by 30 every time etc, it’d be a huge hastle to keep track of lot of variable names</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; creating a function
 (require 2htdp/image)
 
 (define stop1-octsize 30)
@@ -42,8 +41,7 @@
 (overlay
  (text "STOP" (- stop3-octsize 5) "white")
  (regular-polygon stop3-octsize 8 "solid" "red"))
-; ... I can do more but i think you get the point
-</code></pre><p>We can instead create a function that will create the variable in a local temporary environment to vary the size of the stop sign for us, and have the code read like its creating a stop sign</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; name of the function is stop-sign
+; ... I can do more but i think you get the point</code></pre><p>We can instead create a function that will create the variable in a local temporary environment to vary the size of the stop sign for us, and have the code read like its creating a stop sign</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; name of the function is stop-sign
 ; size is a parameter that we named arbitrarily
 ; 1: encapsulates a set of operations
 (define (stop-sign size)
@@ -52,15 +50,14 @@
         (regular-polygon size 8 "solid" "red")))
 
 ; no more needing to create variables
-; and copy and pasting overlay, text, and regular polygon 
+; and copy and pasting overlay, text, and regular polygon
 ; 2: much more meaningful name, stop-sign
 (stop-sign 30) ; all in 1 line to create a stop-sign
 (stop-sign 60)
 (stop-sign 90)
-; 3: reduced a lot of repition compared to example above
-</code></pre><h2 id="exercise_2_create_an_octogon_function"><a class="anchor" href="#exercise_2_create_an_octogon_function">#</a>Exercise 2 Create an octogon function</h2><p>You may notice that 2htdp/image doesn’t contain an octogon function built in. It’s a lot of tedious typing for all the parameters, e.g solid &amp; red.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define size1 30)
+; 3: reduced a lot of repition compared to example above</code></pre><h2 id="exercise_2_create_an_octogon_function"><a class="anchor" href="#exercise_2_create_an_octogon_function">#</a>Exercise 2 Create an octogon function</h2><p>You may notice that 2htdp/image doesn’t contain an octogon function built in. It’s a lot of tedious typing for all the parameters, e.g solid &amp; red.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define size1 30)
 (define size2 90)
-; all these parameters to create an red octogon. 
+; all these parameters to create an red octogon.
 ; Also unclear what this does to a stranger until they run the code or read docs
 (regular-polygon size1 8 "solid" "red")
 (regular-polygon size2 8 "solid" "red") ; copy &amp; paste and change the size every time</code></pre><pre class="line-numbers match-braces rainbow-braces" data-download-link="" data-src="starter/2-redocto_starter.rkt"><code class="language-racket">(require 2htdp/image)
@@ -203,8 +200,7 @@
 ; there are two v's BUT v will be 4, NOT 7
 ; and z will be 8
 (p 3 4)  ; evaluates to -14
-; NOT -17, had v been 7
-</code></pre><p>A function can access global variables but the global context cannot access variables within a function. What happens inside a function stays inside a function.</p><p><img src="images/scope_tower.png"/></p><p>You can think of it as looking for your lost kid in a huge multi-floor building. You’re going to start at the first floor and then if you can’t find them, you go up to floor 2, and then look around, then up and up until you hit the final floor.</p><h2 id="practice_function_eval_and_scope"><a class="anchor" href="#practice_function_eval_and_scope">#</a>Practice Function Eval and Scope</h2><p><a href="https://jestlearn.com/how_to_code/#function_evaluation_and_scope_1">Practice Function Eval and Scope 1</a></p><p><a href="https://jestlearn.com/how_to_code/#function_evaluation_and_scope_2_nested">Practice Function Eval and Scope 2</a></p><p>Get used to looking around and resolving what variables to values.</p><h2 id="conclusion"><a class="anchor" href="#conclusion">#</a>Conclusion</h2><p>Functions allow us to <strong>re-use</strong> and:</p><ol><li>combine a set of operations</li><li>give a meaningful name to the combined operations</li><li>factor out and reduce duplication</li></ol><p>thus making our code more shorter, maintainable, and readable, a little similar to how reapted addition on whole numbers like 5 + 5 + 5 + 5 can be re-written more consisely as 5 * 4.</p><p>You can use Check-Syntax or the stepper to see this in action to see variable susbtitution for functions in action.</p><h2 id="videos"><a class="anchor" href="#videos">#</a>Videos</h2><p><a href="https://www.youtube.com/watch?v=OUx0gzniKg8&amp;list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&amp;index=15">Functions Video</a></p><p><a href="https://www.youtube.com/watch?v=aMtjB_OChxM&amp;list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&amp;index=16">Function Exercies Video</a></p>
+; NOT -17, had v been 7</code></pre><p>A function can access global variables but the global context cannot access variables within a function. What happens inside a function stays inside a function.</p><p><img src="images/scope_tower.png"/></p><p>You can think of it as looking for your lost kid in a huge multi-floor building. You’re going to start at the first floor and then if you can’t find them, you go up to floor 2, and then look around, then up and up until you hit the final floor.</p><h2 id="practice_function_eval_and_scope"><a class="anchor" href="#practice_function_eval_and_scope">#</a>Practice Function Eval and Scope</h2><p><a href="https://jestlearn.com/how_to_code/#function_evaluation_and_scope_1">Practice Function Eval and Scope 1</a></p><p><a href="https://jestlearn.com/how_to_code/#function_evaluation_and_scope_2_nested">Practice Function Eval and Scope 2</a></p><p>Get used to looking around and resolving what variables to values.</p><h2 id="conclusion"><a class="anchor" href="#conclusion">#</a>Conclusion</h2><p>Functions allow us to <strong>re-use</strong> and:</p><ol><li>combine a set of operations</li><li>give a meaningful name to the combined operations</li><li>factor out and reduce duplication</li></ol><p>thus making our code more shorter, maintainable, and readable, a little similar to how reapted addition on whole numbers like 5 + 5 + 5 + 5 can be re-written more consisely as 5 * 4.</p><p>You can use Check-Syntax or the stepper to see this in action to see variable susbtitution for functions in action.</p><h2 id="videos"><a class="anchor" href="#videos">#</a>Videos</h2><p><a href="https://www.youtube.com/watch?v=OUx0gzniKg8&amp;list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&amp;index=15">Functions Video</a></p><p><a href="https://www.youtube.com/watch?v=aMtjB_OChxM&amp;list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&amp;index=16">Function Exercies Video</a></p>
             </article>
         </main>
     </div>

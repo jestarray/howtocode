@@ -50,11 +50,9 @@ and this is all to just get your code to execute! Sure these 10-20+ or so rules 
 
 Instead we're going to use a language called Racket, which really only has about ONE main syntax rule:
 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket" 
-"(<operator> <argument-1> <argument-2> ...)
+◊racket-code-block{
+(<operator> <argument-1> <argument-2> ...)
 (+ 1 2)   
-")
 }
 }
 

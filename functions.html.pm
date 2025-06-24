@@ -11,13 +11,11 @@ A few are:
 but we can create our own functions.
 
 ◊h2{How to create a function?}
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"; creating a function
+◊racket-code-block{
+; creating a function
 ;the function name and the argument names can be whatever you want, just has to be matching in the body
 (define (<f-name> <arg1>...)
     <body>) ; where every instance of the named args are replaced in the body.
-")
 }
 
 ◊h2{How are functions useful?}
@@ -26,39 +24,36 @@ In the previous section on variables, we went over how you can make your program
 
 If I were to ask you to make 10 stop signs, of varying size, 30, 60, 90, increasing by 30 every time etc, it'd be a huge hastle to keep track of lot of variable names
 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"; creating a function
+◊racket-code-block{
+; creating a function
 (require 2htdp/image)
 
 (define stop1-octsize 30)
 (overlay
- (text \"STOP\" (- stop1-octsize 5) \"white\")
- (regular-polygon stop1-octsize 8 \"solid\" \"red\"))
+ (text "STOP" (- stop1-octsize 5) "white")
+ (regular-polygon stop1-octsize 8 "solid" "red"))
 
 (define stop2-octsize 60)
 (overlay
- (text \"STOP\" (- stop2-octsize 5) \"white\")
- (regular-polygon stop2-octsize 8 \"solid\" \"red\"))
+ (text "STOP" (- stop2-octsize 5) "white")
+ (regular-polygon stop2-octsize 8 "solid" "red"))
 
 (define stop3-octsize 90)
 (overlay
- (text \"STOP\" (- stop3-octsize 5) \"white\")
- (regular-polygon stop3-octsize 8 \"solid\" \"red\"))
+ (text "STOP" (- stop3-octsize 5) "white")
+ (regular-polygon stop3-octsize 8 "solid" "red"))
 ; ... I can do more but i think you get the point
-")
 }
 
 We can instead create a function that will create the variable in a local temporary environment to vary the size of the stop sign for us, and have the code read like its creating a stop sign
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"; name of the function is stop-sign
+◊racket-code-block{
+; name of the function is stop-sign
 ; size is a parameter that we named arbitrarily
 ; 1: encapsulates a set of operations
 (define (stop-sign size)
     (overlay
-        (text \"STOP\" (- size 5) \"white\")
-        (regular-polygon size 8 \"solid\" \"red\")))
+        (text "STOP" (- size 5) "white")
+        (regular-polygon size 8 "solid" "red")))
 
 ; no more needing to create variables
 ; and copy and pasting overlay, text, and regular polygon 
@@ -67,21 +62,19 @@ We can instead create a function that will create the variable in a local tempor
 (stop-sign 60)
 (stop-sign 90)
 ; 3: reduced a lot of repition compared to example above
-")
 }
 
 ◊h2{Exercise 2 Create an octogon function}
 
 You may notice that 2htdp/image doesn't contain an octogon function built in. It's a lot of tedious typing for all the parameters, e.g solid & red.
 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"(define size1 30)
+◊racket-code-block{
+(define size1 30)
 (define size2 90)
 ; all these parameters to create an red octogon. 
 ; Also unclear what this does to a stranger until they run the code or read docs
-(regular-polygon size1 8 \"solid\" \"red\")
-(regular-polygon size2 8 \"solid\" \"red\") ; copy & paste and change the size every time")
+(regular-polygon size1 8 "solid" "red")
+(regular-polygon size2 8 "solid" "red") ; copy & paste and change the size every time
 }
 
 ◊(define problem-files (starter-solution "2-redocto"))
@@ -152,9 +145,8 @@ You may notice that 2htdp/image doesn't contain an octogon function built in. It
 
 A function will look for variables ◊em{inside} of itself first, and only if it can't find it, will it keep looking up until it hits the global scope, and if it still can't find it after that then it will be an error.
 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"(define z 8)
+◊racket-code-block{
+(define z 8)
 (define t 6)
 (define v 7)
 
@@ -163,7 +155,6 @@ A function will look for variables ◊em{inside} of itself first, and only if it
 ; and z will be 8
 (p 3 4)  ; evaluates to -14
 ; NOT -17, had v been 7
-")
 }
 
 A function can access global variables but the global context cannot access variables within a function. What happens inside a function stays inside a function.

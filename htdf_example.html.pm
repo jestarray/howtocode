@@ -3,9 +3,8 @@
 ◊h1{How to Design Functions Example}
 
 ◊h2{Double a number}
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-";; PROBLEM: Write a function double that produces double of a number
+◊racket-code-block{
+;; PROBLEM: Write a function double that produces double of a number
 
 ;; 1. Function Description (signature, purpose, stub)
 
@@ -27,13 +26,11 @@
     (* 2 n))
 
 ;; 5. Test, review, and refactor(ctrl+i to auto format code, clean up)
-")
 }
 
 ◊h2{Inches to Centimeters}
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-";; PROBLEM: Write a function double that produces double of a number
+◊racket-code-block{
+;; PROBLEM: Write a function double that produces double of a number
 ;; requires domain knowledge, look up the formula!!
 
 ;; 1. Function Description (signature, purpose, stub)
@@ -55,13 +52,11 @@
     (* 2.54 n))
 
 ;; 5. Test, review, and refactor(ctrl+i to auto format code, clean up)
-")
 }
 
 ◊h2{Fahrenheit to Celsius}
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-";; PROBLEM: Write a function that converts fahrenheit to celcius
+◊racket-code-block{
+;; PROBLEM: Write a function that converts fahrenheit to celcius
 ;; requires domain knowledge, look up the formula!!
 ; °C = (°F - 32) x 5/9 
 
@@ -83,5 +78,4 @@
     (* (- n 32) (/ 5 9)))
 
 ;; 5. Test, review, and refactor(ctrl+i to auto format code, clean up)
-")
 }

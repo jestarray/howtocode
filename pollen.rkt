@@ -34,12 +34,20 @@
         (list solution-fname (cadr file-contents))))
 
 
-; String String -> txexpr
-; creates codeblocks
-(define (code-block contents download-path)
+; String(s) -> txexpr
+; creates codeblocks with optional data src for download
+; (racket-code-block #:data-src "mypath.rkt" "foo" "baz" "bar")
+(define (racket-code-block #:data-src [src ""] . contents)
   (txexpr 'pre
-          (list '(class "line-numbers match-braces rainbow-braces") (list 'data-src download-path) '(data-download-link ""))
-          (list (txexpr 'code '((class "language-racket")) (list contents)))))
+          (if (non-empty-string? src)
+            `((class "line-numbers match-braces rainbow-braces") (data-src ,src) (data-download-link ""))
+            `((class "line-numbers match-braces rainbow-braces")))
+          (list (txexpr 'code '((class "language-racket")) contents))))
+
+; String -> Txexpr
+; short for "racket-1-line" produces a racket 1 liner of code
+(define (r1-liner . contents)
+  (txexpr 'code '((class "language-racket")) contents))
 
 ; String -> txexpr
 (define (code-problem filename)
@@ -51,7 +59,8 @@
   (define solu-path (car solution))
   (define solu-contents (cadr solution))
   ;todo: add option to keep the Q block open?
-  (q (string-append "Exercise " filename) (code-block starter-contents starter-path) (q "Answer" (code-block solu-contents solu-path)))
+  (q (string-append "Exercise " filename) (racket-code-block #:data-src starter-path starter-contents) 
+     (q "Answer" (racket-code-block #:data-src solu-path solu-contents)))
   )
 
 ; string -> txexpr

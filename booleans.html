@@ -40,42 +40,39 @@
 (string? 9999)
 
 (number? 9999)
-(number? "asdf")
-</code></pre><p>Booleans go hand in hand with conditional expressions like <code>if</code></p><h2 id="if_statements"><a class="anchor" href="#if_statements">#</a>If statements</h2><p><code>if</code> statements allow decisions to be made based on a question.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; space out for readability rather than all 1 line
+(number? "asdf")</code></pre><p>Booleans go hand in hand with conditional expressions like <code>if</code></p><h2 id="if_statements"><a class="anchor" href="#if_statements">#</a>If statements</h2><p><code>if</code> statements allow decisions to be made based on a question.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; space out for readability rather than all 1 line
 (if &lt;question&gt;  ; if either true or false, it will error
      &lt;expression&gt; ; true branch
      &lt;expression&gt;) ; false branch
 
 (if #true
     "I am the true branch :)"
-    "I am  the false branch &gt;:(")
-</code></pre><h2 id="if_practice_problems"><a class="anchor" href="#if_practice_problems">#</a>If Practice Problems</h2><p>You may notice that DrRacket also highlights in black the branch that did not run which we will go into more detail in the later sections, don’t worry about it for now.</p><p><a href="https://jestlearn.com/how_to_code/#if_bool_comparisons">If boolean comparisons</a></p><h2 id="cond_statements"><a class="anchor" href="#cond_statements">#</a>Cond statements</h2><p>Like <code>if</code> statements but can handle more than 2 cases, in some ways it’s syntactic sugar for nested <code>if</code> statements, also known as <code>else if</code> or <code>case</code> in other languages</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; space out for readability rather than all 1 line
-(cond 
+    "I am  the false branch &gt;:(")</code></pre><h2 id="if_practice_problems"><a class="anchor" href="#if_practice_problems">#</a>If Practice Problems</h2><p>You may notice that DrRacket also highlights in black the branch that did not run which we will go into more detail in the later sections, don’t worry about it for now.</p><p><a href="https://jestlearn.com/how_to_code/#if_bool_comparisons">If boolean comparisons</a></p><h2 id="cond_statements"><a class="anchor" href="#cond_statements">#</a>Cond statements</h2><p>Like <code>if</code> statements but can handle more than 2 cases, in some ways it’s syntactic sugar for nested <code>if</code> statements, also known as <code>else if</code> or <code>case</code> in other languages</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; space out for readability rather than all 1 line
+(cond
     [&lt;question&gt; &lt;answer&gt;]  ; if question evalutes to true, answer will run, otherwise keep going down until you hit the else case
-    [&lt;question&gt; &lt;answer&gt;]  ; 
+    [&lt;question&gt; &lt;answer&gt;]  ;
     ;... can have unlimited amount of branches
-    [else &lt;answer&gt;]) ; else is the catch all branch, 
+    [else &lt;answer&gt;]) ; else is the catch all branch,
 
 ; example
 ; james, alice, mom
 (define name "james")
 
-(cond 
-    [(string=? name "james") "hey there handsome"] 
-    [(string=? name "alice") "hey girl"] 
-    [(string=? name "mom") "hello mother"] 
-    [else (string-append name ", who the heck are you?")]) ; else is the catch all branch, 
-</code></pre><h2 id="logical_operations"><a class="anchor" href="#logical_operations">#</a>Logical operations</h2><p>And, Not, Or, short circuting</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; logical operators
+(cond
+    [(string=? name "james") "hey there handsome"]
+    [(string=? name "alice") "hey girl"]
+    [(string=? name "mom") "hello mother"]
+    [else (string-append name ", who the heck are you?")]) ; else is the catch all branch,</code></pre><h2 id="logical_operations"><a class="anchor" href="#logical_operations">#</a>Logical operations</h2><p>And, Not, Or, short circuting</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; logical operators
 (and #true #false #true) ; all have to be true in order to produce true, else false
 (or #true #false #true) ; only one has to be true to produce true, else false
 (not #true) ; inverts false to true and true to
 
 ; short circuting to save computation
 ; for and, as soon as a #false is hit SKIP checking the rest as because it will eveluate to #false anyways
-(and #false (&lt;= (+ 1 2) (+ 2 3))) 
+(and #false (&lt;= (+ 1 2) (+ 2 3)))
 
 ; for or, as soon as a #true is hit SKIP checking the rest as because it will eveluate to #true anyways
-(or #false (= (+ 1 1) 2) #true (= 999 99)) 
+(or #false (= (+ 1 1) 2) #true (= 999 99))
 
 ; useful for combining constraints:
 (define age 11)
@@ -83,8 +80,7 @@
 
 (if (and (= age 10) (&gt;= height 5))
     "yes you can ride"
-    "no you can't ride")
-</code></pre><p>These exercises put if statements all in 1 line because it is training you to distinguish parentheses blocks. You should absolutely space out your code for readability.</p><h2 id="if_logical_practice_problems"><a class="anchor" href="#if_logical_practice_problems">#</a>If Logical Practice Problems</h2><p><a href="https://jestlearn.com/how_to_code/#if_logical">If logical</a></p><h2 id="videos"><a class="anchor" href="#videos">#</a>Videos</h2><p><a href="https://www.youtube.com/watch?v=_25wDPmuCKc&amp;list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&amp;index=12">Booleans video</a></p><p><a href="https://www.youtube.com/watch?v=O8c4arZ0FW8&amp;list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&amp;index=13">Logical Comparison video</a></p>
+    "no you can't ride")</code></pre><p>These exercises put if statements all in 1 line because it is training you to distinguish parentheses blocks. You should absolutely space out your code for readability.</p><h2 id="if_logical_practice_problems"><a class="anchor" href="#if_logical_practice_problems">#</a>If Logical Practice Problems</h2><p><a href="https://jestlearn.com/how_to_code/#if_logical">If logical</a></p><h2 id="videos"><a class="anchor" href="#videos">#</a>Videos</h2><p><a href="https://www.youtube.com/watch?v=_25wDPmuCKc&amp;list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&amp;index=12">Booleans video</a></p><p><a href="https://www.youtube.com/watch?v=O8c4arZ0FW8&amp;list=PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J&amp;index=13">Logical Comparison video</a></p>
             </article>
         </main>
     </div>

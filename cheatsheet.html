@@ -23,22 +23,19 @@
             <article>
                 <h1>Syntax Cheat Sheet</h1><p><a href="https://docs.racket-lang.org/htdp-langs/beginner.html">Racket BSL docs</a></p><h2 id="basic_data_types"><a class="anchor" href="#basic_data_types">#</a>basic data types</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">123 ; numbers
 "yayy" ; strings
-#false #true ; booleans
-</code></pre><h2 id="expressions"><a class="anchor" href="#expressions">#</a>expressions</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES:
+#false #true ; booleans</code></pre><h2 id="expressions"><a class="anchor" href="#expressions">#</a>expressions</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES:
 (&lt;operator&gt; &lt;argument-1&gt; &lt;argument-2&gt; ...)
 
-;; examples: 
+;; examples:
 (+ 2 4)
 
-(+ 2 4 (* 3 6 (+ 1 1)))
-</code></pre><h2 id="define_variables"><a class="anchor" href="#define_variables">#</a>define variables</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES
+(+ 2 4 (* 3 6 (+ 1 1)))</code></pre><h2 id="define_variables"><a class="anchor" href="#define_variables">#</a>define variables</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES
 (define &lt;NAME&gt; &lt;VALUE&gt;)
 
 ;; examples:
 (define poo 3)
 (define name "bob")
-(define x (/ 100 2))
-</code></pre><h2 id="if_and_cond"><a class="anchor" href="#if_and_cond">#</a>if and cond</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES
+(define x (/ 100 2))</code></pre><h2 id="if_and_cond"><a class="anchor" href="#if_and_cond">#</a>if and cond</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES
 (if &lt;BOOL-EXPRESSION&gt; &lt;EXPRESSION&gt; &lt;EXPRESSION&gt;)
 
 ;; examples:
@@ -56,23 +53,21 @@
 (cond [(&lt; ran-num 3) "&lt;3 looks like a heart"]
       [(= ran-num 3) "these numbies are equal"]
       [else 1234])
-;; produces: 
-"these numbies are equal" ; 
-</code></pre><h2 id="functions"><a class="anchor" href="#functions">#</a>functions</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES
+;; produces:
+"these numbies are equal" ;</code></pre><h2 id="functions"><a class="anchor" href="#functions">#</a>functions</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES
 
 (define (&lt;NAME&gt; &lt;ARG-NAME1&gt; ...)
     &lt;BODY&gt;)
 
-;; examples: 
+;; examples:
 (define (area-of-circle r)
     (* pi r r))
 
 (define (greet name)
-    (string-append "Hey " name))
-</code></pre><h2 id="structs"><a class="anchor" href="#structs">#</a>structs</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES
+    (string-append "Hey " name))</code></pre><h2 id="structs"><a class="anchor" href="#structs">#</a>structs</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">;; RULES
 (define-struct &lt;NAME&gt; (&lt;FIELD-NAMES&gt; ...))
 
-; creating INSTANCE 
+; creating INSTANCE
 (make-&lt;NAME&gt; &lt;DATA&gt; ...)
 
 ; get pieces out
@@ -93,8 +88,7 @@
 
 ; test instances
 (dog? d1) ; produces true
-(dog? 321) ; produces false
-</code></pre><p>For people who have already programmed before, here is the more <strong>advanced</strong> <a href="https://docs.racket-lang.org/racket-cheat/index.html">quick reference card</a>.</p>
+(dog? 321) ; produces false</code></pre><p>For people who have already programmed before, here is the more <strong>advanced</strong> <a href="https://docs.racket-lang.org/racket-cheat/index.html">quick reference card</a>.</p>
             </article>
         </main>
     </div>

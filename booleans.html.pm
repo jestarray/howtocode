@@ -4,9 +4,8 @@
 ◊h2{What are booleans?}
 They are the values ◊code{#true} or ◊code{#false}, most often the result comparison functions, e.g functions that answer a question, such as ◊code{> , < , = , <= , >= , string=? , etc...}. Another term for these are "predicates" and in racket you can tell whether a boolean will be produced if the name of the operator/function has a ◊code{?}.
 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"; examples
+◊racket-code-block{
+; examples
 (define health 100)
 (> health 0) ; alive!
 (= health 0) ; dead!
@@ -14,19 +13,18 @@ They are the values ◊code{#true} or ◊code{#false}, most often the result com
 (>= 3 3)
 (<= 1 2)
 
-(define username \"bob123\")
+(define username "bob123")
 
-(string=? username \"bob123\")
-(string=? username \"bob124\")
+(string=? username "bob123")
+(string=? username "bob124")
 
 ; becareful, it's 1 charater off from string=?
 ; tests the type of:
-(string? \"adsf\")
+(string? "adsf")
 (string? 9999)
 
 (number? 9999)
-(number? \"asdf\")
-")
+(number? "asdf")
 }
 
 Booleans go hand in hand with conditional expressions like ◊code{if}
@@ -34,17 +32,15 @@ Booleans go hand in hand with conditional expressions like ◊code{if}
 ◊h2{If statements}
 
 ◊code{if} statements allow decisions to be made based on a question.
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"; space out for readability rather than all 1 line
+◊racket-code-block{
+; space out for readability rather than all 1 line
 (if <question>  ; if either true or false, it will error
      <expression> ; true branch
      <expression>) ; false branch
 
 (if #true
-    \"I am the true branch :)\"
-    \"I am  the false branch >:(\")
-")
+    "I am the true branch :)"
+    "I am  the false branch >:(")
 }
 
 ◊h2{If Practice Problems}
@@ -56,9 +52,8 @@ You may notice that DrRacket also highlights in black the branch that did not ru
 ◊h2{Cond statements}
 Like ◊code{if} statements but can handle more than 2 cases, in some ways it's syntactic sugar for nested ◊code{if} statements, also known as ◊code{else if} or ◊code{case} in other languages
 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"; space out for readability rather than all 1 line
+◊racket-code-block{
+; space out for readability rather than all 1 line
 (cond 
     [<question> <answer>]  ; if question evalutes to true, answer will run, otherwise keep going down until you hit the else case
     [<question> <answer>]  ; 
@@ -67,21 +62,19 @@ Like ◊code{if} statements but can handle more than 2 cases, in some ways it's 
 
 ; example
 ; james, alice, mom
-(define name \"james\")
+(define name "james")
 
 (cond 
-    [(string=? name \"james\") \"hey there handsome\"] 
-    [(string=? name \"alice\") \"hey girl\"] 
-    [(string=? name \"mom\") \"hello mother\"] 
-    [else (string-append name \", who the heck are you?\")]) ; else is the catch all branch, 
-")
+    [(string=? name "james") "hey there handsome"] 
+    [(string=? name "alice") "hey girl"] 
+    [(string=? name "mom") "hello mother"] 
+    [else (string-append name ", who the heck are you?")]) ; else is the catch all branch, 
 }
 
 ◊h2{Logical operations}
 And, Not, Or, short circuting
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"; logical operators
+◊racket-code-block{
+; logical operators
 (and #true #false #true) ; all have to be true in order to produce true, else false
 (or #true #false #true) ; only one has to be true to produce true, else false
 (not #true) ; inverts false to true and true to
@@ -98,9 +91,8 @@ And, Not, Or, short circuting
 (define height 5)
 
 (if (and (= age 10) (>= height 5))
-    \"yes you can ride\"
-    \"no you can't ride\")
-")
+    "yes you can ride"
+    "no you can't ride")
 }
 
 These exercises put if statements all in 1 line because it is training you to distinguish parentheses blocks. You should absolutely space out your code for readability.

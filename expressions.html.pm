@@ -3,14 +3,12 @@
 
 ◊h2{Rules to form an expression}
 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket" 
-"; comments are ignored and are for you to jott down notes
+◊racket-code-block{
+; comments are ignored and are for you to jott down notes
 #|this is a multi-line comment|#
 (<operator> <argument-1> <argument-2> ...)
 
 (+ 2 4) ; evaluates to the value 6! yay!
-")
 }
 
 where:
@@ -32,11 +30,9 @@ The result of ◊strong{executing} the function/operation/expression is a ◊str
 ◊h2{Evaluating Expressions in detail}
 
 Operands/Arguments can also be expressions themselves that then evaluate to a value
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket" 
-"; problem: what does this evaluate to?
+◊racket-code-block{
+; problem: what does this evaluate to?
 (+ 2 4 (* 5 5) (- (+ 3 3) 2) 1)
-")
 }
 
 ◊steps{
@@ -45,16 +41,14 @@ Starting from left to right, in order for 1st + to do its job, all arguments nee
     ◊code{2, 4, 1} are already values but ◊code{(* 5 5)} is not a value, it's an expression, thus we need to evaluate it resulting to 25
 }
     ◊step{Evaluate the sub-expressions and turn them into values
-    ◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket" 
-"(+ 2 4 (* 5 5) (- (+ 3 3) 2) 1)
+    ◊racket-code-block{
+(+ 2 4 (* 5 5) (- (+ 3 3) 2) 1)
 ; turns into: 
 (+ 2 4 25      (- (+ 3 3) 2) 1) ; (* 5 5) above turns into 25
 ; turns into:
 (+ 2 4 25         (- 6 2) 1) ; (+ 3 3) above turns into 6, notice we're back out to the substraction now
 ; turns into:
 (+ 2 4 25 4 1) ; (- 6 2) above turns into 4
-")
     }}
     ◊step{
         Finally the + operator can do its job
@@ -63,9 +57,8 @@ Starting from left to right, in order for 1st + to do its job, all arguments nee
 }
 
 Notice in the nested expression: 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"(- (+ 3 3) 2)")
+◊racket-code-block{
+(- (+ 3 3) 2)
 }
 after evaluating the inside: ◊code{(+ 3 3)}, we're back outside to the ◊code{-} operation, ◊code{(- 6 2)}. So in summary the rules for evaluation are left to right from inside to out.
 Also note that ◊code{(- 6 2)} follows the same structure for forming an expression ◊code{(<operator> arg1...)}
@@ -73,21 +66,18 @@ Also note that ◊code{(- 6 2)} follows the same structure for forming an expres
 ◊h2{Inexact numbers}
 
 Numbers like ◊code{pi} or ◊code{(sqrt 2)} are decimal numbers that go on infinitely but computers are limited in terms of memory. These numbers will be printed with a ◊code{#i} to indicate they are close but ◊emphasis{inexact}
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"(sqrt 2)
+◊racket-code-block{
+(sqrt 2)
 #i1.4142135623730951
 pi
 #i3.141592653589793
-")
 }
 
 ◊h3{Check your understanding!}
 
 ◊(q "What does (+ (- (- 9 1) 2) 7 (* 3 2) 1) evaluate to?"
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket" 
-"; problem: what does this evaluate to?
+◊racket-code-block{
+; problem: what does this evaluate to?
 (+ (- (- 9 1) 2) 7 (* 3 3) 1)
 ; step 1: we first need to evaluate (- 9 1) to 8
 (+ (- 8 2)       7 (* 3 3) 1)
@@ -97,7 +87,6 @@ pi
 (+ 6             7 9 1)
 ; step 4: now we can add them all up:
 23
-")
 }
 )
 

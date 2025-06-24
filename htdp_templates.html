@@ -21,7 +21,7 @@
             <div id="home"><a href="/index.html">Index</a></div>
             <div id="next"><a href="/introduction.html">Introduction</a> →</div>
             <article>
-                <h1>Templates and Outlines</h1><p>Templates, or as I’d like to call them, “outlines”, is the bare minimum baseline to kickstart writing a function. It’s akin to laying out all your tools neatly before picking which one to use, or like an artist drawing a rough outline/sketch as a baseline. If you’ve tried visual block based languages like <a href="https://scratch.mit.edu/">Scratch</a>, it lays out all the blocks for you that you can use, and this is what tempaltes accomplish, to gather all the available puzzle pieces(e.g parameters and basic structure) we can use, as the alternative is staring at a blank page stunned. As you program more and more, you’ll be able to template problems in your head.</p><h2 id="design_recipe_cheatsheet"><a class="anchor" href="#design_recipe_cheatsheet">#</a>Design Recipe Cheatsheet</h2><pre><code>#|
+                <h1>Templates and Outlines</h1><p><img src="./images/template_tool.png"/><br/>Templates, or as I’d like to call them, “outlines”, is the bare minimum baseline to kickstart writing a function. It’s akin to laying out all your tools neatly before picking which one to use, or like an artist drawing a rough outline/sketch as a baseline. If you’ve tried visual block based languages like <a href="https://scratch.mit.edu/">Scratch</a>, it lays out all the blocks for you that you can use, and this is what tempaltes accomplish, to gather all the available puzzle pieces(e.g parameters and basic structure) we can use, as the alternative is staring at a blank page stunned. As you program more and more, you’ll be able to template problems in your head.</p><h2 id="design_recipe_cheatsheet"><a class="anchor" href="#design_recipe_cheatsheet">#</a>Design Recipe Cheatsheet</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">#|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
 TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
@@ -34,7 +34,8 @@ Turn all ❌ into ✅ for each step you complete
     4. A function template that processes this data❌
 == Functions ==
     1. Signature, purpose, stub ❌
-    2. Examples (aka check-expect, elaborate the concrete) ❌
+    2. Examples (aka check-expect/tests, elaborate the concrete) ❌
+      2B. if the function consumes a list, make sure a list of 2 or longer is tested
     3. Template(from data)?❌
     3. Code body ❌
     4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
@@ -49,12 +50,11 @@ Turn all ❌ into ✅ for each step you complete
 ; stub (define (double n) 0)
 
 (define (double n)
-  (... n))
-</code></pre><h2 id="enum"><a class="anchor" href="#enum">#</a>Enum</h2><p>Enums list all finite possibilities of a given catatgorey of data you want to represent</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; A TrafficLight is one of the following Strings:
-; – "red"
-; – "green"
-; – "yellow"
-; interpretation the three strings represent the three 
+  (... n))</code></pre><h2 id="enum"><a class="anchor" href="#enum">#</a>Enum</h2><p>Enums list all finite possibilities of a given catatgorey of data you want to represent</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; A TrafficLight is one of the following Strings:
+; - "red"
+; - "green"
+; - "yellow"
+; interpretation the three strings represent the three
 ; possible states that a traffic light may assume
 
 ; TEMPLATE should match amount of cases in the type above, in this case 3 branches:
@@ -72,19 +72,17 @@ Turn all ❌ into ✅ for each step you complete
   (cond
     [(string=? "red" st) ...]
     [(string=? "green" st) ...]
-    [(string=? "yellow" st) ...]))
-</code></pre><h2 id="intervals"><a class="anchor" href="#intervals">#</a>Intervals</h2><p>Use an interval when the information to be represented is numbers within a certain range. Integer[0, 10] is all the integers from 0 to 10 inclusive; Number[0, 10) is all the numbers</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; Countdown is Integer[0, 10]
+    [(string=? "yellow" st) ...]))</code></pre><h2 id="intervals"><a class="anchor" href="#intervals">#</a>Intervals</h2><p>Use an interval when the information to be represented is numbers within a certain range. Integer[0, 10] is all the integers from 0 to 10 inclusive; Number[0, 10) is all the numbers</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; Countdown is Integer[0, 10]
 ; interp. the number of seconds remaining to liftoff
 
 (define C1 10)  ; start
 (define C2 5)   ; middle
 (define C3 0)   ; end
 
-; fn-for-countdown: (Number -&gt; ???)
+; countdown-temp: (Number -&gt; ???)
 
-(define (fn-for-countdown cd)
-  (... cd))
-</code></pre><h2 id="interval_cheatsheet"><a class="anchor" href="#interval_cheatsheet">#</a>Interval cheatsheet</h2><p>The boolean expression to test whether a number falls <strong>within</strong> a given interval:</p><table><caption></caption><thead><th>Interval</th>
+(define (countdown-temp cd)
+  (... cd))</code></pre><h2 id="interval_cheatsheet"><a class="anchor" href="#interval_cheatsheet">#</a>Interval cheatsheet</h2><p>The boolean expression to test whether a number falls <strong>within</strong> a given interval:</p><table><caption></caption><thead><th>Interval</th>
 <th>Expression</th>
 <th>Meaning</th></thead>
 <tbody><tr><td>[0, 100]</td>
@@ -121,13 +119,12 @@ Turn all ❌ into ✅ for each step you complete
     [(and (&gt; num 60) (&lt;= num 80)) ...]
     [(and (&gt; num 40) (&lt;= num 60)) ...]
     [(and (&gt; num 20) (&lt;= num 40)) ...]
-    [(and (&gt;= num 0) (&lt;= num 20)) ...]))
-</code></pre><h2 id="union"><a class="anchor" href="#union">#</a>Union</h2><p>Union(aka itemization) describes the case when there are two or more different <strong>types</strong> of data.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; ValidID is one of:
+    [(and (&gt;= num 0) (&lt;= num 20)) ...]))</code></pre><h2 id="union"><a class="anchor" href="#union">#</a>Union</h2><p>Union(aka itemization) describes the case when there are two or more different <strong>types</strong> of data.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; ValidID is one of:
 ; #false
 ; Number
 ; interp. #false means there is no ID while Number is the ID
 
-; TEMPLATE should match the number of cases above and check with typeof: "&lt;type&gt;?" 
+; TEMPLATE should match the number of cases above and check with typeof: "&lt;type&gt;?"
 (define (&lt;id-fun&gt; x)
   (cond [(boolean? x) ...]
         [(number? x) ...]))
@@ -136,8 +133,7 @@ Turn all ❌ into ✅ for each step you complete
 ; returns true if the person has a valid id, otherwise false
 (define (pull-over-id-check? x)
   (cond [(boolean? x) #false]
-        [(number? x) #true]))
-</code></pre><h2 id="big-bang_world_apps"><a class="anchor" href="#big-bang_world_apps">#</a>big-bang World Apps</h2><p>World apps are interactive applications that can respond to keyboard presses, mouse events, and draw images quickly for things like games, animations, etc.</p><p><i>Note that you can paste in your own images into DrRacket, but for the most part we will be using emoji because when opening the racket file with a text editor(e.g notepad) other than DrRacket, it will display weirdly.</i></p><p><i>big-bang programs are somewhat hard to autograde so please do not be discouraged by scores and self grade yourself comparing it to my solution</i></p><ol><li><ol><li><h3>Domain analysis (use a piece of paper or <a href="https://tldraw.com">tldraw.com</a>)</h3></li><li>Sketch program scenarios</li><li>Identify constant information</li><li>Identify changing information</li><li>Identify big-bang options</li></ol></li><li><ol><li><h3>Build the actual program</h3></li><li>Constants (based on 1.2 above)</li><li>Data definitions using HtDD (based on 1.3 above)</li><li><p>Functions using HtDF</p><ol><li>main first (based on 1.3, 1.4 and 2.2 above)</li><li>todo list entries for big-bang handlers</li></ol></li><li>Work through todo list until done</li></ol></li></ol><h3>big-bang options</h3><table><caption></caption><thead><th>If your app needs to:</th>
+        [(number? x) #true]))</code></pre><h2 id="big-bang_world_apps"><a class="anchor" href="#big-bang_world_apps">#</a>big-bang World Apps</h2><p>World apps are interactive applications that can respond to keyboard presses, mouse events, and draw images quickly for things like games, animations, etc.</p><p><i>Note that you can paste in your own images into DrRacket, but for the most part we will be using emoji because when opening the racket file with a text editor(e.g notepad) other than DrRacket, it will display weirdly.</i></p><p><i>big-bang programs are somewhat hard to autograde so please do not be discouraged by scores and self grade yourself comparing it to my solution</i></p><ol><li><ol><li><h3>Domain analysis (use a piece of paper or <a href="https://tldraw.com">tldraw.com</a>)</h3></li><li>Sketch program scenarios</li><li>Identify constant information</li><li>Identify changing information</li><li>Identify big-bang options</li></ol></li><li><ol><li><h3>Build the actual program</h3></li><li>Constants (based on 1.2 above)</li><li>Data definitions using HtDD (based on 1.3 above)</li><li><p>Functions using HtDF</p><ol><li>main first (based on 1.3, 1.4 and 2.2 above)</li><li>todo list entries for big-bang handlers</li></ol></li><li>Work through todo list until done</li></ol></li></ol><h3>big-bang options</h3><table><caption></caption><thead><th>If your app needs to:</th>
 <th>Then it needs this clause:</th></thead>
 <tbody><tr><td>Update automatically as time passes</td>
 <td><a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28form._world._%28%28lib._2htdp%2Funiverse..rkt%29._on-tick%29%29">on-tick</a></td></tr>
@@ -169,7 +165,7 @@ Turn all ❌ into ✅ for each step you complete
 3. Data Examples❌
 4. A function template that processes this data❌
 |#
-; WS is ... (give WS a better name)
+; WorldState is ... (give WorldState a better name)
 
 
 
@@ -182,29 +178,28 @@ Turn all ❌ into ✅ for each step you complete
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
-; main: (WS -&gt; WS)
+; main: (WorldState -&gt; WorldState)
 ; start the world with ...
-; 
+;
 (define (main ws)
-  (big-bang ws                   ; WS
-    [on-mouse  ...]      ; WS Integer Integer MouseEvent -&gt; WS
-    [on-key    ...]      ; WS KeyEvent -&gt; WS
-    [on-tick   tock]     ; WS -&gt; WS
-    [to-draw   render]   ; WS -&gt; Image
-    [stop-when ...]      ; WS -&gt; Boolean
+  (big-bang ws                   ; WorldState
+    [on-mouse  ...]      ; WorldState Integer Integer MouseEvent -&gt; WorldState
+    [on-key    ...]      ; WorldState KeyEvent -&gt; WorldState
+    [on-tick   tock]     ; WorldState -&gt; WorldState
+    [to-draw   render]   ; WorldState -&gt; Image
+    [stop-when ...]      ; WorldState -&gt; Boolean
     ))
 
-; tock: (WS -&gt; WS)
+; tock: (WorldState -&gt; WorldState)
 ; produce the next ...
 ; TODO!
 (define (tock ws) ...)
 
 
-; render: (WS -&gt; Image)
-; render ... 
+; render: (WorldState -&gt; Image)
+; render ...
 ; TODO!
-(define (render ws) ...)
-</code></pre><p><details><summary>Mushroom Walk Example</summary><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(require 2htdp/image)
+(define (render ws) ...)</code></pre><p><details><summary>Mushroom Walk Example</summary><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(require 2htdp/image)
 (require 2htdp/universe)
 
 ; A mushroom that walks off the screen like the Goomba in Mario
@@ -248,20 +243,20 @@ Turn all ❌ into ✅ for each step you complete
 ; start the world with 0
 (define (main m)
   (big-bang m                        ; Mushroom
-            [on-key handle-key]      ; Mushroom KeyEvent -&gt; Mushroom 
+            [on-key handle-key]      ; Mushroom KeyEvent -&gt; Mushroom
             [on-mouse handle-mouse]  ; Mushroom Number Number MouseEvent -&gt; Mushroom
             [on-tick   advance-mush] ; Mushroom -&gt; Mushroom
             [to-draw   render]))     ; Mushroom -&gt; Image
 
 ; handle-key: (Mushroom KeyEvent -&gt; Mushroom)
 ; upon pressing space or "a" key, reset the mushroom position to 0
-(check-expect (handle-key 123 " ") 0) ; reset when space is hit 
+(check-expect (handle-key 123 " ") 0) ; reset when space is hit
 (check-expect (handle-key 456 "a") 0) ; reset when a is hit
 
 (define (handle-key m ke)
   (cond [(key=? ke " ") 0]
         [(key=? ke "a") 0]
-        [else 
+        [else
          m]))
 
 ; handle-mouse: (Mushroom Number Number MouseEvent -&gt; Mushroom)
@@ -288,20 +283,17 @@ Turn all ❌ into ✅ for each step you complete
 (check-expect (render WIDTH) (place-image MUSH-IMG WIDTH CENTER-Y BG))
 
 (define (render m)
-  (place-image MUSH-IMG m CENTER-Y BG))
-</code></pre></details></p><h3>Key and Mouse Handlers</h3><p>The <code>on-key</code> and <code>on-mouse</code> handler function templates are handled specially. The <code>on-key</code> function is templated according to its second argument, a KeyEvent, using the large enumeration rule. The <code>on-mouse</code> function is templated according to its MouseEvent argument, also using the large enumeration rule. So, for example, for a key handler function that has a special behaviour when the space key is pressed but does nothing for any other key event the following would be the template:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; handle-key: (WorldState KeyEvent -&gt; WorldState)
+  (place-image MUSH-IMG m CENTER-Y BG))</code></pre></details></p><h3>Key and Mouse Handlers</h3><p>The <code>on-key</code> and <code>on-mouse</code> handler function templates are handled specially. The <code>on-key</code> function is templated according to its second argument, a KeyEvent, using the large enumeration rule. The <code>on-mouse</code> function is templated according to its MouseEvent argument, also using the large enumeration rule. So, for example, for a key handler function that has a special behaviour when the space key is pressed but does nothing for any other key event the following would be the template:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; handle-key: (WorldState KeyEvent -&gt; WorldState)
 ; todo: do something when a key is pressed
 (define (handle-key ws ke)
   (cond [(key=? ke "x") (... ws)]
-        [else 
-         (... ws)]))
-</code></pre><p>Similarly the template for a mouse handler function that has special behavior for mouse clicks but ignores all other mouse events would be:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; handle-mouse: (WorldState Number Number MouseEvent -&gt; WorldState)
+        [else
+         (... ws)]))</code></pre><p>Similarly the template for a mouse handler function that has special behavior for mouse clicks but ignores all other mouse events would be:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; handle-mouse: (WorldState Number Number MouseEvent -&gt; WorldState)
 ; todo: do something when the mouse moves or clicks
 (define (handle-mouse ws mousex mousey me)
   (cond [(mouse=? me "button-down") (... ws mousex mousey)]
         [else
-         (... ws mousex mousey)]))
-</code></pre><p>For more information on the <a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28tech._world._keyevent%29">KeyEvent</a> and <a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28tech._world._mouseevent%29">MouseEvent</a> large enumerations see the DrRacket help desk.</p><h2 id="compound_data_aka_structs"><a class="anchor" href="#compound_data_aka_structs">#</a>Compound Data aka Structs</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct person (name age))
+         (... ws mousex mousey)]))</code></pre><p>For more information on the <a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28tech._world._keyevent%29">KeyEvent</a> and <a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28tech._world._mouseevent%29">MouseEvent</a> large enumerations see the DrRacket help desk.</p><h2 id="compound_data_aka_structs"><a class="anchor" href="#compound_data_aka_structs">#</a>Compound Data aka Structs</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct person (name age))
 ; Person is (make-ball String Number)
 ; interp. a person comrpises of a name and age
 
@@ -312,27 +304,25 @@ Turn all ❌ into ✅ for each step you complete
 ; (: person? (Any-&gt; Boolean))
 
 ; TEMPLATE should list all the field accessors
-(define (fn-for-person p)
+(define (person-temp p)
   (... (person-name p)
-       (person-age p)))
-</code></pre><h2 id="recursive_functions"><a class="anchor" href="#recursive_functions">#</a>Recursive Functions</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; ListOfString is one of:
+       (person-age p)))</code></pre><h2 id="recursive_functions"><a class="anchor" href="#recursive_functions">#</a>Recursive Functions</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; ListOfString is one of:
 ;  - empty
 ;  - (cons String ListOfString)
 ; interp. a list of strings
 
-(define LOS-1 empty)
-(define LOS-2 (cons "a" empty))
-(define LOS-3 (cons "b" (cons "c" empty)))
+(define ls0 empty)
+(define ls1 (cons "a" empty))
+(define ls2 (cons "b" (cons "c" empty)))
 
 #;
-(define (fn-for-los los)
-  (cond [(empty? los) (...)]                   ;BASE CASE
-        [else (... (first los)                 ;String
-                   (fn-for-los (rest los)))])) ;NATURAL RECURSION
+(define (strings-temp str-ls)
+  (cond [(empty? str-ls) (...)]                   ;BASE CASE
+        [else (... (first str-ls)                 ;String
+                   (strings-temp (rest str-ls)))])) ;NATURAL RECURSION
 ;             /
 ;            /
-;       COMBINATION
-</code></pre><h2 id="data_driven_templates"><a class="anchor" href="#data_driven_templates">#</a>Data Driven Templates</h2><table><caption></caption><thead><th>Type of Data</th>
+;       COMBINATION</code></pre><h2 id="data_driven_templates"><a class="anchor" href="#data_driven_templates">#</a>Data Driven Templates</h2><table><caption></caption><thead><th>Type of Data</th>
 <th>cond question (if applicable)</th>
 <th>Body or cond answer(if applicable)</th></thead>
 <tbody><tr><td><strong>Base Generic</strong>

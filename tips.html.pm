@@ -7,45 +7,37 @@
 If you are having trouble with counting the parts up in an expression, mouse over parentheses from left to right to count the pieces needed. 
 Space out and format your code more neatly, like so:
 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"
+◊racket-code-block{
 (+ 1 1(* 3 2)(- 5 4)) ; no formatted well
 
 (+ 1 1 (* 3 2) (- 5 4)) ; much easier on the eyes
 
 ; a little harder to count
-(if #true \"I am the true branch >:)\" \"I am the false branch >:(\")
+(if #true "I am the true branch >:)" "I am the false branch >:(")
 
 ; much easier to see the 3 parts of if
 (if #true
-    \"I am the true branch >:)\"
-    \"I am the false branch >:(\")
+    "I am the true branch >:)"
+    "I am the false branch >:(")
 
 ; hit control+I to auto-format code
-")
 }
 
 Parentheses matter! Be aware of where parentheses wrap around, as it could drastically effect the outcome of a program, aside from creating errors:
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"
+◊racket-code-block{
 (+ 2 (* 6 1 3 9)) ; 164
 (+ 2 (* 6 1 3) 9) ; 29 
-")
 }
 
 Enable automatic parens is convient because you most often want parentheses in pairs but sometimes it's not always what you want! For example,
 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"(+ 1 1 * 3 4)) ; just need to add (*
+◊racket-code-block{
+(+ 1 1 * 3 4)) ; just need to add (*
 
 ; but instead it will do this:
 (+ 1 1 ()* 3 4)) ; so you gotta delete the extra
 
 (+ 1 1 (* 3 4)) ; so you gotta delete the extra closing
-")
 }
 
 It will open and close things in pairs ◊code{()}, ◊code{""}, ◊code{[]} , you can turn this off if you don't like it, but for me it's the ◊em{common} case and makes writing code more smooth.
@@ -56,11 +48,9 @@ If you type a closing parens ◊code{)} when there already is a closing parens, 
 
 Avoid squaring yourself into a hole by being aware what you need to be doing.
 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-";typing name) will move your cursor right instead of adding a new parens if they're already matching
-(defne (greet name) \"\")
-")
+◊racket-code-block{
+;typing name) will move your cursor right instead of adding a new parens if they're already matching
+(defne (greet name) "")
 }
 
 ◊h2{Discovering what is possible}

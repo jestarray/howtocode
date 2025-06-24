@@ -5,11 +5,9 @@
 ◊h2{Related Data}
 
 There's a problem with using variables to group related data. This code will crash: 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"
-(define firstname \"edward\")
-(define lastname \"norton\") ; who's last name is this?
+◊racket-code-block{
+(define firstname "edward")
+(define lastname "norton") ; who's last name is this?
 (define age 18)
 (define balance 99)
 (define single #true)
@@ -17,19 +15,18 @@ There's a problem with using variables to group related data. This code will cra
 ; would need to find new names for 
 ; these variables because they already exist:
 ; e.g firstname2, lastname2, age2,
-(define firstname \"marla\")
-(define lastname \"singer\")
+(define firstname "marla")
+(define lastname "singer")
 (define age 24)
 (define balance 55)
 (define single #false)
 
 ; same with these below
-(define firstname \"tyler\")
-(define lastname \"durden\")
+(define firstname "tyler")
+(define lastname "durden")
 (define age 18)
 (define balance 0)
 (define single #false)
-")
 }
 
 Variables cant be defined with the same name so you have to rename so these have to be unique, e.g: ◊code{firstname2}, but it gets tedious when you reach a couple of people. 
@@ -42,27 +39,24 @@ Another problem is that there is no relationship/linking of the variables: ◊co
 
 ◊code{Structs} can help us solve the problem of keeping related pieces of data together without creating a ton of variables. Structs are collections of data relating to 1 "unit" of something, e.g a person, a dog, a 2D point, etc. A real life analogy would be a drink and a straw, things that you can generally expect if you have of them, you might as well have the other.
 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"(define-struct person (fn ln age balance single))
+◊racket-code-block{
+(define-struct person (fn ln age balance single))
 
 ; create instances of persons
-(define p1 (make-person \"edward\" \"norton\" 18 99 #true))
-(define p2 (make-person \"marla\" \"singer\" 24 55 #false))
-(define p3 (make-person \"tyler\" \"durden\" 18 0 #false))
+(define p1 (make-person "edward" "norton" 18 99 #true))
+(define p2 (make-person "marla" "singer" 24 55 #false))
+(define p3 (make-person "tyler" "durden" 18 0 #false))
 
 ; to get the pieces out of a structure out:
 ; aka selectors
 (person-fn p1) ; edward
 (person-ln p2) ; singer 
 (person-balance p3) ; 0 balance from tyler 
-")
 }
 
 ◊h2{Struct Definition Syntax}
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"(define-struct <NAME> (<FIELDNAME> ...))
+◊racket-code-block{
+(define-struct <NAME> (<FIELDNAME> ...))
 
 ; to create an instance of the struct:
 (make-<NAME> <data>...)
@@ -73,20 +67,17 @@ Another problem is that there is no relationship/linking of the variables: ◊co
 
 ; and a predicate to check if its an instance of <NAME>
 (<NAME>? <INSTACE>) ; returns #true or #false
-")
 }
 
-◊pre[#:class "line-numbers match-braces rainbow-braces"]{
-    ◊(code #:class "language-racket"
-"(define-struct person (fn ln age balance single))
+◊racket-code-block{
+(define-struct person (fn ln age balance single))
 (define-struct dog (name age breed))
-(define p3 (make-person \"tyler\" \"durden\" 18 0 #false))
-(define d1 (make-dog \"flipper\" 7 \"pug\"))
+(define p3 (make-person "tyler" "durden" 18 0 #false))
+(define d1 (make-dog "flipper" 7 "pug"))
 
 (dog? p3) ; false
 (dog? d1) ; true
-(dog? \"yay\") ; false
-")
+(dog? "yay") ; false
 }
 
 ◊h2{Conclusion}

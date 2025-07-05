@@ -13,7 +13,7 @@
 (define-runtime-path here ".")
 (define-values (base final dir?) (split-path (simplify-path here)))
 
-(define ASSIGNMENT-NAME 'ladybug)
+(define ASSIGNMENT-NAME 'in-city-state)
 (define markup-prefix ";;> ")
 
 (define-runtime-path override "../overridden-collects/")
@@ -44,18 +44,14 @@
                                          "\n")) |#
         ;(add-report-line! (get-submission-timestamp))
         (!test PNAME ASSIGNMENT-NAME) ; EVERY FILE MUST HAVE THIS ONTOP OF FILE
-        (!procedure main 1)
-        ; (!procedure next-light 1)
+        (!procedure in-city-state? 2)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
         (set-test-max-score! 3)
-; (define-struct lady [x vx])
-;(define SPEED 4)
-;(define WIDTH 400)
 
-(@test "tock#1" "err: try with speed of 4?" (tock (make-lady 0 4)) ((submission-eval) '(make-lady 4 4)) 1)
-(@test "tock#2" "err" (tock (make-lady 500 4)) ((submission-eval) '(make-lady 400 -4)) 1)
-(@test "tock#3" "err" (tock (make-lady -4 (- 4))) ((submission-eval) '(make-lady 0 4)) 1)
+        (@test "in-city-state?#1" "err" (in-city-state? (make-person "joe" "smith" (make-address "Los Angeles" "CA")) (make-address "Los Angeles" "CA"))  ((submission-eval) #true) 1)
+        (@test "in-city-state?#2" "err" (in-city-state? (make-person "joe" "smith" (make-address "Los Angeles" "CA")) (make-address "San Francisco" "CA"))  ((submission-eval) #false) 1)
+        (@test "in-city-state?#3" "err" (in-city-state? (make-person "joe" "smith" (make-address "Los Angeles" "CA")) (make-address "New York City" "NY")) ((submission-eval) #false) 1)
         ; (println submission)
         )
 (post:
@@ -65,13 +61,14 @@
  (define report-path (string-append "../" username "-report-#f.txt"))
  (define final-score (last (file->lines report-path)))
 
- (call-with-output-file "../grade" (lambda (out)
-                                     ;remove 'Final Score:' and prettifies it to just a fraction
-                                     (define prettify
-                                       (string-replace
-                                        (substring final-score 12 (string-length final-score))
-                                        "out of"
-                                        "/"))
-                                     (define test-score (string-append "test-score: " prettify))
-                                     (define htdp-score "\n | htdp-score: 0")
-                                     (write-string (string-append test-score htdp-score) out)) #:exists 'replace))
+ (call-with-output-file "../grade"
+   (lambda (out)
+     ;remove 'Final Score:' and prettifies it to just a fraction
+     (define prettify
+       (string-replace
+        (substring final-score 12 (string-length final-score))
+        "out of"
+        "/"))
+     (define test-score (string-append "test-score: " prettify))
+     (define htdp-score "\n | htdp-score: 0")
+     (write-string (string-append test-score htdp-score) out)) #:exists 'replace))

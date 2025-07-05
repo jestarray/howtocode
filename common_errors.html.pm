@@ -2,7 +2,7 @@
 
 ◊h1{COMMON ERRORS}
 
-◊(define problem-files (starter-solution "syntaxerror"))
+◊(define problem-files (starter&solution "syntaxerror"))
 ◊(define starter (car problem-files))
 ◊(define solution (cadr problem-files))
 ◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src (car starter) #:data-download-link ""]{
@@ -31,7 +31,7 @@ These errors are silent meaning they can be hard to find since they don't crash,
 
 ◊h3{Problem 1}
 
-◊(define problem-files-buggy (starter-solution "buggy_logic1"))
+◊(define problem-files-buggy (starter&solution "buggy_logic1"))
 ◊(define starter-buggy (car problem-files-buggy))
 ◊(define solution-buggy (cadr problem-files-buggy))
 ◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src (car starter-buggy) #:data-download-link ""]{
@@ -46,7 +46,7 @@ These errors are silent meaning they can be hard to find since they don't crash,
 }
 
 ◊h3{Problem 2}
-◊(define problem-files-buggy2 (starter-solution "buggy_logic2"))
+◊(define problem-files-buggy2 (starter&solution "buggy_logic2"))
 ◊(define starter-buggy2 (car problem-files-buggy2))
 ◊(define solution-buggy2 (cadr problem-files-buggy2))
 ◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src (car starter-buggy2) #:data-download-link ""]{
@@ -61,7 +61,7 @@ These errors are silent meaning they can be hard to find since they don't crash,
 }
 
 ◊h3{Problem 3}
-◊(define problem-files-buggy3 (starter-solution "buggy_logic3"))
+◊(define problem-files-buggy3 (starter&solution "buggy_logic3"))
 ◊(define starter-buggy3 (car problem-files-buggy3))
 ◊(define solution-buggy3 (cadr problem-files-buggy3))
 ◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src (car starter-buggy3) #:data-download-link ""]{
@@ -76,7 +76,7 @@ These errors are silent meaning they can be hard to find since they don't crash,
 }
 
 ◊h3{Problem 4}
-◊(define problem-files-buggy4 (starter-solution "buggy_logic4"))
+◊(define problem-files-buggy4 (starter&solution "buggy_logic4"))
 ◊(define starter-buggy4 (car problem-files-buggy4))
 ◊(define solution-buggy4 (cadr problem-files-buggy4))
 ◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src (car starter-buggy4) #:data-download-link ""]{

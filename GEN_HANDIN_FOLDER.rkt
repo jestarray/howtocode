@@ -269,7 +269,9 @@
        (define exists (file-exists? path))
        ; print what is missing
        (when (not exists)
-         (println path))
+         ; ignore having graders for 0.0 to 2.3
+         (println (list ((compose path->string file-name-from-path) path) " does not have a grader"))
+         )
        exists) group))
   (define has-start-sol?
     (andmap file-exists? (take group 2)))
@@ -311,7 +313,9 @@
 (define config-file
   `((allow-new-users #t)
     (allow-change-info #t)
-    (active-dirs (,@assignment-folders))))
+    (active-dirs (,@assignment-folders))
+    (session-timeout 10)
+    ))
 
 (call-with-output-file
     (build-path gen-handin-dir "config.rktd")

@@ -49,7 +49,7 @@ Racket has support for drawing images
 
 ◊img[#:src "images/shapes.png"]{}
 ◊; REQUIRES RACEKT/FILE
-◊(define problem-files (starter-solution "1-imageshapes"))
+◊(define problem-files (starter&solution "1-imageshapes"))
 ◊(define starter (car problem-files))
 ◊(define solution (cadr problem-files))
 ◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src ◊(car starter) #:data-download-link ""]{
@@ -98,7 +98,7 @@ In a lot of 3D shooting games, there are crosshairs to help you aim. Your job is
 Your result should look like this: with the + centered in the middle
 ◊img[#:src "images/center_crosshair.png"]{}
 
-◊(define problem-files2 (starter-solution "1.1-crosshair"))
+◊(define problem-files2 (starter&solution "1.1-crosshair"))
 ◊(define starter2 (car problem-files2))
 ◊(define solution2 (cadr problem-files2))
 

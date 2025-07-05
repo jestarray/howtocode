@@ -28,6 +28,6 @@
 }
 
 ◊lists.html{
-   ◊; self_reference.html
-   ◊; data_directed_design.html
+   data_directed_design.html
+  ◊; self_reference.html
 }

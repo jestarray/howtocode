@@ -13,7 +13,7 @@
 (define-runtime-path here ".")
 (define-values (base final dir?) (split-path (simplify-path here)))
 
-(define ASSIGNMENT-NAME 'ladybug)
+(define ASSIGNMENT-NAME 'typewriter)
 (define markup-prefix ";;> ")
 
 (define-runtime-path override "../overridden-collects/")
@@ -44,18 +44,18 @@
                                          "\n")) |#
         ;(add-report-line! (get-submission-timestamp))
         (!test PNAME ASSIGNMENT-NAME) ; EVERY FILE MUST HAVE THIS ONTOP OF FILE
-        (!procedure main 1)
-        ; (!procedure next-light 1)
+        (!procedure advance-char 1)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
-        (set-test-max-score! 3)
-; (define-struct lady [x vx])
-;(define SPEED 4)
-;(define WIDTH 400)
+        (set-test-max-score! 6)
 
-(@test "tock#1" "err: try with speed of 4?" (tock (make-lady 0 4)) ((submission-eval) '(make-lady 4 4)) 1)
-(@test "tock#2" "err" (tock (make-lady 500 4)) ((submission-eval) '(make-lady 400 -4)) 1)
-(@test "tock#3" "err" (tock (make-lady -4 (- 4))) ((submission-eval) '(make-lady 0 4)) 1)
+        (@test "advance-char#1" "err" (advance-char (make-typewriter "hey" 0)) ((submission-eval) '(make-typewriter "hey" 1)) 1)
+        (@test "advance-char#2" "err" (advance-char (make-typewriter "hey" 1)) ((submission-eval) '(make-typewriter "hey" 2)) 1)
+        (@test "advance-char#3" "err" (advance-char (make-typewriter "hey" 2)) ((submission-eval) '(make-typewriter "hey" 3)) 1)
+        (@test "advance-char#4" "err" (advance-char (make-typewriter "hey" 3)) ((submission-eval) '(make-typewriter "hey" 3)) 1)
+
+        (@test "handle-key#1" "err" (handle-key (make-typewriter "hey" 1) "r") ((submission-eval) '(make-typewriter "hey" 0)) 1)
+        (@test "handle-key#2" "err" (handle-key (make-typewriter "hey" 1) "x") ((submission-eval) '(make-typewriter "hey" 1)) 1)
         ; (println submission)
         )
 (post:
@@ -65,13 +65,14 @@
  (define report-path (string-append "../" username "-report-#f.txt"))
  (define final-score (last (file->lines report-path)))
 
- (call-with-output-file "../grade" (lambda (out)
-                                     ;remove 'Final Score:' and prettifies it to just a fraction
-                                     (define prettify
-                                       (string-replace
-                                        (substring final-score 12 (string-length final-score))
-                                        "out of"
-                                        "/"))
-                                     (define test-score (string-append "test-score: " prettify))
-                                     (define htdp-score "\n | htdp-score: 0")
-                                     (write-string (string-append test-score htdp-score) out)) #:exists 'replace))
+ (call-with-output-file "../grade"
+   (lambda (out)
+     ;remove 'Final Score:' and prettifies it to just a fraction
+     (define prettify
+       (string-replace
+        (substring final-score 12 (string-length final-score))
+        "out of"
+        "/"))
+     (define test-score (string-append "test-score: " prettify))
+     (define htdp-score "\n | htdp-score: 0")
+     (write-string (string-append test-score htdp-score) out)) #:exists 'replace))

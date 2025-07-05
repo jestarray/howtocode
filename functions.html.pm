@@ -77,7 +77,7 @@ You may notice that 2htdp/image doesn't contain an octogon function built in. It
 (regular-polygon size2 8 "solid" "red") ; copy & paste and change the size every time
 }
 
-◊(define problem-files (starter-solution "2-redocto"))
+◊(define problem-files (starter&solution "2-redocto"))
 ◊(define starter (car problem-files))
 ◊(define solution (cadr problem-files))
 
@@ -94,7 +94,7 @@ You may notice that 2htdp/image doesn't contain an octogon function built in. It
 
 ◊h2{Exercise 2.1 Create a warning sign function}
 
-◊(define problem-warn (starter-solution "2.1-warning"))
+◊(define problem-warn (starter&solution "2.1-warning"))
 ◊(define starter-warn (car problem-warn))
 ◊(define solution-warn (cadr problem-warn))
 
@@ -110,7 +110,7 @@ You may notice that 2htdp/image doesn't contain an octogon function built in. It
 }
 
 ◊h2{Exercise 2.2 Create a trapezoid function}
-◊(define problem-trap (starter-solution "2.2-isotrapezoid"))
+◊(define problem-trap (starter&solution "2.2-isotrapezoid"))
 ◊(define starter-trap (car problem-trap))
 ◊(define solution-trap (cadr problem-trap))
 
@@ -126,7 +126,7 @@ You may notice that 2htdp/image doesn't contain an octogon function built in. It
 }
 
 ◊h2{Exercise 2.3 Create a checkerboard function}
-◊(define problem-checker (starter-solution "2.3-checkerboard"))
+◊(define problem-checker (starter&solution "2.3-checkerboard"))
 ◊(define starter-checker (car problem-checker))
 ◊(define solution-check (cadr problem-checker))
 

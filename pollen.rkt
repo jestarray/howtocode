@@ -9,9 +9,9 @@
 (define (practice-url name)
   (string-append "https://jestlearn.com/how_to_code/#" name))
 
-; List<List(String, String)>>
-; returns (Filepath, Contents)
-(define (starter-solution filename)
+; String -> List<(String, String)>
+; read the contents of the filename from "starter" and "solution" directores and produce List<(FilePath, Contents)>
+(define (starter&solution filename)
   ; Path -> String
   ; returns the file string with the first 3 lines if it contains racket teaching lang metadata
   (define (strip-meta path)
@@ -40,8 +40,8 @@
 (define (racket-code-block #:data-src [src ""] . contents)
   (txexpr 'pre
           (if (non-empty-string? src)
-            `((class "line-numbers match-braces rainbow-braces") (data-src ,src) (data-download-link ""))
-            `((class "line-numbers match-braces rainbow-braces")))
+              `((class "line-numbers match-braces rainbow-braces") (data-src ,src) (data-download-link ""))
+              `((class "line-numbers match-braces rainbow-braces")))
           (list (txexpr 'code '((class "language-racket")) contents))))
 
 ; String -> Txexpr
@@ -51,7 +51,7 @@
 
 ; String -> txexpr
 (define (code-problem filename)
-  (define files (starter-solution filename))
+  (define files (starter&solution filename))
   (define starter (car files))
   (define starter-path (car starter))
   (define starter-contents (cadr starter))
@@ -59,7 +59,7 @@
   (define solu-path (car solution))
   (define solu-contents (cadr solution))
   ;todo: add option to keep the Q block open?
-  (q (string-append "Exercise " filename) (racket-code-block #:data-src starter-path starter-contents) 
+  (q (string-append "Exercise " filename) (racket-code-block #:data-src starter-path starter-contents)
      (q "Answer" (racket-code-block #:data-src solu-path solu-contents)))
   )
 
@@ -72,8 +72,8 @@
 
 ;todo: introduce (slide-only) content? that is invis in reading mode and only vis in slide_mode ?
 ; to active slidemode, hit f12 and run the global function slide_mode()
-(define (slide . content)
-  (txexpr 'div (list '(class "slide")) content))
+(define (slide . contents)
+  (txexpr 'div '((class "slide")) contents))
 
 ;(define command-char #\◊)
 (module setup racket/base
@@ -156,15 +156,25 @@
 ; link to url, optional headline, optional bool
 (define (yt link #:headline [headline "Youtube"] #:open [open #false])
   (define split (string-split link "?"))
-  (define cleaned-link-for-thumbnail (cond [(cons? split) (car split)]
-                                           [else link]))
+  (define cleaned-link-for-thumbnail (if (cons? split) (car split) link))
   (define start-open (if open '((open "")) null))
-  (txexpr 'details start-open
-          (list (txexpr
-                 'summary '((style "color:red;")) (list headline))
-                (txexpr 'iframe
-                        (list  (cons 'srcdoc (cons (string-append "<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/" link "?autoplay=1><img src=https://img.youtube.com/vi/" cleaned-link-for-thumbnail "/hqdefault.jpg><span>▶</span></a>") empty))
-                               '(allow "picture-in-picture") '(allowfullscreen "true") '(loading "lazy") '(width "560") '(height "315")) empty))))
+  (define sdoc-string
+    (string-append "<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/" link "?autoplay=1><img src=https://img.youtube.com/vi/" cleaned-link-for-thumbnail "/hqdefault.jpg><span>▶</span></a>"))
+  (txexpr
+   'details
+   start-open
+   (list
+    (txexpr
+     'summary '((style "color:red;")) (list headline))
+    (txexpr
+     'iframe
+     `((srcdoc ,sdoc-string)
+       (allow "picture-in-picture")
+       (allowfullscreen "true")
+       (loading "lazy")
+       (width "560")
+       (height "315"))
+     empty))))
 
 ; String -> String
 ; flips the bits
@@ -204,7 +214,15 @@
 ;returns hashlink id of an h2
 (define (h2 s)
   (define slug (string-downcase (string-replace s " " "_")))
-  (txexpr 'h2 (list (cons 'id (cons slug empty))) (list (txexpr 'a (list '(class "anchor") (cons 'href (cons (string-append "#" slug) empty))) (list "#")) s)))
+  (txexpr
+   'h2
+   `((id ,slug))
+   (list
+    (txexpr 'a
+            `((class "anchor") (href ,(string-append "#" slug)))
+            '("#"))
+    s)))
+
 
 ;for backwards compatability reasons
 (define (sub-heading s) (h2 s))

@@ -21,7 +21,7 @@ Turn all ❌ into ✅ for each step you complete
 == Functions ==
     1. Signature, purpose, stub ❌
     2. Examples (aka check-expect/tests, elaborate the concrete) ❌
-      2B. if the function consumes a list, make sure a list of 2 or longer is tested 
+      2B. if the function consumes a list, make sure a list of 2 or longer is tested ❌
     3. Template(from data)?❌
     3. Code body ❌
     4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
@@ -264,6 +264,7 @@ ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 Turn all ❌ into ✅ for each step you complete
 
 1. Data Description❌
+   1B. if using define-struct, write all accessor signatures❌
 2. Interpretation❌
 3. Data Examples❌
 4. A function template that processes this data❌
@@ -275,11 +276,23 @@ Turn all ❌ into ✅ for each step you complete
 ; =================
 #| Functions:
 1. Signature, purpose, stub ❌
-2. Examples (aka check-expect, elaborate the concrete) ❌
+2. Examples (aka check-expect/tests, elaborate the concrete) ❌
+  2B. if the function consumes a list, make sure a list of 2 or longer is tested❌
 3. Template(from data)?❌
 3. Code body ❌
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
+
+; tock: (WorldState -> WorldState)
+; produce the next ...
+; TODO!
+(define (tock ws) ...)
+
+
+; render: (WorldState -> Image)
+; render ... 
+; TODO!
+(define (render ws) ...)
 
 ; main: (WorldState -> WorldState)
 ; start the world with ...
@@ -292,17 +305,6 @@ Turn all ❌ into ✅ for each step you complete
     [to-draw   render]   ; WorldState -> Image
     [stop-when ...]      ; WorldState -> Boolean
     ))
-
-; tock: (WorldState -> WorldState)
-; produce the next ...
-; TODO!
-(define (tock ws) ...)
-
-
-; render: (WorldState -> Image)
-; render ... 
-; TODO!
-(define (render ws) ...)
 }
 
 ◊details{

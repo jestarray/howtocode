@@ -186,18 +186,6 @@ You must type lists out in a cons chain sort of way for now to get used to the s
 }
 
 ◊slide{
-    ◊h3{What should the following produce?}
-    ◊r1-liner{(cons (+ 1 1) (cons 1 empty))}
-    ◊form{
-       ◊label{◊input[#:type "radio" #:name "q1"]{ a.◊code{3}}}
-       ◊label{◊input[#:type "radio" #:name "q1"]{ b.◊code{2}}}
-       ◊label{◊input[#:type "radio" #:name "q1"]{ c.◊code{(cons 3 empty)}}}
-       ◊label{◊input[#:type "radio" #:name "q1"]{ d.◊code{(cons 2 (cons 1 empty))}}}
-    }
-    ◊details{◊summary{answer} d.◊code{(cons 2 (cons 1 empty))}}
-}
-
-◊slide{
     ◊h3{How many elements does the following list have?}
     ◊r1-liner{(cons 4 empty)}
     ◊form{
@@ -273,7 +261,18 @@ You must type lists out in a cons chain sort of way for now to get used to the s
 }
 
 ◊slide{
-        ◊h3{ Which of the following expressions will evaluate to ◊code{#false}?}
+        ◊h3{What type of list is the following?}
+        ◊r1-liner{(cons "1" (cons "2" empty))}
+        ◊form{
+           ◊label{◊input[#:type "radio" #:name "q"]{ a.◊code{ListOfNumber}}}
+           ◊label{◊input[#:type "radio" #:name "q"]{ b.◊code{ListOfBoolean}}}
+           ◊label{◊input[#:type "radio" #:name "q"]{ c.◊code{ListOfString}}}
+        }
+        ◊details{◊summary{answer} c.◊code{ListOfString}}
+}
+
+◊slide{
+        ◊h3{Which of the following expressions will evaluate to ◊code{#false}?}
         ◊form{
            ◊label{◊input[#:type "radio" #:name "q"]{ a.◊code{(cons? (cons empty empty))}}}
            ◊label{◊input[#:type "radio" #:name "q"]{ b.◊code{(list? (cons empty empty))}}}
@@ -292,7 +291,7 @@ You must type lists out in a cons chain sort of way for now to get used to the s
        ◊label{◊input[#:type "radio" #:name "q"]{ b.◊code{empty}}}
        ◊label{◊input[#:type "radio" #:name "q"]{ c.◊code{(cons 45 empty)}}}
        ◊label{◊input[#:type "radio" #:name "q"]{ d.◊code{(cons 99 empty)}}}
-       ◊label{◊input[#:type "radio" #:name "q"]{ c.◊code{45}}}
+       ◊label{◊input[#:type "radio" #:name "q"]{ e.◊code{45}}}
     }
     ◊details{◊summary{answer} d.◊code{(cons 99 empty)} . You've seen ◊code{first} produce the base types so far, but because ◊code{cons} takes as its 1st argument ◊strong{anything}, we can stick a list there as well.}
 }
@@ -305,9 +304,21 @@ You must type lists out in a cons chain sort of way for now to get used to the s
        ◊label{◊input[#:type "radio" #:name "q"]{ b.2}}
        ◊label{◊input[#:type "radio" #:name "q"]{ c.3}}
        ◊label{◊input[#:type "radio" #:name "q"]{ d.4}}
-       ◊label{◊input[#:type "radio" #:name "q"]{ c.5}}
+       ◊label{◊input[#:type "radio" #:name "q"]{ e.5}}
     }
     ◊details{◊summary{answer} b.◊code{2}}
+}
+
+◊slide{
+    ◊h3{Which ones of the following are INVALID ways to construct a list? Check all that apply}
+    ◊form{
+       ◊label{◊input[#:type "checkbox" #:name "q"]{ a.◊code{(cons 5 empty)}}}
+       ◊label{◊input[#:type "checkbox" #:name "q"]{ b.◊code{(cons #false #false)}}}
+       ◊label{◊input[#:type "checkbox" #:name "q"]{ c.◊code{(cons "argh" (cons "moo" empty))}}}
+       ◊label{◊input[#:type "checkbox" #:name "q"]{ d.◊code{(cons (cons 21 empty))}}}
+       ◊label{◊input[#:type "checkbox" #:name "q"]{ e.◊code{(cons 999)}}}
+    }
+    ◊details{◊summary{answer} b, d, and e}
 }
 
 ◊; Speaker notes: Naively just take (first ls) and slap it onto (cons x (first ls))  to demonstrate an error of the 2nd argument not being a list

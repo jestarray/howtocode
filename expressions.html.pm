@@ -107,7 +107,7 @@ We'll cover errors more extensively later but for now just remember to make sure
 
 ◊; REQUIRES RACEKT/FILE
 ◊(require racket/file)
-◊(define problem (starter-solution "0-pythag"))
+◊(define problem (starter&solution "0-pythag"))
 ◊(define starter (car problem))
 ◊(define solution (cadr problem))
 ◊pre[#:class "line-numbers match-braces rainbow-braces" #:data-src (car starter) #:data-download-link ""]{

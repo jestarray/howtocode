@@ -20,6 +20,16 @@ if using vscode, type in `lz` for the lozenge character which will popup a snipp
 ## slide_mode:
 some pages have a slide mode, just hit f12, run slide_mode() and use "w" and "d" to move right and left
 
+# adding problems to handin:
+Make sure there exists the following files in the 3:
+Note that underscores are important! do not use underscores to deliminate spaces, use dash instead
+graders/1.0-my-test-problem_grader.rkt 
+starter/1.0-my-test-problem_starter.rkt
+solutions/1.0-my-test-problem_solution.rkt
 
+run `GEN_HANDIN_FOLDER.rkt`
+
+# handin-grader notes:
+- graders should not have their own struct defs and reference local variables. instead you have to copy and paste them out, as they will always evaluate in the submission context
 ## todo:
 size all images to use img[#:width "100%"]{} so they don't grow too big in height

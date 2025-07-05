@@ -27,9 +27,14 @@ graders/1.0-my-test-problem_grader.rkt
 starter/1.0-my-test-problem_starter.rkt
 solutions/1.0-my-test-problem_solution.rkt
 
-run `GEN_HANDIN_FOLDER.rkt`
+run `GEN_HANDIN_FOLDER.rkt` . This will copy the necessary graders and setup the handin folder and also generate a `VALID-ASSIGNMENTS.json` which is to be fed into jestlearn
 
 # handin-grader notes:
 - graders should not have their own struct defs and reference local variables. instead you have to copy and paste them out, as they will always evaluate in the submission context
+- checking evaluation of structs should be done with `((submission-eval) '(make-mystruct 1))`, e.g:
+`(@test "advance-char#1" "err" (advance-char (make-typewriter "hey" 0)) ((submission-eval) '(make-typewriter "hey" 1)) 1)`
+- checking evaluation of values should be done without the `(submission-eval)`, e.g:
+`(@test "charge-message#1" "err" (charge-message (make-phone "iphone 10" (make-battery 100 5))) "Fully charged" 1)`
+
 ## todo:
 size all images to use img[#:width "100%"]{} so they don't grow too big in height

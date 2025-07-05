@@ -1,7 +1,7 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 9.00-in-city-state_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-(define PNAME 'in-city-state)
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 9.03-data-info_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(define PNAME 'data-info)
 
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
@@ -23,27 +23,30 @@ Turn all ❌ into ✅ for each step you complete
     4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+
 #|PROBLEM A:
-Finish the uncompleted steps ❌ of Data Design above for both Address and Person
+Finish the uncompleted steps ❌ of Data Design above for both Storage and Computer
 |#
 
-(define-struct address [city state])
-; Address is (make-address String String)
+(define-struct storage [occupied capacity])
+; Storage is (make-storage Number Number)
 ; interp.
-; an american style address. Fields are self explanatory
+; occupied is in GB and is the amount of data in use
+; capacity is in GB and is the amount of max data to store
 
 
-(define-struct person [fname lname address])
-; Person is (make-person String String Address)
+(define-struct computer [brand drive])
+; Computer is (make-computer String Drive)
 ; interp.
-; fname means firstname
-; lname means lastname
-; address is an american style address
-
-
+; brand is the name of the brand
+; drive is how much storage the computer has
 
 #|PROBLEM B:
-Design the function "in-city-state?" that consumes an Person and an Address, and produces whether or not the given person is at the given address.
+On Windows File Explorer in the "This PC" section, 
+there is a message below the hard drive displaying how much storage is left free:
+"X GB free of Y GB"
+X is how much free space is left
+Y is the max capacity of the drive
+https://howtocode.pages.dev/images/windows_storage.png
+Finish desinging the function "data-info"
 |#
-
-; in-city-state? : (Person Address -> Boolean)

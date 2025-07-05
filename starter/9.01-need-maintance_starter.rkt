@@ -1,7 +1,7 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 9.00-in-city-state_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-(define PNAME 'in-city-state)
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 9.01-need-maintance_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(define PNAME 'need-maintance)
 
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
@@ -23,27 +23,27 @@ Turn all ❌ into ✅ for each step you complete
     4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+
 #|PROBLEM A:
-Finish the uncompleted steps ❌ of Data Design above for both Address and Person
+Finish the uncompleted steps ❌ of Data Design above for both Engine and Vehicle
 |#
 
-(define-struct address [city state])
-; Address is (make-address String String)
+(define-struct engine [horsepower oil-life check-light])
+; Engine is (make-engine Number Number Boolean)
+; interp. a car engine
+; horsepower is poweroutput of the engine
+; oil-life is [0-100] representing the percentage
+; check-light indicates the engine has a problem
+
+(define-struct vehicle [brand engine])
+; Vehicle is (make-vehicle String Engine)
 ; interp.
-; an american style address. Fields are self explanatory
-
-
-(define-struct person [fname lname address])
-; Person is (make-person String String Address)
-; interp.
-; fname means firstname
-; lname means lastname
-; address is an american style address
-
+; brand is the name of the brand, e.g toyota, etc
+; engine is a reference to Engine
 
 
 #|PROBLEM B:
-Design the function "in-city-state?" that consumes an Person and an Address, and produces whether or not the given person is at the given address.
+A vehicle neeeds maintance when the oil life is less than or equal to 10% or the check light is on
+Design the function "need-maintance?" that consumes a Vehicle to provide the purpose above
 |#
-
-; in-city-state? : (Person Address -> Boolean)
+; need-maintance? (Vehicle -> Boolean)

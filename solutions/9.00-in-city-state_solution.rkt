@@ -23,6 +23,10 @@ Turn all ❌ into ✅ for each step you complete
     4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+#|PROBLEM A:
+Finish the uncompleted steps ❌ of Data Design above for both Address and Person
+|#
+
 (define-struct address [city state])
 ; Address is (make-address String String)
 ; interp.
@@ -55,10 +59,6 @@ Turn all ❌ into ✅ for each step you complete
   (... (person-fname ps)
        (person-lname ps)
        (address-temp (person-address ps)))) ;reference
-
-#|PROBLEM A:
-Finish the uncompleted steps ❌ of Data Design above for both Address and Person
-|#
 
 #|PROBLEM B:
 Design the function "in-city-state?" that consumes an Person and an Address, and produces whether or not the given person is at the given address.

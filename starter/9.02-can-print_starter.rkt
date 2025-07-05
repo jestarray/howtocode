@@ -1,7 +1,7 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 9.00-in-city-state_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-(define PNAME 'in-city-state)
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 9.02-can-print_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(define PNAME 'can-print)
 
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
@@ -23,27 +23,28 @@ Turn all ❌ into ✅ for each step you complete
     4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+
 #|PROBLEM A:
-Finish the uncompleted steps ❌ of Data Design above for both Address and Person
+Finish the uncompleted steps ❌ of Data Design above for both Ink and Printer
 |#
 
-(define-struct address [city state])
-; Address is (make-address String String)
+(define-struct ink [amount color])
+; Ink is (make-ink Number String)
 ; interp.
-; an american style address. Fields are self explanatory
+; amount is the percentage of ink left in the cartridge
+; color is the name of a color
 
-
-(define-struct person [fname lname address])
-; Person is (make-person String String Address)
+(define-struct printer [name paper ink])
+; Printer is (make-printer String Number Ink)
 ; interp.
-; fname means firstname
-; lname means lastname
-; address is an american style address
-
+; name is the brand of the printer
+; paper is the amount of paper left
+; ink is a reference to Ink, representing the cartiage
 
 
 #|PROBLEM B:
-Design the function "in-city-state?" that consumes an Person and an Address, and produces whether or not the given person is at the given address.
+A printer needs at least 1 piece of paper and 1% of ink in order to print.
+Design a function "can-print?" that consumes a Printer and provides the given purpose above.
 |#
 
-; in-city-state? : (Person Address -> Boolean)
+; can-print? : (Printer -> Boolean)

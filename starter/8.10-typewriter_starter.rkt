@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 8.10-typewriter_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 8.10-typewriter_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (define PNAME 'typewriter)
 
 (require 2htdp/image)
@@ -68,12 +68,12 @@ Turn all ❌ into ✅ for each step you complete
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
-; tock: (TypeWriter -> TypeWriter)
+; advance-char : (TypeWriter -> TypeWriter)
 ; TODO
 (define (advance-char tw) ...)
 
-; render: (TypeWriter -> Image)
-; TOOD
+; render : (TypeWriter -> Image)
+; TODO
 
 (define (render tw) ...)
 

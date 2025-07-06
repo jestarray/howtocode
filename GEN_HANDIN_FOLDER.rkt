@@ -33,9 +33,9 @@
 
 #;
 (for ([file-or-dir (directory-list gen-handin-dir)])
-; delete only directories
-; todo: only delete and replace grader files?
-; warn if a folder is not valid, e.g out of date because moved problem number or renamed
+  ; delete only directories
+  ; todo: only delete and replace grader files?
+  ; warn if a folder is not valid, e.g out of date because moved problem number or renamed
   (define full-path (build-path gen-handin-dir file-or-dir))
   (when (directory-exists? full-path)
     (delete-directory/files full-path #:must-exist? #f)
@@ -301,6 +301,7 @@
                         (hints ,@hint-funcs))) *valid-assignments-and-hints*))
          (copy-file grader-path (build-path problem-dir "checker.rkt") #t)]))
 
+; List<String>
 (define assignment-folders
   (filter-map
    (lambda (file-or-dir)
@@ -310,10 +311,19 @@
          (path->string file-or-dir)
          #f)) (directory-list gen-handin-dir)))
 
+(define sorted-assignment-folders
+  (sort
+   assignment-folders
+   (lambda (a b)
+     (define num1 (string->number (first (string-split a "-"))))
+     (define num2 (string->number (first (string-split b "-"))))
+     (<= num1 num2))
+   ))
+
 (define config-file
   `((allow-new-users #t)
     (allow-change-info #t)
-    (active-dirs (,@assignment-folders))
+    (active-dirs (,@sorted-assignment-folders))
     (session-timeout 10)
     ))
 
@@ -325,10 +335,16 @@
 ; goes into jestlearn server
 (call-with-output-file "VALID-ASSIGNMENTS.json"
   (lambda (out)
-    (displayln (jsexpr->string
-                (sort *valid-assignments-and-hints*
-                      (lambda (a b)
-                        (string<=? (hash-ref a 'name) (hash-ref b 'name))))) out)) #:exists 'replace)
+    (displayln
+     (jsexpr->string
+      (sort *valid-assignments-and-hints*
+            (lambda (a b)
+              (define name1 (hash-ref a 'name))
+              (define name2 (hash-ref b 'name))
+              (define num1 (string->number (first (string-split name1 "-"))))
+              (define num2 (string->number (first (string-split name2 "-"))))
+              ;(println (list num1 num2))
+              (<= num1 num2)))) out)) #:exists 'replace)
 
 (define overridden-collects-dir (build-path gen-handin-dir "overriden-collects"))
 (delete-directory/files overridden-collects-dir #:must-exist? #f)

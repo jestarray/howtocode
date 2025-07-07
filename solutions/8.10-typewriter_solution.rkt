@@ -68,7 +68,7 @@ Turn all ❌ into ✅ for each step you complete
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
-; tock: (TypeWriter -> TypeWriter)
+; advance-char : (TypeWriter -> TypeWriter)
 ; produce the next character of the typewriter text
 (check-expect (advance-char castle)
               (make-typewriter (typewriter-message castle) 1))
@@ -86,7 +86,7 @@ Turn all ❌ into ✅ for each step you complete
    ))
 
 ; render: (TypeWriter -> Image)
-; draws the given typewriter message based on its cursor
+; draw the given text in typewriter piece wise based on the cursor
 (check-expect 
  (render castle)
  (text 

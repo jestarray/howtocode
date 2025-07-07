@@ -8,7 +8,7 @@
 
 #|PROBLEM A:
 Design a world program that bounces a cube on the screen like those old bouncing dvd logos:
-https://youtu.be/QOtuX0jL85Y?si=RcYvO1G9ja515eID
+https://youtu.be/QOtuX0jL85Y?si=rTnCW7zFckeOAves&t=26
 We have provided you with the data definition for bouncer and some constants.
 Finish working on the "process-bouncer" and render function
 hint: use place-image/align in the render function
@@ -42,7 +42,7 @@ Turn all ❌ into ✅ for each step you complete
 ; x & y is the top left position of the box
 ; slope-x is the rate it is traveling in the x-axis per pixel
 ; slope-y is the rate it is traveling in the y-axis per pixel
-(define b1 (make-bouncer 200 25 LOGO 5 5))
+(define b1 (make-bouncer 200 200 LOGO 5 5))
 
 ; bouncer-x : (Bouncer -> Number)
 ; bouncer-y : (Bouncer -> Number)
@@ -157,4 +157,4 @@ Turn all ❌ into ✅ for each step you complete
     [on-tick process-bouncer]     ; Bouncer -> Bouncer
     [to-draw render]   ; Bouncer -> Image
     ))
-(main (make-bouncer 200 25 LOGO 5 5))
+(main b1)

@@ -20,7 +20,8 @@
             (define fname (path->string (file-name-from-path path)))
             (define splits (string-split fname "-"))
             (define try-num (string->number (first splits)))
-            (if try-num
+            ; ignore 0.0 to 2.3 because they do not have graders intentionally
+            (if (and try-num (not (<= 0.0 try-num 2.9)))
                 (list (build-path starter-dir path)
                       (build-path solution-dir (string-replace fname "_starter.rkt" "_solution.rkt"))
                       (build-path grader-dir (string-replace fname "_starter.rkt" "_grader.rkt")))
@@ -269,7 +270,7 @@
        (define exists (file-exists? path))
        ; print what is missing
        (when (not exists)
-         ; ignore having graders for 0.0 to 2.3
+         ; ignore 0.0 to 2.3 because they do not have graders intentionally
          (println (list ((compose path->string file-name-from-path) path) " does not have a grader"))
          )
        exists) group))

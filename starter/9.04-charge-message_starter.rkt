@@ -51,5 +51,5 @@ We are only concerned with minutes, no need to convert them to hours(challenge y
 In the case of fully charged:
 "Fully charged"
 
-Design a function "charge-mesasage" that consumes a Phone and provides the given purpose above.
+Design a function "charge-message" that consumes a Phone and provides the given purpose above.
 |#

@@ -42,7 +42,7 @@ Turn all ❌ into ✅ for each step you complete
 ; x & y is the top left position of the box
 ; slope-x is the rate it is traveling in the x-axis per pixel
 ; slope-y is the rate it is traveling in the y-axis per pixel
-(define b1 (make-bouncer 200 200 LOGO -5 -5))
+(define b1 (make-bouncer 250 200 LOGO -5 -5))
 
 ; bouncer-x : (Bouncer -> Number)
 ; bouncer-y : (Bouncer -> Number)

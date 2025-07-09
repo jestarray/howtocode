@@ -36,6 +36,7 @@ Finish the uncompleted steps ❌ of Data Design above for both Engine and Vehicl
 ; check-light indicates the engine has a problem
 (define nocheck-10% (make-engine 2000 10 #false))
 (define check-10% (make-engine 2000 10 #true))
+
 (define check-5% (make-engine 2000 5 #true))
 (define nocheck-5% (make-engine 2000 5 #false))
 (define nocheck-40% (make-engine 2000 40 #false))
@@ -57,6 +58,7 @@ Finish the uncompleted steps ❌ of Data Design above for both Engine and Vehicl
 ; engine is a reference to Engine
 (define honda (make-vehicle "Honda" nocheck-10%))
 (define toyota (make-vehicle "Toyota" check-10%))
+
 (define byd (make-vehicle "BYD" check-5%))
 (define volvo (make-vehicle "Volvo" nocheck-5%))
 (define xpeng (make-vehicle "Xpeng" nocheck-40%))
@@ -71,6 +73,7 @@ Finish the uncompleted steps ❌ of Data Design above for both Engine and Vehicl
    (engine-temp (vehicle-engine vh))))
 
 #|PROBLEM B:
+You are working at a car company and they want you to design code that detects when a vehicle needs maintance.
 A vehicle neeeds maintance when the oil life is less than or equal to 10% or the check light is on
 Design the function "need-maintance?" that consumes a Vehicle to provide the purpose above
 |#

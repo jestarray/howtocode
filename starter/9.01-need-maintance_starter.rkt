@@ -43,6 +43,7 @@ Finish the uncompleted steps ❌ of Data Design above for both Engine and Vehicl
 
 
 #|PROBLEM B:
+You are working at a car company and they want you to design code that detects when a vehicle needs maintance.
 A vehicle neeeds maintance when the oil life is less than or equal to 10% or the check light is on
 Design the function "need-maintance?" that consumes a Vehicle to provide the purpose above
 |#

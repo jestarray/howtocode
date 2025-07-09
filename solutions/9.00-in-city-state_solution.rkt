@@ -61,7 +61,7 @@ Finish the uncompleted steps ❌ of Data Design above for both Address and Perso
        (address-temp (person-address ps)))) ;reference
 
 #|PROBLEM B:
-Design the function "in-city-state?" that consumes an Person and an Address, and produces whether or not the given person is at the given address.
+Design the function "in-city-state?" that consumes a Person and an Address, and produces whether or not the given person is at the given address.
 |#
 
 ; in-city-state? : (Person Address -> Boolean)

@@ -32,7 +32,7 @@ Finish the uncompleted steps ❌ of Data Design above for both Engine and Vehicl
 ; Engine is (make-engine Number Number Boolean)
 ; interp. a car engine
 ; horsepower is poweroutput of the engine
-; oil-life is [0-100] representing the percentage
+; oil-life is [0-100] representing the percentage of oil left
 ; check-light indicates the engine has a problem
 (define nocheck-10% (make-engine 2000 10 #false))
 (define check-10% (make-engine 2000 10 #true))

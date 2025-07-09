@@ -74,7 +74,7 @@ Finish the uncompleted steps ❌ of Data Design above for both Engine and Vehicl
 
 #|PROBLEM B:
 You are working at a car company and they want you to design code that detects when a vehicle needs maintance.
-A vehicle neeeds maintance when the oil life is less than or equal to 10% or the check light is on
+A vehicle needs maintance when the oil life is less than or equal to 10% or the check light is on
 Design the function "need-maintance?" that consumes a Vehicle to provide the purpose above
 |#
 
@@ -85,14 +85,14 @@ Design the function "need-maintance?" that consumes a Vehicle to provide the pur
 (check-expect (need-maintance? xpeng) #false)
 (check-expect (need-maintance? nio) #true)
 
-; need-maintance? (Vehicle -> Boolean)
-; produce #true if the given vehicle has 10% oil life or check light is on
+; need-maintance? : (Vehicle -> Boolean)
+; produce #true if the given vehicle has less than or equal to 10% oil life or check light is on
 ;(define (need-maintance? vh) #false)
 (define (need-maintance? vh)
   (light-or-10%? (vehicle-engine vh)))
 
 ; light-or-10%? : (Engine -> Boolean)
-; produce #true if the given engine has 10% oil life or check light is on
+; produce #true if the given engine has less than or equal to 10% oil life or check light is on
 (define (light-or-10%? eng)
   (or (<= (engine-oil-life eng) 10)
       (engine-check-light eng)))

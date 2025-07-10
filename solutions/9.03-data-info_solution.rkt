@@ -65,7 +65,7 @@ there is a message below the hard drive displaying how much storage is left free
 X is how much free space is left
 Y is the max capacity of the drive
 https://howtocode.pages.dev/images/windows_storage.png
-Finish desinging the function "data-info"
+Design a function: "data-info" that consumes a computer and produces a message about how much is left as stated above
 |#
 
 ; data-info : (Computer -> String)

@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 9.03-data-info_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 9.03-data-info_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (define PNAME 'data-info)
 
 #|
@@ -48,5 +48,5 @@ there is a message below the hard drive displaying how much storage is left free
 X is how much free space is left
 Y is the max capacity of the drive
 https://howtocode.pages.dev/images/windows_storage.png
-Finish desinging the function "data-info"
+Design a function: "data-info" that consumes a computer and produces a message about how much is left as stated above
 |#

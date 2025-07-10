@@ -16,8 +16,8 @@ Turn all ❌ into ✅ for each step you complete
     1. Signature, purpose, stub ✅
     2. Examples (aka check-expect, elaborate the concrete) ✅
     3. Template(from data)?✅
-    3. Code body ✅
-    4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
+    4. Code body ✅
+    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
 ; A Year is a non-negative integer

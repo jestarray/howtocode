@@ -43,9 +43,9 @@ Finish the uncompleted steps ❌ of Data Design above for both Battery and Phone
 
 #|PROBLEM B:
 Phones(mainly Android) have a feature where it will tell you how long it will take to charge:
-"<current-percentage>% 19 m until full"
+"Charging: <current-percentage>% 19 m until full"
 
-https://howtocode.pages.dev/images/charge_info.png
+https://howtocode.pages.dev/images/charge_info.jpg
 (don't worry about spacing percentange and minutes left into new lines)
 
 We are only concerned with minutes, no need to convert them to hours(challenge yourself ;))

@@ -49,8 +49,8 @@
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
         (set-test-max-score! 3)
 (@test "charge-message#1" "err" (charge-message (make-phone "iphone 10" (make-battery 100 5)))  "Fully charged" 1)
-(@test "charge-message#2" "err" (charge-message (make-phone "Samsung Galaxy 24" (make-battery 50 5))) "50% 10 m until full" 1)
-(@test "charge-message#3" "err" (charge-message (make-phone "Vivo" (make-battery 20 10))) "20% 8 m until full" 1)
+(@test "charge-message#2" "err" (charge-message (make-phone "Samsung Galaxy 24" (make-battery 50 5))) "Charging: 50% 10 m until full" 1)
+(@test "charge-message#3" "err" (charge-message (make-phone "Vivo" (make-battery 20 10))) "Charging: 20% 8 m until full" 1)
         ; (println submission)
         )
 (post:

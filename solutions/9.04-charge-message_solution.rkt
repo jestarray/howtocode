@@ -62,9 +62,9 @@ Finish the uncompleted steps ❌ of Data Design above for both Battery and Phone
 
 #|PROBLEM B:
 Phones(mainly Android) have a feature where it will tell you how long it will take to charge:
-"<current-percentage>% 19 m until full"
+"Charging: <current-percentage>% 19 m until full"
 
-https://howtocode.pages.dev/images/charge_info.png
+https://howtocode.pages.dev/images/charge_info.jpg
 (don't worry about spacing percentange and minutes left into new lines)
 
 We are only concerned with minutes, no need to convert them to hours(challenge yourself ;))
@@ -74,11 +74,12 @@ In the case of fully charged:
 Design a function "charge-message" that consumes a Phone and provides the given purpose above.
 |#
 
+
 ; charge-message : (Phone -> String)
 ; produce the minutes left until full or "Fully charged"
 (check-expect (charge-message i10) "Fully charged")
-(check-expect (charge-message samsung) "50% 10 m until full")
-(check-expect (charge-message vivo) "20% 8 m until full")
+(check-expect (charge-message samsung) "Charging: 50% 10 m until full")
+(check-expect (charge-message vivo) "Charging: 20% 8 m until full")
 ; (define (charge-message ph) "")
 
 (define (charge-message ph)
@@ -92,6 +93,7 @@ Design a function "charge-message" that consumes a Phone and provides the given 
      "Fully charged"]
     [else
      (string-append
+     "Charging: "
       (number->string (battery-percent bat)) "% " 
       (number->string
        (/ (- 100 (battery-percent bat)) (battery-charge-rate bat)))

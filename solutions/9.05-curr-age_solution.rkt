@@ -83,11 +83,13 @@ Design the function "curr-age" that consumes a Date and a Person, and produces t
 
 (define (years-between old new)
   (cond
-    [(and (<= (date-month old) (date-month new))
-          (<= (date-day old) (date-day new)))
+    [(and
+      (<= (date-month old) (date-month new))
+      (<= (date-day old) (date-day new)))
      (- (date-year new) (date-year old))]
     [else
-     (- (date-year new) (date-year old) 1)]))
+     (- (date-year new) (date-year old)
+        1)]))
 
 (define (years-between2 old new)
   (- (date-year new) (date-year old)

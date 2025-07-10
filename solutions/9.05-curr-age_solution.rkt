@@ -23,7 +23,7 @@ Turn all ❌ into ✅ for each step you complete
 |#
 
 #|PROBLEM A:
-Finish the uncompleted steps ❌ of Data Design above for Person and Date 
+Finish the uncompleted steps ❌ of Data Design above for Date and Person
 |#
 
 (define-struct date [month day year])

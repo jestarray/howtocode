@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 9.04-charge-message_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 9.04-charge-message_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (define PNAME 'charge-message)
 
 #|
@@ -25,7 +25,7 @@ Turn all ❌ into ✅ for each step you complete
 
 
 #|PROBLEM A:
-Finish the uncompleted steps ❌ of Data Design above for both Ink and Printer
+Finish the uncompleted steps ❌ of Data Design above for both Battery and Phone
 |#
 
 (define-struct battery [percent charge-rate])
@@ -42,11 +42,12 @@ Finish the uncompleted steps ❌ of Data Design above for both Ink and Printer
 
 
 #|PROBLEM B:
+Phones(mainly Android) have a feature where it will tell you how long it will take to charge:
+"<current-percentage>% 19 m until full"
+
 https://howtocode.pages.dev/images/charge_info.png
 (don't worry about spacing percentange and minutes left into new lines)
 
-Phones(mainly Android) have a feature where it will tell you how long it will take to charge:
-"<current-percentage>% 19 m until full"
 We are only concerned with minutes, no need to convert them to hours(challenge yourself ;))
 In the case of fully charged:
 "Fully charged"

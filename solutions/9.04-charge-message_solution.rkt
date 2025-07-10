@@ -25,7 +25,7 @@ Turn all ❌ into ✅ for each step you complete
 
 
 #|PROBLEM A:
-Finish the uncompleted steps ❌ of Data Design above for both Ink and Printer
+Finish the uncompleted steps ❌ of Data Design above for both Battery and Phone
 |#
 
 (define-struct battery [percent charge-rate])
@@ -61,11 +61,12 @@ Finish the uncompleted steps ❌ of Data Design above for both Ink and Printer
   (... (phone-brand ph) ... (battery-temp (phone-battery ph))))
 
 #|PROBLEM B:
+Phones(mainly Android) have a feature where it will tell you how long it will take to charge:
+"<current-percentage>% 19 m until full"
+
 https://howtocode.pages.dev/images/charge_info.png
 (don't worry about spacing percentange and minutes left into new lines)
 
-Phones(mainly Android) have a feature where it will tell you how long it will take to charge:
-"<current-percentage>% 19 m until full"
 We are only concerned with minutes, no need to convert them to hours(challenge yourself ;))
 In the case of fully charged:
 "Fully charged"

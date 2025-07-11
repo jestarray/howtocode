@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 10.02-update-battery_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 10.02-update-battery_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (define PNAME 'update-battery)
 
 #|
@@ -41,7 +41,7 @@ Finish the uncompleted steps ❌ of Data Design above for Battery and EVCar
 
 
 #|PROBLEM B:
-In some parts of China, there are EV battery swapping stations! The battery swap should only happen if the id number in the car and the new battery matches AND if the new battery has more charge than the one being replaced
+In some parts of China, there are EV battery swapping stations! The battery swap should only happen if the id number of the current cars battery and the new battery matches AND if the new battery has more charge than the one being replaced
 
 Write a function "update-battery" that consumes an EvCar and a Battery and produces the car with the potentially replaced battery
 |#

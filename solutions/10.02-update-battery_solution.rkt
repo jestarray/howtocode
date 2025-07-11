@@ -35,11 +35,11 @@ Finish the uncompleted steps ❌ of Data Design above for Battery and EVCar
 ; battery-id : (Battery -> Number)
 ; battery-charge : (Battery -> Number)
 
-(define battery-tesla-full (make-battery 1 100))
-(define battery-tesla-half (make-battery 1 50))
+(define batt-tesla-full (make-battery 1 100))
+(define batt-tesla-half (make-battery 1 50))
 
-(define battery-byd-half (make-battery 2 50))
-(define battery-byd-full (make-battery 2 100))
+(define batt-byd-half (make-battery 2 50))
+(define batt-byd-full (make-battery 2 100))
 
 (define (battery-temp bt)
   (... (battery-id bt)
@@ -54,27 +54,27 @@ Finish the uncompleted steps ❌ of Data Design above for Battery and EVCar
 ; evcar-name : (EVCar -> Name)
 ; evcar-batt : (EVCar -> Battery)
 
-(define tesla (make-evcar "Tesla" battery-tesla-half))
-(define byd (make-evcar "BYD" battery-byd-full))
+(define tesla (make-evcar "Tesla" batt-tesla-half))
+(define byd (make-evcar "BYD" batt-byd-full))
 
 (define (evcar-temp ev)
   (... (evcar-name ev) 
        (battery-temp (evcar-batt ev))))
 
 #|PROBLEM B:
-In some parts of China, there are EV battery swapping stations! The battery swap should only happen if the id number in the car and the new battery matches AND if the new battery has more charge than the one being replaced
+In some parts of China, there are EV battery swapping stations! The battery swap should only happen if the id number of the current cars battery and the new battery matches AND if the new battery has more charge than the one being replaced
 
 Write a function "update-battery" that consumes an EvCar and a Battery and produces the car with the potentially replaced battery
 |#
 
-(check-expect (update-battery tesla battery-tesla-full)
-              (make-evcar "Tesla" battery-tesla-full))
+(check-expect (update-battery tesla batt-tesla-full)
+              (make-evcar "Tesla" batt-tesla-full))
 
-(check-expect (update-battery byd battery-byd-half)
-              (make-evcar "BYD" battery-byd-full))
+(check-expect (update-battery byd batt-byd-half)
+              (make-evcar "BYD" batt-byd-full))
 
-(check-expect (update-battery byd battery-tesla-full)
-              (make-evcar "BYD" battery-byd-full))
+(check-expect (update-battery byd batt-tesla-full)
+              (make-evcar "BYD" batt-byd-full))
 
 ; update-battery : (EVCar Battery -> EVCar)
 ; replaces the battery of the ev car
@@ -84,6 +84,11 @@ Write a function "update-battery" that consumes an EvCar and a Battery and produ
 
 ; decide-battery : (Battery Battery -> Battery)
 ; produces the the 2nd given battery if it has more charge than the 1st and is of the same id
+(check-expect (decide-battery batt-tesla-half batt-tesla-full) batt-tesla-full)
+(check-expect (decide-battery batt-tesla-full batt-tesla-half) batt-tesla-full)
+(check-expect (decide-battery batt-tesla-full batt-byd-full) batt-tesla-full)
+(check-expect (decide-battery batt-tesla-half batt-byd-full) batt-tesla-half)
+
 (define (decide-battery bt bt2)
   (if (and (= (battery-id bt) (battery-id bt2))
            (< (battery-charge bt) (battery-charge bt2)))

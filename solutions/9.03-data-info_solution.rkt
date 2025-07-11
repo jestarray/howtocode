@@ -33,7 +33,7 @@ Finish the uncompleted steps ❌ of Data Design above for both Storage and Compu
 ; occupied is in GB and is the amount of data in use
 ; capacity is in GB and is the amount of max data to store
 (define st0 (make-storage 500 500))
-(define st1 (make-storage 50 500))
+(define st1 (make-storage 50 750))
 
 ; storage-occupied: (Storage -> Number)
 ; storage-capacity: (Storage -> Number)
@@ -72,7 +72,7 @@ Design a function: "data-info" that consumes a computer and produces a message a
 ; X is how much free space is left
 ; Y is the max capacity of the drive
 (check-expect (data-info hp) "0 GB free of 500 GB")
-(check-expect (data-info dell) "450 GB free of 500 GB")
+(check-expect (data-info dell) "700 GB free of 750 GB")
 ;(define (data-info cmp) "")
 
 (define (data-info cmp)

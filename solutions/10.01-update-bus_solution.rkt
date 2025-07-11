@@ -67,7 +67,7 @@ Desgin a function "update-bus" which only replaces its driver if the given drive
 |#
 
 ; update-bus: (Bus Driver -> Bus)
-; replaces the driver on the bus with a new driver who can drive the same route
+; replace the driver on the bus with a new driver only if they can drive the same route
 (check-expect (update-bus bus-r1 alice) (make-bus 1 alice))
 (check-expect (update-bus bus-r1 jack) (make-bus 1 bob))
 
@@ -76,7 +76,11 @@ Desgin a function "update-bus" which only replaces its driver if the given drive
             (decide-driver (bus-driver bs) dvr)))
 
 ; decide-driver : (Driver Driver -> Driver)
-; produces the 2nd given driver if the routes of both drivers are the same
+; produce the new(2nd given driver) driver if the routes of both drivers are the same
+(check-expect (decide-driver alice bob) bob)
+(check-expect (decide-driver bob alice) alice)
+(check-expect (decide-driver bob jack) bob)
+
 (define (decide-driver curr new)
   (cond
     [(= (driver-route curr) (driver-route new))

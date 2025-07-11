@@ -62,10 +62,10 @@ Finish the uncompleted steps ❌ of Data Design above for Date and Person
        (date-temp (person-birthdate ps)))) ;reference
 
 #|PROBLEM B:
-Design the function "curr-age" that consumes a Date and a Person, and produces the approximate age of the Person relative the given date 
+Design the function "curr-age" that consumes a Person and a Date, and produces the age of the Person relative the given date 
 |#
 
-; curr-age : (Date Person -> Number)
+; curr-age : (Person Date -> Number)
 ; produces the current age of the person
 (check-expect (curr-age bob newyears-2025) 24)
 (check-expect (curr-age bob xmas-2025) 25)
@@ -80,6 +80,10 @@ Design the function "curr-age" that consumes a Date and a Person, and produces t
 
 ; years-between : (Date Date -> Number)
 ; produces the years elapsed by the two dates
+(check-expect (years-between xmas-2k newyears-2025) 24)
+(check-expect (years-between xmas-2k xmas-2025) 25)
+(check-expect (years-between xmas-2k lastday-2025) 25)
+(check-expect (years-between xmas-2k xmas-2k) 0)
 
 (define (years-between old new)
   (cond

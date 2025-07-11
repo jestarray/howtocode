@@ -39,7 +39,7 @@ Finish the uncompleted steps ❌ of Data Design above for Date and Person
 ; date is self explanitory
 
 #|PROBLEM B:
-Design the function "curr-age" that consumes a Date and a Person, and produces the approximate age of the Person relative the given date 
+Design the function "curr-age" that consumes a Person and a Date, and produces the age of the Person relative the given date 
 |#
 
-; curr-age : (Date Person -> Number)
+; curr-age : (Person Date -> Number)

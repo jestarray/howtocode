@@ -74,7 +74,7 @@ In video games, players can only equip a wep that is of their same class.
 If a Mage tries to equip a sword, the game would not let them and their equip would remain the same.
 Let's also prevent the player from down equiping their weapon by making it so they will always equip the weapon with the most damage
 
-Design the "update-equip" that takes a Player and a Wep, and produces a Player fullfills the mechanics above
+Design the "update-equip" that takes a Player and a Wep, and produces a Player that fullfills the mechanics above
 |#
 
 ; update-equip: (Player Wep -> Player)

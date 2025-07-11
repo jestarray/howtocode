@@ -17,6 +17,7 @@ Turn all ❌ into ✅ for each step you complete
 == Functions ==
     1. Signature, purpose, stub ✅
     2. Examples (aka check-expect/tests, elaborate the concrete) ✅
+      2B. if the function consumes a list, make sure a list of 2 or longer is tested
     3. Template(from data)?✅
     4. Code body ✅
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
@@ -43,17 +44,17 @@ Finish the uncompleted steps ❌ of Data Design above for Driver and Bus
   (... (driver-name dvr)
        (driver-route dvr)))
 
-(define-struct bus [route driver])
-; Bus is (make-bus String Driver)
+(define-struct bus [seats driver])
+; Bus is (make-bus Number Driver)
 ; interp.
-; name is the brand name of the car
-; batt is a reference to Driver
+; seats is how many can passengers we can seat
+; driver is a who is driving this bus
 
-; evcar-name : (Bus -> Name)
-; evcar-batt : (Bus -> Driver)
+; bus-seats : (Bus -> Number)
+; bus-driver : (Bus -> Driver)
 
-(define bus-r1 (make-bus 1 bob))
-(define bus-r2 (make-bus 2 jack))
+(define bus-r1 (make-bus 10 bob))
+(define bus-r2 (make-bus 20 jack))
 
 (define (bus-temp bs)
   (... (bus-route bs) 
@@ -71,7 +72,7 @@ Desgin a function "update-bus" which only replaces its driver if the given drive
 (check-expect (update-bus bus-r1 jack) (make-bus 1 bob))
 
 (define (update-bus bs dvr)
-  (make-bus (bus-route bs) 
+  (make-bus (bus-seats bs) 
             (decide-driver (bus-driver bs) dvr)))
 
 ; decide-driver : (Driver Driver -> Driver)

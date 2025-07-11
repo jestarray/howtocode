@@ -32,11 +32,11 @@ Finish the uncompleted steps ❌ of Data Design above for Driver and Bus
 ; name is the name of the driver
 ; route is the route number the driver knows how to drive
 
-(define-struct bus [route driver])
-; Bus is (make-bus String Driver)
+(define-struct bus [seats driver])
+; Bus is (make-bus Number Driver)
 ; interp.
-; name is the brand name of the car
-; batt is a reference to Driver
+; seats is how many can passengers we can seat
+; driver is a who is driving this bus
 
 #|PROBLEM B:
 At the end of a bus drivers route, they switch with another driver who know drives the same route.

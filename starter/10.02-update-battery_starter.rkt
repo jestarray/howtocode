@@ -29,7 +29,7 @@ Finish the uncompleted steps ❌ of Data Design above for Battery and EVCar
 (define-struct battery [id charge])
 ; Battery is (make-battery Number Number)
 ; interp.
-; id is a unique part number the car will check if it is compatible
+; id is a unique part number that indicates swapability with other batteries
 ; charge is the percentage charge of the battery
 
 

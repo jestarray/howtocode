@@ -49,10 +49,10 @@
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
         (set-test-max-score! 4)
 
-(@test "trans#1" "err" (apply-transaction (make-account "me" 40) (make-withdraw 10)) 30 1)
-(@test "trans#2" "err" (apply-transaction (make-account "me" 40) (make-deposit 10)) 50 1)
-(@test "trans#3" "err" (apply-transaction (make-account "me" 40) (make-transfer (make-account "me" 40) (make-account "joe" 100) 30)) 10 1)
-(@test "trans#4" "err" (apply-transaction (make-account "me" 40) (make-transfer (make-account "joe" 100) (make-account "me" 40) 30)) 70 1)
+(@test "trans#1" "err" (apply-transaction (make-account "me" 40) (make-withdraw 10)) ((submission-eval) '(make-account "me" 30)) 1)
+(@test "trans#2" "err" (apply-transaction (make-account "me" 40) (make-deposit 10)) ((submission-eval) '(make-account "me" 50)) 1)
+(@test "trans#3" "err" (apply-transaction (make-account "me" 40) (make-transfer (make-account "me" 40) (make-account "joe" 100) 30)) ((submission-eval) '(make-account "me" 10)) 1)
+(@test "trans#4" "err" (apply-transaction (make-account "me" 40) (make-transfer (make-account "joe" 100) (make-account "me" 40) 30)) ((submission-eval) '(make-account "me" 70)) 1)
         ; (println submission)
         )
 (post:

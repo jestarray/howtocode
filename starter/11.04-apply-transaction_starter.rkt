@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 11.04-apply-transaction_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 11.04-apply-transaction_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (define PNAME 'apply-transaction)
 
 #|
@@ -12,14 +12,14 @@ Turn all ❌ into ✅ for each step you complete
     1. Data Description✅
         1B. if using define-struct, write all accessor signatures✅
     2. Interpretation✅
-    3. Data Examples❌
-    4. A function template that processes this data❌
+    3. Data Examples✅
+    4. A function template that processes this data✅
 == Functions ==
-    1. Signature, purpose, stub ❌
-    2. Examples (aka check-expect/tests, elaborate the concrete) ❌
-    3. Template(from data)?❌
-    4. Code body ❌
-    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+    1. Signature, purpose, stub ✅
+    2. Examples (aka check-expect/tests, elaborate the concrete) ✅
+    3. Template(from data)?✅
+    4. Code body ✅
+    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
 #|PROBLEM A:
@@ -27,20 +27,20 @@ Notice the Data Definitions for Account, Deposit, Withdraw, and Transfer are don
 Finish the uncompleted steps ❌ of Data Design above for "Transaction"(examples and template)
 |#
 
-(define-struct account [name amount])
-; Account is (make-balance String Number)
+(define-struct account [name balance])
+; Account is (make-account String Number)
 ; interp.
 ; name is the owner of the bank account
-; amount is the current balance of a bank account
+; balance is the current balance of a bank account
 
 ; account-name : (Account -> String)
-; account-amount : (Account -> Number)
+; account-balance : (Account -> Number)
 
-; Account-temp : (Account -> ???)
+; account-temp : (Account -> ???)
 (define (account-temp acc)
   (...
    (account-name acc)
-   (account-amount acc)))
+   (account-balance acc)))
 
 (define-struct deposit [amount])
 ; Deposit is (make-deposit Number)
@@ -87,11 +87,9 @@ Finish the uncompleted steps ❌ of Data Design above for "Transaction"(examples
 ; - (make-transfer Account Account Number)
 ; interp. a set of bank account transactions
 
-; TODO: 3. Examples and 4.Template
-
 #|PROBLEM B:
 Design a function "apply-transaction" that consumes an Account and a Transaction 
-; and produces the balance(amount) of the given Account after the transaction has been applied.
+and produces the balance(amount) of the given Account after the transaction has been applied.
 
 For example:
 | my-account | action                             | result|
@@ -101,5 +99,5 @@ For example:
 | $10        | (make-transfer joes my-account 30) | $40   |
 |#
 
-; apply-transaction : (Account Transaction -> Number)
+; apply-transaction : (Account Transaction -> Account)
 ; apply the given transaction based on the table above to the given Account

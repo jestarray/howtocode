@@ -27,20 +27,20 @@ Notice the Data Definitions for Account, Deposit, Withdraw, and Transfer are don
 Finish the uncompleted steps ❌ of Data Design above for "Transaction"(examples and template)
 |#
 
-(define-struct account [name amount])
-; Account is (make-balance String Number)
+(define-struct account [name balance])
+; Account is (make-account String Number)
 ; interp.
 ; name is the owner of the bank account
-; amount is the current balance of a bank account
+; balance is the current balance of a bank account
 
 ; account-name : (Account -> String)
-; account-amount : (Account -> Number)
+; account-balance : (Account -> Number)
 
-; Account-temp : (Account -> ???)
+; account-temp : (Account -> ???)
 (define (account-temp acc)
   (...
    (account-name acc)
-   (account-amount acc)))
+   (account-balance acc)))
 
 (define-struct deposit [amount])
 ; Deposit is (make-deposit Number)
@@ -86,27 +86,27 @@ Finish the uncompleted steps ❌ of Data Design above for "Transaction"(examples
 ; - (make-withdraw Number)
 ; - (make-transfer Account Account Number)
 ; interp. a set of bank account transactions
-(define joes-money (make-account "joe" 100))
-(define my-money (make-account "me" 40))
+(define joe-account (make-account "joe" 55))
+(define li-account (make-account "li" 100))
 (define wd1 (make-withdraw 20))
 (define dep1 (make-deposit 10))
-(define tr1 (make-transfer my-money joes-money 30))
+(define tr1 (make-transfer li-account joe-account 30))
 
 ; transaction-temp : (Transaction -> ???)
-(define (transaction-temp t-action)
+(define (transaction-temp action)
   (cond
-    [(deposit? t-action)
-     (... (deposit-amount t-action))]
-    [(withdraw? t-action)
-     (... (withdraw-amount t-action))]
-    [(transfer? t-action)
-     (... (account-temp (transfer-from t-action))
-          (account-temp (transfer-to t-action))
-          (transfer-amount t-action))]))
+    [(deposit? action)
+     (... (deposit-amount action))]
+    [(withdraw? action)
+     (... (withdraw-amount action))]
+    [(transfer? action)
+     (... (account-temp (transfer-from action))
+          (account-temp (transfer-to action))
+          (transfer-amount action))]))
 
 #|PROBLEM B:
 Design a function "apply-transaction" that consumes an Account and a Transaction 
-; and produces the balance(amount) of the given Account after the transaction has been applied.
+and produces the balance(amount) of the given Account after the transaction has been applied.
 
 For example:
 | my-account | action                             | result|
@@ -116,49 +116,57 @@ For example:
 | $10        | (make-transfer joes my-account 30) | $40   |
 |#
 
-; apply-transaction : (Account Transaction -> Number)
+; apply-transaction : (Account Transaction -> Account)
 ; apply the given transaction based on the table above to the given Account
-(check-expect (apply-transaction my-money (make-withdraw 10)) 30)
-(check-expect (apply-transaction my-money (make-deposit 10)) 50)
-(check-expect (apply-transaction my-money (make-transfer my-money joes-money 30))
-              10)
-(check-expect (apply-transaction my-money (make-transfer joes-money my-money 30))
-              70)
+(check-expect (apply-transaction li-account (make-withdraw 10))
+              (make-account "li" 90))
+(check-expect (apply-transaction li-account (make-deposit 10))
+              (make-account "li" 110))
+(check-expect (apply-transaction li-account (make-transfer li-account joe-account 30))
+              (make-account "li" 70))
+(check-expect (apply-transaction li-account (make-transfer joe-account li-account 30))
+              (make-account "li" 130))
 ; (define (apply-transaction acc trans) acc)
 
-(define (apply-transaction acc t-action)
+(define (apply-transaction facilitator action)
   (cond
-    [(deposit? t-action)
-     (+ (account-amount acc) (deposit-amount t-action))]
-    [(withdraw? t-action)
-     (- (account-amount acc) (withdraw-amount t-action))]
-    [(transfer? t-action)
+    [(deposit? action)
+     (make-account
+      (account-name facilitator)
+      (+ (account-balance facilitator) (deposit-amount action)))]
+    [(withdraw? action)
+     (make-account
+      (account-name facilitator)
+      (- (account-balance facilitator) (withdraw-amount action)))]
+    [(transfer? action)
      (process-transfer
-      (account-name acc)
-      (transfer-from t-action)
-      (transfer-to t-action)
-      (transfer-amount t-action))]))
+      (account-name facilitator)
+      (transfer-from action)
+      (transfer-to action)
+      (transfer-amount action))]))
 
-(define (apply-transaction-inline acc t-action)
+; process-transfer : (String Account Account Number -> Account)
+; produce the account of the facilitator with balance updated depending on from & to
+(check-expect (process-transfer "li" li-account joe-account 30)
+              (make-account "li" 70))
+(check-expect (process-transfer "joe" joe-account li-account 30)
+              (make-account "joe" 25))
+;(define (process-tranfer facil-name from to amount) 0)
+(define (process-transfer facil-name from to amount)
+  (make-account
+   facil-name
+   (if (string=? facil-name (account-name from))
+       (- (account-balance from) amount)
+       (+ (account-balance to) amount))))
+
+(define (apply-transaction-inline facilitator action)
   (cond
-    [(deposit? t-action)
-     (+ (account-amount acc) (deposit-amount t-action))]
-    [(withdraw? t-action)
-     (- (account-amount acc) (withdraw-amount t-action))]
-    [(transfer? t-action)
+    [(deposit? action)
+     (+ (account-balance facilitator) (deposit-amount action))]
+    [(withdraw? action)
+     (- (account-balance facilitator) (withdraw-amount action))]
+    [(transfer? action)
      (if
-      (string=? (account-name acc) (account-name (transfer-from t-action)))
-      (- (account-amount (transfer-from t-action)) (transfer-amount t-action))
-      (+ (account-amount (transfer-to t-action)) (transfer-amount t-action)))]))
-
-; process-transfer : (String Account Account Number -> Number)
-; produce the amount of money of who is the one transfering
-(check-expect (process-transfer "me" my-money joes-money 30)
-              10)
-(check-expect (process-transfer "joe" joes-money my-money 30)
-              70)
-;(define (process-tranfer who from to t-amount) 0)
-(define (process-transfer who from to t-amount)
-  (if (string=? who (account-name from))
-      (- (account-amount from) t-amount)
-      (+ (account-amount to) t-amount)))
+      (string=? (account-name facilitator) (account-name (transfer-from action)))
+      (- (account-balance (transfer-from action)) (transfer-amount action))
+      (+ (account-balance (transfer-to action)) (transfer-amount action)))]))

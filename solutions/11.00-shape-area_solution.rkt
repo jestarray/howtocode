@@ -33,7 +33,7 @@ Finish the uncompleted steps ❌ of Data Design above for "Shape"(examples and t
 
 ; square-side : (Square -> Number)
 
-; square-temp : (Rect -> ???)
+; square-temp : (Square -> ???)
 (define (square-temp sq)
   (... (square-side sq)))
 

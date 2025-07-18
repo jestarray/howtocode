@@ -23,7 +23,7 @@ Turn all ❌ into ✅ for each step you complete
 |#
 
 #|PROBLEM A:
-Notice the Data Definitions for Car, Truck, and Motorcycle are done.
+Notice the Data Definitions for GasCar, Truck, and Motorcycle are done.
 Finish the uncompleted steps ❌ of Data Design above for "Vehicle"(examples and template)
 |#
 

@@ -12,14 +12,14 @@ Turn all ❌ into ✅ for each step you complete
     1. Data Description✅
         1B. if using define-struct, write all accessor signatures✅
     2. Interpretation✅
-    3. Data Examples✅
-    4. A function template that processes this data✅
+    3. Data Examples❌
+    4. A function template that processes this data❌
 == Functions ==
-    1. Signature, purpose, stub ✅
-    2. Examples (aka check-expect/tests, elaborate the concrete) ✅
-    3. Template(from data)?✅
-    4. Code body ✅
-    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
+    1. Signature, purpose, stub ❌
+    2. Examples (aka check-expect/tests, elaborate the concrete) ❌
+    3. Template(from data)?❌
+    4. Code body ❌
+    5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
 #|PROBLEM A:

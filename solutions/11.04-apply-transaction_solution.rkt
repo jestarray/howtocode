@@ -117,7 +117,7 @@ For example:
 |#
 
 ; apply-transaction : (Account Transaction -> Account)
-; apply the given transaction based on the table above to the given Account
+; produce the given account updated with the transaction applied to it based on the table above
 (check-expect (apply-transaction li-account (make-withdraw 10))
               (make-account "li" 90))
 (check-expect (apply-transaction li-account (make-deposit 10))

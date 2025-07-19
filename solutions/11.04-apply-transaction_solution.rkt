@@ -73,7 +73,7 @@ Finish the uncompleted steps ❌ of Data Design above for "Transaction"(examples
 
 ; transfer-from : (Transfer -> Account)
 ; transfer-to : (Transfer -> Account)
-; transfer-amount : (Transfer -> Account)
+; transfer-amount : (Transfer -> Number)
 
 ; transfer-temp : (Transfer -> ???)
 (define (transfer-temp tfr)

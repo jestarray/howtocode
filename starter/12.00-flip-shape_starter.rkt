@@ -28,6 +28,12 @@ Turn all ❌ into ✅ for each step you complete
 4. A function template that processes this data❌
 |#
 
+#|PROBLEM A:
+Design a world program that animates a growing red disc and box!
+Notice how the data definition step for Disc and Box are already done,
+complete the Data Design steps for the union "Shape"
+|#
+
 (define-struct disc [radius])
 ; Disc is (make-disc Number)
 ; interp. represents a disc with a radius
@@ -60,6 +66,12 @@ Turn all ❌ into ✅ for each step you complete
 3. Template(from data)?❌
 3. Code body ❌
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+|#
+
+#|PROBLEM B:
+Finish designing the functions in the following order:
+grow-shape, shape->image, render.
+flip-shape & handle-key are the hardest so do these last
 |#
 
 ; grow-shape: (Shape -> Shape)

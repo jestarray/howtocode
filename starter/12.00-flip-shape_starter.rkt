@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 12.00-flip-shape_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 12.00-flip-shape_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require 2htdp/image)
 (require 2htdp/universe)
 (define PNAME 'flip-shape)
@@ -33,8 +33,6 @@ Turn all ❌ into ✅ for each step you complete
 ; interp. represents a disc with a radius
 ; disc-radius : (Disc -> Number)
 
-(define ds-30 (make-disc 30))
-
 ; disc-temp: (Disc -> ???)
 (define (disc-temp ds)
   (... (disc-radius ds)))
@@ -44,8 +42,6 @@ Turn all ❌ into ✅ for each step you complete
 ; interp. represents a box
 ; box-width : (Box -> Number)
 ; box-height : (Box -> Number)
-
-(define bx-20-30 (make-box 20 30))
 
 ; box-temp : (Box -> ???)
 (define (box-temp bx)
@@ -68,6 +64,7 @@ Turn all ❌ into ✅ for each step you complete
 
 ; grow-shape: (Shape -> Shape)
 ; produces the shape but with its dimmensions increased
+(define (grow-shape sh) sh)
 ; TODO: Function Design
 
 ; shape->image : (Shape -> Image)
@@ -76,6 +73,7 @@ Turn all ❌ into ✅ for each step you complete
 
 ; render: (Shape -> Image)
 ; draws the image of a shape on a background
+(define (render sh) empty-image)
 ; TODO: Function Design
 
 ; flip-shape : (Shape -> Shape)

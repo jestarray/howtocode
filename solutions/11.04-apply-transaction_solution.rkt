@@ -162,9 +162,13 @@ For example:
 (define (apply-transaction-inline facilitator action)
   (cond
     [(deposit? action)
-     (+ (account-balance facilitator) (deposit-amount action))]
+     (make-account
+      (account-name facilitator)
+      (+ (account-balance facilitator) (deposit-amount action)))]
     [(withdraw? action)
-     (- (account-balance facilitator) (withdraw-amount action))]
+     (make-account
+      (account-name facilitator)
+      (- (account-balance facilitator) (withdraw-amount action)))]
     [(transfer? action)
      (if
       (string=? (account-name facilitator) (account-name (transfer-from action)))

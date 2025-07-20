@@ -87,6 +87,8 @@ Finish the uncompleted steps ❌ of Data Design above for "Transaction"(examples
 ; - (make-transfer Account Account Number)
 ; interp. a set of bank account transactions
 
+; TODO: 3. Examples and 4.Template
+
 #|PROBLEM B:
 Design a function "apply-transaction" that consumes an Account and a Transaction 
 and produces the balance(amount) of the given Account after the transaction has been applied.

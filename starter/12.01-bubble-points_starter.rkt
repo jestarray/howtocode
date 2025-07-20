@@ -3,7 +3,7 @@
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname 12.01-bubble-points_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require 2htdp/image)
 (require 2htdp/universe)
-(define PNAME 'flip-shape)
+(define PNAME 'bubble-points)
 
 ; =================
 ; CONSTANTS:

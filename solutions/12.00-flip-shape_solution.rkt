@@ -33,8 +33,6 @@ Turn all ❌ into ✅ for each step you complete
 ; interp. represents a disc with a radius
 ; disc-radius : (Disc -> Number)
 
-(define ds-30 (make-disc 30))
-
 ; disc-temp: (Disc -> ???)
 (define (disc-temp ds)
   (... (disc-radius ds)))
@@ -45,8 +43,6 @@ Turn all ❌ into ✅ for each step you complete
 ; box-width : (Box -> Number)
 ; box-height : (Box -> Number)
 
-(define bx-20-30 (make-box 20 30))
-
 ; box-temp : (Box -> ???)
 (define (box-temp bx)
   (... (box-width bx) (box-height bx)))
@@ -56,6 +52,8 @@ Turn all ❌ into ✅ for each step you complete
 ; - (make-box Number Number)
 ; interp. a set of shapes
 
+(define ds-30 (make-disc 30))
+(define bx-20-30 (make-box 20 30))
 ; shape-temp : (Shape -> ???)
 (define (shape-temp sh)
   (cond
@@ -152,3 +150,5 @@ Turn all ❌ into ✅ for each step you complete
     [on-tick   grow-shape]     ; Shape -> Shape
     [to-draw   render]   ; Shape -> Image
     ))
+
+(main (make-disc 0))

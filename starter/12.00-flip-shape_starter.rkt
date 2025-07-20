@@ -21,9 +21,9 @@ TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 Turn all ❌ into ✅ for each step you complete
 
-1. Data Description❌
-   1B. if using define-struct, write all accessor signatures❌
-2. Interpretation❌
+1. Data Description✅
+   1B. if using define-struct, write all accessor signatures✅
+2. Interpretation✅
 3. Data Examples❌
 4. A function template that processes this data❌
 |#

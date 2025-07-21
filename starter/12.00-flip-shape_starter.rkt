@@ -29,9 +29,9 @@ Turn all ❌ into ✅ for each step you complete
 |#
 
 #|PROBLEM A:
-Design a world program that animates a growing red disc and box!
-Notice how the data definition step for Disc and Box are already done,
-complete the Data Design steps for the union "Shape"
+Design a world program that animates a growing red disc and black box!
+Notice how the data definition step for Disc and Box are already done.
+Complete the Data Design steps for the union "Shape"
 |#
 
 (define-struct disc [radius])
@@ -75,7 +75,7 @@ flip-shape & handle-key are the hardest so do these last
 |#
 
 ; grow-shape: (Shape -> Shape)
-; produces the shape but with its dimmensions increased
+; grows the given shape by increasing its dimensions by 1
 (define (grow-shape sh) sh)
 ; TODO: Function Design
 
@@ -89,11 +89,17 @@ flip-shape & handle-key are the hardest so do these last
 ; TODO: Function Design
 
 ; flip-shape : (Shape -> Shape)
-; if the given shape is a disc, flip it to a box and vice versa
+; change the given shape from a disc to a box and from a box to a disc. 
+; The dimensions should carry through the flip
 ; TODO: Function Design
 
 ; handle-key: (Shape KeyEvent -> Shape)
-; when the space key is pressed, produce change the shape from box to disc and vice versa
+; when the space key is pressed, change the shape from disc<->box(flip between them)
+(define (handle-key sh ke)
+  (cond [(key=? ke "x") 
+         (... sh)]
+        [else
+         (... sh)]))
 ; TODO: Function Design
 
 ; main: (Shape -> Shape)

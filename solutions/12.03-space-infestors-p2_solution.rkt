@@ -28,11 +28,11 @@ TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 Turn all ❌ into ✅ for each step you complete
 
-1. Data Description❌
-   1B. if using define-struct, write all accessor signatures❌
-2. Interpretation❌
-3. Data Examples❌
-4. A function template that processes this data❌
+1. Data Description✅
+   1B. if using define-struct, write all accessor signatures✅
+2. Interpretation✅
+3. Data Examples✅
+4. A function template that processes this data✅
 |#
 
 (define-struct point [x y])
@@ -98,7 +98,8 @@ Turn all ❌ into ✅ for each step you complete
 
 (define centered-tank (make-tank HALF-WIDTH 0))
 (define non-fired-game (make-game centered-tank #false (make-point 20 0)))
-(define player-win (make-game centered-tank #false #false))
+(define shots-fired (make-game centered-tank (make-point HALF-WIDTH HALF-HEIGHT) (make-point 20 30)))
+(define player-alone (make-game centered-tank #false #false))
 
 ; draw-minvader : (MaybeEnemy Image -> Image)
 ; draws the invader at its given coordinates if it is alive
@@ -164,6 +165,16 @@ Turn all ❌ into ✅ for each step you complete
     (draw-tank
      (game-player gm)
      BACKGROUND))))
+
+; =================
+#| Functions:
+1. Signature, purpose, stub ✅
+2. Examples (aka check-expect/tests, elaborate the concrete) ✅
+  2B. if the function consumes a list, make sure a list of 2 or longer is tested✅
+3. Template(from data)?✅
+3. Code body ✅
+4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
+|#
 
 #|PROBLEM A:
 We've finished the draw/render functions in 12.02 which are done above.

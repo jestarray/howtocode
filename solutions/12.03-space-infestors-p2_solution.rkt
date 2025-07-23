@@ -250,7 +250,7 @@ Adding key interactions will be done in 12.04
 (define (main gm)
   (big-bang
       gm
-    [on-tick update-game]
-    [to-draw render]))
+    [on-tick update-game] ; Game -> Game
+    [to-draw render])) ; Game -> Image
 
 (main not-yet-shot-game)

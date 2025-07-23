@@ -156,6 +156,6 @@ render
 (define (main gm)
   (big-bang
       gm
-    [to-draw render]))
+    [to-draw render])) ; Game -> Image
 
 ; (main not-yet-shot-game)

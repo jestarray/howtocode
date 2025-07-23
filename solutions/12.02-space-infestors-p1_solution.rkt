@@ -88,7 +88,8 @@ Come up with the following data examples for "Game" where:
 1) there's a player, with the bullet not fired yet, and a live Enemy
 2) there's a player, with a bullet fired, and a live Enemy
 3) there's a player, with a bullet who's position is super close to the enemy
-3) there's a player, with the bullet and enemy dead
+4) there's a player, with the bullet and enemy dead
+5) an invalid game that does not follow the "game" data definition types
 Sketch them out at https://tldraw.com
 
 Finish 4(Template) for the "Game" struct
@@ -105,19 +106,21 @@ Finish 4(Template) for the "Game" struct
 ; game-shot : (Game -> MaybeBullet)
 ; game-invader : (Game -> MaybeEnemy)
 ; game-score : (Game -> Number)
-(define (game-temp gm)
-  (...
-   (tank-temp (game-player gm))
-   (maybe-bullet-temp (game-shot gm))
-   (maybe-enemy-temp (game-invader gm))
-   (game-score gm)))
 
 (define centered-tank (make-tank HALF-WIDTH 0))
 (define not-yet-shot-game (make-game centered-tank #false (make-point 20 0) 0))
 (define miss-shot-game (make-game centered-tank (make-point HALF-WIDTH HALF-HEIGHT) (make-point 20 30) 0))
 (define shot-hit-game (make-game centered-tank (make-point HALF-WIDTH (- HALF-HEIGHT 10)) (make-point HALF-WIDTH HALF-HEIGHT) 0))
 (define player-alone (make-game centered-tank #false #false 0))
+(define invalid-game (make-game 99 "something" "enemy" 0))
 
+; game-temp : (Game -> ???)
+(define (game-temp gm)
+  (...
+   (tank-temp (game-player gm))
+   (maybe-bullet-temp (game-shot gm))
+   (maybe-enemy-temp (game-invader gm))
+   (game-score gm)))
 ; =================
 #| Functions:
 1. Signature, purpose, stub ✅

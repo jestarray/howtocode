@@ -88,7 +88,8 @@ Come up with the following data examples for "Game" where:
 1) there's a player, with the bullet not fired yet, and a live Enemy
 2) there's a player, with a bullet fired, and a live Enemy
 3) there's a player, with a bullet who's position is super close to the enemy
-3) there's a player, with the bullet and enemy dead
+4) there's a player, with the bullet and enemy dead
+5) an invalid game that does not follow the "game" data definition types
 Sketch them out at https://tldraw.com
 
 Finish 4(Template) for the "Game" struct
@@ -111,6 +112,7 @@ Finish 4(Template) for the "Game" struct
 (define miss-shot-game ...)
 (define shot-hit-game ...)
 (define player-alone ...)
+(define invalid-game ...)
 
 ; game-temp : (Game -> ???)
 

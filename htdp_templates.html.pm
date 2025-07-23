@@ -404,8 +404,8 @@ The ◊code{on-key} and ◊code{on-mouse} handler function templates are handled
 ◊racket-code-block{
 ; handle-key: (WorldState KeyEvent -> WorldState)
 ; todo: do something when a key is pressed
-(define (handle-key ws ke)
-  (cond [(key=? ke "x") (... ws)]
+(define (handle-key ws kevent)
+  (cond [(key=? kevent "x") (... ws)]
         [else 
          (... ws)]))
 }
@@ -415,8 +415,9 @@ Similarly the template for a mouse handler function that has special behavior fo
 ◊racket-code-block{
 ; handle-mouse: (WorldState Number Number MouseEvent -> WorldState)
 ; todo: do something when the mouse moves or clicks
-(define (handle-mouse ws mousex mousey me)
-  (cond [(mouse=? me "button-down") (... ws mousex mousey)]
+(define (handle-mouse ws mousex mousey mevent)
+  (cond [(mouse=? mevent "button-down") 
+         (... ws mousex mousey)]
         [else
          (... ws mousex mousey)]))
 }

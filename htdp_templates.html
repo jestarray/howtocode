@@ -287,13 +287,14 @@ Turn all ❌ into ✅ for each step you complete
 (define (render m)
   (place-image MUSH-IMG m CENTER-Y BG))</code></pre></details></p><h3>Key and Mouse Handlers</h3><p>The <code>on-key</code> and <code>on-mouse</code> handler function templates are handled specially. The <code>on-key</code> function is templated according to its second argument, a KeyEvent, using the large enumeration rule. The <code>on-mouse</code> function is templated according to its MouseEvent argument, also using the large enumeration rule. So, for example, for a key handler function that has a special behaviour when the space key is pressed but does nothing for any other key event the following would be the template:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; handle-key: (WorldState KeyEvent -&gt; WorldState)
 ; todo: do something when a key is pressed
-(define (handle-key ws ke)
-  (cond [(key=? ke "x") (... ws)]
+(define (handle-key ws kevent)
+  (cond [(key=? kevent "x") (... ws)]
         [else
          (... ws)]))</code></pre><p>Similarly the template for a mouse handler function that has special behavior for mouse clicks but ignores all other mouse events would be:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; handle-mouse: (WorldState Number Number MouseEvent -&gt; WorldState)
 ; todo: do something when the mouse moves or clicks
-(define (handle-mouse ws mousex mousey me)
-  (cond [(mouse=? me "button-down") (... ws mousex mousey)]
+(define (handle-mouse ws mousex mousey mevent)
+  (cond [(mouse=? mevent "button-down")
+         (... ws mousex mousey)]
         [else
          (... ws mousex mousey)]))</code></pre><p>For more information on the <a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28tech._world._keyevent%29">KeyEvent</a> and <a href="https://docs.racket-lang.org/teachpack/2htdpuniverse.html#%28tech._world._mouseevent%29">MouseEvent</a> large enumerations see the DrRacket help desk.</p><h2 id="compound_data_aka_structs"><a class="anchor" href="#compound_data_aka_structs">#</a>Compound Data aka Structs</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct person (name age))
 ; Person is (make-ball String Number)

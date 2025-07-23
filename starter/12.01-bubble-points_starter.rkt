@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 12.01-bubble-points_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 12.01-bubble-points_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require 2htdp/image)
 (require 2htdp/universe)
 (define PNAME 'bubble-points)
@@ -22,11 +22,20 @@ TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 Turn all ❌ into ✅ for each step you complete
 
-1. Data Description❌
-   1B. if using define-struct, write all accessor signatures❌
-2. Interpretation❌
+1. Data Description✅
+   1B. if using define-struct, write all accessor signatures✅
+2. Interpretation✅
 3. Data Examples❌
 4. A function template that processes this data❌
+|#
+
+#|PROBLEM A:
+Design a world program that moves a Bunch of points up.
+The program starts with no points until the user clicks.
+At max, there should can be 2 points on screen.
+Adding more than 2 points will replace the oldest point.
+Notice how the data definitions for Point, None, Single, and Couple are done.
+Complete the Data Design steps for "BunchOfPoints"
 |#
 
 (define-struct point [x y])
@@ -37,9 +46,6 @@ Turn all ❌ into ✅ for each step you complete
 
 ; point-x : (Point -> Number)
 ; point-y : (Point -> Number)
-
-(define pt-5-250 (make-point 5 250))
-(define pt-10-330 (make-point 10 330))
 
 ; point-temp : (Point -> ???)
 (define (point-temp pt)
@@ -71,6 +77,9 @@ Turn all ❌ into ✅ for each step you complete
   (... (point-temp (couple-first cp))
        (point-temp (couple-second cp))))
 
+(define pt-5-250 (make-point 5 250))
+(define pt-10-330 (make-point 10 330))
+
 ; union BunchOfPoints is one of:
 ; - (make-none)
 ; - (make-single Point)
@@ -88,20 +97,34 @@ Turn all ❌ into ✅ for each step you complete
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+#|PROBLEM B:
+Finish the Function design steps for the following functions
+(in order of easiest to hardest difficulty)
+move-up
+draw-point
+bubble-points
+render
+add-point
+click-add
+Comment out the on-mouse big-bang clause when you are finished with all
+|#
+
 ; move-up : (Point -> Point)
 ; produces a point with the y decreased by 1
 ; TODO: Function Design
 
 ; bubble-points : (BunchOfPoints -> BunchOfPoints)
 ; moves all points up in the BunchOfPoints
+(define (bubble-points bunch) bunch)
 ; TODO: Function Design
 
 ; draw-point : (Point Image -> Image)
 ; draws a point on the given background
 ; TODO: Function Design
 
-; render: (BunchOfPoints -> Image)
+; render : (BunchOfPoints -> Image)
 ; draws the bunch of points on a background
+(define (render bunch) empty-image)
 ; TODO: Function Design
 
 ; add-point : (BunchOfPoints Number Number -> BunchOfPoints)
@@ -109,9 +132,15 @@ Turn all ❌ into ✅ for each step you complete
 ; if BunchOfPoints is a couple, the oldest point should be in the 2nd position
 ; TODO: Function Design
 
-; click-add: (BunchOfPoints Number Number MouseEvent -> BunchOfPoints)
+; click-add : (BunchOfPoints Number Number MouseEvent -> BunchOfPoints)
 ; add point to world on mouse click
+; HINT: use "add-point"
 ; TODO: Function Design
+(define (click-add bunch mousex mousey mevent)
+  (cond [(mouse=? mevent "button-down")
+         (... bunch mousex mousey)]
+        [else
+         (... bunch mousex mousey)]))
 
 ; main: (BunchOfPoints -> BunchOfPoints)
 ; start the world with ...

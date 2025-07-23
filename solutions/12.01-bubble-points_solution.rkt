@@ -29,6 +29,15 @@ Turn all ❌ into ✅ for each step you complete
 4. A function template that processes this data❌
 |#
 
+#|PROBLEM A:
+Design a world program that moves a Bunch of points up.
+The program starts with no points until the user clicks.
+At max, there should can be 2 points on screen.
+Adding more than 2 points will replace the oldest point.
+Notice how the data definitions for Point, None, Single, and Couple are done.
+Complete the Data Design steps for "BunchOfPoints"
+|#
+
 (define-struct point [x y])
 ; Point is (make-point Number Number)
 ; interp.
@@ -100,6 +109,18 @@ Turn all ❌ into ✅ for each step you complete
 4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+#|PROBLEM B:
+Finish the Function design steps for the following functions
+(in order of easiest to hardest difficulty)
+move-up
+draw-point
+bubble-points
+render
+add-point
+click-add
+Comment out the on-mouse big-bang clause when you are finished with all
+|#
+
 ; move-up : (Point -> Point)
 ; produces a point with the y decreased by 1
 (check-expect (move-up pt-5-250) (make-point 5 249))
@@ -143,7 +164,7 @@ Turn all ❌ into ✅ for each step you complete
    (point-y pt)
    background))
 
-; render: (BunchOfPoints -> Image)
+; render : (BunchOfPoints -> Image)
 ; draws the bunch of points on a background
 (check-expect (render (make-none)) BACKGROUND)
 (check-expect (render (make-single pt-5-250))
@@ -207,12 +228,13 @@ Turn all ❌ into ✅ for each step you complete
 
 ; click-add : (BunchOfPoints Number Number MouseEvent -> BunchOfPoints)
 ; add point to world on mouse click
+; HINT: use "add-point"
 (check-expect (click-add (make-none) 20 30 "button-down")
               (make-single (make-point 20 30)))
 (check-expect (click-add (make-none) 30 40 "enter")
               (make-none))
-(define (click-add bunch mousex mousey me)
-  (cond [(mouse=? me "button-down")
+(define (click-add bunch mousex mousey mevent)
+  (cond [(mouse=? mevent "button-down")
          (add-point bunch mousex mousey)]
         [else
          bunch]))

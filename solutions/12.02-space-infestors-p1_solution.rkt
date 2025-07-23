@@ -94,26 +94,29 @@ Sketch them out at https://tldraw.com
 Finish 4(Template) for the "Game" struct
 |#
 
-(define-struct game [player shot invader])
-; Game is (make-game Tank MaybeBullet MaybeEnemy)
+(define-struct game [player shot invader score])
+; Game is (make-game Tank MaybeBullet MaybeEnemy Number)
 ; interp. represents the game state
 ; player is the tank that is controlled by the user
 ; shot is the bullet that might be fired
 ; invader is the enemy coming down at us
+; score is how many enemies we have shot down
 ; game-player : (Game -> Tank)
 ; game-shot : (Game -> MaybeBullet)
 ; game-invader : (Game -> MaybeEnemy)
+; game-score : (Game -> Number)
 (define (game-temp gm)
   (...
    (tank-temp (game-player gm))
    (maybe-bullet-temp (game-shot gm))
-   (maybe-enemy-temp (game-invader gm))))
+   (maybe-enemy-temp (game-invader gm))
+   (game-score gm)))
 
 (define centered-tank (make-tank HALF-WIDTH 0))
-(define not-yet-shot-game (make-game centered-tank #false (make-point 20 0)))
-(define miss-shot-game (make-game centered-tank (make-point HALF-WIDTH HALF-HEIGHT) (make-point 20 30)))
-(define shot-hit-game (make-game centered-tank (make-point HALF-WIDTH (- HALF-HEIGHT 10)) (make-point HALF-WIDTH HALF-HEIGHT)))
-(define player-alone (make-game centered-tank #false #false))
+(define not-yet-shot-game (make-game centered-tank #false (make-point 20 0) 0))
+(define miss-shot-game (make-game centered-tank (make-point HALF-WIDTH HALF-HEIGHT) (make-point 20 30) 0))
+(define shot-hit-game (make-game centered-tank (make-point HALF-WIDTH (- HALF-HEIGHT 10)) (make-point HALF-WIDTH HALF-HEIGHT) 0))
+(define player-alone (make-game centered-tank #false #false 0))
 
 ; =================
 #| Functions:

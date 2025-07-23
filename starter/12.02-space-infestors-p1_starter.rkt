@@ -94,15 +94,17 @@ Sketch them out at https://tldraw.com
 Finish 4(Template) for the "Game" struct
 |#
 
-(define-struct game [player shot invader])
-; Game is (make-game Tank MaybeBullet MaybeEnemy)
+(define-struct game [player shot invader score])
+; Game is (make-game Tank MaybeBullet MaybeEnemy Number)
 ; interp. represents the game state
 ; player is the tank that is controlled by the user
 ; shot is the bullet that might be fired
 ; invader is the enemy coming down at us
+; score is how many enemies we have shot down
 ; game-player : (Game -> Tank)
 ; game-shot : (Game -> MaybeBullet)
 ; game-invader : (Game -> MaybeEnemy)
+; game-score : (Game -> Number)
 
 (define centered-tank ...)
 (define not-yet-shot-game ...)

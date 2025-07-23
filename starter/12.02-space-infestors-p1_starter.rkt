@@ -11,6 +11,7 @@
 (define HEIGHT 500)
 
 (define HALF-WIDTH (/ WIDTH 2))
+(define HALF-HEIGHT (/ HEIGHT 2))
 (define BACKGROUND (empty-scene WIDTH HEIGHT "black"))
 (define ENEMY-IMG (text "👾" 26 "red"))
 
@@ -83,9 +84,10 @@ Turn all ❌ into ✅ for each step you complete
 
 #|PROBLEM A:
 Finish steps Data Design steps: 3(Examples)  for the "Game" struct
-Come up with 3 data examples for "Game" where:
-1) there's a player, with the bullet not fired yet, and an Enemy
-2) there's a player, with a bullet fired, and an Enemy
+Come up with the following data examples for "Game" where:
+1) there's a player, with the bullet not fired yet, and a live Enemy
+2) there's a player, with a bullet fired, and a live Enemy
+3) there's a player, with a bullet who's position is super close to the enemy
 3) there's a player, with the bullet and enemy dead
 Sketch them out at https://tldraw.com
 
@@ -101,6 +103,14 @@ Finish 4(Template) for the "Game" struct
 ; game-player : (Game -> Tank)
 ; game-shot : (Game -> MaybeBullet)
 ; game-invader : (Game -> MaybeEnemy)
+
+(define centered-tank ...)
+(define non-fired-game ...)
+(define shots-fired-game ...)
+(define shot-hit-game ...)
+(define player-alone ...)
+
+; game-temp : (Game -> ???)
 
 ; =================
 #| Functions:
@@ -144,4 +154,4 @@ render
       gm
     [to-draw render]))
 
-(main non-fired-game)
+; (main non-fired-game)

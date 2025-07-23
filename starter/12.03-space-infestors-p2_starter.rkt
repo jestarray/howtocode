@@ -11,6 +11,7 @@
 (define HEIGHT 500)
 
 (define HALF-WIDTH (/ WIDTH 2))
+(define HALF-HEIGHT (/ HEIGHT 2))
 (define BACKGROUND (empty-scene WIDTH HEIGHT "black"))
 (define ENEMY-IMG (text "👾" 26 "red"))
 
@@ -98,7 +99,8 @@ Turn all ❌ into ✅ for each step you complete
 
 (define centered-tank (make-tank HALF-WIDTH 0))
 (define non-fired-game (make-game centered-tank #false (make-point 20 0)))
-(define shots-fired (make-game centered-tank (make-point HALF-WIDTH HALF-HEIGHT) (make-point 20 30)))
+(define shots-fired-game (make-game centered-tank (make-point HALF-WIDTH HALF-HEIGHT) (make-point 20 30)))
+(define shot-hit-game (make-game centered-tank (make-point HALF-WIDTH (- HALF-HEIGHT 10)) (make-point HALF-WIDTH HALF-HEIGHT)))
 (define player-alone (make-game centered-tank #false #false))
 
 ; draw-minvader : (MaybeEnemy Image -> Image)

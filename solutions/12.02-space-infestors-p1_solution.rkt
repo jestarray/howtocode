@@ -28,11 +28,11 @@ TEMPLATES: https://howtocode.pages.dev/htdp_templates
 ASK FOR HELP: https://discord.com/invite/6Zq8sH5
 Turn all ❌ into ✅ for each step you complete
 
-1. Data Description❌
-   1B. if using define-struct, write all accessor signatures❌
-2. Interpretation❌
-3. Data Examples❌
-4. A function template that processes this data❌
+1. Data Description✅
+   1B. if using define-struct, write all accessor signatures✅
+2. Interpretation✅
+3. Data Examples✅
+4. A function template that processes this data✅
 |#
 
 (define-struct point [x y])
@@ -81,6 +81,17 @@ Turn all ❌ into ✅ for each step you complete
     [(point? bull)
      (... (point-x bull) (point-y bull))]))
 
+#|PROBLEM A:
+Finish steps Data Design steps: 3(Examples)  for the "Game" struct
+Come up with 3 data examples for "Game" where:
+1) there's a player, with the bullet not fired yet, and an Enemy
+2) there's a player, with a bullet fired, and an Enemy
+3) there's a player, with the bullet and enemy dead
+Sketch them out at https://tldraw.com
+
+Finish 4(Template) for the "Game" struct
+|#
+
 (define-struct game [player shot invader])
 ; Game is (make-game Tank MaybeBullet MaybeEnemy)
 ; interp. represents the game state
@@ -96,16 +107,20 @@ Turn all ❌ into ✅ for each step you complete
    (maybe-bullet-temp (game-shot gm))
    (maybe-enemy-temp (game-invader gm))))
 
-#|PROBLEM A:
-Come up with 3 data examples for "Game" where:
-1) there's a player, with the bullet not fired yet, and an Enemy
-2) there's a player, with a bullet fired, and an Enemy
-3) there's a player, with the bullet and enemy dead
-Sketch them out at https://tldraw.com
-|#
 (define centered-tank (make-tank HALF-WIDTH 0))
 (define non-fired-game (make-game centered-tank #false (make-point 20 0)))
-(define player-win (make-game centered-tank #false #false))
+(define shots-fired (make-game centered-tank (make-point HALF-WIDTH HALF-HEIGHT) (make-point 20 30)))
+(define player-alone (make-game centered-tank #false #false))
+
+; =================
+#| Functions:
+1. Signature, purpose, stub ✅
+2. Examples (aka check-expect/tests, elaborate the concrete) ✅
+  2B. if the function consumes a list, make sure a list of 2 or longer is tested✅
+3. Template(from data)?✅
+3. Code body ✅
+4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
+|#
 
 #|PROBLEM B:
 Finish the function design steps for:

@@ -105,8 +105,8 @@ Finish 4(Template) for the "Game" struct
 ; game-invader : (Game -> MaybeEnemy)
 
 (define centered-tank ...)
-(define non-fired-game ...)
-(define shots-fired-game ...)
+(define not-yet-shot-game ...)
+(define miss-shot-game ...)
 (define shot-hit-game ...)
 (define player-alone ...)
 
@@ -154,4 +154,4 @@ render
       gm
     [to-draw render]))
 
-; (main non-fired-game)
+; (main not-yet-shot-game)

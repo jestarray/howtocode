@@ -98,9 +98,8 @@ Turn all ❌ into ✅ for each step you complete
    (maybe-enemy-temp (game-invader gm))))
 
 (define centered-tank (make-tank HALF-WIDTH 0))
-(define non-fired-game (make-game centered-tank #false (make-point 20 0)))
-(define shots-fired-game (make-game centered-tank (make-point HALF-WIDTH HALF-HEIGHT) (make-point 20 30)))
-(define shot-hit-game (make-game centered-tank (make-point HALF-WIDTH (- HALF-HEIGHT 10)) (make-point HALF-WIDTH HALF-HEIGHT)))
+(define not-yet-shot-game (make-game centered-tank #false (make-point 20 0)))
+(define miss-shot-game (make-game centered-tank (make-point HALF-WIDTH HALF-HEIGHT) (make-point 20 30)))(define shot-hit-game (make-game centered-tank (make-point HALF-WIDTH (- HALF-HEIGHT 10)) (make-point HALF-WIDTH HALF-HEIGHT)))
 (define player-alone (make-game centered-tank #false #false))
 
 ; draw-minvader : (MaybeEnemy Image -> Image)
@@ -246,4 +245,4 @@ Adding key interactions will be done in 12.04
     [on-tick update-game]
     [to-draw render]))
 
-(main non-fired-game)
+(main not-yet-shot-game)

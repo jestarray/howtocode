@@ -110,8 +110,8 @@ Finish 4(Template) for the "Game" struct
    (maybe-enemy-temp (game-invader gm))))
 
 (define centered-tank (make-tank HALF-WIDTH 0))
-(define non-fired-game (make-game centered-tank #false (make-point 20 0)))
-(define shots-fired-game (make-game centered-tank (make-point HALF-WIDTH HALF-HEIGHT) (make-point 20 30)))
+(define not-yet-shot-game (make-game centered-tank #false (make-point 20 0)))
+(define miss-shot-game (make-game centered-tank (make-point HALF-WIDTH HALF-HEIGHT) (make-point 20 30)))
 (define shot-hit-game (make-game centered-tank (make-point HALF-WIDTH (- HALF-HEIGHT 10)) (make-point HALF-WIDTH HALF-HEIGHT)))
 (define player-alone (make-game centered-tank #false #false))
 
@@ -203,4 +203,4 @@ render
       gm
     [to-draw render]))
 
-(main non-fired-game)
+(main not-yet-shot-game)

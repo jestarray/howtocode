@@ -11,8 +11,6 @@
 (define WIDTH 400)
 (define HEIGHT 400)
 (define BACKGROUND (empty-scene WIDTH HEIGHT "blue"))
-(define HALF-WIDTH (/ WIDTH 2))
-(define HALF-HEIGHT (/ HEIGHT 2))
 (define BUBBLE (circle 5 "solid" "grey"))
 
 ; =================
@@ -32,7 +30,7 @@ Turn all ❌ into ✅ for each step you complete
 #|PROBLEM A:
 Design a world program that moves a Bunch of points up.
 The program starts with no points until the user clicks.
-At max, there should can be 2 points on screen.
+At max, there can be 2 points on screen.
 Adding more than 2 points will replace the oldest point.
 Notice how the data definitions for Point, None, Single, and Couple are done.
 Complete the Data Design steps for "BunchOfPoints"
@@ -66,7 +64,7 @@ Complete the Data Design steps for "BunchOfPoints"
   (... (point-temp (single-one sg))))
 
 (define-struct couple [first second])
-; Point is (make-couple Point Point)
+; Couple is (make-couple Point Point)
 ; interp. represents when there are 2 Points on the screen
 
 ; couple-first : (Point -> Point)
@@ -113,13 +111,13 @@ Comment out the on-mouse big-bang clause when you are finished with all
 ; produces a point with the y decreased by 1
 ; TODO: Function Design
 
+; draw-point : (Point Image -> Image)
+; draws a point on the given background
+; TODO: Function Design
+
 ; bubble-points : (BunchOfPoints -> BunchOfPoints)
 ; moves all points up in the BunchOfPoints
 (define (bubble-points bunch) bunch)
-; TODO: Function Design
-
-; draw-point : (Point Image -> Image)
-; draws a point on the given background
 ; TODO: Function Design
 
 ; render : (BunchOfPoints -> Image)

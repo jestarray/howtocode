@@ -297,6 +297,23 @@ You must type lists out in a cons chain sort of way for now to get used to the s
 }
 
 ◊slide{
+    ◊h3{How do you get the 99 out of the following expression?}
+    ◊racket-code-block{(define x (cons (cons 99 empty) (cons 45 empty)))}
+    ◊form{
+       ◊label{◊input[#:type "radio" #:name "q"]{ a.◊code{(rest x)}}}
+       ◊label{◊input[#:type "radio" #:name "q"]{ b.◊code{(first x)}}}
+       ◊label{◊input[#:type "radio" #:name "q"]{ c.◊code{(rest (first x))}}}
+       ◊label{◊input[#:type "radio" #:name "q"]{ d.◊code{(first (first x))}}}
+       ◊label{◊input[#:type "radio" #:name "q"]{ e.◊code{(rest (rest x))}}}
+    }
+    ◊details{◊summary{answer} d.◊code{(first (first x))} 
+    because: 
+    ◊code{(first x) -> (cons 99 empty)}
+    And then we have to take the first of that again to get the 99 out: 
+    ◊code{(first (cons 99 empty)) -> 99}}
+}
+
+◊slide{
     ◊h3{How many elements are in this list?}
     ◊racket-code-block{(cons (cons 4 empty) (cons 3 empty))}
     ◊form{

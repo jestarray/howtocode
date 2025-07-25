@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 12.03-space-infestors-p2_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 12.03-space-infestors-p2_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require 2htdp/image)
 (require 2htdp/universe)
 (define PNAME 'space-infestors-p2)
@@ -197,7 +197,7 @@ Adding key interactions will be done in 12.04
 |#
 
 ; update-tank : (Tank -> Tank)
-; produces the tank with its x position by its vel-x
+; produces the tank with its x position increased by its vel-x
 
 ; update-menemy : (MaybeEnemy -> MaybeEnemy)
 ; moves the enemy y position if it is alive by ENEMY-SPEED

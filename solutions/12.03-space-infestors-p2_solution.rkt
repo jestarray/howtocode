@@ -94,9 +94,9 @@ Turn all ❌ into ✅ for each step you complete
 ; game-invader : (Game -> MaybeEnemy)
 ; game-score : (Game -> Number)
 
-(define centered-tank (make-tank HALF-WIDTH 0))
+(define centered-tank (make-tank HALF-WIDTH -1))
 (define not-yet-shot-game (make-game centered-tank #false (make-point 20 0) 0))
-(define miss-shot-game (make-game centered-tank (make-point HALF-WIDTH HALF-HEIGHT) (make-point 20 30) 0))
+(define miss-shot-game (make-game centered-tank (make-point HALF-WIDTH HEIGHT) (make-point 20 30) 0))
 (define shot-hit-game (make-game centered-tank (make-point HALF-WIDTH (- HALF-HEIGHT 10)) (make-point HALF-WIDTH HALF-HEIGHT) 0))
 (define player-alone (make-game centered-tank #false #false 0))
 (define invalid-game (make-game 99 "something" "enemy" 0))
@@ -197,7 +197,7 @@ Adding key interactions will be done in 12.04
 |#
 
 ; update-tank : (Tank -> Tank)
-; produces the tank with its x position by its vel-x
+; produces the tank with its x position increased by its vel-x
 (check-expect (update-tank (make-tank 20 TANK-SPEED))
               (make-tank (+ 20 TANK-SPEED) TANK-SPEED))
 (define (update-tank tk)
@@ -253,4 +253,4 @@ Adding key interactions will be done in 12.04
     [on-tick update-game] ; Game -> Game
     [to-draw render])) ; Game -> Image
 
-(main not-yet-shot-game)
+(main miss-shot-game)

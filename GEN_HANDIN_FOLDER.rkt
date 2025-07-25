@@ -42,7 +42,9 @@
     (delete-directory/files full-path #:must-exist? #f)
     ))
 
-(define (read-thing-from-file f)
+;; Path | String -> (ListOfExp Boolean)
+; (read-thing-from-file "/mnt/z/jestlearn_howtocode/writeups/solutions/12.01-bubble-points_solution.rkt")
+(define (read-thing-from-file file-path)
   (define (read-thing source)
     ;; Read some object from a source port.
     ;; Return two values: either the object read and #t,
@@ -56,7 +58,7 @@
                        [read-accept-reader #t])
           (values (read source) #t))))))
   ;; read a thing from a file
-  (call-with-input-file f read-thing))
+  (call-with-input-file file-path read-thing))
 
 (define bsl-funcs
   '(cond
@@ -395,23 +397,54 @@
   (define problem-dir
     (build-path gen-handin-dir
                 problem-name-and-number))
-  (cond [has-start-sol-grader?
-         (make-directory* problem-dir)
-         (define grader-path (third group))
-         (define solution-path (second group))
-         (define-values (contents err?) (read-thing-from-file solution-path))
-         (define hint-funcs
-           (filter-map
-            (lambda (sym)
-              (if (index-of bsl&image-funcs sym)
-                  (symbol->string sym)
-                  #f)) (remove-duplicates (filter symbol? (flatten contents)))))
-         ; (println hint-funcs)
-         (set! *valid-assignments-and-hints*
-               (cons (make-hash
-                      `((name ,@problem-name-and-number)
-                        (hints ,@hint-funcs))) *valid-assignments-and-hints*))
-         (copy-file grader-path (build-path problem-dir "checker.rkt") #t)]))
+  (cond
+    [has-start-sol-grader?
+     (make-directory* problem-dir)
+     (define grader-path (third group))
+     (define solution-path (second group))
+     (define-values (all-contents err?) (read-thing-from-file solution-path))
+     (define contents (first (rest (rest (rest all-contents)))))
+     (define (is-define-struct? defs)
+       (findf
+        (lambda (sym)
+          (eq? sym 'define-struct))
+        (if (list? defs) defs '())))
+     (define all-structs (filter is-define-struct? contents))
+     (define struct-accessor-funcs
+       (flatten
+        (map
+         (lambda (dstructs)
+           (define struct-name (second dstructs))
+           (define struct-fields (third dstructs))
+           ; Symbol Symbol -> String
+           (define (make-accessor-string sname fname)
+             (string-append
+              (symbol->string sname)
+              "-"
+              (symbol->string fname)))
+           (map ((curry make-accessor-string) struct-name) struct-fields)) all-structs)))
+     ; remove the define-struct blocks
+     ; because if (define-struct foo [second]), the hint will say to use "second" which is wrong
+     (define no-define-structs
+       (filter-not is-define-struct? contents))
+     ; Symbol -> String | #f
+     ; produces the string of the symbol if it is in "bsl&image-funcs"
+     (define (bsl&img-funcs-to-string sym)
+       (if (index-of bsl&image-funcs sym)
+           (symbol->string sym)
+           #f))
+     (define bsl-hint-funcs
+       (filter-map
+        bsl&img-funcs-to-string
+        (remove-duplicates (filter symbol? (flatten no-define-structs)))))
+     (define all-hint-funts
+       (append bsl-hint-funcs struct-accessor-funcs))
+     ; (println hint-funcs)
+     (set! *valid-assignments-and-hints*
+           (cons (make-hash
+                  `((name ,@problem-name-and-number)
+                    (hints ,@all-hint-funts))) *valid-assignments-and-hints*))
+     (copy-file grader-path (build-path problem-dir "checker.rkt") #t)]))
 
 ; List<String>
 (define assignment-folders

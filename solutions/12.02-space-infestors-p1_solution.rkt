@@ -83,13 +83,14 @@ Turn all ❌ into ✅ for each step you complete
      (... (point-x bull) (point-y bull))]))
 
 #|PROBLEM A:
-Finish steps Data Design steps 3 & 4 for the "Game" struct.
-Step 3 Examples:
-Come up with the following data examples for "Game" where:
-1) there's a player, with the bullet not fired yet, and a live Enemy
-2) there's a player, with a bullet fired, and a live Enemy
-3) there's a player, with a bullet who's position is super close to the enemy
-4) there's a player, with the bullet and enemy dead
+Notice how the Data Design for Point, Tank, MaybeEnemy, MaybeBullet are done.
+Finish the Data Design steps 3 & 4 for the "Game" struct below.
+Step 3: Examples
+Come up with the following data examples for "Game" where there's:
+1) a tank at the bottom of the screen, with the bullet not fired yet, and a live Enemy
+2) a tank at the bottom of the screen, with a bullet fired, and a live Enemy
+3) a tank at the bottom of the screen, with a bullet who's position is super close to the enemy
+4) a tank at the bottom of the screen, with the bullet and enemy dead
 5) an invalid game that does not follow the "game" data definition types
 Sketch them out at https://tldraw.com
 

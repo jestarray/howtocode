@@ -138,16 +138,16 @@ render
 
 ; draw-minvader : (MaybeEnemy Image -> Image)
 ; draws the invader at its given coordinates if it is alive on the given image(bg)
-; otherwise produce the given background(bg)
+; otherwise produce the given image(bg)
 
 
 ; draw-mbullet : (MaybeBullet Image -> Image)
 ; draws the bullet at its given coordinates if it is alive on the given image(bg)
-; otherwise produce the given background(bg)
+; otherwise produce the given image(bg)
 
 ; draw-tank : (Tank Image -> Image)
 ; draws the tank at its given x coordinate at the bottom of the screen on the given image(bg)
-; otherwise produce the given background(bg)
+; otherwise produce the given image(bg)
 
 ; render : (Game -> Image)
 ; produces an image of the tank, invader, and bullet all ontop of a background

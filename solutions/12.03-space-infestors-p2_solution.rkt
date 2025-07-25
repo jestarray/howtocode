@@ -111,7 +111,7 @@ Turn all ❌ into ✅ for each step you complete
 
 ; draw-minvader : (MaybeEnemy Image -> Image)
 ; draws the invader at its given coordinates if it is alive on the given image(bg)
-; otherwise produce the given background(bg)
+; otherwise produce the given image(bg)
 (check-expect (draw-minvader #false BACKGROUND) BACKGROUND)
 (check-expect (draw-minvader (make-point 20 30) BACKGROUND)
               (place-image/align ENEMY-IMG 20 30 "left" "top" BACKGROUND))
@@ -129,7 +129,7 @@ Turn all ❌ into ✅ for each step you complete
 
 ; draw-mbullet : (MaybeBullet Image -> Image)
 ; draws the bullet at its given coordinates if it is alive on the given image(bg)
-; otherwise produce the given background(bg)
+; otherwise produce the given image(bg)
 (check-expect (draw-mbullet #false BACKGROUND) BACKGROUND)
 (check-expect (draw-mbullet (make-point 150 250) BACKGROUND)
               (place-image/align BULLET-IMG 150 250 "left" "top" BACKGROUND))
@@ -147,7 +147,7 @@ Turn all ❌ into ✅ for each step you complete
 
 ; draw-tank : (Tank Image -> Image)
 ; draws the tank at its given x coordinate at the bottom of the screen on the given image(bg)
-; otherwise produce the given background(bg)
+; otherwise produce the given image(bg)
 (check-expect (draw-tank (make-tank 150 0) BACKGROUND)
               (place-image/align
                TANK-IMG 150

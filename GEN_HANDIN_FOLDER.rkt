@@ -12,7 +12,7 @@
 
 
 ; (listof (listof paths))
-; (list starter solution grader) paths
+; where (listof paths) is (list starter solution grader) paths
 (define starter-n-grader
   (filter-map
    (lambda (path)
@@ -374,77 +374,85 @@
     bitmap/file
     ))
 (define bsl&image-funcs (append bsl-funcs htdp-image-fns))
-(define *valid-assignments-and-hints* empty)
 
-(for ([group starter-n-grader])
-  (define has-start-sol-grader?
-    (andmap
-     (lambda (path)
-       (define exists (file-exists? path))
-       ; print what is missing
-       (when (not exists)
-         ; ignore 0.0 to 2.3 because they do not have graders intentionally
-         (println (list ((compose path->string file-name-from-path) path) " does not have a grader"))
-         )
-       exists) group))
-  (define has-start-sol?
-    (andmap file-exists? (take group 2)))
-  ; only copy those that have all 3 of the starter, solution or grader files for handin
-  ; delete old generated directory
+; groups of files that have the starter, soul, and grader, all as existing files
+(define has-start-sol-grader
+  (filter-map
+   (lambda (group)
+     (cond
+       [(((curry andmap) file-exists?) group) group]
+       [else
+        ; ignore 0.0 to 2.3 because they do not have graders intentionally
+        (println (list (first group) "does not have one of: _starter/solution/grader"))
+        #f])) starter-n-grader))
+
+; create handin dirs and copy the graders to checker.rkt
+(for ([group has-start-sol-grader])
   (define starter-path (first group))
+  (define grader-path (third group))
   (define problem-name-and-number
-    (string-replace (path->string (file-name-from-path starter-path)) "_starter.rkt" ""))
-  (define problem-dir
-    (build-path gen-handin-dir
-                problem-name-and-number))
-  (cond
-    [has-start-sol-grader?
-     (make-directory* problem-dir)
-     (define grader-path (third group))
+    (first (string-split (path->string (file-name-from-path starter-path)) "_")))
+  (define handin-problem-path
+    (build-path gen-handin-dir problem-name-and-number))
+  
+  (make-directory* handin-problem-path)
+  (copy-file grader-path (build-path handin-problem-path "checker.rkt") #t))
+
+; List of file contents in s-expression/module form -> List<String>
+; example:
+; '(#%module-begin (define PNAME 'update-equip) (define-struct wep (name class damage)) -> '("wep-name" ...)
+(define (hints-from-contents contents)
+  (define (is-define-struct? defs)
+    (findf
+     (lambda (sym)
+       (eq? sym 'define-struct))
+     (if (list? defs) defs '())))
+  (define all-structs (filter is-define-struct? contents))
+  (define struct-accessor-funcs
+    (flatten
+     (map
+      (lambda (dstructs)
+        (define struct-name (second dstructs))
+        (define struct-fields (third dstructs))
+        ; Symbol Symbol -> String
+        (define (make-accessor-string sname fname)
+          (string-append
+           (symbol->string sname)
+           "-"
+           (symbol->string fname)))
+        (map ((curry make-accessor-string) struct-name) struct-fields)) all-structs)))
+  ; remove the define-struct blocks
+  ; because if (define-struct foo [second]), the hint will say to use "second" which is wrong
+  (define no-define-structs
+    (filter-not is-define-struct? contents))
+  ; Symbol -> String | #f
+  ; produces the string of the symbol if it is in "bsl&image-funcs"
+  (define (bsl&img-funcs-to-string sym)
+    (if (index-of bsl&image-funcs sym)
+        (symbol->string sym)
+        #f))
+  (define bsl-hint-funcs
+    (filter-map
+     bsl&img-funcs-to-string
+     (remove-duplicates (filter symbol? (flatten no-define-structs)))))
+  (define all-hint-funts
+    (append bsl-hint-funcs struct-accessor-funcs))
+  all-hint-funts)
+
+; create the hash for the json, where we make gather the funcs used as hints
+(define valid-assignments&hints
+  (map
+   (lambda (group)
+     (define starter-path (first group))
+     (define problem-name-and-number
+       (first (string-split (path->string (file-name-from-path starter-path)) "_")))
      (define solution-path (second group))
      (define-values (all-contents err?) (read-thing-from-file solution-path))
      (define contents (first (rest (rest (rest all-contents)))))
-     (define (is-define-struct? defs)
-       (findf
-        (lambda (sym)
-          (eq? sym 'define-struct))
-        (if (list? defs) defs '())))
-     (define all-structs (filter is-define-struct? contents))
-     (define struct-accessor-funcs
-       (flatten
-        (map
-         (lambda (dstructs)
-           (define struct-name (second dstructs))
-           (define struct-fields (third dstructs))
-           ; Symbol Symbol -> String
-           (define (make-accessor-string sname fname)
-             (string-append
-              (symbol->string sname)
-              "-"
-              (symbol->string fname)))
-           (map ((curry make-accessor-string) struct-name) struct-fields)) all-structs)))
-     ; remove the define-struct blocks
-     ; because if (define-struct foo [second]), the hint will say to use "second" which is wrong
-     (define no-define-structs
-       (filter-not is-define-struct? contents))
-     ; Symbol -> String | #f
-     ; produces the string of the symbol if it is in "bsl&image-funcs"
-     (define (bsl&img-funcs-to-string sym)
-       (if (index-of bsl&image-funcs sym)
-           (symbol->string sym)
-           #f))
-     (define bsl-hint-funcs
-       (filter-map
-        bsl&img-funcs-to-string
-        (remove-duplicates (filter symbol? (flatten no-define-structs)))))
-     (define all-hint-funts
-       (append bsl-hint-funcs struct-accessor-funcs))
-     ; (println hint-funcs)
-     (set! *valid-assignments-and-hints*
-           (cons (make-hash
-                  `((name ,@problem-name-and-number)
-                    (hints ,@all-hint-funts))) *valid-assignments-and-hints*))
-     (copy-file grader-path (build-path problem-dir "checker.rkt") #t)]))
+     (define all-hint-funts (hints-from-contents contents))
+     (make-hash
+      `((name ,@problem-name-and-number)
+        (hints ,@all-hint-funts)))) has-start-sol-grader))
 
 ; List<String>
 (define assignment-folders
@@ -482,7 +490,7 @@
   (lambda (out)
     (displayln
      (jsexpr->string
-      (sort *valid-assignments-and-hints*
+      (sort valid-assignments&hints
             (lambda (a b)
               (define name1 (hash-ref a 'name))
               (define name2 (hash-ref b 'name))

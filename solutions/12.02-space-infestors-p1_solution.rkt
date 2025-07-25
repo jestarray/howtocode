@@ -142,7 +142,7 @@ render
 |#
 
 ; draw-minvader : (MaybeEnemy Image -> Image)
-; draws the invader at its given coordinates if it is alive
+; draws the invader at its given coordinates if it is alive on the given image(bg)
 ; otherwise produce the given background(bg)
 (check-expect (draw-minvader #false BACKGROUND) BACKGROUND)
 (check-expect (draw-minvader (make-point 20 30) BACKGROUND)
@@ -160,7 +160,7 @@ render
       bg)]))
 
 ; draw-mbullet : (MaybeBullet Image -> Image)
-; draws the bullet at its given coordinates if it is alive
+; draws the bullet at its given coordinates if it is alive on the given image(bg)
 ; otherwise produce the given background(bg)
 (check-expect (draw-mbullet #false BACKGROUND) BACKGROUND)
 (check-expect (draw-mbullet (make-point 150 250) BACKGROUND)
@@ -178,7 +178,7 @@ render
       bg)]))
 
 ; draw-tank : (Tank Image -> Image)
-; draws the tank at its given x coordinate at the bottom of the screen
+; draws the tank at its given x coordinate at the bottom of the screen on the given image(bg)
 ; otherwise produce the given background(bg)
 (check-expect (draw-tank (make-tank 150 0) BACKGROUND)
               (place-image/align

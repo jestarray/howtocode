@@ -260,7 +260,118 @@
      error
      exit
      identity
-     struct?))
+     struct?
+     ))
+; from: /usr/share/racket/pkgs/htdp-lib/2htdp/image.rkt
+(define htdp-image-fns
+  '(
+    overlay
+    overlay/align
+    overlay/offset
+    overlay/align/offset
+    overlay/xy
+
+    underlay
+    underlay/align
+    underlay/offset
+    underlay/align/offset
+    underlay/xy
+
+    beside
+    beside/align
+
+    above
+    above/align
+
+    crop
+    crop/align
+    rotate
+    flip-horizontal
+    flip-vertical
+    color-frame
+    frame
+    place-image
+    place-image/align
+    place-images
+    place-images/align
+    put-image
+
+    scale
+    scale/xy
+
+    circle
+    ellipse
+    wedge
+    rectangle
+    empty-scene
+    square
+    rhombus
+    regular-polygon
+    pulled-regular-polygon
+    polygon
+    star
+    star-polygon
+    radial-star
+    triangle
+    triangle/sss
+    triangle/ssa
+    triangle/sas
+    triangle/ass
+    triangle/aas
+    triangle/asa
+    triangle/saa
+    isosceles-triangle
+    right-triangle
+    line
+    add-line
+    add-polygon
+    add-curve
+    add-solid-curve
+    scene+line
+    scene+polygon
+    scene+curve
+    text
+    text/font
+
+    image->color-list
+    color-list->bitmap
+
+    x-place?
+    y-place?
+    image?
+    mode?
+    angle?
+    side-count?
+    image-color?
+    pen-style?
+    pen-cap?
+    pen-join?
+    real-valued-posn?
+
+    image-width
+    image-height
+    image-baseline
+
+    put-pinhole
+    clear-pinhole
+    center-pinhole
+    pinhole-x
+    pinhole-y
+    overlay/pinhole
+    underlay/pinhole
+
+    make-color
+    make-pen
+    make-pulled-point
+    step-count?
+    save-image
+    save-svg-image
+
+    freeze
+    bitmap/url
+    bitmap/file
+    ))
+(define bsl&image-funcs (append bsl-funcs htdp-image-fns))
 (define *valid-assignments-and-hints* empty)
 
 (for ([group starter-n-grader])
@@ -292,7 +403,7 @@
          (define hint-funcs
            (filter-map
             (lambda (sym)
-              (if (index-of bsl-funcs sym)
+              (if (index-of bsl&image-funcs sym)
                   (symbol->string sym)
                   #f)) (remove-duplicates (filter symbol? (flatten contents)))))
          ; (println hint-funcs)

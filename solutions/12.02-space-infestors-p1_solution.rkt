@@ -83,7 +83,8 @@ Turn all ❌ into ✅ for each step you complete
      (... (point-x bull) (point-y bull))]))
 
 #|PROBLEM A:
-Finish steps Data Design steps: 3(Examples)  for the "Game" struct
+Finish steps Data Design steps 3 & 4 for the "Game" struct.
+Step 3 Examples:
 Come up with the following data examples for "Game" where:
 1) there's a player, with the bullet not fired yet, and a live Enemy
 2) there's a player, with a bullet fired, and a live Enemy
@@ -92,7 +93,7 @@ Come up with the following data examples for "Game" where:
 5) an invalid game that does not follow the "game" data definition types
 Sketch them out at https://tldraw.com
 
-Finish 4(Template) for the "Game" struct
+Finish Step 4(Template) for the "Game" struct
 |#
 
 (define-struct game [player shot invader score])

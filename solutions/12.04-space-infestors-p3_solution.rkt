@@ -284,10 +284,11 @@ Adjust the "update-game" function to fullfill its updated purpose
 ; bullet-hit-enemy? : (MaybeBullet MaybeEnemy -> Boolean)
 ; produces #true if the the MaybeBullet and MaybeEnemy touch
 ; hint: use distance
-(check-expect (bullet-hit-enemy? (make-point 20 30) (make-point 20 40)) #true)
-(check-expect (bullet-hit-enemy? (make-point 40 50) (make-point 10 20)) #false)
+(check-expect (bullet-hit-enemy? #false #false) #false)
 (check-expect (bullet-hit-enemy? #false (make-point 20 10)) #false)
 (check-expect (bullet-hit-enemy? (make-point 20 10) #false) #false)
+(check-expect (bullet-hit-enemy? (make-point 20 30) (make-point 20 40)) #true)
+(check-expect (bullet-hit-enemy? (make-point 40 50) (make-point 10 20)) #false)
 (define (bullet-hit-enemy? bull enemy)
   (cond
     [(or (boolean? bull) (boolean? enemy)) #f]

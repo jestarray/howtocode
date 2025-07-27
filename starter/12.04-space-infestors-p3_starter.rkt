@@ -248,7 +248,7 @@ and finally:
 Adjust the "update-game" function to fullfill its updated purpose
 |#
 
-; can-fire-bullet? : (MaybeBullet -> MaybeBullet)
+; can-fire-bullet? : (MaybeBullet -> Boolean)
 ; produces #true if the bullet is dead or hit the top of the canvas
 
 ; check-game-over? : (Game -> Boolean)

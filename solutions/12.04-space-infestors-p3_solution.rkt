@@ -248,7 +248,7 @@ and finally:
 Adjust the "update-game" function to fullfill its updated purpose
 |#
 
-; can-fire-bullet? : (MaybeBullet -> MaybeBullet)
+; can-fire-bullet? : (MaybeBullet -> Boolean)
 ; produces #true if the bullet is dead or hit the top of the canvas
 (check-expect (can-fire-bullet? #false) #true)
 (check-expect (can-fire-bullet? (make-point 20 -1)) #true)

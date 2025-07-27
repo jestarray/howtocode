@@ -240,7 +240,8 @@ The "distance" function is given to you in this problem
 Ranked from easiest to hardest:
 Finish desinging the functions:
 can-fire-bullet?
-check-win-lose?
+check-game-over?
+menemy-hit-bottom?
 bullet-hit-enemy?
 handle-key
 and finally:
@@ -250,10 +251,10 @@ Adjust the "update-game" function to fullfill its updated purpose
 ; can-fire-bullet? : (MaybeBullet -> MaybeBullet)
 ; produces #true if the bullet is dead or hit the top of the canvas
 
-; check-win-lose? : (Game -> Boolean)
+; check-game-over? : (Game -> Boolean)
 ; produces #true if the game-score is higher than 3
 ; or if the enemy reaches the bottom of the screen
-(define (check-win-lose? gm) #false)
+(define (check-game-over? gm) #false)
 
 ; menemy-hit-bottom? : (MaybeEnemy -> Boolean)
 ; produces #true if the given invaders y position is > HEIGHT of the game
@@ -270,33 +271,28 @@ Adjust the "update-game" function to fullfill its updated purpose
 ; if the space key is pressed, check to see if we "can-fire-bullet?" ...
 ; ^ adding the bullet into the game if so
 ; otherwise the game should continue on
-
 (define (handle-key gm pressed)
   (cond
     [(key=? pressed "a")
      (...
-      (game-player gm)
-      (game-shot gm)
-      (game-invader gm)
+      (tank-temp (game-player gm))
+      (maybe-bullet-temp (game-shot gm))
+      (maybe-enemy-temp (game-invader gm))
       (game-score gm))]
     [(key=? pressed "d")
      (...
-      (game-player gm)
-      (game-shot gm)
-      (game-invader gm)
+      (tank-temp (game-player gm))
+      (maybe-bullet-temp (game-shot gm))
+      (maybe-enemy-temp (game-invader gm))
       (game-score gm))]
     [(key=? pressed " ")
      (...
-      (game-player gm)
-      (game-shot gm)
-      (game-invader gm)
+      (tank-temp (game-player gm))
+      (maybe-bullet-temp (game-shot gm))
+      (maybe-enemy-temp (game-invader gm))
       (game-score gm))]
     [else
-     (...
-      (game-player gm)
-      (game-shot gm)
-      (game-invader gm)
-      (game-score gm))]))
+     gm]))
 
 ; update-game : (Game -> Game)
 ; produces a game with the updated tank, bullet, and enemy movements
@@ -310,7 +306,7 @@ Adjust the "update-game" function to fullfill its updated purpose
    (update-tank (game-player gm))
    (update-mbullet (game-shot gm))
    (update-menemy (game-invader gm))
-   (game-score gm)) )
+   (game-score gm)))
 
 (define (main gm)
   (big-bang
@@ -318,7 +314,7 @@ Adjust the "update-game" function to fullfill its updated purpose
     [on-key handle-key] ; Game KeyEvent -> Game
     [on-tick update-game] ; Game -> Game
     [to-draw render] ; Game -> Image
-    [stop-when check-win-lose?] ; Game -> Boolean
+    [stop-when check-game-over?] ; Game -> Boolean
     ))
 
-(main not-yet-shot-game)
+;(main not-yet-shot-game)

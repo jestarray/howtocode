@@ -240,7 +240,8 @@ The "distance" function is given to you in this problem
 Ranked from easiest to hardest:
 Finish desinging the functions:
 can-fire-bullet?
-check-win-lose?
+check-game-over?
+menemy-hit-bottom?
 bullet-hit-enemy?
 handle-key
 and finally:
@@ -256,15 +257,15 @@ Adjust the "update-game" function to fullfill its updated purpose
   (or (boolean? bull)
       (< (point-y bull) 0)))
 
-; check-win-lose? : (Game -> Boolean)
+; check-game-over? : (Game -> Boolean)
 ; produces #true if the game-score is higher than 3
 ; or if the enemy reaches the bottom of the screen
 
-(check-expect (check-win-lose? (make-game centered-tank #false #false 1)) #false)
-(check-expect (check-win-lose? (make-game centered-tank #false #false 3)) #true)
+(check-expect (check-game-over? (make-game centered-tank #false #false 1)) #false)
+(check-expect (check-game-over? (make-game centered-tank #false #false 3)) #true)
 (check-expect
- (check-win-lose? (make-game centered-tank #false (make-point 50 999) 0)) #true)
-(define (check-win-lose? gm)
+ (check-game-over? (make-game centered-tank #false (make-point 50 999) 0)) #true)
+(define (check-game-over? gm)
   (or (= (game-score gm) 3)
       (menemy-hit-bottom? (game-invader gm))))
 
@@ -303,6 +304,20 @@ Adjust the "update-game" function to fullfill its updated purpose
 ; if the space key is pressed, check to see if we "can-fire-bullet?" ...
 ; ^ adding the bullet into the game if so
 ; otherwise the game should continue on
+(check-expect (handle-key not-yet-shot-game "p")
+              not-yet-shot-game)
+(check-expect
+ (handle-key not-yet-shot-game "a")
+ (make-game (make-tank HALF-WIDTH (- TANK-SPEED)) #false (make-point 20 0) 0))
+
+(check-expect
+ (handle-key not-yet-shot-game "d")
+ (make-game (make-tank HALF-WIDTH TANK-SPEED) #false (make-point 20 0) 0))
+
+(check-expect
+ (handle-key miss-shot-game " ")
+ miss-shot-game)
+
 (check-expect
  (handle-key not-yet-shot-game " ")
  (make-game centered-tank (make-point HALF-WIDTH HEIGHT) (make-point 20 0) 0))
@@ -339,6 +354,12 @@ Adjust the "update-game" function to fullfill its updated purpose
 ; with the score increased by one
 ; hint: use "bullet-hit-enemy?"
 ; <tests are omitted>
+(check-random (update-game shot-hit-game)
+              (make-game (update-tank (game-player shot-hit-game))
+                         #false
+                         (make-point (random WIDTH) 0)
+                         (+ 1 (game-score shot-hit-game))))
+
 (define (update-game gm)
   (cond
     [(bullet-hit-enemy? (game-shot gm) (game-invader gm))
@@ -360,7 +381,7 @@ Adjust the "update-game" function to fullfill its updated purpose
     [on-key handle-key] ; Game KeyEvent -> Game
     [on-tick update-game] ; Game -> Game
     [to-draw render] ; Game -> Image
-    [stop-when check-win-lose?] ; Game -> Boolean
+    [stop-when check-game-over?] ; Game -> Boolean
     ))
 
 (main not-yet-shot-game)

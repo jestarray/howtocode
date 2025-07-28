@@ -216,6 +216,7 @@ Turn all ❌ into ✅ for each step you complete
       (+ (point-y bull) BULLET-SPEED))]))
 
 ; distance : (Point Point -> Number)
+; produces the distance between the two given points
 ; sqrt((x2-x1)^2 + (y2-y1)^2))
 (check-expect (distance (make-point 1 0) (make-point 2 0)) 1)
 (define (distance p1 p2)
@@ -252,7 +253,7 @@ Adjust the "update-game" function to fullfill its updated purpose
 ; produces #true if the bullet is dead or hit the top of the canvas
 
 ; check-game-over? : (Game -> Boolean)
-; produces #true if the game-score is higher than 3
+; produces #true if the game-score is greater than or equal to 3
 ; or if the enemy reaches the bottom of the screen
 (define (check-game-over? gm) #false)
 

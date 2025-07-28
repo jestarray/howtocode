@@ -216,6 +216,7 @@ Turn all ❌ into ✅ for each step you complete
       (+ (point-y bull) BULLET-SPEED))]))
 
 ; distance : (Point Point -> Number)
+; produces the distance between the two given points
 ; sqrt((x2-x1)^2 + (y2-y1)^2))
 (check-expect (distance (make-point 1 0) (make-point 2 0)) 1)
 (define (distance p1 p2)
@@ -258,13 +259,13 @@ Adjust the "update-game" function to fullfill its updated purpose
       (< (point-y bull) 0)))
 
 ; check-game-over? : (Game -> Boolean)
-; produces #true if the game-score is higher than 3
+; produces #true if the game-score is greater than or equal to 3
 ; or if the enemy reaches the bottom of the screen
 
 (check-expect (check-game-over? (make-game centered-tank #false #false 1)) #false)
 (check-expect (check-game-over? (make-game centered-tank #false #false 3)) #true)
 (check-expect
- (check-game-over? (make-game centered-tank #false (make-point 50 999) 0)) #true)
+ (check-game-over? (make-game centered-tank #false (make-point 50 (+ HEIGHT 1)) 0)) #true)
 (define (check-game-over? gm)
   (or (= (game-score gm) 3)
       (menemy-hit-bottom? (game-invader gm))))
@@ -273,14 +274,14 @@ Adjust the "update-game" function to fullfill its updated purpose
 ; produces #true if the given invaders y position is > HEIGHT of the game
 (check-expect (menemy-hit-bottom? #false) #false)
 (check-expect (menemy-hit-bottom? (make-point 20 50)) #false)
-(check-expect (menemy-hit-bottom? (make-point 20 999)) #true)
-(define (menemy-hit-bottom? en)
+(check-expect (menemy-hit-bottom? (make-point 20 (+ HEIGHT 1))) #true)
+(define (menemy-hit-bottom? enemy)
   ; can be simplified:
   (cond
-    [(boolean? en)
+    [(boolean? enemy)
      #false]
-    [(point? en)
-     (> (point-y en) HEIGHT)]))
+    [(point? enemy)
+     (> (point-y enemy) HEIGHT)]))
 
 ; bullet-hit-enemy? : (MaybeBullet MaybeEnemy -> Boolean)
 ; produces #true if the the MaybeBullet and MaybeEnemy touch
@@ -359,6 +360,13 @@ Adjust the "update-game" function to fullfill its updated purpose
                          #false
                          (make-point (random WIDTH) 0)
                          (+ 1 (game-score shot-hit-game))))
+
+(check-expect (update-game miss-shot-game)
+              (make-game
+               (update-tank (game-player miss-shot-game))
+               (update-mbullet (game-shot miss-shot-game))
+               (update-menemy (game-invader miss-shot-game))
+               (game-score miss-shot-game)))
 
 (define (update-game gm)
   (cond

@@ -21,23 +21,63 @@
             <div id="home"><a href="/index.html">Index</a></div>
 
             <article>
-                <h1>Data Directed Design</h1><p>The structure of the code should mirror the structure of the data definitions. Here we can see this done in some of the data definitions we’ve done before:</p><div class="slide"><h2 id="enum_data"><a class="anchor" href="#enum_data">#</a>Enum data</h2><p><img src="images/dd_enum_arrows.png"/></p></div><div class="slide"><h2 id="union_data"><a class="anchor" href="#union_data">#</a>Union data</h2><p><img src="images/dd_union_arrows.png"/></p></div><div class="slide"><h2 id="self_referential_data"><a class="anchor" href="#self_referential_data">#</a>Self Referential Data</h2><p><img src="images/dd_selfref_arrows.png"/></p><h2 id="self_reference_template"><a class="anchor" href="#self_reference_template">#</a>Self reference template</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define (list-temp lst)
-    (cond [(empty? lst) ...] ; ◄────── (1) ... base case
-          [else
-             (... (first lst)
-                  (list-temp (rest lst)))]))
-             ; ▲
-             ; │
-             ; │
-             ; (2) ... contribution to the base
-</code></pre><p>Notice the <code>...</code> in the template for <code>ListOfString</code> mirrors that of the data definition. <strong>Always use the template as starter code.</strong> The two main things you need to focus on is:</p><ol><li>Base case: what we do when the list is empty, the termination condition</li><li>How to contribute/combine to the base case</li></ol></div><p>Consider the following 3 recursive functions:<br/><code>sum-prices count-items has-peanuts?</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; Notice the similarities between 3 recursive functions
+                <h1>Data Directed Design</h1><p>The structure of the code should mirror the structure of the data definitions. Here we can see this done in some of the data definitions we’ve done before:</p><div class="slide"><h2 id="enum_data"><a class="anchor" href="#enum_data">#</a>Enum data</h2><p><img src="images/dd_enum_arrows.png"/></p></div><div class="slide"><h2 id="union_data"><a class="anchor" href="#union_data">#</a>Union data</h2><p><img src="images/dd_union_arrows.png"/></p></div><div class="slide"><h2 id="self_referential_data(recursion)"><a class="anchor" href="#self_referential_data(recursion)">#</a>Self Referential Data(Recursion)</h2><p><img src="images/dd_selfref_arrows.png"/></p><h2 id="self_reference_template"><a class="anchor" href="#self_reference_template">#</a>Self reference template</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; ListOfNumbers is one of:
+; - empty
+; - (cons Number ListOfNumber)
+; interp. a list of numbers
+
+; examples:
+(define nothing empty)
+(define one-ls (cons 99 empty))
+(define two-ls (cons 4 (cons 6 empty)))
+(define three-ls (cons 1 (cons 8 (cons 5 empty))))
+
+(define (list-of-nums-temp lst)
+  (cond [(empty? lst) ...] ; ◄────── (1) ... base case
+        [else
+         (... (first lst)
+              (list-temp (rest lst)))]))
+        ; ▲
+        ; │
+        ; │
+        ; (2) ... contribution to the base</code></pre><p>Notice how the Data Definition maps to the code. It’s a <code>one of</code>, so we need a <code>cond</code> with two matching cases. In the 2nd case, we use <code>else</code> for short. <strong>Always use the derived template as starter code, as all recursive functions will have this structure.</strong></p></div><div class="slide"><h2 id="the_two_main_things_you_need_to_focus_on_is:"><a class="anchor" href="#the_two_main_things_you_need_to_focus_on_is:">#</a>The two main things you need to focus on is:</h2><p>    </p><ol><li><h3>Base case: what we do when the list is empty, aka the termination condition</h3></li><li><h3>How to contribute/combine to the base case</h3><p> Focus on the 1 list long case and how you combine it with the base case to achieve the intended purpose, and trust that it will just work for a list of any length</p></li></ol></div><div class="slide"><p>Use the design recipe and <strong>recursive template</strong> to work through the following 3 problems<br/><code>sum-prices count-items has-peanuts?</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; ListOfNumber is one of:
+; - empty
+;- (cons Number ListOfNumber)
+; interp. a sequence of numbers
+
+(define (list-num-temp num-ls)
+  (cond
+    [(empty? num-ls) ...]
+    [else
+     (... (first num-ls)
+          (list-num-temp (rest num-ls)))]))
+
+; sum-prices : (ListOfNumber -&gt; Number)
+; produces the combined sum total of all the numbers in the given list
+
+; count-items: (ListOfNumber -&gt; Number)
+; produces the COUNT of how many numbers are in the list
+
+; ListOfString is one of:
+; - empty
+;- (cons String ListOfString)
+; interp. a sequnce of strings
+(define (list-string-temp str-ls)
+  (cond
+    [(empty? str-ls) ...]
+    [else
+     (... (first str-ls)
+          (list-string-temp (rest str-ls)))]))
+
+; has-peanuts? : (ListOfString -&gt; Boolean)
+; produces #true if the list contains "peanuts"</code></pre><p><details><summary>answer</summary><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; Notice the similarities between 3 recursive functions
 
 ; ListOfNumber is one of:
 ; - empty
 ;- (cons Number ListOfNumber)
 ; interp. a sequence of numbers
 
-; sum-prices (ListOfNumber -&gt; Number)
+; sum-prices : (ListOfNumber -&gt; Number)
 ; produces the combined sum total of all the numbers in the given list
 (check-expect (sum-prices empty) 0)
 (check-expect (sum-prices (cons 0.50 (cons 4 empty))) (+ 4 0.50))
@@ -62,11 +102,11 @@
 
 ; ListOfString is one of:
 ; - empty
-;- (cons Number ListOfString)
+;- (cons String ListOfString)
 ; interp. a sequnce of strings
 
-; has-peanuts?: (ListOfString -&gt; Boolean)
-; produces #true if the list contains "chocolate"
+; has-peanuts? : (ListOfString -&gt; Boolean)
+; produces #true if the list contains "peanuts"
 (check-expect (has-peanuts? empty) #false)
 (check-expect (has-peanuts? (cons "vanilla" (cons "chocolate" empty))) #true)
 (check-expect (has-peanuts? (cons "mint" (cons "peanuts" empty))) #true)
@@ -76,7 +116,7 @@
     [else
      (if (string=? (first str-lst) "peanuts")
          #true
-         (has-peanuts? (rest str-lst)))]))</code></pre><p>Here is a table in the main ways they differ:</p><table><caption></caption><thead><th>Function</th>
+         (has-peanuts? (rest str-lst)))]))</code></pre></details></p></div><div class="slide"><p>Here’s a table in the main ways they are similar but differ:</p><table><caption></caption><thead><th>Function</th>
 <th>Base</th>
 <th>Contribution of first</th>
 <th>Combination</th></thead>
@@ -91,7 +131,7 @@
 <tr><td><code>count-items</code></td>
 <td><code>0</code></td>
 <td>1</td>
-<td><code>+</code></td></tr></tbody></table><p>Recursion is difficult, its like reciting the alphabet backwards... not as natural to how we think.</p><p>I’m sure you’re feeling:<br/>Wait a minute, I’m <strong>assuming</strong> this functions fulfills its purpose statement but I haven’t even finished the function itself yet! I’m still the process of writing it out, and I don’t know why this works. It feels like magic, like cheating!</p><p>With iteration, its “What’s the next operation? Do the next operation NOW”, and we see the state changes happen way earlier.<br/>With recursion, its “Do the next operation, not NOW but after we’ve done all the other operations to get to the last one” and we dont see state changing until it comes all the way back up and combines together<br/>https://youtu.be/x5cWX-EyLEI mathematical induction</p><h2 id="how_does_it_work?"><a class="anchor" href="#how_does_it_work?">#</a>How does it work?</h2><p>There’s an intense urge to <strong>need to know</strong> all the individual/micro steps of a recursive function, BUT this is not how you should think about solving recursive problems. You’ll inevitably do it so we’ll go over it together <strong>once</strong>. I <strong>highly recommended</strong> that you use the stepper to to do this! As a function calls itself, it will build a sort of “chain” of calls until it hits the base case. Let’s see this in action with a call to:<br/><code>(sum-prices (cons 2 (cons 1 (cons 7 empty))))</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket"> (+
+<td><code>+</code></td></tr></tbody></table></div><p>I’m sure you’re feeling:<br/><strong>Wait a minute</strong>, when I write the recrusive call, I’m <strong>assuming</strong> this functions fullfills its purpose statement and just works? But I haven’t even finished writing the function yet! I’m still in the process of writing it out, and I don’t know why this works. It feels like magic, like cheating! Not to mention purpose statements are just comments!</p><div class="slide"><h2 id="how_does_it_work?"><a class="anchor" href="#how_does_it_work?">#</a>How does it work?</h2><p>The individual/micro operations of recursive functions expliots the rule that we’ve learned all the way in the start of the course, and that is that <strong>function operands</strong>(aka parameters, inputs, arguments) <strong>need to be values</strong> before the <strong>operator</strong> can do its job. Let’s explore this in a bit more detail!</p><p>Use the stepper and step through this expression:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(+ (* 2 6  (/ 4 4)) (- 1 1))</code></pre><p>This is the order of <strong>calls</strong>:<br/>Calling:<br/><code>+</code> is <strong>called 1st</strong><br/><code>*</code> is <strong>called 2nd</strong><br/><code>/</code> is <strong>called 3rd</strong><br/><code>-</code> is <strong>called last</strong></p><p>Even though <strong>+</strong> is called first, it has to wait until all of its operands resolve into values, so it is executed last. The order of the operations that <strong>executes</strong> is different:</p><p>Executing:<br/><code>/</code> is <strong>executed 1st</strong><br/><code>*</code> is <strong>executed 2nd</strong><br/><code>-</code> is <strong>executed 3rd</strong><br/><code>+</code> is <strong>executed last</strong></p></div><p>As a function calls itself, it will build a sort of “chain” of calls until it hits the base case. Let’s see this in action using the stepper to step through the call to:<br/><code>(sum-prices (cons 2 (cons 1 (cons 7 empty))))</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket"> (+
   2
   (+
    1
@@ -123,7 +163,7 @@
     7
      0))) ; &lt;- the base case
 ; ^ re-written more neatly without the spacing:
-(+ 2 (+ 1 (+ 7 0)))</code></pre><p>For debugging purposes, thinking about the micro steps too much is not helpful.</p><h2 id="why_is_recursion_hard?"><a class="anchor" href="#why_is_recursion_hard?">#</a>Why is recursion hard?</h2><h3>1. Default mindset: Humans think sequentially (“do A, then B, then C”).</h3><p>Recursion demands: “Solve a smaller version of the problem first, then combine results”—a backwards or self-referential logic.</p><p>Example:</p><p>Iterative: “To climb 10 stairs, step 1, then 2, then 3...”</p><p>Recursive: “To climb 10 stairs, first know how to climb 9 stairs, then add one more step.”</p><p>Why it feels unnatural: Recursion asks us to delegate the work before seeing the result, which feels like “cheating”, compared to the iteration where we can see all the previous steps before us more easily.</p><h3>2. The Fear of the Unknown</h3><p>Desire for control: People want to trace every call to feel “sure” it works.</p><p>Recursion’s opacity: Each recursive call hides complexity, creating unease.</p><h3>3. Infinite Loop Anxiety</h3><p>Base-case paranoia: Missing or incorrect base cases lead to infinite recursion (and stack overflows). In contrast to iteration, we have a more intuitive grasp at when we end up front with very little chances of infinite looping.</p><p>This is <strong>NOT</strong> how you should approach recursive functions, and here’s why:<br/>- 12:38 to 13:30 recursive functions mental stack blowup(norman ramsay on teaching htdp)<br/>    - we want to know the micro operations but that is not where the focus should really be in recursion?</p><p>Eventually you’ll develop an intution of trust<br/>- EMPHASIZE that you only need to focus on the base case, and filling in the ... of the template<br/>- EMPHASIZE IU 211 TABLE METHOD</p><p>- look up how cs2500, iu211, uwaterloo, brown?? and how they teach recursion first,</p>
+(+ 2 (+ 1 (+ 7 0)))</code></pre><div class="slide"><h2 id="top_mistakes_students_make_when_doing_recursion"><a class="anchor" href="#top_mistakes_students_make_when_doing_recursion">#</a>Top mistakes students make when doing recursion</h2><ol><li><a href="https://youtu.be/Ae7g73jM4J4?feature=shared&amp;t=733">Being overly concerned/hung up on the individual micro operations of recursive functions</a></li><li>Not having a good base case</li><li>Forgetting to write the natural recursion on the rest of the list in the fucntion</li><li>Not following the signature</li><li>Not having a <strong>clear</strong> purpose statement and trusting it, and focusing too much on the code</li></ol></div><div class="slide"><h2 id="debugging_recursive_functions"><a class="anchor" href="#debugging_recursive_functions">#</a>Debugging recursive functions</h2><ol><li>Comment out all tests <strong>except the failing one</strong>, and use the stepper</li><li>Write out in a table the first and rest of every call to get a birds eyeview: <a href="https://samagino.github.io/Beginning-Student-Tables/">beginning student tables</a></li></ol></div><div class="slide"><h2 id="why_is_recursion_hard?"><a class="anchor" href="#why_is_recursion_hard?">#</a>Why is recursion hard?</h2><h3>1. Default mindset: Humans think sequentially (“do A, then B, then C”).</h3><p>Recursion demands: “Solve a smaller version of the problem first, then combine results”—a backwards or self-referential logic.</p><p>Example:</p><p>Iterative: “To climb 10 stairs, step 1, then 2, then 3...”</p><p>Recursive: “To climb 10 stairs, first know how to climb 9 stairs, then add one more step.”</p><p>Why it feels unnatural: Recursion asks us to delegate the work before seeing the result, which feels like “cheating”, compared to the iteration where we can see all the previous steps before us more easily.</p><h3>2. The Fear of the Unknown</h3><p>Desire for control: People want to trace every call to feel “sure” it works.</p><p>Recursion’s opacity: Each recursive call hides complexity, creating unease.</p><h3>3. Infinite Loop Anxiety</h3><p>Base-case paranoia: Missing or incorrect base cases lead to infinite recursion (and stack overflows). In contrast to iteration, we have a more intuitive grasp at when we end up front with very little chances of infinite looping.</p><p>The idea of why recursion works is similar to proofs by <a href="https://youtu.be/x5cWX-EyLEI">mathematical induction</a>.</p></div>
             </article>
         </main>
     </div>

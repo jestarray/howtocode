@@ -446,23 +446,26 @@ For more information on the ◊a[#:href "https://docs.racket-lang.org/teachpack/
 ◊h2{Recursive Functions}
 
 ◊racket-code-block{
-; ListOfString is one of:
-;  - empty
-;  - (cons String ListOfString)
-; interp. a list of strings
+; ListOfNumbers is one of:
+; - empty
+; - (cons Number ListOfNumber)
+; interp. a list of numbers
 
-(define ls0 empty)
-(define ls1 (cons "a" empty))
-(define ls2 (cons "b" (cons "c" empty)))
+; examples:
+(define nothing empty)
+(define one-ls (cons 99 empty))
+(define two-ls (cons 4 (cons 6 empty)))
+(define three-ls (cons 1 (cons 8 (cons 5 empty))))
 
-#;
-(define (strings-temp str-ls)
-  (cond [(empty? str-ls) (...)]                   ;BASE CASE
-        [else (... (first str-ls)                 ;String
-                   (strings-temp (rest str-ls)))])) ;NATURAL RECURSION
-;             /
-;            /
-;       COMBINATION
+(define (list-of-nums-temp lst)
+  (cond [(empty? lst) ...] ; ◄────── (1) ... base case
+        [else
+         (... (first lst)
+              (list-temp (rest lst)))]))
+        ; ▲
+        ; │
+        ; │
+        ; (2) ... contribution to the base
 }
 
 ◊h2{Data Driven Templates}

@@ -17,9 +17,17 @@ The structure of the code should mirror the structure of the data definitions. H
 ◊slide{
     ◊h2{Self Referential Data(Recursion)}
     ◊img[#:src "images/dd_selfref_arrows.png"]{}
+}
 
-    ◊h2{Self reference template}
-    ◊racket-code-block{
+◊slide{
+◊h2{The two main things you need to focus on are:}
+    ◊ol{
+        ◊li{◊h3{Base case: what we do when the list is empty, aka the termination condition}}
+        ◊li{◊h3{How to contribute/combine to the base case} Focus on the 1 list long case and how you combine it with the base case to achieve the intended purpose, and trust that it will just work for a list of any length}
+    }
+
+◊h2{Self reference template}
+◊racket-code-block{
 ; ListOfNumbers is one of:
 ; - empty
 ; - (cons Number ListOfNumber)
@@ -44,20 +52,10 @@ The structure of the code should mirror the structure of the data definitions. H
     Notice how the Data Definition maps to the code. It's a ◊code{one of}, so we need a ◊code{cond} with two matching cases. In the 2nd case, we use ◊code{else} for short. ◊strong{Always use the derived template as starter code, as all recursive functions will have this structure.}
 }
 
-◊slide{
-◊h2{The two main things you need to focus on is:}
-    ◊ol{
-        ◊li{◊h3{Base case: what we do when the list is empty, aka the termination condition}}
-        ◊li{◊h3{How to contribute/combine to the base case} Focus on the 1 list long case and how you combine it with the base case to achieve the intended purpose, and trust that it will just work for a list of any length}
-    }
-}
-
 ◊; emphasize an incremental approach, e.g looking at all the steps of the design recipe, e.g the examples, the sig, and dedeucing the contribution has to be a using functions that produce the output value. Read the docs otherwise to look for a combinator. Not to mention the base case has to be the type of the output function
 ◊; use the table method from iu 211 if youre stuck on finding the combinator
-◊; EMPHASIZE IU 211 TABLE METHOD
 ◊; trust the natural recursion, e.g trust the purpose statement, and that if it works for a 1 element long list(call it n?), it should work for n+1
 ◊; if you follow this structured approach, you see it all works out
-◊; #1 mistake is not continuing the recursion, which if you work off of the list template, won't happen
 ◊slide{
 Use the design recipe and ◊strong{recursive template} to work through the following 3 problems
 ◊code{sum-prices count-items has-peanuts?}
@@ -168,7 +166,7 @@ Here's a table in the main ways they are similar but differ:
         ◊tr{
             ◊td{◊code{sum-prices}}
             ◊td{◊code{0}}
-            ◊td{the price itself(first nums)}
+            ◊td{◊code{(first nums)} the price itself}
             ◊td{◊code{+}}
         }
         ◊tr{
@@ -181,12 +179,11 @@ Here's a table in the main ways they are similar but differ:
 }
 }
 I'm sure you're feeling:
-◊strong{Wait a minute}, when I write the recrusive call, I'm ◊strong{assuming} this functions fullfills its purpose statement and just works? But I haven't even finished writing the function yet! I'm still in the process of writing it out, and I don't know why this works. It feels like magic, like cheating! Not to mention purpose statements are just comments!
-◊; Table method: https://samagino.github.io/Beginning-Student-Tables/
+◊strong{Wait a minute}, when I write the recrusive call, I'm ◊strong{assuming} this functions fullfills its purpose statement and just works? But I haven't even finished writing the function yet, in fact I'm still in the middle of writing it! It's weird... It feels like magic, like cheating! Not to mention purpose statements are just comments!
 
 ◊slide{
 ◊h2{How does it work?}
-The individual/micro operations of recursive functions expliots the rule that we've learned all the way in the start of the course, and that is that ◊strong{function operands}(aka parameters, inputs, arguments) ◊strong{need to be values} before the ◊strong{operator} can do its job. Let's explore this in a bit more detail!
+The individual/micro/mechanical operations of recursive functions expliots the rule that we've learned all the way in the start of the course, and that is that ◊strong{function operands}(aka parameters, inputs, arguments) ◊strong{need to be values} before the ◊strong{operator} can do its job. Let's explore this in a bit more detail!
 
 Use the stepper and step through this expression:
 ◊racket-code-block{
@@ -208,7 +205,12 @@ Executing:
 ◊code{+} is ◊strong{executed last}
 }
 
-As a function calls itself, it will build a sort of "chain" of calls until it hits the base case. Let's see this in action using the stepper to step through the call to:
+◊slide{
+Note that ◊em{calling and executing are two different things}. 
+◊strong{Calling} a function is like putting it on a todolist.
+◊strong{Executing} a function is doing the operation.
+}
+As a function calls itself, it will build a sort of "chain" of calls until it hits and stops at the base case. Let's see this in action using the stepper to step through the call to:
 ◊code{(sum-prices (cons 2 (cons 1 (cons 7 empty))))}
 
 ◊racket-code-block{
@@ -248,9 +250,59 @@ As a function calls itself, it will build a sort of "chain" of calls until it hi
 }
 
 ◊slide{
+◊h2{Table method}
+It is often better to write out the execution in a ◊a[#:href "https://samagino.github.io/Beginning-Student-Tables/"]{table format} for more of a birds eye view. Here is the execution of ◊code{sum-prices} when it is given the list ◊code{(cons 2 (cons 1 (cons 7 empty)))}:
+
+◊table{
+    ◊thead{
+        ◊th{step#}
+        ◊th{lst}
+        ◊th{(empty? lst)}
+        ◊th{(first lst)}
+        ◊th{(rest lst)}
+    }
+    ◊tbody{
+        ◊tr{
+            ◊td{1}
+            ◊td{◊code{(cons 2 (cons 1 (cons 7 empty)))}}
+            ◊td{◊code{false}}
+            ◊td{◊code{2}}
+            ◊td{◊code{(cons 1 (cons 7 empty))}}
+        }
+        ◊tr{
+            ◊td{2}
+            ◊td{◊code{(cons 1 (cons 7 empty))}}
+            ◊td{◊code{false}}
+            ◊td{◊code{1}}
+            ◊td{◊code{(cons 7 empty)}}
+        }
+        ◊tr{
+            ◊td{3}
+            ◊td{◊code{(cons 7 empty)}}
+            ◊td{◊code{false}}
+            ◊td{◊code{7}}
+            ◊td{◊code{empty}}
+        }
+        ◊tr{
+            ◊td{4}
+            ◊td{◊code{empty} ◊mark{base case: ◊code{0}}}
+            ◊td{◊code{true}}
+            ◊td{ERROR}
+            ◊td{ERROR}
+        }
+    }
+    ◊caption{
+       ◊code{(+ 2 (+ 1 (+ 7 0)))}
+       ◊p{Note that the base case produces 0}
+    }
+}
+}
+
+◊slide{
 ◊h2{Top mistakes students make when doing recursion}
 ◊ol{
-    ◊li{◊a[#:href "https://youtu.be/Ae7g73jM4J4?feature=shared&t=733"]{Being overly concerned/hung up on the individual micro operations of recursive functions}}
+    ◊li{◊a[#:href "https://youtu.be/Ae7g73jM4J4?feature=shared&t=733"]{Being overly concerned/hung up on the individual micro/mechanical operations of recursive functions, and not using the stepper/writing things down}}
+    ◊li{Not writing code from a well built template}
     ◊li{Not having a good base case}
     ◊li{Forgetting to write the natural recursion on the rest of the list in the fucntion}
     ◊li{Not following the signature}

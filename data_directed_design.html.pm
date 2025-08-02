@@ -57,38 +57,28 @@ The structure of the code should mirror the structure of the data definitions. H
 ◊; trust the natural recursion, e.g trust the purpose statement, and that if it works for a 1 element long list(call it n?), it should work for n+1
 ◊; if you follow this structured approach, you see it all works out
 ◊slide{
+◊h2{Recursion Exercise}
 Use the design recipe and ◊strong{recursive template} to work through the following 3 problems
-◊code{sum-prices count-items has-peanuts?}
+◊code{sum-price , count-items , has-peanuts?}
 
 ◊racket-code-block{
 ; ListOfNumber is one of:
 ; - empty
 ;- (cons Number ListOfNumber)
 ; interp. a sequence of numbers
-
-(define (list-num-temp num-ls)
-  (cond
-    [(empty? num-ls) ...]
-    [else
-     (... (first num-ls)
-          (list-num-temp (rest num-ls)))]))
+; TODO: TEMPLATE
 
 ; sum-prices : (ListOfNumber -> Number)
-; produces the combined sum total of all the numbers in the given list
+; produces the sum total of the numbers in the given list
 
 ; count-items: (ListOfNumber -> Number)
-; produces the COUNT of how many numbers are in the list
+; produces the amount of numbers in the given list
 
 ; ListOfString is one of:
 ; - empty
 ;- (cons String ListOfString)
 ; interp. a sequnce of strings 
-(define (list-string-temp str-ls)
-  (cond
-    [(empty? str-ls) ...]
-    [else
-     (... (first str-ls)
-          (list-string-temp (rest str-ls)))]))
+; TODO: TEMPLATE
 
 ; has-peanuts? : (ListOfString -> Boolean)
 ; produces #true if the list contains "peanuts" 
@@ -102,9 +92,15 @@ Use the design recipe and ◊strong{recursive template} to work through the foll
 ; - empty
 ;- (cons Number ListOfNumber)
 ; interp. a sequence of numbers
+(define (list-num-temp num-ls)
+  (cond
+    [(empty? num-ls) ...]
+    [else
+     (... (first num-ls)
+          (list-num-temp (rest num-ls)))]))
 
 ; sum-prices : (ListOfNumber -> Number)
-; produces the combined sum total of all the numbers in the given list
+; produces the sum total of the numbers in the given list
 (check-expect (sum-prices empty) 0)
 (check-expect (sum-prices (cons 0.50 (cons 4 empty))) (+ 4 0.50))
 (check-expect (sum-prices (cons 2 (cons 1 (cons 7 empty)))) (+ 2 1 7))
@@ -116,7 +112,7 @@ Use the design recipe and ◊strong{recursive template} to work through the foll
          (sum-prices (rest num-lst)))]))
 
 ; count-items: (ListOfNumber -> Number)
-; produces the COUNT of how many numbers are in the list
+; produces the amount of numbers in the given list
 (check-expect (count-items empty) 0)
 (check-expect (count-items (cons 33 (cons 4 empty))) 2)
 (define (count-items num-lst)
@@ -129,7 +125,13 @@ Use the design recipe and ◊strong{recursive template} to work through the foll
 ; ListOfString is one of:
 ; - empty
 ;- (cons String ListOfString)
-; interp. a sequnce of strings 
+; interp. a sequnce of strings
+(define (list-string-temp str-ls)
+  (cond
+    [(empty? str-ls) ...]
+    [else
+     (... (first str-ls)
+          (list-string-temp (rest str-ls)))]))
 
 ; has-peanuts? : (ListOfString -> Boolean)
 ; produces #true if the list contains "peanuts" 
@@ -148,6 +150,7 @@ Use the design recipe and ◊strong{recursive template} to work through the foll
 }
 
 ◊slide{
+◊h2{Similarities}
 Here's a table in the main ways they are similar but differ:
 ◊table{
     ◊thead{
@@ -178,6 +181,8 @@ Here's a table in the main ways they are similar but differ:
     }
 }
 }
+Look in the ◊a[#:href "https://docs.racket-lang.org/htdp-langs/beginner.html"]{BSL documentation} for the combinator. If it doesn't exist, wishlist it!
+
 I'm sure you're feeling:
 ◊strong{Wait a minute}, when I write the recrusive call, I'm ◊strong{assuming} this functions fullfills its purpose statement and just works? But I haven't even finished writing the function yet, in fact I'm still in the middle of writing it! It's weird... It feels like magic, like cheating! Not to mention purpose statements are just comments!
 
@@ -293,7 +298,7 @@ It is often better to write out the execution in a ◊a[#:href "https://samagino
     }
     ◊caption{
        ◊code{(+ 2 (+ 1 (+ 7 0)))}
-       ◊p{Note that the base case produces 0}
+       ◊p{Note that the base case produces: ◊code{0}}
     }
 }
 }
@@ -301,12 +306,13 @@ It is often better to write out the execution in a ◊a[#:href "https://samagino
 ◊slide{
 ◊h2{Top mistakes students make when doing recursion}
 ◊ol{
-    ◊li{◊a[#:href "https://youtu.be/Ae7g73jM4J4?feature=shared&t=733"]{Being overly concerned/hung up on the individual micro/mechanical operations of recursive functions, and not using the stepper/writing things down}}
-    ◊li{Not writing code from a well built template}
+    ◊li{◊a[#:href "https://youtu.be/Ae7g73jM4J4?feature=shared&t=733"]{Being overly concerned/hung up on the individual micro/mechanical operations of recursive functions}}
+    ◊li{Not writing or using a template as a starter}
+    ◊li{Not using the stepper/writing things down in a table}
+    ◊li{Not having a ◊strong{clear} purpose statement and trusting it, and focusing too much on the code. Purpose statements should focus on ◊strong{what} the function computes not ◊strong{how} it goes about it}
+    ◊li{Forgetting to write the natural recursion on the rest of the list in the function(step through ◊code{has-peanuts?} without the natural recusive call)}
     ◊li{Not having a good base case}
-    ◊li{Forgetting to write the natural recursion on the rest of the list in the fucntion}
-    ◊li{Not following the signature}
-    ◊li{Not having a ◊strong{clear} purpose statement and trusting it, and focusing too much on the code}
+    ◊li{Not having the functions follow the signature}
 }
 }
 

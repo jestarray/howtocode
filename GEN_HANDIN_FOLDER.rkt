@@ -16,7 +16,8 @@
 (define starter-n-grader
   (filter-map
    (lambda (path)
-     (cond [(bytes=? #".rkt" (path-get-extension path))
+     (define ext (path-get-extension path))
+     (cond [(and (bytes? ext) (bytes=? #".rkt" ext))
             (define fname (path->string (file-name-from-path path)))
             (define splits (string-split fname "-"))
             (define try-num (string->number (first splits)))

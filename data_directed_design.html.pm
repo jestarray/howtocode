@@ -2,7 +2,9 @@
 
 ◊h1{Data Directed Design}
 
-The structure of the code should mirror the structure of the data definitions. Here we can see this done in some of the data definitions we've done before:
+◊h2{Where does recursion come from?}
+
+It comes from the idea that the structure of the code should mirror the structure of the data definitions. Here we can see this done in some of the data definitions we've done before:
 
 ◊slide{
     ◊h2{Enum data}
@@ -17,12 +19,13 @@ The structure of the code should mirror the structure of the data definitions. H
 ◊slide{
     ◊h2{Self Referential Data(Recursion)}
     ◊img[#:src "images/dd_selfref_arrows.png"]{}
+    Trippy I know.
 }
 
 ◊slide{
 ◊h2{The two main things you need to focus on are:}
     ◊ol{
-        ◊li{◊h3{Base case: what we do when the list is empty, aka the termination condition}}
+        ◊li{◊h3{Base case: what we do when the list is ◊code{empty}, aka the termination condition}}
         ◊li{◊h3{How to contribute/combine to the base case} Focus on the 1 list long case and how you combine it with the base case to achieve the intended purpose, and trust that it will just work for a list of any length}
     }
 
@@ -48,7 +51,7 @@ The structure of the code should mirror the structure of the data definitions. H
         ; │
         ; (2) ... contribution to the base
     }
-    Notice how the Data Definition maps to the code. It's a ◊code{one of}, so we need a ◊code{cond} with two matching cases. In the 2nd case, we use ◊code{else} for short. ◊strong{Always use the derived template as starter code, as all recursive functions will have this structure.}
+    Notice how the Data Definition maps to the code. It's a ◊code{one of}, so we need a ◊code{cond} with two matching cases. In the 2nd case, we simplify what would be ◊code{(cons? lst)} to ◊code{else} instead for short. ◊strong{Always use the derived template as starter code, as all recursive functions will have this structure.}
 }
 
 ◊; emphasize an incremental approach, e.g looking at all the steps of the design recipe, e.g the examples, the sig, and dedeucing the contribution has to be a using functions that produce the output value. Read the docs otherwise to look for a combinator. Not to mention the base case has to be the type of the output function
@@ -191,7 +194,7 @@ The individual/micro/mechanical operations of recursive functions expliots the r
 
 Use the stepper and step through this expression:
 ◊racket-code-block{
-    (+ (* 2 6  (/ 4 4)) (- 1 1))
+    (+ (* 2 6 (/ 4 4)) (- 1 1))
 }
 This is the order of ◊strong{calls}:
 Calling:

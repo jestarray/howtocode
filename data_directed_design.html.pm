@@ -34,7 +34,6 @@ The structure of the code should mirror the structure of the data definitions. H
 ; interp. a list of numbers
 
 ; examples:
-(define nothing empty)
 (define one-ls (cons 99 empty))
 (define two-ls (cons 4 (cons 6 empty)))
 (define three-ls (cons 1 (cons 8 (cons 5 empty))))

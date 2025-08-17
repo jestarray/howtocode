@@ -41,7 +41,7 @@
         ; │
         ; (2) ... contribution to the base</code></pre><p>    Notice how the Data Definition maps to the code. It’s a <code>one of</code>, so we need a <code>cond</code> with two matching cases. In the 2nd case, we simplify what would be <code>(cons? lst)</code> to <code>else</code> instead for short. <strong>Always use the derived template as starter code, as all recursive functions will have this structure.</strong></p></div><div class="slide"><h2 id="recursion_exercise"><a class="anchor" href="#recursion_exercise">#</a>Recursion Exercise</h2><p>Use the design recipe and <strong>recursive template</strong> to work through the following 3 problems<br/><code>sum-price , count-items , has-peanuts?</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; ListOfNumber is one of:
 ; - empty
-;- (cons Number ListOfNumber)
+; - (cons Number ListOfNumber)
 ; interp. a sequence of numbers
 ; TODO: TEMPLATE
 
@@ -62,7 +62,7 @@
 
 ; ListOfNumber is one of:
 ; - empty
-;- (cons Number ListOfNumber)
+; - (cons Number ListOfNumber)
 ; interp. a sequence of numbers
 (define (list-num-temp num-ls)
   (cond
@@ -96,7 +96,7 @@
 
 ; ListOfString is one of:
 ; - empty
-;- (cons String ListOfString)
+; - (cons String ListOfString)
 ; interp. a sequnce of strings
 (define (list-string-temp str-ls)
   (cond

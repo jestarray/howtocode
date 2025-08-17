@@ -66,7 +66,7 @@ Use the design recipe and ◊strong{recursive template} to work through the foll
 ◊racket-code-block{
 ; ListOfNumber is one of:
 ; - empty
-;- (cons Number ListOfNumber)
+; - (cons Number ListOfNumber)
 ; interp. a sequence of numbers
 ; TODO: TEMPLATE
 
@@ -92,7 +92,7 @@ Use the design recipe and ◊strong{recursive template} to work through the foll
 
 ; ListOfNumber is one of:
 ; - empty
-;- (cons Number ListOfNumber)
+; - (cons Number ListOfNumber)
 ; interp. a sequence of numbers
 (define (list-num-temp num-ls)
   (cond
@@ -126,7 +126,7 @@ Use the design recipe and ◊strong{recursive template} to work through the foll
 
 ; ListOfString is one of:
 ; - empty
-;- (cons String ListOfString)
+; - (cons String ListOfString)
 ; interp. a sequnce of strings
 (define (list-string-temp str-ls)
   (cond

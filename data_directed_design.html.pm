@@ -309,7 +309,7 @@ Notice that the list gets smaller on each iteration step
 ◊slide{
 ◊h2{Top mistakes students make when doing recursion}
 ◊ol{
-    ◊li{◊a[#:href "https://youtu.be/Ae7g73jM4J4?feature=shared&t=733"]{Being overly concerned/hung up on the individual micro/mechanical operations of recursive functions}}
+    ◊li{◊a[#:href "https://youtu.be/Ae7g73jM4J4?feature=shared&t=733"]{Being hung up on the individual mechanical operations of each recursive call}}
     ◊li{Not writing or using a template as a starter}
     ◊li{Not using the stepper/writing things down in a table}
     ◊li{Not having a ◊strong{clear} purpose statement and trusting it, and focusing too much on the code. Purpose statements should focus on ◊strong{what} the function computes not ◊strong{how} it goes about it}

@@ -303,6 +303,7 @@ It is often better to write out the execution in a ◊a[#:href "https://samagino
        ◊p{Note that the base case produces: ◊code{0}}
     }
 }
+Notice that the list gets smaller on each iteration step
 }
 
 ◊slide{
@@ -312,7 +313,7 @@ It is often better to write out the execution in a ◊a[#:href "https://samagino
     ◊li{Not writing or using a template as a starter}
     ◊li{Not using the stepper/writing things down in a table}
     ◊li{Not having a ◊strong{clear} purpose statement and trusting it, and focusing too much on the code. Purpose statements should focus on ◊strong{what} the function computes not ◊strong{how} it goes about it}
-    ◊li{Forgetting to write the natural recursion on the rest of the list in the function(step through ◊code{has-peanuts?} without the natural recusive call)}
+    ◊li{Forgetting to make sure the a recursive function calls itself}
     ◊li{Not having a good base case}
     ◊li{Not having the functions follow the signature}
 }

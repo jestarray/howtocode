@@ -105,7 +105,7 @@ Use the design recipe and ◊strong{recursive template} to work through the foll
 ; produces the sum total of the numbers in the given list
 (check-expect (sum-prices empty) 0)
 (check-expect (sum-prices (cons 0.50 (cons 4 empty))) (+ 4 0.50))
-(check-expect (sum-prices (cons 2 (cons 1 (cons 7 empty)))) (+ 2 1 7))
+(check-expect (sum-prices (cons 4 (cons 1 (cons 7 empty)))) (+ 4 1 7))
 (define (sum-prices num-lst)
   (cond
     [(empty? num-lst) 0]
@@ -258,7 +258,7 @@ As a function calls itself, it will build a sort of "chain" of calls until it hi
 
 ◊slide{
 ◊h2{Table method}
-It is often better to write out the execution in a ◊a[#:href "https://samagino.github.io/Beginning-Student-Tables/"]{table format} for more of a birds eye view. Here is the execution of ◊code{sum-prices} when it is given the list ◊code{(cons 2 (cons 1 (cons 7 empty)))}:
+It is often better to write out the execution in a ◊a[#:href "https://samagino.github.io/Beginning-Student-Tables/"]{table format} for more of a birds eye view. Here is the execution of ◊code{sum-prices} when it is given the list ◊code{(cons 4 (cons 1 (cons 7 empty)))}:
 
 ◊table{
     ◊thead{
@@ -271,7 +271,7 @@ It is often better to write out the execution in a ◊a[#:href "https://samagino
     ◊tbody{
         ◊tr{
             ◊td{0}
-            ◊td{◊code{(cons 2 (cons 1 (cons 7 empty)))}}
+            ◊td{◊code{(cons 4 (cons 1 (cons 7 empty)))}}
             ◊td{◊code{false}}
             ◊td{◊code{2}}
             ◊td{◊code{(cons 1 (cons 7 empty))}}
@@ -299,7 +299,7 @@ It is often better to write out the execution in a ◊a[#:href "https://samagino
         }
     }
     ◊caption{
-       ◊code{(+ 2 (+ 1 (+ 7 0)))}
+       ◊code{(+ 4 (+ 1 (+ 7 0)))}
        ◊p{Note that the base case produces: ◊code{0}}
     }
 }

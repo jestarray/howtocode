@@ -270,28 +270,28 @@ It is often better to write out the execution in a ◊a[#:href "https://samagino
     }
     ◊tbody{
         ◊tr{
-            ◊td{1}
+            ◊td{0}
             ◊td{◊code{(cons 2 (cons 1 (cons 7 empty)))}}
             ◊td{◊code{false}}
             ◊td{◊code{2}}
             ◊td{◊code{(cons 1 (cons 7 empty))}}
         }
         ◊tr{
-            ◊td{2}
+            ◊td{1}
             ◊td{◊code{(cons 1 (cons 7 empty))}}
             ◊td{◊code{false}}
             ◊td{◊code{1}}
             ◊td{◊code{(cons 7 empty)}}
         }
         ◊tr{
-            ◊td{3}
+            ◊td{2}
             ◊td{◊code{(cons 7 empty)}}
             ◊td{◊code{false}}
             ◊td{◊code{7}}
             ◊td{◊code{empty}}
         }
         ◊tr{
-            ◊td{4}
+            ◊td{3}
             ◊td{◊code{empty} ◊mark{base case: ◊code{0}}}
             ◊td{◊code{true}}
             ◊td{ERROR}

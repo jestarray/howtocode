@@ -273,7 +273,7 @@ It is often better to write out the execution in a ◊a[#:href "https://samagino
             ◊td{0}
             ◊td{◊code{(cons 4 (cons 1 (cons 7 empty)))}}
             ◊td{◊code{false}}
-            ◊td{◊code{2}}
+            ◊td{◊code{4}}
             ◊td{◊code{(cons 1 (cons 7 empty))}}
         }
         ◊tr{

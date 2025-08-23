@@ -218,11 +218,11 @@ Note that ◊em{calling and executing are two different things}.
 ◊strong{Executing} a function is doing the operation.
 }
 As a function calls itself, it will build a sort of "chain" of calls until it hits and stops at the base case. Let's see this in action using the stepper to step through the call to:
-◊code{(sum-prices (cons 2 (cons 1 (cons 7 empty))))}
+◊code{(sum-prices (cons 4 (cons 1 (cons 7 empty))))}
 
 ◊racket-code-block{
  (+
-  2
+444
   (+
    1
    (+
@@ -234,7 +234,7 @@ As a function calls itself, it will build a sort of "chain" of calls until it hi
 
 ; hitting the base case:
  (+
-  2
+  4
   (+
    1
    (+
@@ -246,14 +246,14 @@ As a function calls itself, it will build a sort of "chain" of calls until it hi
 
 ; the "final" expression, a chain of calls:
  (+
-  2
+  4
   (+
    1
    (+
     7
      0))) ; <- the base case
 ; ^ re-written more neatly without the spacing:
-(+ 2 (+ 1 (+ 7 0)))
+(+ 4 (+ 1 (+ 7 0)))
 }
 
 ◊slide{

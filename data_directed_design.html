@@ -131,8 +131,8 @@
 <tr><td><code>count-items</code></td>
 <td><code>0</code></td>
 <td>1</td>
-<td><code>+</code></td></tr></tbody></table></div><p>Look in the <a href="https://docs.racket-lang.org/htdp-langs/beginner.html">BSL documentation</a> for the combinator. If it doesn’t exist, wishlist it!</p><p>I’m sure you’re feeling:<br/><strong>Wait a minute</strong>, when I write the recrusive call, I’m <strong>assuming</strong> this functions fullfills its purpose statement and just works? But I haven’t even finished writing the function yet, in fact I’m still in the middle of writing it! It’s weird... It feels like magic, like cheating! Not to mention purpose statements are just comments!</p><div class="slide"><h2 id="how_does_it_work?"><a class="anchor" href="#how_does_it_work?">#</a>How does it work?</h2><p>The individual/micro/mechanical operations of recursive functions expliots the rule that we’ve learned all the way in the start of the course, and that is that <strong>function operands</strong>(aka parameters, inputs, arguments) <strong>need to be values</strong> before the <strong>operator</strong> can do its job. Let’s explore this in a bit more detail!</p><p>Use the stepper and step through this expression:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(+ (* 2 6 (/ 4 4)) (- 1 1))</code></pre><p>This is the order of <strong>calls</strong>:<br/>Calling:<br/><code>+</code> is <strong>called 1st</strong><br/><code>*</code> is <strong>called 2nd</strong><br/><code>/</code> is <strong>called 3rd</strong><br/><code>-</code> is <strong>called last</strong></p><p>Even though <strong>+</strong> is called first, it has to wait until all of its operands resolve into values, so it is executed last. The order of the operations that <strong>executes</strong> is different:</p><p>Executing:<br/><code>/</code> is <strong>executed 1st</strong><br/><code>*</code> is <strong>executed 2nd</strong><br/><code>-</code> is <strong>executed 3rd</strong><br/><code>+</code> is <strong>executed last</strong></p></div><div class="slide">Note that <em>calling and executing are two different things</em>.<br/><strong>Calling</strong> a function is like putting it on a todolist.<br/><strong>Executing</strong> a function is doing the operation.</div><p>As a function calls itself, it will build a sort of “chain” of calls until it hits and stops at the base case. Let’s see this in action using the stepper to step through the call to:<br/><code>(sum-prices (cons 2 (cons 1 (cons 7 empty))))</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket"> (+
-  2
+<td><code>+</code></td></tr></tbody></table></div><p>Look in the <a href="https://docs.racket-lang.org/htdp-langs/beginner.html">BSL documentation</a> for the combinator. If it doesn’t exist, wishlist it!</p><p>I’m sure you’re feeling:<br/><strong>Wait a minute</strong>, when I write the recrusive call, I’m <strong>assuming</strong> this functions fullfills its purpose statement and just works? But I haven’t even finished writing the function yet, in fact I’m still in the middle of writing it! It’s weird... It feels like magic, like cheating! Not to mention purpose statements are just comments!</p><div class="slide"><h2 id="how_does_it_work?"><a class="anchor" href="#how_does_it_work?">#</a>How does it work?</h2><p>The individual/micro/mechanical operations of recursive functions expliots the rule that we’ve learned all the way in the start of the course, and that is that <strong>function operands</strong>(aka parameters, inputs, arguments) <strong>need to be values</strong> before the <strong>operator</strong> can do its job. Let’s explore this in a bit more detail!</p><p>Use the stepper and step through this expression:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(+ (* 2 6 (/ 4 4)) (- 1 1))</code></pre><p>This is the order of <strong>calls</strong>:<br/>Calling:<br/><code>+</code> is <strong>called 1st</strong><br/><code>*</code> is <strong>called 2nd</strong><br/><code>/</code> is <strong>called 3rd</strong><br/><code>-</code> is <strong>called last</strong></p><p>Even though <strong>+</strong> is called first, it has to wait until all of its operands resolve into values, so it is executed last. The order of the operations that <strong>executes</strong> is different:</p><p>Executing:<br/><code>/</code> is <strong>executed 1st</strong><br/><code>*</code> is <strong>executed 2nd</strong><br/><code>-</code> is <strong>executed 3rd</strong><br/><code>+</code> is <strong>executed last</strong></p></div><div class="slide">Note that <em>calling and executing are two different things</em>.<br/><strong>Calling</strong> a function is like putting it on a todolist.<br/><strong>Executing</strong> a function is doing the operation.</div><p>As a function calls itself, it will build a sort of “chain” of calls until it hits and stops at the base case. Let’s see this in action using the stepper to step through the call to:<br/><code>(sum-prices (cons 4 (cons 1 (cons 7 empty))))</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket"> (+
+444
   (+
    1
    (+
@@ -144,7 +144,7 @@
 
 ; hitting the base case:
  (+
-  2
+  4
   (+
    1
    (+
@@ -156,14 +156,14 @@
 
 ; the "final" expression, a chain of calls:
  (+
-  2
+  4
   (+
    1
    (+
     7
      0))) ; &lt;- the base case
 ; ^ re-written more neatly without the spacing:
-(+ 2 (+ 1 (+ 7 0)))</code></pre><div class="slide"><h2 id="table_method"><a class="anchor" href="#table_method">#</a>Table method</h2><p>It is often better to write out the execution in a <a href="https://samagino.github.io/Beginning-Student-Tables/">table format</a> for more of a birds eye view. Here is the execution of <code>sum-prices</code> when it is given the list <code>(cons 4 (cons 1 (cons 7 empty)))</code>:</p><table><caption></caption><thead><th>step#</th>
+(+ 4 (+ 1 (+ 7 0)))</code></pre><div class="slide"><h2 id="table_method"><a class="anchor" href="#table_method">#</a>Table method</h2><p>It is often better to write out the execution in a <a href="https://samagino.github.io/Beginning-Student-Tables/">table format</a> for more of a birds eye view. Here is the execution of <code>sum-prices</code> when it is given the list <code>(cons 4 (cons 1 (cons 7 empty)))</code>:</p><table><caption></caption><thead><th>step#</th>
 <th>lst</th>
 <th>(empty? lst)</th>
 <th>(first lst)</th>

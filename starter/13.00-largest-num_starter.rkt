@@ -26,10 +26,10 @@ Turn all ❌ into ✅ for each step you complete
 ; - empty
 ; - (cons Number ListOfNumber)
 ; interp. a list of Numbers
-(define nums0 empty)
 (define nums1 (cons 2 (cons 5 empty)))
 (define nums2 (cons 2 (cons 5 (cons 9 (cons 1 empty)))))
 
+; list-nums-temp : (ListOfNumber -> ???)
 (define (list-nums-temp num-lst)
   (cond
     [(empty? num-lst) ...]

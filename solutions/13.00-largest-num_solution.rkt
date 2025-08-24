@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 9.02-largest_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 13.00-largest-num_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (define PNAME 'largest-num)
 #|
 CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
@@ -26,10 +26,10 @@ Turn all ❌ into ✅ for each step you complete
 ; - empty
 ; - (cons Number ListOfNumber)
 ; interp. a list of Numbers
-(define nums0 empty)
 (define nums1 (cons 2 (cons 5 empty)))
 (define nums2 (cons 2 (cons 5 (cons 9 (cons 1 empty)))))
 
+; list-nums-temp : (ListOfNumber -> ???)
 (define (list-nums-temp num-lst)
   (cond
     [(empty? num-lst) ...]
@@ -46,7 +46,7 @@ Finish the uncompleted function design steps ❌ 1-5 above
 
 ; largest: (ListOfNumber -> Number)
 ; produces the greatest number in the list
-(check-expect (largest nums0) 0)
+(check-expect (largest empty) 0)
 (check-expect (largest nums1) 5)
 (check-expect (largest nums2) 9)
 

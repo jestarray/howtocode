@@ -26,12 +26,12 @@ Turn all ❌ into ✅ for each step you complete
 ; - empty
 ; - (cons Number ListOfNumber)
 ; interp. a list of Numbers
-(define nums0 empty)
 (define nums1 (cons 8 empty))
 (define nums2 (cons 2 (cons 5 empty)))
 (define nums3 (cons 2 (cons 2 (cons 2 (cons 2 empty)))))
 (define nums4 (cons 2 (cons 2 (cons 3 (cons 2 empty)))))
 
+; list-nums-temp : (ListOfNumber -> ???)
 (define (list-nums-temp num-lst)
   (cond
     [(empty? num-lst) ...]
@@ -40,9 +40,14 @@ Turn all ❌ into ✅ for each step you complete
           (list-nums-temp (rest num-lst)))]))
 
 #|PROBLEM A:
-Notice how the data design step is done. Write a function 'all-same' that consumes a ListOfNumber
-and produces #true if all the numbers in the list are the same:
-HINT: Use 'second'
+Notice that data design steps are done above.
+Design the function "only-evens" which consumes a ListOfNumbers
+and produces a list without the odd numbers
+For example:
+(only-evens (cons 1 (cons 2 (cons 3 (cons 4 empty)))))
+produces:
+(cons 2 (cons 4 empty))
+Finish the uncompleted function design steps ❌ 1-5 above
 |#
 
 ; all-same: (ListOfNumber -> Boolean)

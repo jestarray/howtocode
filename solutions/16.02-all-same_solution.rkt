@@ -40,14 +40,14 @@ Turn all ❌ into ✅ for each step you complete
           (list-nums-temp (rest num-lst)))]))
 
 #|PROBLEM A:
-Notice that data design steps are done above.
-Design the function "only-evens" which consumes a ListOfNumbers
-and produces a list without the odd numbers
+Notice how the data design step is done.
+Write a function 'all-same?' that consumes a ListOfNumber
+and produces #true if all the numbers in the list are the same:
 For example:
-(only-evens (cons 1 (cons 2 (cons 3 (cons 4 empty)))))
-produces:
-(cons 2 (cons 4 empty))
-Finish the uncompleted function design steps ❌ 1-5 above
+(all-same? (cons 3 empty)) -> #true
+(all-same? (cons 1 (cons 1 empty))) -> #true
+(all-same? (cons 0 (cons 1 empty))) -> #false
+HINT: Use 'second'
 |#
 
 ; all-same: (ListOfNumber -> Boolean)

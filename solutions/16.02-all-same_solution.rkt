@@ -50,20 +50,20 @@ For example:
 HINT: Use 'second'
 |#
 
-; all-same: (ListOfNumber -> Boolean)
+; all-same? : (ListOfNumber -> Boolean)
 ; produces #true if all the numbers in the list are the same
-(check-expect (all-same nums0) #true)
-(check-expect (all-same nums1) #true)
-(check-expect (all-same nums2) #false)
-(check-expect (all-same nums3) #true)
-(check-expect (all-same nums4) #false)
+(check-expect (all-same? nums0) #true)
+(check-expect (all-same? nums1) #true)
+(check-expect (all-same? nums2) #false)
+(check-expect (all-same? nums3) #true)
+(check-expect (all-same? nums4) #false)
 
-; (define (all-same nums) 0)
+; (define (all-same? nums) 0)
 
-(define (all-same nums)
+(define (all-same? nums)
   (cond
     [(empty? nums) #true]
     [(= 1 (length nums)) #true]
     [else
      (and (= (first nums) (second nums))
-          (all-same (rest nums)))]))
+          (all-same? (rest nums)))]))

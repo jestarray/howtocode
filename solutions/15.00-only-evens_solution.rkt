@@ -45,7 +45,7 @@ Finish the uncompleted function design steps ❌ 1-5 above
 |#
 
 ; only-evens : (ListOfNumber -> ListOfNumber)
-; produces a list that only includes even numbers
+; produces the given list with only includes even numbers
 (check-expect (only-evens empty) empty)
 (check-expect (only-evens (cons 1 empty)) empty)
 (check-expect (only-evens (cons 1 (cons 2 (cons 3 empty))))

@@ -38,7 +38,7 @@ Turn all ❌ into ✅ for each step you complete
 #|PROBLEM A:
 Notice that data design steps are done above.
 Design the function "only-shorts" that produces a ListOfString
-where the strings only of length 7 or less long
+where the strings only of length 7 or less long are kept
 For example:
 (only-shorts (cons "cat" (cons "cowabung" (cons "monster" (cons "meow" empty))))
 produces:

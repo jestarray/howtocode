@@ -45,19 +45,3 @@ produces:
 (cons 4 (cons 10 empty))
 Finish the uncompleted function design steps ❌ 1-5 above
 |#
-
-; double-all: (ListOfNumber -> ListOfNumber)
-; produces the given list of numbers with every number doubled
-(check-expect (double-all empty) empty)
-(check-expect (double-all (cons 2 empty))
-              (cons (* 2 2) empty))
-(check-expect (double-all (cons 2 (cons 5 empty)))
-              (cons (* 2 2) (cons (* 2 5) empty)))
-; (define (double-all ls) empty)
-
-(define (double-all nums)
-  (cond
-    [(empty? nums) empty]
-    [else
-     (cons (* (first nums) 2)
-           (double-all (rest nums)))]))

@@ -28,6 +28,7 @@ Turn all ❌ into ✅ for each step you complete
 ; interp. a list of numbers
 (define nums1 (cons 2 (cons 5 empty)))
 
+; list-nums-temp : (ListOfNumber -> ???)
 (define (list-nums-temp num-lst)
   (cond
     [(empty? num-lst) ...]
@@ -36,7 +37,7 @@ Turn all ❌ into ✅ for each step you complete
           (list-nums-temp (rest num-lst)))]))
 
 #|PROBLEM A:
-Notice how the data design step is done. 
+Notice how the data design step are done. 
 Write a function 'double-all' that consumes a list of numbers
 and doubles every number in that list.
 For example:

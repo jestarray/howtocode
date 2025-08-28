@@ -58,7 +58,7 @@ HINT: Use 'second'
 (check-expect (all-same? nums3) #true)
 (check-expect (all-same? nums4) #false)
 
-; (define (all-same? nums) 0)
+; (define (all-same? nums) #false)
 
 (define (all-same? nums)
   (cond

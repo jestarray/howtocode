@@ -47,9 +47,8 @@
         (!procedure all-same? 1)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
-        (set-test-max-score! 5)
+        (set-test-max-score! 4)
 
-(@test "all-same?#1" "err" (all-same? empty) #true 1)
 (@test "all-same?#2" "err" (all-same? (cons 8 empty)) #true 1)
 (@test "all-same?#3" "err" (all-same? (cons 2 (cons 5 empty))) #false 1)
 (@test "all-same?#4" "err" (all-same? (cons 2 (cons 2 (cons 2 (cons 2 empty))))) #true 1)

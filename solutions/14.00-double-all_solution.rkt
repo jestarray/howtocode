@@ -36,7 +36,8 @@ Turn all ❌ into ✅ for each step you complete
           (list-nums-temp (rest num-lst)))]))
 
 #|PROBLEM A:
-Notice how the data design step is done. Write a function 'double-all' that consumes a list of numbers
+Notice how the data design step is done. 
+Write a function 'double-all' that consumes a list of numbers
 and doubles every number in that list.
 For example:
 (double-all (cons 2 (cons 5 empty)))

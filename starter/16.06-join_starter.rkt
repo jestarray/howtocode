@@ -48,4 +48,4 @@ produces:
 
 ; join : (ListOfString String -> String)
 ; produces a new string where each string is seperated by a delimeter
-(define (join str-lst delmineter) "")
+(define (join str-lst delimiter) "")

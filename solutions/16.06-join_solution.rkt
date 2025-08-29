@@ -35,7 +35,7 @@ Turn all ❌ into ✅ for each step you complete
           (ne-strings-temp (rest string-lst)))]))
 
 #|PROBLEM A:
-Notice how the data design step is done. 
+Finish writing the template for NEListOfString!
 Write a function join that consumes NEListOfString, and an additional delimiter string(delimiter).
 The function produces a single string consisting of all the list elements joined together,
 separated by copies of delimiter.

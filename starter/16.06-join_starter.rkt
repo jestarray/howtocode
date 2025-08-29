@@ -12,7 +12,7 @@ Turn all ❌ into ✅ for each step you complete
         1B. if using define-struct, write all accessor signatures✅
     2. Interpretation✅
     3. Data Examples✅
-    4. A function template that processes this data✅
+    4. A function template that processes this data❌
 == Functions ==
     1. Signature, purpose, stub ❌
     2. Examples (aka check-expect/tests, elaborate the concrete) ❌
@@ -29,7 +29,7 @@ Turn all ❌ into ✅ for each step you complete
 ; ne-strings-temp : (NEListOfString -> ???)
 
 #|PROBLEM A:
-Notice how the data design step is done. 
+Finish writing the template for NEListOfString!
 Write a function join that consumes NEListOfString, and an additional delimiter string(delimiter).
 The function produces a single string consisting of all the list elements joined together,
 separated by copies of delimiter.

@@ -24,7 +24,7 @@ Turn all ❌ into ✅ for each step you complete
 
 ; NEListOfString(NonEmptyListOfString) is one of:
 ; - (cons String empty) 
-; - (cons String ListOfString)
+; - (cons String NEListOfString)
 
 ; ne-strings-temp : (NEListOfString -> ???)
 (define (ne-strings-temp string-lst)

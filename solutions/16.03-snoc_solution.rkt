@@ -22,12 +22,12 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
-; ListOfNumber is one of:
+; NEListOfNumber(NonEmptyListOfNumber) is one of:
 ; - (cons Number empty)
-; - (cons Number ListOfNumber)
+; - (cons Number NEListOfNumber)
 ; interp. a list of numbers
 
-; list-nums-temp : (ListOfNumber -> ???)
+; list-nums-temp : (NEListOfNumber -> ???)
 (define (list-nums-temp num-lst)
   (cond
     [(empty? num-lst) ...]
@@ -55,7 +55,7 @@ Finish the uncompleted function design steps ❌ 1-5 above
 (check-expect (snoc 4 (cons 2 (cons 1 empty)))
               (cons 2 (cons 1 (cons 4 empty))))
 
-; snoc : (Number ListOfNumber -> ListOfNumber)
+; snoc : (Number NEListOfNumber -> NEListOfNumber)
 ; produces a list where N is put at the end of the list(most right side)
 (define (snoc n num-list)
   (cond

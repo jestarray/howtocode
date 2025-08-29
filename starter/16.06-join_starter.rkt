@@ -39,7 +39,7 @@ Turn all ❌ into ✅ for each step you complete
 Notice how the data design step is done. 
 Write a function join that consumes a list of strings, with an additional delimiter string(delimiter).
 The function produces a single string consisting of all the list elements joined together,
-separated by copies of del.
+separated by copies of delimiter.
 For example:
 (join (cons "A" (cons "B" (cons "C" empty))) "/")
 produces:

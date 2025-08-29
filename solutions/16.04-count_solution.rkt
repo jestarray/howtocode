@@ -36,8 +36,8 @@ Turn all ❌ into ✅ for each step you complete
           (list-any-temp (rest any-lst)))]))
 
 #|PROBLEM A:
-Design the function "count" that consumes a list lst and a value val.
-The function computes the number of times that val appears in lst.
+Design the function "count" that consumes a list and a value 
+The function computes the number of times that given value appears in list.
 For example:
 (count (cons 9 (cons 9 (cons 7 empty))) 9) -> 2 (two 9's in the list)
 (count (cons 9 (cons 9 (cons 7 empty))) 7) -> 1

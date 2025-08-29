@@ -55,7 +55,7 @@ Finish the uncompleted function design steps ❌ 1-5 above
 (check-expect (snoc 4 (cons 2 (cons 1 empty)))
               (cons 2 (cons 1 (cons 4 empty))))
 
-; snoc : (Number NEListOfNumber -> NEListOfNumber)
+; snoc : (Number ListOfNumber -> NEListOfNumber)
 ; produces a list where N is put at the end of the list(most right side)
 (define (snoc n num-list)
   (cond

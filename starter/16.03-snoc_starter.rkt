@@ -48,5 +48,5 @@ Use the pattern above, treating n as auxiliary data.
 Finish the uncompleted function design steps ❌ 1-5 above
 |#
 
-; snoc : (Number NEListOfNumber -> NEListOfNumber)
+; snoc : (Number ListOfNumber -> NEListOfNumber)
 ; produces a list where N is put at the end of the list(most right side)

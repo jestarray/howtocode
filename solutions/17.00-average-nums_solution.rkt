@@ -27,6 +27,7 @@ Turn all ❌ into ✅ for each step you complete
 ; - (cons Number ListOfNumber)
 ; interp. a list of Numbers
 
+; list-nums-temp : (ListOfNumber -> ???)
 (define (list-nums-temp num-lst)
   (cond
     [(empty? num-lst) ...]
@@ -35,7 +36,8 @@ Turn all ❌ into ✅ for each step you complete
           (list-nums-temp (rest num-lst)))]))
 
 #|PROBLEM A:
-Notice how the data design step is done. Write a function 'average-nums'
+Notice how the data design step is done.
+Write a function 'average'
 that consumes a list of numbers and computes the average.
 The formula for an average of a list of numbers is:
 average = sum-of-all-numbers / amount-of-numbers

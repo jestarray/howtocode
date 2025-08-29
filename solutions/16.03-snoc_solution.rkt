@@ -23,9 +23,11 @@ Turn all ❌ into ✅ for each step you complete
 |#
 
 ; ListOfNumber is one of:
-; - empty
+; - (cons Number empty)
 ; - (cons Number ListOfNumber)
 ; interp. a list of numbers
+
+; list-nums-temp : (ListOfNumber -> ???)
 (define (list-nums-temp num-lst)
   (cond
     [(empty? num-lst) ...]
@@ -37,7 +39,7 @@ Turn all ❌ into ✅ for each step you complete
 Notice that data design steps are done above.
 Design a function snoc that behaves like the opposite of cons.
 It consumes a number and a list of numbers,
-and produces a new list in which n has been inserted at the end of the list.
+and produces a new list in which n has been inserted at the END of the list.
 For example:
 (snoc 3 (cons 1 (cons 2 empty)))
 produces:
@@ -53,7 +55,7 @@ Finish the uncompleted function design steps ❌ 1-5 above
 (check-expect (snoc 4 (cons 2 (cons 1 empty)))
               (cons 2 (cons 1 (cons 4 empty))))
 
-; snoc : (Any ListOfAny -> ListOfAny)
+; snoc : (Number ListOfNumber -> ListOfNumber)
 ; produces a list where N is put at the end of the list(most right side)
 (define (snoc n num-list)
   (cond

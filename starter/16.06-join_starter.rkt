@@ -27,7 +27,7 @@ Turn all ❌ into ✅ for each step you complete
 ; - (cons Number ListOfString)
 ; interp. a list of Strings
 
-; list-strings-temp : (ListOfString -> ???
+; list-strings-temp : (ListOfString -> ???)
 (define (list-strings-temp string-lst)
   (cond
     [(empty? string-lst) ...]

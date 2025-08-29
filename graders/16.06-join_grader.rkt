@@ -49,10 +49,9 @@
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
         (set-test-max-score! 4)
 
-(@test "join#1" "err" (join empty "/") "" 1)
-(@test "join#2" "err" (join (cons "a" empty) "/") "a/" 1)
-(@test "join#3" "err" (join (cons "z" (cons "c" empty)) "/") "z/c/" 1)
-(@test "join#4" "err" (join (cons "x" (cons "y" (cons "z" (cons "a" empty)))) ">") "x>y>z>a>" 1)
+(@test "join#1" "err" (join (cons "a" empty) "") "a" 1)
+(@test "join#2" "err" (join (cons "z" (cons "c" empty)) "/") "z/c" 1)
+(@test "join#3" "err" (join (cons "x" (cons "y" (cons "z" (cons "a" empty)))) ">") "x>y>z>a" 1)
 
 ;(@test "my-member#1" "err" (my-member "bob" empty) #false 1)
 ;(@test "my-member#2" "err" (my-member "bob" (cons 1 (cons 2 empty))) #false 1)

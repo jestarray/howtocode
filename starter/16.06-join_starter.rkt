@@ -22,30 +22,28 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
-; ListOfString is one of:
-; - empty
-; - (cons Number ListOfString)
-; interp. a list of Strings
+; NEListOfString(NonEmptyListOfString) is one of:
+; - (cons String empty) 
+; - (cons String ListOfString)
 
-; list-strings-temp : (ListOfString -> ???)
-(define (list-strings-temp string-lst)
+; ne-strings-temp : (NEListOfString -> ???)
+(define (ne-strings-temp string-lst)
   (cond
     [(empty? string-lst) ...]
     [else
      (... (first string-lst)
-          (list-strings-temp (rest string-lst)))]))
+          (ne-strings-temp (rest string-lst)))]))
 
 #|PROBLEM A:
 Notice how the data design step is done. 
-Write a function join that consumes a list of strings, with an additional delimiter string(delimiter).
+Write a function join that consumes NEListOfString, and additional delimiter string(delimiter).
 The function produces a single string consisting of all the list elements joined together,
 separated by copies of delimiter.
 For example:
-(join (cons "A" (cons "B" (cons "C" empty))) "/")
-produces:
-"A/B/C"
+(join (cons "a" empty) "/")) -> "a"
+(join (cons "A" (cons "B" (cons "C" empty))) "/") -> "A/B/C"
 |#
 
-; join : (ListOfString String -> String)
+; join : (NEListOfString String -> String)
 ; produces a new string where each string is seperated by a delimeter
-(define (join str-lst delimiter) "")
+(define (join string-list delimiter) "")

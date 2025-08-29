@@ -22,41 +22,39 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
-; ListOfString is one of:
-; - empty
-; - (cons Number ListOfString)
-; interp. a list of Strings
+; NEListOfString(NonEmptyListOfString) is one of:
+; - (cons String empty) 
+; - (cons String ListOfString)
 
-; list-strings-temp : (ListOfString -> ???)
-(define (list-strings-temp string-lst)
+; ne-strings-temp : (NEListOfString -> ???)
+(define (ne-strings-temp string-lst)
   (cond
     [(empty? string-lst) ...]
     [else
      (... (first string-lst)
-          (list-strings-temp (rest string-lst)))]))
+          (ne-strings-temp (rest string-lst)))]))
 
 #|PROBLEM A:
 Notice how the data design step is done. 
-Write a function join that consumes a list of strings, with an additional delimiter string(delimiter).
+Write a function join that consumes NEListOfString, and additional delimiter string(delimiter).
 The function produces a single string consisting of all the list elements joined together,
 separated by copies of delimiter.
 For example:
-(join (cons "A" (cons "B" (cons "C" empty))) "/")
-produces:
-"A/B/C"
+(join (cons "a" empty) "/")) -> "a"
+(join (cons "A" (cons "B" (cons "C" empty))) "/") -> "A/B/C"
 |#
 
-; join : (ListOfString String -> String)
+; join : (NEListOfString String -> String)
 ; produces a new string where each string is seperated by a delimeter
-(check-expect (join empty "/") "")
-(check-expect (join str1 "/") "a/")
-(check-expect (join str2 "/") "a/b/")
-(check-expect (join str3 ">") "a>b>c>d")
+(check-expect (join (cons "a" empty) "/") "a")
+(check-expect (join (cons "a" (cons "b" empty)) "/") "a/b")
+(check-expect (join (cons "A" (cons "B" (cons "C" empty))) "/") "A/B/C")
 
-; (define (join str-list delimiter) "")
+; (define (join string-list delimiter) "")
 (define (join string-lst delimiter)
   (cond
-    [(empty? string-lst) ""]
+    [(= (length string-lst) 1)
+     (first string-lst)]
     [else
      (string-append
       (first string-lst)

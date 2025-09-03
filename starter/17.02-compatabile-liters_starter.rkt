@@ -144,6 +144,7 @@ CHART: https://howtocode.pages.dev/images/bloodtype.jpg
 ; compat-blood? : (BloodType BloodType -> Boolean)
 ; produces #true if the first given bloodtype is compatabile with blood of the second given bloodtype
 ; TODO: CODE "compat-blood?"
+(define (compat-blood? bld donor) ...)
 
 #|PROBLEM B:
 Write a function 'compatabile-liters' that consumes a ListOfBloodType and a Bloodtype,

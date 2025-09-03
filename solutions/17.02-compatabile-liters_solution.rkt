@@ -33,7 +33,7 @@ and produces whether the recipient is compataible with the donors blood given th
     Additonally, a person with B+ blood can receive blood from a donor with O+ or B- blood.
     No other combination of donor and recipient blood types is compatible.
 
-NOTE: The data design and tests has been done for you in this problem.
+NOTE: The data design, examples/tests has been done for you in this problem.
 CHART: https://howtocode.pages.dev/images/bloodtype.jpg
 |#
 
@@ -58,9 +58,6 @@ CHART: https://howtocode.pages.dev/images/bloodtype.jpg
     [(string=? bld "B-") ...]
     [(string=? bld "O+") ...]
     [(string=? bld "O-") ...]))
-
-; compat-blood? (BloodType BloodType -> Boolean)
-; produces #true if the first given bloodtype is compatabile with blood of the second given bloodtype
 
 ; O+ can only recieve blood from itself or O-
 (check-expect (compat-blood? "O+" "O+") #true)
@@ -144,6 +141,8 @@ CHART: https://howtocode.pages.dev/images/bloodtype.jpg
 (check-expect (compat-blood? "AB-" "AB+") #false)
 (check-expect (compat-blood? "AB-" "AB-") #true)
 
+; compat-blood? : (BloodType BloodType -> Boolean)
+; produces #true if the first given bloodtype is compatabile with blood of the second given bloodtype
 (define (compat-blood? bld donor)
   (cond
     [(string=? bld donor) #true] ; compat with itself
@@ -157,13 +156,12 @@ CHART: https://howtocode.pages.dev/images/bloodtype.jpg
 
 
 #|PROBLEM B:
-Write a function 'compatabile-liters' that consumes a ListOfBloodType and a bloodtype,
-and adds 1 liter per bloodtype in the list that is compatable with the given boodtype.
+Write a function 'compatabile-liters' that consumes a ListOfBloodType and a Bloodtype,
+and adds 1 liter per Bloodtype in the list that is compatable with the given boodtype.
 Use 'compat-blood?' in your solution
 For example:
-(compatabile-liters (cons "A-" (cons "O-" empty)) "AB-")
-produces:
-2
+(compatabile-liters (cons "A-" (cons "O-" empty)) "AB-") -> 2
+(compatabile-liters (cons "A-" (cons "O-" empty)) "B-") -> 1
 |#
 
 ; ListOfBloodType is one of:
@@ -174,6 +172,7 @@ produces:
 (define every-blood 
   (cons "AB+" (cons "AB-" (cons "A+"  (cons "A-"  (cons "B+"  (cons "B-"  (cons "O+" (cons "O-" empty)))))))))
 
+; list-blood-temp : (ListOfBlodType -> ???)
 (define (list-blood-temp bank)
   (cond
     [(empty? bank) ...]
@@ -192,8 +191,6 @@ produces:
 (check-expect (compatabile-liters every-blood "B+") 4)
 (check-expect (compatabile-liters every-blood "A-") 2)
 (check-expect (compatabile-liters every-blood "B-") 2)
-
-; (define (compatabile-liters nums) 0)
 
 (define (compatabile-liters bank btype)
   (cond

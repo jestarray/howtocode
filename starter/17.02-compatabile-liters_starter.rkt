@@ -48,17 +48,6 @@ CHART: https://howtocode.pages.dev/images/bloodtype.jpg
 ; -"O-"
 ; interp. all the types of blood
 
-(define (blood-type-temp bld)
-  (cond
-    [(string=? bld "AB+") ...]
-    [(string=? bld "AB-") ...]
-    [(string=? bld "A+") ...]
-    [(string=? bld "A-") ...]
-    [(string=? bld "B+") ...]
-    [(string=? bld "B-") ...]
-    [(string=? bld "O+") ...]
-    [(string=? bld "O-") ...]))
-
 ; O+ can only recieve blood from itself or O-
 (check-expect (compat-blood? "O+" "O+") #true)
 (check-expect (compat-blood? "O+" "O-") #true)
@@ -144,7 +133,16 @@ CHART: https://howtocode.pages.dev/images/bloodtype.jpg
 ; compat-blood? : (BloodType BloodType -> Boolean)
 ; produces #true if the first given bloodtype is compatabile with blood of the second given bloodtype
 ; TODO: CODE "compat-blood?"
-(define (compat-blood? bld donor) ...)
+(define (compat-blood? bld donor)
+  (cond
+    [(string=? bld "AB+") ...]
+    [(string=? bld "AB-") ...]
+    [(string=? bld "A+") ...]
+    [(string=? bld "A-") ...]
+    [(string=? bld "B+") ...]
+    [(string=? bld "B-") ...]
+    [(string=? bld "O+") ...]
+    [(string=? bld "O-") ...]))
 
 #|PROBLEM B:
 Write a function 'compatabile-liters' that consumes a ListOfBloodType and a Bloodtype,
@@ -174,4 +172,5 @@ For example:
 ; compatabile-liters: (ListOfBloodType BloodType -> Number)
 ; produces the number of liters that are compatabile with the given bloodtype
 ; in the given list
-; TODO: TETS & CODE "compatabile-liters:"
+; TODO: EXAMPLES & CODE "compatabile-liters:"
+(define (compatible-liters bank btype) ...)

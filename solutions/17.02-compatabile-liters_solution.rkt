@@ -48,17 +48,6 @@ CHART: https://howtocode.pages.dev/images/bloodtype.jpg
 ; -"O-"
 ; interp. all the types of blood
 
-(define (bloodtype-temp bld)
-  (cond
-    [(string=? bld "AB+") ...]
-    [(string=? bld "AB-") ...]
-    [(string=? bld "A+") ...]
-    [(string=? bld "A-") ...]
-    [(string=? bld "B+") ...]
-    [(string=? bld "B-") ...]
-    [(string=? bld "O+") ...]
-    [(string=? bld "O-") ...]))
-
 ; O+ can only recieve blood from itself or O-
 (check-expect (compat-blood? "O+" "O+") #true)
 (check-expect (compat-blood? "O+" "O-") #true)

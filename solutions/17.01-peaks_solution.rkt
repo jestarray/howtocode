@@ -37,7 +37,7 @@ Turn all ❌ into ✅ for each step you complete
 #|PROBLEM A:
 In a list of numbers, a given element is called a peak if 
 it's strictly larger than ALL the numbers that come AFTER it in the list.
-Write a function peaks that consumes a non-empty list of numbers and 
+Write a function peaks that consumes a list of numbers and 
 produces a sub-list consisting of all the peaks from the original list. 
 For example:
 (peaks (cons 1 (cons 6 (cons 4 (cons 5 empty))))) 

@@ -33,8 +33,8 @@ and produces whether the recipient is compataible with the donors blood given th
     Additonally, a person with B+ blood can receive blood from a donor with O+ or B- blood.
     No other combination of donor and recipient blood types is compatible.
 
-NOTE: The data design, examples/tests has been done for you in this problem.
 CHART: https://howtocode.pages.dev/images/bloodtype.jpg
+NOTE: The data design, examples/tests has been done for you in this problem.
 |#
 
 ; BloodType is one of:
@@ -131,7 +131,7 @@ CHART: https://howtocode.pages.dev/images/bloodtype.jpg
 (check-expect (compat-blood? "AB-" "AB-") #true)
 
 ; compat-blood? : (BloodType BloodType -> Boolean)
-; produces #true if the first given bloodtype is compatabile with blood of the second given bloodtype
+; produces #true if the first given bloodtype is compatabile with the second(donor) given bloodtype
 (define (compat-blood? bld donor)
   (cond
     [(string=? bld donor) #true] ; compat with itself

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
+    <title>List Abbreviation</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/data_directed_design.html"> Data Directed Design</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+
+            <article>
+                <h1>List Abbreviation</h1><div class="slide"><h2 id="the_problem_with_cons"><a class="anchor" href="#the_problem_with_cons">#</a>The problem with cons</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(cons
+ "bob"
+ (cons
+  "carl"
+  (cons
+   "dana"
+   (cons
+    "erik"
+    (cons
+     "frank"
+     (cons
+      "grant"
+      (cons
+       "hank"
+       (cons
+        "ian"
+        (cons
+         "john"
+         (cons
+          "karel"
+          '()))))))))))</code></pre></div><p>When you have lists with lots of elements, <code>cons</code> lists become hard to read and write! There’s a lot of nesting and parens at the end, along with 10 <code>cons</code>‘s!</p><p>Instead, we can write this with <code>list</code> instead:</p><div class="slide"><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(list "bob" "carl" "dana" "erik" "frank" "grant" "hank" "ian" "john" "karel")</code></pre></div><p><code>list</code> takes in any N number of arguments and makes a list</p><p>Underneath, it is just <code>cons</code> if you run it in the evaluations window.</p><h2 id="change_the_language_level"><a class="anchor" href="#change_the_language_level">#</a>Change the language level</h2><p>Change the language level to “Beginning Student with List Abbreviations” in the bottom left menu bar to make it so all <code>cons</code> lists print in the abbreviated format.</p><p>The abbrevated format makes lists easier to visually read and type, but underneath, it is still just a <code>cons</code> list. There is still an empty even when using <strong>list</strong>: <code>(rest (list 5)) == empty</code>. It’s important to note that the <code>list</code> and <code>cons</code> way of building the list are equivalent, just different notation.</p><p><code>(check-expect (cons 5 (cons 7 empty)) (list 5 7) #true)</code></p><div class="slide"><table><caption></caption><thead><th>short-hand</th>
+<th>long-hand</th></thead>
+<tbody><tr><td><code>(list "ABC")</code></td>
+<td><code>(cons "ABC" '())</code></td></tr>
+<tr><td><code>(list #false #true)</code></td>
+<td><code>(cons #false (cons #true '()))</code></td></tr>
+<tr><td><code>(list 1 2 3)</code></td>
+<td><code>(cons 1 (cons 2 (cons 3 '())))</code></td></tr>
+<tr><td><code>(list (make-pos 1 4) (make-pos 9 2))</code></td>
+<td><code>(cons (make-pos 1 4) (cons (make-pos 9 2) empty))</code></td></tr></tbody></table></div><div class="slide"><h2 id="when_to_use_cons_vs_list?"><a class="anchor" href="#when_to_use_cons_vs_list?">#</a>When to use cons vs list?</h2><p>This doesn’t mean we will never use <code>cons</code> again!</p><h3>cons</h3><p><code>cons</code> is better for continously adding things into a list, where you don’t know how long the list can be(dynamically building them)!</p><video autoplay="" height="360" loop="" muted="" width="640"><source src="./images/build_cons.mp4" type="video/mp4"></source></video><h3>list</h3><p>whereas <code>list</code> is more useful for typing out lists when we know the length of them ahead of time.</p></div><p>95% of the time, <code>cons</code> will be used in <strong>functions</strong>, because sometimes you add things onto a list and sometimes you don’t, and you should use <code>list</code> when writing <strong>examples/tests</strong> because you know the amount there are ahead of time</p><div class="slide"><h2 id="exercises"><a class="anchor" href="#exercises">#</a>Exercises</h2><h3>List to Cons</h3><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; Fill in the ... and make the tests pass:
+; Use "cons" and "empty" to form the equivalent of the following lists:
+(check-expect (list 7 2 1 3 5) ...)
+(check-expect (list (list "he" 0) (list "it" 1) (list "lui" 14)) ...)
+(check-expect (list 1 (list 1 2) (list 1 2 3)) ...)</code></pre></div><div class="slide"><h3>Cons to List</h3><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; Fill in the ... and make sure the tests pass:
+; Use "list" to form the equivalent of the following lists:
+(check-expect (cons "apple" (cons "banana" (cons "chestnut" empty))) ...)
+(check-expect (cons (cons "apple" empty) (cons (cons "banana" (cons "chestnut" empty)) empty)) ...)
+(check-expect (cons (list 1 2) (list 3 4)) ...)
+(check-expect (cons (cons empty empty) (cons empty empty)) ...)</code></pre></div><div class="slide"><h3>List to Cons with Structs</h3><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct person [fname lname])
+(define bob (make-person "bob" "smith"))
+(define lisa (make-person "lisa" "lee"))
+(define jack (make-person "jack" "chan"))
+
+; Use "list" to form the equivalent of the following lists:
+(check-expect (cons bob (cons lisa (cons jack empty))) ...)
+(check-expect (cons jack (cons bob (cons lisa empty))) ...)
+(check-expect (person-lname (first (rest (list lisa jack)))) ...)</code></pre></div>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

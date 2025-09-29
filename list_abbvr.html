@@ -59,7 +59,7 @@
 (check-expect (cons "apple" (cons "banana" (cons "chestnut" empty))) ...)
 (check-expect (cons (cons "apple" empty) (cons (cons "banana" (cons "chestnut" empty)) empty)) ...)
 (check-expect (cons (list 1 2) (list 3 4)) ...)
-(check-expect (cons (cons empty empty) (cons empty empty)) ...)</code></pre></div><div class="slide"><h3>List to Cons with Structs</h3><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct person [fname lname])
+(check-expect (cons (cons empty empty) (cons empty empty)) ...)</code></pre></div><div class="slide"><h3>Cons to Lists with Structs</h3><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct person [fname lname])
 (define bob (make-person "bob" "smith"))
 (define lisa (make-person "lisa" "lee"))
 (define jack (make-person "jack" "chan"))

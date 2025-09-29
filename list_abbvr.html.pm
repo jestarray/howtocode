@@ -115,7 +115,7 @@ whereas ◊code{list} is more useful for typing out lists when we know the lengt
 }
 
 ◊slide{
-◊h3{List to Cons with Structs}
+◊h3{Cons to Lists with Structs}
 ◊racket-code-block{
 (define-struct person [fname lname])
 (define bob (make-person "bob" "smith"))

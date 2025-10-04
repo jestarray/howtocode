@@ -53,6 +53,10 @@ Turn all ❌ into ✅ for each step you complete
 (define every1 (list ava jack anna bob jess))
 (define zero-interns (list jack anna bob))
 
+#|PROBLEM A:
+Finish the template for ListOfEmployee
+|#
+
 ; list-empl-temp : (ListOfEmployee -> ???)
 (define (list-empl-temp empl-ls)
   (cond
@@ -61,7 +65,7 @@ Turn all ❌ into ✅ for each step you complete
      (... (employee-temp (first empl-ls))
           (list-empl-temp (rest empl-ls)))]))
 
-#|PROBLEM A:
+#|PROBLEM B:
 Design a function "raise-wages" that consumes a ListOfEmployee and a Number
 and increases everyones wages by that Number
 |#
@@ -88,7 +92,7 @@ and increases everyones wages by that Number
    (+ (employee-wage empl) raise)
    (employee-role empl)))
 
-#|PROBLEM B:
+#|PROBLEM C:
 Design a function "filter-role" which consumes a ListOfEmployee and a Role
 and produces only the set of Employees with the given Role
 |#
@@ -113,7 +117,7 @@ and produces only the set of Employees with the given Role
 (define (is-role? empl role)
   (string=? (employee-role empl) role))
 
-#|PROBLEM C:
+#|PROBLEM D:
 Design a function "count-roles" that consumes a ListOfEmployees and a Role
 and produces the count of employees in that role
 |#

@@ -12,7 +12,7 @@ Turn all ❌ into ✅ for each step you complete
         1B. if using define-struct, write all accessor signatures✅
     2. Interpretation✅
     3. Data Examples✅
-    4. A function template that processes this data✅
+    4. A function template that processes this data❌
 == Functions ==
     1. Signature, purpose, stub ❌
     2. Examples (aka check-expect/tests, elaborate the concrete) ❌
@@ -53,15 +53,14 @@ Turn all ❌ into ✅ for each step you complete
 (define every1 (list ava jack anna bob jess))
 (define zero-interns (list jack anna bob))
 
-; list-empl-temp : (ListOfEmployee -> ???)
-(define (list-empl-temp empl-ls)
-  (cond
-    [(empty? empl-ls) ...]
-    [else
-     (... (employee-temp (first empl-ls))
-          (list-empl-temp (rest empl-ls)))]))
-
 #|PROBLEM A:
+Finish the template for ListOfEmployee
+|#
+
+; list-empl-temp : (ListOfEmployee -> ???)
+; TODO
+
+#|PROBLEM B:
 Design a function "raise-wages" that consumes a ListOfEmployee and a Number
 and increases everyones wages by that Number
 |#
@@ -69,14 +68,14 @@ and increases everyones wages by that Number
 ; raise-wages : (ListOfEmpolyee Number -> ListOfEmployee)
 ; increase the wages of all given employees by the given raise
 
-#|PROBLEM B:
+#|PROBLEM C:
 Design a function "filter-role" which consumes a ListOfEmployee and a Role
 and produces only the set of Employees with the given Role
 |#
 
 ; filter-role : (ListOfEmployee Role -> ListOfEmployee)
 
-#|PROBLEM C:
+#|PROBLEM D:
 Design a function "count-roles" that consumes a ListOfEmployees and a Role
 and produces the count of employees in that role
 |#

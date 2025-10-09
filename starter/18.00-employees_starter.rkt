@@ -58,7 +58,7 @@ Finish the template for ListOfEmployee
 |#
 
 ; list-empl-temp : (ListOfEmployee -> ???)
-; TODO
+; TODO: TEMPLATE
 
 #|PROBLEM B:
 Design a function "raise-wages" that consumes a ListOfEmployee and a Number

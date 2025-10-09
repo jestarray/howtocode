@@ -48,7 +48,7 @@ Turn all ❌ into ✅ for each step you complete
 Finish the template for ListOfGrocery
 |#
 ; list-grocery-temp : (ListOfGrocery -> ???)
-; TODO
+; TODO: TEMPLATE
 
 #|PROBLEM B:
 Design a function "total-prices" that consumes a ListOfGrocery and

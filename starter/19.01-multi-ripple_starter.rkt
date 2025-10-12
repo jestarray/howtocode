@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-abbr-reader.ss" "lang")((modname 19.01-multi-ripple_solution) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-abbr-reader.ss" "lang")((modname 19.01-multi-ripple_starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (define PNAME 'multi-ripple)
 
 (require 2htdp/image)
@@ -69,10 +69,6 @@ Turn all ❌ into ✅ for each step you complete
 Expanding on the Ripple program from 8.07, where a click spawns an expanding circle,
 https://howtocode.pages.dev/images/ripple.png
 
-Difficulty challenge(optional): Copy & modify 8.07-ripple file and replace the WorldState
-with a "ListOfRipple" and expand the code from there.
-Or you can just continue working on this file instead, which is esaier since the tasks are laid out
-
 The following functions are done for you cause being carried over from 8.07-ripple
 ✅grow-ripple
 ✅draw-ripple
@@ -123,7 +119,11 @@ Follow the design process and finish the functions:
 ; click-add : (ListOfRipple Number Number MouseEvent -> ListOfRipple)
 ; produce the ripple at where the mouse is if user clicked
 ; TODO
-(define (click-add rpl-ls mousex mousey mevent) empty)
+;(define (click-add rpl-ls mousex mousey mevent) empty)
+(define (click-add rpl-ls mousex mousey mevent)
+  (cond
+    [(mouse=? mevent "mouse-down") ...]
+    [else ...]))
 
 ; main: (ListOfRipple -> ListOfRipple)
 ; start the world with (main empty)

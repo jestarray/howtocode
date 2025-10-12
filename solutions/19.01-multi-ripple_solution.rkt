@@ -69,10 +69,6 @@ Turn all ❌ into ✅ for each step you complete
 Expanding on the Ripple program from 8.07, where a click spawns an expanding circle,
 https://howtocode.pages.dev/images/ripple.png
 
-Difficulty challenge(optional): Copy & modify 8.07-ripple file and replace the WorldState
-with a "ListOfRipple" and expand the code from there.
-Or you can just continue working on this file instead, which is esaier since the tasks are laid out
-
 The following functions are done for you cause being carried over from 8.07-ripple
 ✅grow-ripple
 ✅draw-ripple
@@ -81,7 +77,6 @@ Follow the design process and finish the functions:
 ✅grow-all-ripple
 ✅draw-all-ripple
 ✅handle-mouse
-
 |#
 
 ; grow-ripple : (Ripple-> Ripple)
@@ -169,4 +164,4 @@ Follow the design process and finish the functions:
     [to-draw   draw-all-ripple]   ; ListOfRipple -> Image
     ))
 
-; (main empty)
+(main empty)

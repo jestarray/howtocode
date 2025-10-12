@@ -63,10 +63,6 @@ Turn all ❌ into ✅ for each step you complete
 |#
 
 #|PROBLEM A:
-Difficulty challenge(optional): Copy & modify 12.01 bubble-points file and replace "BunchOfPoints"
-with a "ListOfPoints".
-Or you can just continue working on this file instead, which is esaier since the tasks are laid out
-
 Notice how the data definition steps are done.
 Some parts of the 12.01 bubble-points have been brought over to this file
 ✅ move-up

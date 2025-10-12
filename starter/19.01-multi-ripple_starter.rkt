@@ -69,7 +69,9 @@ Turn all ❌ into ✅ for each step you complete
 Expanding on the Ripple program from 8.07, where a click spawns an expanding circle,
 https://howtocode.pages.dev/images/ripple.png
 
-The following functions are done for you cause being carried over from 8.07-ripple
+Notice the data design steps are done above.
+
+The following functions are done carried over from 8.07-ripple
 ✅grow-ripple
 ✅draw-ripple
 

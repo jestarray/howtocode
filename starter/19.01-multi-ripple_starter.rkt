@@ -10,7 +10,7 @@
 ; CONSTANTS:
 (define WIDTH 400)
 (define HEIGHT 400)
-(define REMOVAL-SIZE (* WIDTH HEIGHT 2))
+(define REMOVAL-SIZE (* WIDTH HEIGHT 6))
 (define BG (empty-scene WIDTH HEIGHT "blue"))
 (define RIPPLE-GROWTH 4)
 
@@ -91,7 +91,7 @@ Follow the design process and finish the functions:
    (ripple-y ws)
    (+ (ripple-radius ws) RIPPLE-GROWTH)))
 
-; draw-ripple : (Ripple -> Image)
+; draw-ripple : (Ripple Image -> Image)
 ; draws a single ripple on the given BG
 (check-expect (draw-ripple (make-ripple 30 20 25) BG)
               (place-image
@@ -119,12 +119,11 @@ Follow the design process and finish the functions:
 (define (draw-all-ripple rp-ls) BG)
 
 ; click-add : (ListOfRipple Number Number MouseEvent -> ListOfRipple)
-; produce the ripple at where the mouse is if user clicked
-; TODO
+; adds a ripple where the mouse is to the existing list of ripples when the user left clicks
 ;(define (click-add rpl-ls mousex mousey mevent) empty)
 (define (click-add rpl-ls mousex mousey mevent)
   (cond
-    [(mouse=? mevent "mouse-down") ...]
+    [(mouse=? mevent "button-down") ...]
     [else ...]))
 
 ; main: (ListOfRipple -> ListOfRipple)

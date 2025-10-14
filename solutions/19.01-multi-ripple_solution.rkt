@@ -10,7 +10,7 @@
 ; CONSTANTS:
 (define WIDTH 400)
 (define HEIGHT 400)
-(define REMOVAL-SIZE (* WIDTH HEIGHT 2))
+(define REMOVAL-SIZE (* WIDTH HEIGHT 6))
 (define BG (empty-scene WIDTH HEIGHT "blue"))
 (define RIPPLE-GROWTH 4)
 
@@ -91,6 +91,22 @@ Follow the design process and finish the functions:
    (ripple-y ws)
    (+ (ripple-radius ws) RIPPLE-GROWTH)))
 
+; draw-ripple : (Ripple Image -> Image)
+; draws a single ripple on the given BG
+(check-expect (draw-ripple (make-ripple 30 20 25) BG)
+              (place-image
+               (circle 25 "outline" "white")
+               30
+               20
+               BG))
+
+(define (draw-ripple rp bg)
+  (place-image
+   (circle (ripple-radius rp) "outline" "white")
+   (ripple-x rp)
+   (ripple-y rp)
+   bg))
+
 ; grow-all-ripple : (ListOfRipple -> ListOfRipple)
 ; grows every ripple in the given list
 ; and removes those that are too big and out of view(bonus: can be done WAY last)
@@ -112,22 +128,6 @@ Follow the design process and finish the functions:
      (cons (grow-ripple (first rpl-ls))
            (grow-all-ripple (rest rpl-ls)))]))
 
-; draw-ripple : (Ripple -> Image)
-; draws a single ripple on the given BG
-(check-expect (draw-ripple (make-ripple 30 20 25) BG)
-              (place-image
-               (circle 25 "outline" "white")
-               30
-               20
-               BG))
-
-(define (draw-ripple rp bg)
-  (place-image
-   (circle (ripple-radius rp) "outline" "white")
-   (ripple-x rp)
-   (ripple-y rp)
-   bg))
-
 ; draw-all-ripple : (ListOfRipple -> Image)
 ; draws all ripples on the given background image
 (check-expect (draw-all-ripple empty) BG)
@@ -144,15 +144,15 @@ Follow the design process and finish the functions:
                   (draw-all-ripple (rest rpl-ls)))]))
 
 ; click-add : (ListOfRipple Number Number MouseEvent -> ListOfRipple)
-; produce the ripple at where the mouse is if user clicked
+; adds a ripple where the mouse is to the existing list of ripples when the user left clicks
 (check-expect (click-add (list (make-ripple 1 2 3)) 32 42 "button-down")
               (list (make-ripple 32 42 0) (make-ripple 1 2 3)))
 (check-expect (click-add (list (make-ripple 1 2 3)) 32 42 "drag")
               (list (make-ripple 1 2 3)))
 
-(define (click-add rpl-ls mousex mousey me)
+(define (click-add rpl-ls mousex mousey mevent)
   (cond
-    [(mouse=? me "button-down")
+    [(mouse=? mevent "button-down")
      (cons (make-ripple mousex mousey 0) rpl-ls)]
     [else
      rpl-ls]))

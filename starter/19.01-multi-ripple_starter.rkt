@@ -78,7 +78,7 @@ The following functions are done carried over from 8.07-ripple
 Follow the design process and finish the functions:
 ❌grow-all-ripple
 ❌draw-all-ripple
-❌handle-mouse
+❌click-add
 |#
 
 ; grow-ripple : (Ripple-> Ripple)

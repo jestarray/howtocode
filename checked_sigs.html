@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
+    <title>Checked Signatures</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/htdp_templates.html"> Templates and Outlines</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+            <div id="next"><a href="/introduction.html">Introduction</a> →</div>
+            <article>
+                <h1>Checked Signatures</h1><h2 id="checked_signature_cheatsheet"><a class="anchor" href="#checked_signature_cheatsheet">#</a>Checked Signature Cheatsheet</h2><p>Find more types in the <a href="https://docs.racket-lang.org/htdp-langs/intermediate.html#%28part._intermediate-signatures%29">Racket Documentation</a></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; === ENUMERATIONS ===
+; Rank is one of:
+; - "Bronze"
+; - "Silver"
+; - "Gold"
+; - "Platinum"
+; - "Diamond"
+(define Rank
+  (signature (enum "Bronze" "Silver" "Gold" "Platinum" "Diamond")))
+
+(: demote (Rank -&gt; Rank))
+; produces the next rank below it, bronze will stay bronze
+(check-expect (demote "Diamond") "Platinum")
+(check-expect (demote "Platinum") "Gold")
+(check-expect (demote "Gold") "Silver")
+(check-expect (demote "Silver") "Bronze")
+(check-expect (demote "Bronze") "Bronze")
+(define (demote r)
+  (cond
+    [(string=? r "Bronze") "Bronze"]
+    [(string=? r "Silver") "Bronze"]
+    [(string=? r "Gold") "Silver"]
+    [(string=? r "Platinum") "Gold"]
+    [(string=? r "Diamond") "Platinum"]))
+
+; === Unions/Itemization(Mixed data) ===
+; A WalkLight is one of:
+; Number[0, 10]
+; "walk"
+; "stop"
+(define WalkLight (signature (mixed Number (enum "walk" "stop"))))
+(: can-walk? (WalkLight -&gt; Boolean))
+; produces #true if given "walk" or in countdown
+(define (can-walk? wl)
+  (cond
+    [(and (number? wl) (&gt;= wl 0) (&lt;= wl 10)) #true]
+    [(string=? wl "walk") #true]
+    [(string=? wl "stop") #false]))
+
+; === Structs ===
+(define-struct employee [name age wage])
+(define EmployeeSig (signature (Employee String Number Number)))
+(: increase-wage (Employee Number -&gt; Employee))
+(check-expect (increase-wage (make-employee "bob" 20 15) 2)
+              (make-employee "bob" 20 (+ 15 2)))
+(define (increase-wage ps n)
+  (make-employee
+   (employee-name ps)
+   (employee-age ps)
+   (+ n (employee-wage ps))))
+
+; === Lists ===
+(: double-all ((ListOf Number) -&gt; (ListOf Number)))
+; produces the given list but with all numbers doubled!
+(check-expect (double-all (list 1 2 3)) (list 2 4 6))
+(define (double-all num-ls)
+  (cond
+    [(empty? num-ls) empty]
+    [else
+     (cons (* 2 (first num-ls))
+           (double-all (rest num-ls)))]))
+
+; === ListOf Structs ===
+(: raise-all-wages ((ListOf Employee) Number -&gt; (ListOf Employee)))
+; produce the given list of employees with the wage increased by N
+(check-expect (raise-all-wages (list (make-employee "bob" 20 15)) 2)
+              (list (make-employee "bob" 20 (+ 15 2))))
+(define (raise-all-wages psn-ls n)
+  (cond
+    [(empty? psn-ls) empty]
+    [else
+     (cons
+      (increase-wage (first psn-ls) n)
+      (raise-all-wages (rest psn-ls) n))]))</code></pre>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

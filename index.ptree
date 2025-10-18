@@ -2,6 +2,7 @@
 
 ◊cheatsheet.html{
     htdp_templates.html
+    checked_sigs.html
 }
 ◊introduction.html{
     installation.html

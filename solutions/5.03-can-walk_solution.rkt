@@ -41,11 +41,11 @@ three states using at least 2 types.
 (define STOP "stop")
 
 (define (walk-light-temp wl)
-    (cond
-        [(and (number? wl) (>= wl 0) (<= wl 10)) ...]
-        [(and (string? wl) (string=? wl WALK)) ...]
-        [(and (string? wl) (string=? wl STOP)) ...]
-        ))
+  (cond
+    [(and (number? wl) (>= wl 0) (<= wl 10)) ...]
+    [(and (string? wl) (string=? wl WALK)) ...]
+    [(and (string? wl) (string=? wl STOP)) ...]
+    ))
 
 #|PROBLEM B:
 A City has hired you to detect when a WalkLight is walkable
@@ -56,7 +56,7 @@ Design a function called "can-walk?" that consumes a WalkLight
 and produces whether the pedestrian can walk accross or not.
 |#
 
-; next-wl: (WalkLight -> Boolean)
+; can-walk? : (WalkLight -> Boolean)
 ; produces #true if "walk" or in countdown.
 
 (check-expect (can-walk? WALK) #true)
@@ -66,15 +66,15 @@ and produces whether the pedestrian can walk accross or not.
 (check-expect (can-walk? STOP) #false)
 
 (define (can-walk? wl)
-    (cond
-        [(and (number? wl) (>= wl 0) (<= wl 10)) #true]
-        [(and (string? wl) (string=? wl WALK)) #true]
-        [(and (string? wl) (string=? wl STOP)) #false]
-        ))
+  (cond
+    [(and (number? wl) (>= wl 0) (<= wl 10)) #true]
+    [(and (string? wl) (string=? wl WALK)) #true]
+    [(and (string? wl) (string=? wl STOP)) #false]
+    ))
 
 (define (can-walk?-OPT wl)
-    (cond
-        [(and (number? wl) (>= wl 0) (<= wl 10)) #true]
-        [(string=? wl WALK) #true]
-        [(string=? wl STOP) #false]
-        ))
+  (cond
+    [(and (number? wl) (>= wl 0) (<= wl 10)) #true]
+    [(string=? wl WALK) #true]
+    [(string=? wl STOP) #false]
+    ))

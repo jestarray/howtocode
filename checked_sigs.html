@@ -62,8 +62,8 @@
 
 ; === Structs ===
 (define-struct employee [name age wage])
-(define EmployeeSig (signature (Employee String Number Number)))
-(: increase-wage (Employee Number -&gt; Employee))
+(define EmployeeSig (signature (EmployeeOf String Number Number)))
+(: increase-wage (EmployeeSig Number -&gt; EmployeeSig))
 (check-expect (increase-wage (make-employee "bob" 20 15) 2)
               (make-employee "bob" 20 (+ 15 2)))
 (define (increase-wage ps n)
@@ -84,7 +84,7 @@
            (double-all (rest num-ls)))]))
 
 ; === ListOf Structs ===
-(: raise-all-wages ((ListOf Employee) Number -&gt; (ListOf Employee)))
+(: raise-all-wages ((ListOf EmployeeSig) Number -&gt; (ListOf EmployeeSig)))
 ; produce the given list of employees with the wage increased by N
 (check-expect (raise-all-wages (list (make-employee "bob" 20 15)) 2)
               (list (make-employee "bob" 20 (+ 15 2))))

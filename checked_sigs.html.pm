@@ -46,8 +46,8 @@ Find more types in the ◊a[#:href "https://docs.racket-lang.org/htdp-langs/inte
 
 ; === Structs ===
 (define-struct employee [name age wage])
-(define EmployeeSig (signature (Employee String Number Number)))
-(: increase-wage (Employee Number -> Employee))
+(define EmployeeSig (signature (EmployeeOf String Number Number)))
+(: increase-wage (EmployeeSig Number -> EmployeeSig))
 (check-expect (increase-wage (make-employee "bob" 20 15) 2)
               (make-employee "bob" 20 (+ 15 2)))
 (define (increase-wage ps n)
@@ -68,7 +68,7 @@ Find more types in the ◊a[#:href "https://docs.racket-lang.org/htdp-langs/inte
            (double-all (rest num-ls)))]))
 
 ; === ListOf Structs ===
-(: raise-all-wages ((ListOf Employee) Number -> (ListOf Employee)))
+(: raise-all-wages ((ListOf EmployeeSig) Number -> (ListOf EmployeeSig)))
 ; produce the given list of employees with the wage increased by N
 (check-expect (raise-all-wages (list (make-employee "bob" 20 15)) 2)
               (list (make-employee "bob" 20 (+ 15 2))))

@@ -91,7 +91,7 @@
       (+ (first lst) 5)
       (plus5 (rest lst)))]))
 
-; PROBLEM A: ABSTRACT add1* &amp; plus5 into a general abstract function
+; PROBLEM A: ABSTRACT add1* &amp; plus5 into a new general abstract function
 ; TODO
 
 ; PROBLEM B: Reimplement the add1* &amp; plus5 with the abstract function from PROBLEM A
@@ -107,7 +107,7 @@
 (define (plus5 lst)
   (add-n lst 5))
 
-; PROBLEM A: ABSTRACT add1* &amp; plus5 into a general abstract function
+; PROBLEM A: ABSTRACT add1* &amp; plus5 into a new general abstract function
 (: add-n ([ListOf Number] Number -&gt; [ListOf Number]))
 ; adds-n to every number in lst
 (define (add-n lst n)
@@ -116,11 +116,13 @@
     [else
      (cons
       (+ n (first lst))
-      (add-n (rest lst) n))]))</code></pre></details></p></details></p><h2 id="recipe_for_abstraction"><a class="anchor" href="#recipe_for_abstraction">#</a>Recipe for Abstraction</h2><ol><li>Compare two items for similarities in text and behavior</li><li>Abstract! Replace the common inessential differences with new names and add these names to the parameter list.</li><li>Rewrite your old function in terms of the new abstraction function, and validate tests</li><li>Rewrite the signature for the new abstraction</li></ol><p>When you abstract, you tend to write the signature last because it will be the hardest part, due to the signatures also needing to be more abstract(aka generic).</p><h2 id="abstract_via_function_parameters"><a class="anchor" href="#abstract_via_function_parameters">#</a>Abstract via Function Parameters</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; PROBLEM A: Write tests for "smaller-than" and "larger-than"
+      (add-n (rest lst) n))]))
 
+; PROBLEM B: Reimplement the add1* &amp; plus5 with the abstract function from PROBLEM A
+; (done, see above)</code></pre></details></p></details></p><h2 id="recipe_for_abstraction"><a class="anchor" href="#recipe_for_abstraction">#</a>Recipe for Abstraction</h2><ol><li>Compare two items for similarities in text and behavior</li><li>Abstract! Replace the common inessential differences with new names and add these names to the parameter list.</li><li>Rewrite your old function in terms of the new abstraction function, and validate tests</li><li>Rewrite the signature for the new abstraction</li></ol><p>When you abstract, you tend to write the signature last because it will be the hardest part, due to the signatures also needing to be more abstract(aka generic).</p><h2 id="abstract_via_function_parameters"><a class="anchor" href="#abstract_via_function_parameters">#</a>Abstract via Function Parameters</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; PROBLEM A: Write tests for "smaller-than" and "larger-than"
 (: smaller-than ([ListOf Number] Number -&gt; [ListOf Number]))
 ; keep only those numbers smaller than the given "limit"
-; TODO: TESTS
+; TODO TESTS
 (define (smaller-than lst limit)
   (cond
     [(empty? lst) empty]
@@ -131,7 +133,7 @@
 
 (: larger-than ([ListOf Number] Number -&gt; [ListOf Number]))
 ; keep only those numbers biggers than the given "limit"
-; TODO: TESTS
+; TODO TESTS
 (define (larger-than lst limit)
   (cond
     [(empty? lst) empty]
@@ -140,23 +142,36 @@
          (cons (first lst) (larger-than (rest lst) limit))
          (larger-than (rest lst) limit))]))
 
-; PROBLEM B: Abstract "smaller-than" &amp; "larger-than" with "extract"</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; PROBLEM A: Write tests for "smaller-than" and "larger-than"
+; PROBLEM B: Abstract "smaller-than" &amp; "larger-than" with a NEW function, call it "extract"
+; TODO
 
+; PROBLEM C: Use the abstracted function from PROBLEM B to re-implement "smaller-than" &amp; "larger-than"
+; TODO</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; PROBLEM A: Write tests for "smaller-than" and "larger-than"
 (: smaller-than ([ListOf Number] Number -&gt; [ListOf Number]))
 ; keep only those numbers smaller than the given "limit"
 (check-expect (smaller-than (list 1 2 3 4) 3)
               (list 1 2))
 (define (smaller-than lst limit)
-  (extract &lt; lst limit))
+  (cond
+    [(empty? lst) empty]
+    [else
+     (if (&lt; (first lst) limit)
+         (cons (first lst) (smaller-than (rest lst) limit))
+         (smaller-than (rest lst) limit))]))
 
 (: larger-than ([ListOf Number] Number -&gt; [ListOf Number]))
 ; keep only those numbers biggers than the given "limit"
 (check-expect (larger-than (list 1 2 3 4) 2)
               (list 3 4))
 (define (larger-than lst limit)
-  (extract &gt; lst limit))
+  (cond
+    [(empty? lst) empty]
+    [else
+     (if (&gt; (first lst) limit)
+         (cons (first lst) (larger-than (rest lst) limit))
+         (larger-than (rest lst) limit))]))
 
-; PROBLEM B: Abstract "smaller-than" &amp; "larger-than" with "extract"
+; PROBLEM B: Abstract "smaller-than" &amp; "larger-than" with a NEW function, call it "extract"
 (: extract ((Number Number -&gt; Boolean) [ListOf Number] Number -&gt; [ListOf Number]))
 ; extract numbers based on the given "fn" and limit
 (define (extract fn lst limit)
@@ -165,7 +180,22 @@
     [else
      (if (fn (first lst) limit)
          (cons (first lst) (extract fn (rest lst) limit))
-         (extract fn (rest lst) limit))]))</code></pre></details></p><p>Yes! You can even pass in function just like you would any old data like booleans, strings, numbers, and this gives us a very powerful tool to abstract things!</p>
+         (extract fn (rest lst) limit))]))
+
+; PROBLEM C: Use the abstracted function from PROBLEM B to re-implement "smaller-than" &amp; "larger-than"
+(: smaller-thanv2 ([ListOf Number] Number -&gt; [ListOf Number]))
+; keep only those numbers smaller than the given "limit"
+(check-expect (smaller-thanv2 (list 1 2 3 4) 3)
+              (list 1 2))
+(define (smaller-thanv2 lst limit)
+  (extract &lt; lst limit))
+
+(: larger-thanv2 ([ListOf Number] Number -&gt; [ListOf Number]))
+; keep only those numbers biggers than the given "limit"
+(check-expect (larger-thanv2 (list 1 2 3 4) 2)
+              (list 3 4))
+(define (larger-thanv2 lst limit)
+  (extract &gt; lst limit))</code></pre></details></p><p>Yes! You can even pass in function just like you would any old data like booleans, strings, numbers, and this gives us a very powerful tool to abstract things!</p>
             </article>
         </main>
     </div>

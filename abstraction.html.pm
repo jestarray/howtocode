@@ -97,7 +97,7 @@ This reduces bugs as we only need to look at ◊code{contains?} which holds the 
       (+ (first lst) 5)
       (plus5 (rest lst)))]))
 
-; PROBLEM A: ABSTRACT add1* & plus5 into a general abstract function
+; PROBLEM A: ABSTRACT add1* & plus5 into a new general abstract function
 ; TODO
 
 ; PROBLEM B: Reimplement the add1* & plus5 with the abstract function from PROBLEM A
@@ -117,7 +117,7 @@ This reduces bugs as we only need to look at ◊code{contains?} which holds the 
 (define (plus5 lst)
   (add-n lst 5))
 
-; PROBLEM A: ABSTRACT add1* & plus5 into a general abstract function
+; PROBLEM A: ABSTRACT add1* & plus5 into a new general abstract function
 (: add-n ([ListOf Number] Number -> [ListOf Number]))
 ; adds-n to every number in lst
 (define (add-n lst n)
@@ -127,6 +127,9 @@ This reduces bugs as we only need to look at ◊code{contains?} which holds the 
      (cons
       (+ n (first lst))
       (add-n (rest lst) n))]))
+
+; PROBLEM B: Reimplement the add1* & plus5 with the abstract function from PROBLEM A
+; (done, see above)
 }
 }
 }
@@ -144,10 +147,9 @@ When you abstract, you tend to write the signature last because it will be the h
 ◊h2{Abstract via Function Parameters}
 ◊racket-code-block{
 ; PROBLEM A: Write tests for "smaller-than" and "larger-than"
-
 (: smaller-than ([ListOf Number] Number -> [ListOf Number]))
 ; keep only those numbers smaller than the given "limit"
-; TODO: TESTS
+; TODO TESTS
 (define (smaller-than lst limit)
   (cond
     [(empty? lst) empty]
@@ -158,7 +160,7 @@ When you abstract, you tend to write the signature last because it will be the h
 
 (: larger-than ([ListOf Number] Number -> [ListOf Number]))
 ; keep only those numbers biggers than the given "limit"
-; TODO: TESTS
+; TODO TESTS
 (define (larger-than lst limit)
   (cond
     [(empty? lst) empty]
@@ -167,28 +169,41 @@ When you abstract, you tend to write the signature last because it will be the h
          (cons (first lst) (larger-than (rest lst) limit))
          (larger-than (rest lst) limit))]))
 
-; PROBLEM B: Abstract "smaller-than" & "larger-than" with "extract"
+; PROBLEM B: Abstract "smaller-than" & "larger-than" with a NEW function, call it "extract"
+; TODO
+
+; PROBLEM C: Use the abstracted function from PROBLEM B to re-implement "smaller-than" & "larger-than"
+; TODO
 }
 ◊q{
 Answer
 ◊racket-code-block{
 ; PROBLEM A: Write tests for "smaller-than" and "larger-than"
-
 (: smaller-than ([ListOf Number] Number -> [ListOf Number]))
 ; keep only those numbers smaller than the given "limit"
 (check-expect (smaller-than (list 1 2 3 4) 3)
               (list 1 2))
 (define (smaller-than lst limit)
-  (extract < lst limit))
+  (cond
+    [(empty? lst) empty]
+    [else
+     (if (< (first lst) limit)
+         (cons (first lst) (smaller-than (rest lst) limit))
+         (smaller-than (rest lst) limit))]))
 
 (: larger-than ([ListOf Number] Number -> [ListOf Number]))
 ; keep only those numbers biggers than the given "limit"
 (check-expect (larger-than (list 1 2 3 4) 2)
               (list 3 4))
 (define (larger-than lst limit)
-  (extract > lst limit))
+  (cond
+    [(empty? lst) empty]
+    [else
+     (if (> (first lst) limit)
+         (cons (first lst) (larger-than (rest lst) limit))
+         (larger-than (rest lst) limit))]))
 
-; PROBLEM B: Abstract "smaller-than" & "larger-than" with "extract"
+; PROBLEM B: Abstract "smaller-than" & "larger-than" with a NEW function, call it "extract"
 (: extract ((Number Number -> Boolean) [ListOf Number] Number -> [ListOf Number]))
 ; extract numbers based on the given "fn" and limit
 (define (extract fn lst limit)
@@ -198,6 +213,21 @@ Answer
      (if (fn (first lst) limit)
          (cons (first lst) (extract fn (rest lst) limit))
          (extract fn (rest lst) limit))]))
+
+; PROBLEM C: Use the abstracted function from PROBLEM B to re-implement "smaller-than" & "larger-than"
+(: smaller-thanv2 ([ListOf Number] Number -> [ListOf Number]))
+; keep only those numbers smaller than the given "limit"
+(check-expect (smaller-thanv2 (list 1 2 3 4) 3)
+              (list 1 2))
+(define (smaller-thanv2 lst limit)
+  (extract < lst limit))
+
+(: larger-thanv2 ([ListOf Number] Number -> [ListOf Number]))
+; keep only those numbers biggers than the given "limit"
+(check-expect (larger-thanv2 (list 1 2 3 4) 2)
+              (list 3 4))
+(define (larger-thanv2 lst limit)
+  (extract > lst limit))
 }
 }
 

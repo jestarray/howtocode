@@ -139,6 +139,8 @@ This reduces bugs as we only need to look at ◊code{contains?} which holds the 
   ◊li{Rewrite the signature for the new abstraction}
 }
 
+When you abstract, you tend to write the signature last because it will be the hardest part, due to the signatures also needing to be more abstract(aka generic).
+
 ◊h2{Abstract via Function Parameters}
 ◊racket-code-block{
 ; PROBLEM A: Write tests for "smaller-than" and "larger-than"

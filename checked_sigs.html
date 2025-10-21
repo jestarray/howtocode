@@ -73,7 +73,7 @@
    (+ n (employee-wage ps))))
 
 ; === Lists ===
-(: double-all ((ListOf Number) -&gt; (ListOf Number)))
+(: double-all ([ListOf Number] -&gt; [ListOf Number]))
 ; produces the given list but with all numbers doubled!
 (check-expect (double-all (list 1 2 3)) (list 2 4 6))
 (define (double-all num-ls)
@@ -84,7 +84,7 @@
            (double-all (rest num-ls)))]))
 
 ; === ListOf Structs ===
-(: raise-all-wages ((ListOf EmployeeSig) Number -&gt; (ListOf EmployeeSig)))
+(: raise-all-wages ([ListOf EmployeeSig] Number -&gt; [ListOf EmployeeSig]))
 ; produce the given list of employees with the wage increased by N
 (check-expect (raise-all-wages (list (make-employee "bob" 20 15)) 2)
               (list (make-employee "bob" 20 (+ 15 2))))

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
+    <title>Abstraction</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/list_abbvr.html"> List Abbreviation</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+
+            <article>
+                <h1>Abstraction</h1><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; Instead of calculating area of a circle for 5 and 10
+(* pi 5 5)
+(* pi 10 10)
+
+; We can "abstract"(make more general) it with a function
+; that factors out the difference
+(: circle-area (Number -&gt; Number))
+; produces the area of a r radius circle
+(define (circle-area r)
+  (* pi r r))
+(circle-area 5)
+(circle-area 10)</code></pre><h2 id="similarities"><a class="anchor" href="#similarities">#</a>Similarities</h2><p><img src="images/similar_c.gif"/></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(: contains-dog? ([ListOf String] -&gt; Boolean))
+; produces #true if the list contains "dog"
+(check-expect (contains-dog? (list "cow" "dog")) #true)
+(define (contains-dog? lst)
+  (cond
+    [(empty? lst) #false]
+    [else
+     (or (string=? (first lst) "dog")
+         (contains-dog? (rest lst)))]))
+
+(: contains-cat? ([ListOf String] -&gt; Boolean))
+; produces #true if the list contains "cat"
+(check-expect (contains-dog? (list "sheep" "cat")) #true)
+(define (contains-cat? lst)
+  (cond
+    [(empty? lst) #false]
+    [else
+     (or (string=? (first lst) "cat")
+         (contains-cat? (rest lst)))]))</code></pre><p>Notice how the two functions above, <code>contains-dog?</code> and <code>contains-cat?</code> are 90% similar! The main difference is in:<br/><code>(string=? (first lst) "cat")</code><br/><code>(string=? (first lst) "dog")</code></p><h2 id="abstract_via_parameters"><a class="anchor" href="#abstract_via_parameters">#</a>Abstract via Parameters</h2><p>We fan factor out the string <code>"cat"</code> and <code>"dog"</code> into a parameter and implement <code>contains-dog?</code> and <code>contains-cat?</code> using a more general <strong>abstract</strong> <code>contains?</code> function.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(: contains-dog? ([ListOf String] -&gt; Boolean))
+; produces #true if the list contains "dog"
+(check-expect (contains-dog? (list "cow" "dog")) #true)
+(define (contains-dog? lst)
+  (contains? lst "dog"))
+
+(: contains-cat? ([ListOf String] -&gt; Boolean))
+; produces #true if the list contains "cat"
+(check-expect (contains-dog? (list "sheep" "cat")) #true)
+(define (contains-cat? lst)
+  (contains? lst "cat"))
+
+(: contains? ([ListOf String] String -&gt; Boolean))
+; produces #true if the given string is in the list
+(define (contains? lst find-str)
+  (cond
+    [(empty? lst) #false]
+    [else
+     (or (string=? (first lst) find-str)
+         (contains? (rest lst)))]))</code></pre><p>This reduces bugs as we only need to look at <code>contains?</code> which holds the main logic and provides a more general useful function that’s able to look for any string in a list instead of just <code>"cat"</code> and <code>"dog"</code></p><p><details><summary class="question">Exercise 1</summary><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(: add1* ([ListOf Number] -&gt; [ListOf Number]))
+; adds 1 to each item on lst
+(check-expect (add1* (list 1 3 5)) (list 2 4 6))
+(define (add1* lst)
+  (cond
+    [(empty? lst) empty]
+    [else
+     (cons
+      (add1 (first lst))
+      (add1* (rest lst)))]))
+
+(: plus5 ([ListOf Number] -&gt; [ListOf Number]))
+(check-expect (plus5 (list 1 3 5)) (list 6 8 10))
+; adds 5 to each item on lst
+(define (plus5 lst)
+  (cond
+    [(empty? lst) empty]
+    [else
+     (cons
+      (+ (first lst) 5)
+      (plus5 (rest lst)))]))
+
+; PROBLEM A: ABSTRACT add1* &amp; plus5 into a general abstract function
+; TODO
+
+; PROBLEM B: Reimplement the add1* &amp; plus5 with the abstract function from PROBLEM A
+; TODO</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(: add1* ([ListOf Number] -&gt; [ListOf Number]))
+; adds 1 to each item on lst
+(check-expect (add1* (list 1 3 5)) (list 2 4 6))
+(define (add1* lst)
+  (add-n lst 1))
+
+(: plus5 ([ListOf Number] -&gt; [ListOf Number]))
+(check-expect (plus5 (list 1 3 5)) (list 6 8 10))
+; adds 5 to each item on lst
+(define (plus5 lst)
+  (add-n lst 5))
+
+; PROBLEM A: ABSTRACT add1* &amp; plus5 into a general abstract function
+(: add-n ([ListOf Number] Number -&gt; [ListOf Number]))
+; adds-n to every number in lst
+(define (add-n lst n)
+  (cond
+    [(empty? lst) empty]
+    [else
+     (cons
+      (+ n (first lst))
+      (add-n (rest lst) n))]))</code></pre></details></p></details></p><h2 id="recipe_for_abstraction"><a class="anchor" href="#recipe_for_abstraction">#</a>Recipe for Abstraction</h2><ol><li>Compare two items for similarities in text and behavior</li><li>Abstract! Replace the common inessential differences with new names and add these names to the parameter list.</li><li>Rewrite your old function in terms of the new abstraction function, and validate tests</li><li>Rewrite the signature for the new abstraction</li></ol><h2 id="abstract_via_function_parameters"><a class="anchor" href="#abstract_via_function_parameters">#</a>Abstract via Function Parameters</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; PROBLEM A: Write tests for "smaller-than" and "larger-than"
+
+(: smaller-than ([ListOf Number] Number -&gt; [ListOf Number]))
+; keep only those numbers smaller than the given "limit"
+; TODO: TESTS
+(define (smaller-than lst limit)
+  (cond
+    [(empty? lst) empty]
+    [else
+     (if (&lt; (first lst) limit)
+         (cons (first lst) (smaller-than (rest lst) limit))
+         (smaller-than (rest lst) limit))]))
+
+(: larger-than ([ListOf Number] Number -&gt; [ListOf Number]))
+; keep only those numbers biggers than the given "limit"
+; TODO: TESTS
+(define (larger-than lst limit)
+  (cond
+    [(empty? lst) empty]
+    [else
+     (if (&gt; (first lst) limit)
+         (cons (first lst) (larger-than (rest lst) limit))
+         (larger-than (rest lst) limit))]))
+
+; PROBLEM B: Abstract "smaller-than" &amp; "larger-than" with "extract"</code></pre><p><details><summary class="question">Answer</summary><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; PROBLEM A: Write tests for "smaller-than" and "larger-than"
+
+(: smaller-than ([ListOf Number] Number -&gt; [ListOf Number]))
+; keep only those numbers smaller than the given "limit"
+(check-expect (smaller-than (list 1 2 3 4) 3)
+              (list 1 2))
+(define (smaller-than lst limit)
+  (extract &lt; lst limit))
+
+(: larger-than ([ListOf Number] Number -&gt; [ListOf Number]))
+; keep only those numbers biggers than the given "limit"
+(check-expect (larger-than (list 1 2 3 4) 2)
+              (list 3 4))
+(define (larger-than lst limit)
+  (extract &gt; lst limit))
+
+; PROBLEM B: Abstract "smaller-than" &amp; "larger-than" with "extract"
+(: extract ((Number Number -&gt; Boolean) [ListOf Number] Number -&gt; [ListOf Number]))
+; extract numbers based on the given "fn" and limit
+(define (extract fn lst limit)
+  (cond
+    [(empty? lst) empty]
+    [else
+     (if (fn (first lst) limit)
+         (cons (first lst) (extract fn (rest lst) limit))
+         (extract fn (rest lst) limit))]))</code></pre></details></p><p>Yes! You can even pass in function just like you would any old data like booleans, strings, numbers, and this gives us a very powerful tool to abstract things!</p>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

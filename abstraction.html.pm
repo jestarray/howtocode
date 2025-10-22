@@ -32,7 +32,7 @@
 
 (: contains-cat? ([ListOf String] -> Boolean))
 ; produces #true if the list contains "cat"
-(check-expect (contains-dog? (list "sheep" "cat")) #true)
+(check-expect (contains-cat? (list "sheep" "cat")) #true)
 (define (contains-cat? lst)
   (cond
     [(empty? lst) #false]

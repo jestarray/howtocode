@@ -22,7 +22,7 @@ Turn all ❌ into ✅ for each step you complete
 |#
 
 #| PROBLEM A:
-Design a function "square-all" that consumes a ListOfNumbers squares the numbers
+Design a function "square-all" that consumes a ListOfNumbers and squares the numbers
 For example (square-all (list 1 2 3)) -> (list 1 4 9)
 |#
 
@@ -39,7 +39,7 @@ For example (square-all (list 1 2 3)) -> (list 1 4 9)
       (square-all (rest lst)))]))
 
 #| PROBLEM B:
-Design a function "sqrt-all" that consumes a ListOfNumbers squares the numbers
+Design a function "sqrt-all" that consumes a ListOfNumbers and sqrt the numbers
 For example (sqrt-all (list 1 4 9)) -> (list 1 2 3)
 |#
 (: sqrt-all ([ListOf Number] -> [ListOf Number]))
@@ -93,5 +93,5 @@ into (rectangle 16 N "solid" "blue") long, where N is the number in the list
 
 #|PROBLEM F: OPTIONAL
 For more practice copy and paste "do-to-all" function defined here and
-reimplement al 14.00 problems with "do-to-all"
+reimplement all 14.00 problems with "do-to-all"
 |#

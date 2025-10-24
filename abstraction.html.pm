@@ -139,7 +139,7 @@ This reduces bugs as we only need to look at ◊code{contains?} which holds the 
   ◊li{Compare two items for similarities in text and behavior}
   ◊li{Abstract! Replace the common inessential differences with new names and add these names to the parameter list.}
   ◊li{Rewrite your old function in terms of the new abstraction function, and validate tests}
-  ◊li{Rewrite the signature for the new abstraction}
+  ◊li{Rewrite the signature for the new abstraction(hardest)}
 }
 
 When you abstract, you tend to write the signature last because it will be the hardest part, due to the signatures also needing to be more abstract(aka generic).

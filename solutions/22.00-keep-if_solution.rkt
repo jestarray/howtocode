@@ -73,7 +73,8 @@ that will consume a function and then a list
          (keep-if fn (rest lst)))]))
 
 #|PROBLEM D:
-Use the abstracted function "keep-if" in PROBLEM C to reimplement "positives-only?" and "negatives-only?"
+Use the abstracted function "keep-if" in PROBLEM C 
+to reimplement "positives-only?" and "negatives-only?"
 |#
 (define (positives-only?v2 lst) (keep-if positive? lst))
 (define (negatives-only?v2 lst) (keep-if negative? lst))

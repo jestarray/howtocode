@@ -42,7 +42,8 @@ that will consume a function and then a list
 ; TODO
 
 #|PROBLEM D:
-Use the abstracted function "keep-if" in PROBLEM C to reimplement "positives-only?" and "negatives-only?"
+Use the abstracted function "keep-if" in PROBLEM C 
+to reimplement "positives-only?" and "negatives-only?"
 |#
 ; TODO
 

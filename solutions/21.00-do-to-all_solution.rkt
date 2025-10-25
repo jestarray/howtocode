@@ -27,7 +27,7 @@ For example (square-all (list 1 2 3)) -> (list 1 4 9)
 |#
 
 (: square-all ([ListOf Number] -> [ListOf Number]))
-; keep only those numbers biggers than the given "limit"
+; produce a list with all the given numbers squared
 (check-expect (square-all empty) empty)
 (check-expect (square-all (list 1 2 3)) (list 1 4 9))
 (define (square-all lst)
@@ -43,7 +43,7 @@ Design a function "sqrt-all" that consumes a ListOfNumbers and sqrt the numbers
 For example (sqrt-all (list 1 4 9)) -> (list 1 2 3)
 |#
 (: sqrt-all ([ListOf Number] -> [ListOf Number]))
-; keep only those numbers biggers than the given "limit"
+; produce all the numbers in the given list square rooted
 (check-expect (sqrt-all empty) empty)
 (check-expect (sqrt-all (list 1 4 9)) (list 1 2 3))
 (define (sqrt-all lst)

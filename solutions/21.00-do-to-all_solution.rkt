@@ -59,7 +59,7 @@ Abstract "square-all" and "sqrt-all" into a "do-to-all" function
 that will consume a function and then a list
 |#
 ; (: do-to-all ((Number -> Number) [ListOf Number] -> [ListOf Number]))
-; keep only those numbers biggers than the given "limit"
+; given (list n0 n1 ...) produce the function applied to each element (list (fn n0) (fn n1) ...)
 (check-expect (do-to-all sqr (list 1 2 3)) (list 1 4 9))
 (check-expect (do-to-all sqrt (list 1 4 9)) (list 1 2 3))
 (define (do-to-all fn lst)

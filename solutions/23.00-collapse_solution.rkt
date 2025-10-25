@@ -63,5 +63,5 @@ to reimplement "sum-nums" and "mult-nums"
 
 #|PROBLEM C:
 HIGHLY RECOMMEND!
-Copy "collapse" and reimplement 13.00 problems with it
+Copy "collapse" and reimplement ALL 13.00 problems with it
 |#

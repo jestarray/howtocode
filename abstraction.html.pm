@@ -232,3 +232,108 @@ Answer
 }
 
 Yes! You can even pass in function just like you would any old data like booleans, strings, numbers, and this gives us a very powerful tool to abstract things!
+
+◊h2{Abstracting Signatures}
+◊racket-code-block{
+#lang htdp/isl+
+; ========== data defs ==========
+
+; ListOfString is one of:
+; - empty
+; - (cons String ListOfString)
+
+; ListOfNumber is one of:
+; - empty
+; - (cons Number ListOfNumber)
+
+; INSTEAD, we can have data definitions over some X, like functions:
+
+; [ListOf X] is one of:
+; - empty
+; - (cons X [ListOf X])
+
+; =============================
+; Abstracting function sigs:
+
+; ========== keep-if ==========
+
+;(: keep-if ((Number -> Boolean) [ListOf Number] -> [ListOf Number]))
+; keep only those numbers biggers than the given "limit"
+(define (keep-if fn lst)
+  (cond
+    [(empty? lst) empty]
+    [else
+     (if (fn (first lst))
+         (cons (first lst) (keep-if fn (rest lst)))
+         (keep-if fn (rest lst)))]))
+
+(: positives-only ([ListOf Number] -> [ListOf Number]))
+; keep only those numbers biggers than the given "limit"
+(check-expect (positives-only (list -1 0 -4 9)) (list 9))
+(define (positives-only lst)
+  (keep-if positive? lst))
+
+(: no-yelling ([ListOf String] -> [ListOf String]))
+; produces a list that removes any strings with capital letters
+(check-expect (no-yelling (list "yay" "noO" "meow")) (list "yay" "meow"))
+(define (no-yelling lst)
+  (keep-if string-lower-case? lst))
+
+
+; ========== do-to-all ==========
+
+; (: do-to-all ((Number -> Number) [ListOf Number] -> [ListOf Number]))
+; given (list n0 n1 ...) produce the function applied to each element (list (fn n0) (fn n1) ...)
+(define (do-to-all fn lst)
+  (cond
+    [(empty? lst) empty]
+    [else
+     (cons
+      (fn (first lst))
+      (do-to-all fn (rest lst)))]))
+
+(: square-all ([ListOf Number] -> [ListOf Number]))
+; produce a list with all the given numbers squared
+(check-expect (square-all (list 1 2 3)) (list 1 4 9))
+(define (square-all lst)
+  (do-to-all sqr lst))
+
+(: word-len-all ([ListOf String] -> [ListOf Number]))
+; produce a list with all the given numbers squared
+(check-expect (word-len-all (list "moo" "woof" "meow")) (list 3 4 4))
+(define (word-len-all lst)
+  (do-to-all string-length lst))
+
+
+; ========== collapse ==========
+; (: collapse ((Number -> Number) Number [ListOf Number] -> Number))
+(define (collapse fn base lst)
+  (cond
+    [(empty? lst) base]
+    [else
+     (fn (first lst) (collapse fn base (rest lst) ))]))
+
+(: sum-nums ([ListOf Number] -> Number))
+; sum up all the numbers in the given list
+(check-expect (sum-nums empty) 0)
+(check-expect (sum-nums (list 2 4)) 6)
+(define (sum-nums lst)
+  (collapse + 0 lst))
+
+(: fuse-strings ([ListOf String] -> String))
+; produces all the strings in the list fused into one
+(check-expect (fuse-strings (list "new" " " "year")) "new year")
+(define (fuse-strings lst)
+  (collapse string-append "" lst))
+
+; ========== structs ==========
+
+(define-struct couple [uno dos])
+; couple is (make-couple Any Any)
+
+; couple : (Couple -> ???)
+(define (couple-temp cp)
+  (...
+   (couple-uno cp)
+   (couple-dos cp)))
+}

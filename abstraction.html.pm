@@ -325,15 +325,4 @@ Yes! You can even pass in function just like you would any old data like boolean
 (check-expect (fuse-strings (list "new" " " "year")) "new year")
 (define (fuse-strings lst)
   (collapse string-append "" lst))
-
-; ========== structs ==========
-
-(define-struct couple [uno dos])
-; couple is (make-couple Any Any)
-
-; couple : (Couple -> ???)
-(define (couple-temp cp)
-  (...
-   (couple-uno cp)
-   (couple-dos cp)))
 }

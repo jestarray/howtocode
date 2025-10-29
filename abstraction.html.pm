@@ -258,7 +258,7 @@ Yes! You can even pass in function just like you would any old data like boolean
 ; ========== keep-if ==========
 
 ;(: keep-if ((Number -> Boolean) [ListOf Number] -> [ListOf Number]))
-; keep only those numbers biggers than the given "limit"
+; keep only the given items if they pass the given criteria
 (define (keep-if fn lst)
   (cond
     [(empty? lst) empty]

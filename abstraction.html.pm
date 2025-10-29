@@ -268,7 +268,7 @@ Yes! You can even pass in function just like you would any old data like boolean
          (keep-if fn (rest lst)))]))
 
 (: positives-only ([ListOf Number] -> [ListOf Number]))
-; keep only those numbers biggers than the given "limit"
+; keep only the positive numbers in the given list
 (check-expect (positives-only (list -1 0 -4 9)) (list 9))
 (define (positives-only lst)
   (keep-if positive? lst))
@@ -299,7 +299,7 @@ Yes! You can even pass in function just like you would any old data like boolean
   (do-to-all sqr lst))
 
 (: word-len-all ([ListOf String] -> [ListOf Number]))
-; produce a list with all the given numbers squared
+; produce the string-length of every string in the list
 (check-expect (word-len-all (list "moo" "woof" "meow")) (list 3 4 4))
 (define (word-len-all lst)
   (do-to-all string-length lst))

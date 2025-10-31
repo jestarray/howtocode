@@ -320,9 +320,14 @@ Yes! You can even pass in function just like you would any old data like boolean
 (define (sum-nums lst)
   (collapse + 0 lst))
 
-(: fuse-strings ([ListOf String] -> String))
-; produces all the strings in the list fused into one
-(check-expect (fuse-strings (list "new" " " "year")) "new year")
-(define (fuse-strings lst)
-  (collapse string-append "" lst))
+(: word-count ([ListOf String] -> Number))
+; produces the total number of letters in the list
+(check-expect (word-count (list "cow" "meow")) 7)
+(define (word-count lst)
+  ; (String Number -> Number) Number [ListOf String]
+  (collapse add-wlen 0 lst))
+
+(: add-wlen (String Number -> Number))
+(define (add-wlen str base)
+  (+ (string-length str) base))
 }

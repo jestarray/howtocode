@@ -61,6 +61,7 @@
   ;; read a thing from a file
   (call-with-input-file file-path read-thing))
 
+; from: /usr/share/racket/pkgs/htdp-lib/lang/private/intermediate-plus.rkt
 (define bsl-funcs
   '(cond
      if
@@ -265,6 +266,29 @@
      identity
      struct?
      ))
+(define isl-funcs
+  '(
+    andmap
+    apply
+    argmax
+    argmin
+    build-list
+    build-string
+    compose
+    filter
+    foldl
+    foldr
+    posn
+    map
+    memf
+    ormap
+    sort
+    quicksort
+    procedure?
+    lambda
+    local
+    time
+    ))
 ; from: /usr/share/racket/pkgs/htdp-lib/2htdp/image.rkt
 (define htdp-image-fns
   '(
@@ -374,7 +398,7 @@
     bitmap/url
     bitmap/file
     ))
-(define bsl&image-funcs (append bsl-funcs htdp-image-fns))
+(define bsl&image-funcs (append bsl-funcs isl-funcs htdp-image-fns))
 
 ; groups of files that have the starter, soul, and grader, all as existing files
 (define has-start-sol-grader
@@ -395,7 +419,7 @@
     (first (string-split (path->string (file-name-from-path starter-path)) "_")))
   (define handin-problem-path
     (build-path gen-handin-dir problem-name-and-number))
-  
+
   (make-directory* handin-problem-path)
   (copy-file grader-path (build-path handin-problem-path "checker.rkt") #t))
 

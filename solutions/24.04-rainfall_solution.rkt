@@ -40,9 +40,7 @@ Turn all ❌ into ✅ for each step you complete
         (make-weather "7/5/88" 15.5 13.5 11.4 7.6 0 7.6)))
 
 #|PROBLEM A:
-consume a list of person and produce the sum total of time spent on social media for those who are under 16
-
-Complete the design of a function that takes a list of weather data
+Complete the design of "total-warm-rain" that takes a list of weather data
 and produces the sum total of rainfall in millimeters on days where
 the average temperature was greater than 15 degrees Celsius.
 

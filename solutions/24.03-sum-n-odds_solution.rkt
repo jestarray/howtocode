@@ -26,9 +26,16 @@ the final function definition. Use at least one built in abstract
 function.
 
 HINT: The first n odd numbers are contained within the range of the first 
-2*n naturals numbers
-For example (list 0 1 2 3) contains the first 4 natural numbers AND the first 
-2 odd numbers. Also note that you can use odd?
+2*n numbers
+For example:
+You need to make a list of 2*n to get the first n odd numbers
+Let's say n=2(I want the first 2 odd numbers)
+You need a 2*n list:(2*2=4
+(list 0 1 2 3) contains the first 4 numbers
+which will contain the first 
+2 odd numbers.
+
+Check the website for hints, you can use "odd?"
 |#
 
 (: sum-n-odds (Number -> Number))

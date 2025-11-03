@@ -31,7 +31,7 @@ Turn all ❌ into ✅ for each step you complete
 
 #|PROBLEM A:
 Design a function called "to-frame" that consumes an album name and a list of photos 
-and that produces a list of only those photos that are favourites and that belong to 
+and produces a list of only those photos that are favourites and that belong to 
 the given album. You MUST USE built-in abstract functions wherever possible. 
 |#
 

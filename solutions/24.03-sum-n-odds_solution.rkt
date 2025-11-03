@@ -21,8 +21,9 @@ Turn all ❌ into ✅ for each step you complete
 |#
 
 #|PROBLEM A:
-Complete the design of the following function, by writing out
-the final function definition. Use at least one built in abstract
+Notice some steps are done for you,
+Complete the design of "sum-n-odds". 
+Use at least one built in abstract
 function.
 
 HINT: The first n odd numbers are contained within the range of the first 

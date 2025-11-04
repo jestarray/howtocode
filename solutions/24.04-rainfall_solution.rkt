@@ -70,9 +70,9 @@ produces
                      (make-weather "7/5/88" 15.5 13.5 11.4 7.6 0 7.6)))
               (+ 2.0 0.2 0.4) 0.1)
 
-(define (total-warm-rain low)
-  (local [(define (warm-day? w)
-            (> (weather-avg-tmp w) 15))]
+(define (total-warm-rain w-lst)
+  (local [(define (warm-day? wt)
+            (> (weather-avg-tmp wt) 15))]
     (foldr + 0
            (map weather-rain
-                (filter warm-day? low)))))
+                (filter warm-day? w-lst)))))

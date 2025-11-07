@@ -115,7 +115,7 @@ x
     [else
      (if (&gt; (first lst) (largest-num (rest lst)))
          (first lst)
-         (largest-num (rest lst)))]))</code></pre><p>You end up with quadratic blowup if you run it against this long list(biggest is 9):<br/><code>(time (largest-num (list 7 0 4 0 3 0 4 5 7 5 2 1 7 8 1 4 8 3 6 2 8 9 0)))</code><br/>cpu time: 2403 real time: 2359 gc time: 212</p><p>2.4 seconds! This should not be happening!<br/>This is because our code is making 2 recursive calls to “largest-num”, so for a list of length.<br/><strong>Each of those 2 recursive calls</strong> computes it twice, leading to 4 recursive calls, and then those 4 will do 2 recursive calls each(4^2 = 16), 16^2</p><p>This is because to compute largest-num for the whole list, you need to compute it twice for the sublist of length n-1<br/>And so on...</p><p>This creates a recursion tree where the number of function calls doubles at each level, leading to O(2^n) time complexity.<br/>You can imagine this like your kids always having 2 kids<br/><img src="./images/exponential-fs8.png"/></p><h3>The Efficency fix</h3><p>Use local to store <code>(largest-num (rest lst))</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define (largest-num lst)
+         (largest-num (rest lst)))]))</code></pre><p>You end up with quadratic blowup if you run it against this long list(biggest is 9):<br/><code>(time (largest-num (list 7 0 4 0 3 0 4 5 7 5 2 1 7 8 1 4 8 3 6 2 9 0)))</code><br/>cpu time: 2403 real time: 2359 gc time: 212</p><p>2.4 seconds! This should not be happening!<br/>This is because our code is making 2 recursive calls to “largest-num”, so for a list of length.<br/><strong>Each of those 2 recursive calls</strong> computes it twice, leading to 4 recursive calls, and then those 4 will do 2 recursive calls each(4^2 = 16), 16^2</p><p>This is because to compute largest-num for the whole list, you need to compute it twice for the sublist of length n-1<br/>And so on...</p><p>This creates a recursion tree where the number of function calls doubles at each level, leading to O(2^n) time complexity.<br/>You can imagine this like your kids always having 2 kids<br/><img src="./images/exponential-fs8.png"/></p><h3>The Efficency fix</h3><p>Use local to store <code>(largest-num (rest lst))</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define (largest-num lst)
   (cond
     [(empty? (rest lst))
      (first lst)]
@@ -142,7 +142,10 @@ x
   (local
     [(define delta-x (- (point-x p1) (point-x p0)))
      (define delta-y (- (point-y p1) (point-y p0)))]
-    (make-point delta-x delta-y)))</code></pre><p>The function <code>distance</code> and <code>slope</code> both internally have <code>delta-x</code> and <code>delta-y</code> variables, and the two don’t run into naming collisions with each other.<br/>The same can be said for local functions!</p><p>Sometimes helper functions are <strong>only</strong> useful in the context of implementing a larger function, so therefore it should be put inside a local. Such as this example for<br/><code>calc-speed</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; (: plane-speed (Plane -&gt; Number))
+    (make-point delta-x delta-y)))</code></pre><p>The function <code>distance</code> and <code>slope</code> both internally have <code>delta-x</code> and <code>delta-y</code> variables, and the two don’t run into naming collisions with each other.<br/>The same can be said for local functions!</p><p>Sometimes helper functions are <strong>only</strong> useful in the context of implementing a larger function, so therefore it should be put inside a local. Such as this example for<br/><code>calc-speed</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct plane [velocity altitude])
+(define-struct vehicle [velocity tire-friction])
+
+; (: plane-speed (Plane -&gt; Number))
 (define (plane-speed pln)
   (local
     [(define air-resistance 0.4)
@@ -158,8 +161,7 @@ x
      ; calc-speed : (Vehicle -&gt; Number)
      (define (calc-speed vhl) ; plane-speed also has its own version
        (* (vehicle-velocity vhl) traffic (vehicle-tire-friction vhl)))]
-    (calc-speed vhl)))</code></pre><p>Generally you want to limit the scope of unhelpful/specific functions so they don’t pollute the global namespace. For useful functions, you want the scope to be wider so they can be discovered and reused when helpful.</p><h2 id="local_basics_quiz"><a class="anchor" href="#local_basics_quiz">#</a>Local basics quiz</h2><div class="slide"><h3>Which one of these are valid local expressions?</h3><form><label><input name="q1" type="checkbox"><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(local []
-  (+ 1 1))</code></pre></input></label><br/><label><input name="q1" type="radio"> b.<code>2</code></input></label><br/><label><input name="q1" type="radio"> c.<code>(cons 3 empty)</code></input></label><br/><label><input name="q1" type="radio"> d.<code>(cons 2 (cons 1 empty))</code></input></label></form><p><details><summary>answer</summary><p> d.<code>(cons 2 (cons 1 empty))</code></p></details></p></div>
+    (calc-speed vhl)))</code></pre><p>Generally you want to limit the scope of unhelpful/specific functions so they don’t pollute the global namespace. For useful functions, you want the scope to be wider so they can be discovered and reused when helpful.</p>
             </article>
         </main>
     </div>

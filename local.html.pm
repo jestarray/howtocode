@@ -166,7 +166,7 @@ The 2nd version is more clearer as to what we're calculating. This is a small ex
          (largest-num (rest lst)))]))
 }
 You end up with quadratic blowup if you run it against this long list(biggest is 9):
-◊code{(time (largest-num (list 7 0 4 0 3 0 4 5 7 5 2 1 7 8 1 4 8 3 6 2 8 9 0)))}
+◊code{(time (largest-num (list 7 0 4 0 3 0 4 5 7 5 2 1 7 8 1 4 8 3 6 2 9 0)))}
 cpu time: 2403 real time: 2359 gc time: 212
 
 2.4 seconds! This should not be happening!
@@ -228,6 +228,9 @@ The same can be said for local functions!
 Sometimes helper functions are ◊strong{only} useful in the context of implementing a larger function, so therefore it should be put inside a local. Such as this example for 
 ◊code{calc-speed}
 ◊racket-code-block{
+(define-struct plane [velocity altitude])
+(define-struct vehicle [velocity tire-friction])
+
 ; (: plane-speed (Plane -> Number))
 (define (plane-speed pln)
   (local

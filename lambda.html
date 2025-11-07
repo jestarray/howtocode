@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
+    <title>Lambda</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/local.html"> Local</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+
+            <article>
+                <h1>Lambda</h1><p>Let’s revist the idea of an <strong>expression</strong> vs a <strong>statement</strong></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; statement:
+(define a 3)
+
+; expression:
+3
+(* 3 1)
+a</code></pre><p>Statements do not produce anything until you use the name of it, only then can it be an expression.</p><p>A lambda can be thought of as the <strong>expression</strong> form of a function, since all functions we’ve wrote up until now were statements.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; statement:
+(define (meow x) (+ 1 x))
+
+; expression:
+(lambda (x) (+ 1 x))
+meow
+
+; lambdas can be bound to variables, thus turning them back into statements
+(define meow2 (lambda (x) (+ 1 x)))</code></pre><p>The evaluation rules for lambda is the exact same as a function, so nothing too interesting.</p><h2 id="when_to_use_lambda?"><a class="anchor" href="#when_to_use_lambda?">#</a>When to use lambda?</h2><p>Making code shorter instead of using local. Use this only for small functions</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; add-n: ([ListOf Number] Number -&gt; [ListOf Number])
+; adds N to every number in the list
+(check-expect (add-n (list 0 4 1) 2)
+              (list 2 6 3))
+(define (add-n num-lst inc)
+  (local
+    [; add-to : (Number -&gt; Number)
+     (define (add-to i)
+       (+ i inc))]
+    (map add-to num-lst)))
+
+; instead, write the local function with lambda:
+; much shorter! 1 liner
+(define (add-n num-lst inc)
+  (map (lambda (i) (+ i inc)) num-lst))</code></pre><p>Remember, the main point of the <code>local</code> is that we need to stick a function inside another function so it can capture its variables! But we can also do that by just writing <em>lambda</em>(a function expression) also.</p><p>Use lambda to abstract when you think a function is simple or will never be called more than once.</p><h2 id="returning_functions"><a class="anchor" href="#returning_functions">#</a>Returning functions</h2><p>We’ve only had functions that produce primitive values(strings, booleans, numbers) but we can have functions that produce functions to reduce repitition and abstract. <strong>NOTE</strong>: This is super rare and we won’t be doing this in this course all that much</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; warning: (String -&gt; String)
+(define (warning text)
+    (string-append "WARNING: " text))
+
+; note: (String -&gt; String)
+(define (note text)
+    (string-append "Note: " text))
+
+(warning "Low battery")  ; → "WARNING: Low battery"
+(note "Remember to save") ; → "Note: Remember to save"</code></pre><p>Instead we can create an abstract <code>make-prefixer</code> function</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; make-prefixer : (String -&gt; (String -&gt; String))
+(define (make-prefixer prefix)
+  (lambda (text)
+    (string-append prefix text)))
+
+(define warning (make-prefixer "WARNING: "))
+(define note (make-prefixer "Note: "))
+
+(warning "Low battery")  ; → "WARNING: Low battery"
+(note "Remember to save") ; → "Note: Remember to save"</code></pre><p>A good use of a function producing another function can be seen in the builtin function to ISL called <code>compose</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; letter-count : ([ListOf String] -&gt; Number)
+; counts up the letters in the list
+(check-expect (word-count (list "moo" "woof")) 7)
+(define (word-count lst)
+  (foldl (lambda (str base)
+           (+ (string-length str) base)) 0 lst))
+
+; instead, we can use compose, which will make a string-length adder here
+(define (word-count-BETTER lst)
+  (foldl (compose + string-length) 0 lst))</code></pre>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

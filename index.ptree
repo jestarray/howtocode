@@ -35,5 +35,6 @@
 }
 
 ◊abstraction.html{
-
+    local.html
+    lambda.html
 }

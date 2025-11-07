@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
+    <title>Local</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/abstraction.html"> Abstraction</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+            <div id="next"><a href="/lambda.html">Lambda</a> →</div>
+            <article>
+                <h1>Local</h1><h2 id="formal_syntax_rules"><a class="anchor" href="#formal_syntax_rules">#</a>Formal Syntax Rules</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(local
+  [&lt;definitions&gt;]
+  &lt;expression body&gt;) ; MUST BE AN EXPRESSION, CANNOT BE A DEFINITION</code></pre><p>Local has <code>&lt;definitions&gt;</code> that can <strong>only</strong> be used in the <code>&lt;expression body&gt;</code> area.</p><p>For example:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(local
+  [(define a 1)
+   (define b 2)]
+  (+ a b))
+; produces 2
+
+a
+;^ error cause defintions inside a local are only valid inside the local body
+
+(define (f x)
+    (+ x 1))
+x
+;^ error cause definitions inside a function are only valid inside the function</code></pre><h2 id="lexical_scoping"><a class="anchor" href="#lexical_scoping">#</a>Lexical Scoping</h2><p>Lexical scoping determines how variable names are resolved in nested functions or locals. A variable’s scope is determined by its position in the source code at the time the code is written, not when it’s executed. The scope is “fixed” lexically (by the physical structure of the code).</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define p "An")
+(local
+  [(define p "Bob")
+   (define (greet n) (string-append n p))]
+  (greet "hello "))</code></pre><p>The racket language will go line by line, recording every variable it encounters and putting them into a box.<br/>When it reaches a function or local block, it will wrap a box <strong>only in the area</strong> of the function/local.<br/>Here is the box diagram:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">┌─────────────────────────────────────────────────┐
+│;Global Scope                                    │
+│                                                 │
+│ (define p "An")                                 │
+│                                                 │
+│ ┌─────────────────────────────────────────────┐ │
+│ │;Local Scope (inside local block)            │ │
+│ │(local                                       │ │
+│ │ [                                           │ │
+│ │   (define p "Bob")                          │ │
+│ │   (define (greet n)                         │ │
+│ │ ┌─────────────────────────────────────────┐ │ │
+│ │ │;Function Scope (greet)                  │ │ │
+│ │ │   (string-append n p))                  │ │ │
+│ │ └─────────────────────────────────────────┘ │ │
+│ │ ]                                           │ │
+│ │ (greet "hello "))                           │ │
+│ └─────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────┘</code></pre><p>Global scope records:</p><ul><li><em>a variable</em> p bound “An”</li></ul><p>Local scope records:</p><ul><li><em>a variable</em> p bound to “Bob”</li><li><p><em>a function</em> greet</p><ul><li><em>a local function variable</em> n</li></ul></li></ul><p>We call functions at top level, the global scope, because it can be accessed by anyone, even those with very nested scopes!</p><p>In the case of the function <code>greet</code> scope, since it doesn’t have <em>the variable</em> “p” in the paramter list, it looks it up and finds it in the local, but if it didn’t exist in the local then it will then keep going until it hits the global. If no such variable exists, then you get an error.</p><h2 id="evaluation_rules_of_local"><a class="anchor" href="#evaluation_rules_of_local">#</a>Evaluation Rules of Local</h2><ol><li>Renaming</li><li>Lifting to global/toplevel</li><li>Replacing with renamed body</li><li>Evaluate</li></ol><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; STEP 0
+(define b 6)
+(+ b ; evalues to 6 in step1
+   (local [(define b 2)]
+     (* b b))
+   b)
+
+; STEP 1: Renaming: variables insidde local, b -&gt; b_0
+(define b 1)
+(+ 6
+   (local [(define b_0 2)]
+     (* b_0 b_0))
+   b)
+
+; STEP 2: Lifting: Move b_0 to GLOBAL SCOPE
+(define b_0 2)
+(+ 6
+   (local []
+     (* b_0 b_0))
+   b)
+
+; STEP 3: Replace/remove the local with the renamed body
+(+ 6
+   (* b_0 b_0)
+   b)
+
+; STEP 4: Resolve variables and evalue
+(+ 6
+    (* 2 2)
+   6)
+
+(+ 6 4 6) ; produces 16</code></pre><p>Use the stepper over this expression.</p><h2 id="benefits_of_local"><a class="anchor" href="#benefits_of_local">#</a>Benefits of Local</h2><h2 id="clarifying_readability"><a class="anchor" href="#clarifying_readability">#</a>Clarifying readability</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; shipping-costv0 : (Number Number -&gt; Number)
+(define (shipping-costV0 weight distance)
+  (+ 5 (* weight 0.5) (* distance 0.1)))
+   ; ^ uh.. why are we adding 5? what is this?
+
+; Clear version with named rates
+; shipping-cost : (Number Number -&gt; Number)
+(define (shipping-cost weight distance)
+  (local
+    [(define base-shipping 5)
+     (define cost-per-kg 0.5)
+     (define cost-per-km 0.1)
+     (define weight-cost (* weight cost-per-kg))
+     (define distance-cost (* distance cost-per-km))
+     (define total-cost (+ base-shipping weight-cost distance-cost))]
+    total-cost))</code></pre><p>The 2nd version is more clearer as to what we’re calculating. This is a small example, but imagine a bigger function that uses distance-cost or weight-cost constantly! We would factor out a lot of repitition.</p><h2 id="efficiency"><a class="anchor" href="#efficiency">#</a>Efficiency</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; largest-num : NonEmptyListOfNumber -&gt; Number
+; determines the largest number in the list
+(check-expect (largest-num (list 2)) 2)
+(check-expect (largest-num (list 7 4 6)) 7)
+(check-expect (largest-num (list 1 9 3 2)) 9)
+(define (largest-num lst)
+  (cond
+    [(empty? (rest lst))
+     (first lst)]
+    [else
+     (if (&gt; (first lst) (largest-num (rest lst)))
+         (first lst)
+         (largest-num (rest lst)))]))</code></pre><p>You end up with quadratic blowup if you run it against this long list(biggest is 9):<br/><code>(time (largest-num (list 7 0 4 0 3 0 4 5 7 5 2 1 7 8 1 4 8 3 6 2 8 9 0)))</code><br/>cpu time: 2403 real time: 2359 gc time: 212</p><p>2.4 seconds! This should not be happening!<br/>This is because our code is making 2 recursive calls to “largest-num”, so for a list of length.<br/><strong>Each of those 2 recursive calls</strong> computes it twice, leading to 4 recursive calls, and then those 4 will do 2 recursive calls each(4^2 = 16), 16^2</p><p>This is because to compute largest-num for the whole list, you need to compute it twice for the sublist of length n-1<br/>And so on...</p><p>This creates a recursion tree where the number of function calls doubles at each level, leading to O(2^n) time complexity.<br/>You can imagine this like your kids always having 2 kids<br/><img src="./images/exponential-fs8.png"/></p><h3>The Efficency fix</h3><p>Use local to store <code>(largest-num (rest lst))</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define (largest-num lst)
+  (cond
+    [(empty? (rest lst))
+     (first lst)]
+    [else
+     (local
+       [(define larger-than-rest (largest-num (rest lst)))] ; STORE IT
+       (if (&gt; (first lst) larger-than-rest)
+           (first lst)
+           larger-than-rest))]))</code></pre><p>Run <code>time</code> again and it should be super fast again!</p><p>This <a href="https://www.desmos.com/calculator/vzgscor4h5">desmos graph models</a> the exponential blowup vs linear</p><h2 id="encapsulation"><a class="anchor" href="#encapsulation">#</a>Encapsulation</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct point [x y])
+
+; (: distance (Point Point -&gt; Number))
+; d = sqrt((x1-x0)^2 + (y1-y0)^2)
+(define (distance p0 p1)
+  (local
+    [(define delta-x (- (point-x p1) (point-x p0)))
+     (define delta-y (- (point-y p1) (point-y p0)))]
+    (sqrt (+ (sqr delta-x) (sqr delta-y)))))
+
+; (: slope (Point Point -&gt; Point))
+; calculates the change in x and y by doing: x1-x0 and y1-y0
+(check-expect (slope (make-point 1 1) (make-point 2 3))
+              (make-point 1 2))
+(define (slope p0 p1)
+  (local
+    [(define delta-x (- (point-x p1) (point-x p0)))
+     (define delta-y (- (point-y p1) (point-y p0)))]
+    (make-point delta-x delta-y)))</code></pre><p>The function <code>distance</code> and <code>slope</code> both internally have <code>delta-x</code> and <code>delta-y</code> variables, and the two don’t run into naming collisions with each other.<br/>The same can be said for local functions!</p><p>Sometimes helper functions are <strong>only</strong> useful in the context of implementing a larger function, so therefore it should be put inside a local. Such as this example for<br/><code>calc-speed</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; (: plane-speed (Plane -&gt; Number))
+(define (plane-speed pln)
+  (local
+    [(define air-resistance 0.4)
+     ; calc-speed : (Plane -&gt; Number)
+     (define (calc-speed pln) ; vehicle-speed also has its own version
+       (* (plane-velocity pln) air-resistance (plane-altitude pln)))]
+    (calc-speed pln)))
+
+; (: vehicle-speed (Vehicle -&gt; Number))
+(define (vehicle-speed vhl)
+  (local
+    [(define traffic 0.9)
+     ; calc-speed : (Vehicle -&gt; Number)
+     (define (calc-speed vhl) ; plane-speed also has its own version
+       (* (vehicle-velocity vhl) traffic (vehicle-tire-friction vhl)))]
+    (calc-speed vhl)))</code></pre><p>Generally you want to limit the scope of unhelpful/specific functions so they don’t pollute the global namespace. For useful functions, you want the scope to be wider so they can be discovered and reused when helpful.</p><h2 id="local_basics_quiz"><a class="anchor" href="#local_basics_quiz">#</a>Local basics quiz</h2><div class="slide"><h3>Which one of these are valid local expressions?</h3><form><label><input name="q1" type="checkbox"><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(local []
+  (+ 1 1))</code></pre></input></label><br/><label><input name="q1" type="radio"> b.<code>2</code></input></label><br/><label><input name="q1" type="radio"> c.<code>(cons 3 empty)</code></input></label><br/><label><input name="q1" type="radio"> d.<code>(cons 2 (cons 1 empty))</code></input></label></form><p><details><summary>answer</summary><p> d.<code>(cons 2 (cons 1 empty))</code></p></details></p></div>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

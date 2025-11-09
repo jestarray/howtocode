@@ -30,6 +30,11 @@ meow
 
 The evaluation rules for lambda is the exact same as a function, so nothing too interesting. ◊code{meow} and ◊code{meow2} are identical, so prefer ◊code{(define (meow) ...)} as it is less parenthesis. This is called "syntactic sugar", whereby the language has more nicer/sweeter ways of writing things.
 
+The syntax rules of lambda are:
+◊racket-code-block{
+(lambda (variable-1 ... variable-N) expression)
+}
+
 ◊h2{When to use lambda?}
 Making code shorter instead of using local. Use this ◊strong{only} for small functions or functions you forsee will only be used once.
 ◊racket-code-block{

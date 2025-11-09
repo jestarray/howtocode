@@ -13,7 +13,7 @@ Let's revist the idea of an ◊strong{expression} vs a ◊strong{statement}
 (* 3 1)
 a
 }
-Statements do not produce anything until you use the name of it, only then can it be an expression.
+Statements do not produce anything until you use the name of it, only then is it converted to an expression.
 
 A lambda can be thought of as the ◊strong{expression} form of a function, since all functions we've wrote up until now were statements.
 ◊racket-code-block{
@@ -28,10 +28,10 @@ meow
 (define meow2 (lambda (x) (+ 1 x)))
 }
 
-The evaluation rules for lambda is the exact same as a function, so nothing too interesting.
+The evaluation rules for lambda is the exact same as a function, so nothing too interesting. ◊code{meow} and ◊code{meow2} are identical, so prefer ◊code{(define (meow) ...)} as it is less parenthesis. This is called "syntactic sugar", whereby the language has more nicer/sweeter ways of writing things.
 
 ◊h2{When to use lambda?}
-Making code shorter instead of using local. Use this only for small functions
+Making code shorter instead of using local. Use this ◊strong{only} for small functions or functions you forsee will only be used once.
 ◊racket-code-block{
 ; add-n: ([ListOf Number] Number -> [ListOf Number])
 ; adds N to every number in the list
@@ -52,7 +52,7 @@ Making code shorter instead of using local. Use this only for small functions
 
 Remember, the main point of the ◊code{local} is that we need to stick a function inside another function so it can capture its variables! But we can also do that by just writing ◊em{lambda}(a function expression) also.
 
-Use lambda to abstract when you think a function is simple or will never be called more than once.
+So use lambda to abstract when you think a function is simple or will never be called more than once.
 
 ◊h2{Returning functions}
 We've only had functions that produce primitive values(strings, booleans, numbers) but we can have functions that produce functions to reduce repitition and abstract. ◊strong{NOTE}: This is super rare and we won't be doing this in this course all that much
@@ -84,7 +84,7 @@ Instead we can create an abstract ◊code{make-prefixer} function
 (note "Remember to save") ; → "Note: Remember to save"
 }
 
-A good use of a function producing another function can be seen in the builtin function to ISL called ◊code{compose}
+A better example of a function producing another function can be seen in the builtin function to ISL called ◊code{compose}
 ◊racket-code-block{
 ; letter-count : ([ListOf String] -> Number)
 ; counts up the letters in the list

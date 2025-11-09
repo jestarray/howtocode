@@ -27,7 +27,7 @@
 ; expression:
 3
 (* 3 1)
-a</code></pre><p>Statements do not produce anything until you use the name of it, only then can it be an expression.</p><p>A lambda can be thought of as the <strong>expression</strong> form of a function, since all functions we’ve wrote up until now were statements.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; statement:
+a</code></pre><p>Statements do not produce anything until you use the name of it, only then is it converted to an expression.</p><p>A lambda can be thought of as the <strong>expression</strong> form of a function, since all functions we’ve wrote up until now were statements.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; statement:
 (define (meow x) (+ 1 x))
 
 ; expression:
@@ -35,7 +35,7 @@ a</code></pre><p>Statements do not produce anything until you use the name of it
 meow
 
 ; lambdas can be bound to variables, thus turning them back into statements
-(define meow2 (lambda (x) (+ 1 x)))</code></pre><p>The evaluation rules for lambda is the exact same as a function, so nothing too interesting.</p><h2 id="when_to_use_lambda?"><a class="anchor" href="#when_to_use_lambda?">#</a>When to use lambda?</h2><p>Making code shorter instead of using local. Use this only for small functions</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; add-n: ([ListOf Number] Number -&gt; [ListOf Number])
+(define meow2 (lambda (x) (+ 1 x)))</code></pre><p>The evaluation rules for lambda is the exact same as a function, so nothing too interesting. <code>meow</code> and <code>meow2</code> are identical, so prefer <code>(define (meow) ...)</code> as it is less parenthesis. This is called “syntactic sugar”, whereby the language has more nicer/sweeter ways of writing things.</p><h2 id="when_to_use_lambda?"><a class="anchor" href="#when_to_use_lambda?">#</a>When to use lambda?</h2><p>Making code shorter instead of using local. Use this <strong>only</strong> for small functions or functions you forsee will only be used once.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; add-n: ([ListOf Number] Number -&gt; [ListOf Number])
 ; adds N to every number in the list
 (check-expect (add-n (list 0 4 1) 2)
               (list 2 6 3))

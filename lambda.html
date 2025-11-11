@@ -26,7 +26,7 @@
 
 ; expression:
 3
-(* 3 1)
+(* 4 2)
 a</code></pre><p>Statements do not produce anything until you use the name of it, only then is it converted to an expression.</p><p>A lambda can be thought of as the <strong>expression</strong> form of a function, since all functions we’ve wrote up until now were statements.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; statement:
 (define (meow x) (+ 1 x))
 
@@ -35,7 +35,7 @@ a</code></pre><p>Statements do not produce anything until you use the name of it
 meow
 
 ; lambdas can be bound to variables, thus turning them back into statements
-(define meow2 (lambda (x) (+ 1 x)))</code></pre><p>The evaluation rules for lambda is the exact same as a function, so nothing too interesting. <code>meow</code> and <code>meow2</code> are identical, so prefer <code>(define (meow) ...)</code> as it is less parenthesis. This is called “syntactic sugar”, whereby the language has more nicer/sweeter ways of writing things.</p><p>The syntax rules of lambda are:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(lambda (variable-1 ... variable-N) expression)</code></pre><h2 id="when_to_use_lambda?"><a class="anchor" href="#when_to_use_lambda?">#</a>When to use lambda?</h2><p>Making code shorter instead of using local. Use this <strong>only</strong> for small functions or functions you forsee will only be used once.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; add-n: ([ListOf Number] Number -&gt; [ListOf Number])
+(define meow2 (lambda (x) (+ 1 x)))</code></pre><p>The evaluation rules for lambda is the exact same as a function, so nothing too interesting. So why are there two ways of writing the same thing? <code>meow</code> and <code>meow2</code> are identical. This is called “syntactic sugar”, whereby the language has more nicer/sweeter ways of writing things. Prefer <code>(define (meow) ...)</code> for global function defs as it is less parenthesis.</p><p>The syntax rules of lambda are:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(lambda (variable-1 ... variable-N) expression)</code></pre><p>You can also use <code>λ</code> instead of <code>lambda</code> with <code>ctrl+\</code>, but we will not be doing this shorthand for legibility and typability reasons.</p><h2 id="when_to_use_lambda?"><a class="anchor" href="#when_to_use_lambda?">#</a>When to use lambda?</h2><p>Making code shorter instead of using local. Use this <strong>only</strong> for small functions or functions you forsee will only be used once.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; add-n: ([ListOf Number] Number -&gt; [ListOf Number])
 ; adds N to every number in the list
 (check-expect (add-n (list 0 4 1) 2)
               (list 2 6 3))
@@ -67,16 +67,15 @@ meow
 (define note (make-prefixer "Note: "))
 
 (warning "Low battery")  ; → "WARNING: Low battery"
-(note "Remember to save") ; → "Note: Remember to save"</code></pre><p>A better example of a function producing another function can be seen in the builtin function to ISL called <code>compose</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; letter-count : ([ListOf String] -&gt; Number)
-; counts up the letters in the list
-(check-expect (word-count (list "moo" "woof")) 7)
-(define (word-count lst)
-  (foldl (lambda (str base)
-           (+ (string-length str) base)) 0 lst))
+(note "Remember to save") ; → "Note: Remember to save"</code></pre><p>A better example of a function producing another function can be seen in the builtin function to ISL called <code>compose</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(check-expect (add1&amp;sqr (list 1 2 3))
+              (list 4 9 16))
+; add1&amp;sqr : ([ListOf Number] -&gt; [ListOf Number])
+(define (add1&amp;sqr lst)
+  (map (lambda (n) (sqr (add1 n))) lst))
 
-; instead, we can use compose, which will make a string-length adder here
-(define (word-count-BETTER lst)
-  (foldl (compose + string-length) 0 lst))</code></pre>
+; using compose which consumes and produces a function
+(define (add1&amp;sqrV2 lst)
+  (map (compose sqr add1) lst))</code></pre>
             </article>
         </main>
     </div>

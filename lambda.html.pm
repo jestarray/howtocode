@@ -10,7 +10,7 @@ Let's revist the idea of an ◊strong{expression} vs a ◊strong{statement}
 
 ; expression:
 3
-(* 3 1)
+(* 4 2)
 a
 }
 Statements do not produce anything until you use the name of it, only then is it converted to an expression.
@@ -28,12 +28,14 @@ meow
 (define meow2 (lambda (x) (+ 1 x)))
 }
 
-The evaluation rules for lambda is the exact same as a function, so nothing too interesting. ◊code{meow} and ◊code{meow2} are identical, so prefer ◊code{(define (meow) ...)} as it is less parenthesis. This is called "syntactic sugar", whereby the language has more nicer/sweeter ways of writing things.
+The evaluation rules for lambda is the exact same as a function, so nothing too interesting. So why are there two ways of writing the same thing? ◊code{meow} and ◊code{meow2} are identical. This is called "syntactic sugar", whereby the language has more nicer/sweeter ways of writing things. Prefer ◊code{(define (meow) ...)} for global function defs as it is less parenthesis.
 
 The syntax rules of lambda are:
 ◊racket-code-block{
 (lambda (variable-1 ... variable-N) expression)
 }
+
+You can also use ◊code{λ} instead of ◊code{lambda} with ◊code{ctrl+\}, but we will not be doing this shorthand for legibility and typability reasons.
 
 ◊h2{When to use lambda?}
 Making code shorter instead of using local. Use this ◊strong{only} for small functions or functions you forsee will only be used once.
@@ -91,14 +93,13 @@ Instead we can create an abstract ◊code{make-prefixer} function
 
 A better example of a function producing another function can be seen in the builtin function to ISL called ◊code{compose}
 ◊racket-code-block{
-; letter-count : ([ListOf String] -> Number)
-; counts up the letters in the list
-(check-expect (word-count (list "moo" "woof")) 7)
-(define (word-count lst)
-  (foldl (lambda (str base)
-           (+ (string-length str) base)) 0 lst))
+(check-expect (add1&sqr (list 1 2 3))
+              (list 4 9 16))
+; add1&sqr : ([ListOf Number] -> [ListOf Number])
+(define (add1&sqr lst)
+  (map (lambda (n) (sqr (add1 n))) lst))
 
-; instead, we can use compose, which will make a string-length adder here
-(define (word-count-BETTER lst)
-  (foldl (compose + string-length) 0 lst))
+; using compose which consumes and produces a function
+(define (add1&sqrV2 lst)
+  (map (compose sqr add1) lst))
 }

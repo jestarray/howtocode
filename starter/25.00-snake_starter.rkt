@@ -1,0 +1,178 @@
+#lang htdp/isl+
+(require 2htdp/image)
+(require 2htdp/universe)
+(define PNAME 'snake)
+
+; =================
+; CONSTANTS:
+(define CELL-SIZE 16)
+
+(define TILE-WIDTH 22)
+(define TILE-HEIGHT 22)
+(define WIDTH (* TILE-WIDTH CELL-SIZE))
+(define HEIGHT (* TILE-HEIGHT CELL-SIZE))
+(define HALF-WIDTH (/ WIDTH 2))
+(define HALF-HEIGHT (/ HEIGHT 2))
+
+(define WIDTH-IN-CELLS (/ WIDTH CELL-SIZE))
+(define HEIGHT-IN-CELLS (/ HEIGHT CELL-SIZE))
+(define HALF-WIDTH-IN-CELLS (/ WIDTH-IN-CELLS 2))
+(define HALF-HEIGHT-IN-CELLS (/ HEIGHT-IN-CELLS 2))
+(define BACKGROUND (empty-scene WIDTH HEIGHT "black"))
+(define SQUARE-IMG (square CELL-SIZE "solid" "white"))
+
+; =================
+#| Data definitions:
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+TEMPLATES: https://howtocode.pages.dev/htdp_templates
+ASK FOR HELP: https://discord.com/invite/6Zq8sH5
+Turn all ❌ into ✅ for each step you complete
+
+1. Data Description✅
+   1B. if using define-struct, write all accessor signatures✅
+2. Interpretation✅
+3. Data Examples✅
+4. A function template that processes this data✅
+|#
+
+(define-struct point [x y])
+; Point is (make-point Number Number)
+; interp.
+; x horizontal point, relative to top left, in grid units
+; y vertical point, relative to top left, in grid units
+
+; ListOfPoint is one of:
+; - empty
+; - (cons Point ListOfPoint)
+
+; list-point-temp : (ListOfPoint -> ???)
+(define (list-point-temp pt-ls)
+  (cond
+    [(empty? pt-ls) ...]
+    [else
+     (... (point-temp (first pt-ls))
+          (list-point-temp (rest pt-ls)))]))
+
+(define-struct game [snake vel food])
+; Game is (make-game ListOfPoint Point Point)
+; interp.
+; snake is a ListOfPoints where the head is the first element of the list, and the rest is the body, all in grid cords
+; vel is the velocity(direction) the snake is moving in, in grid cords
+; food is a point where it is located at in grid cords
+
+; a snake at the center of the screen with food at (5, 7), not moving
+(define initial-game
+  (make-game
+   (list (make-point HALF-WIDTH-IN-CELLS HALF-HEIGHT-IN-CELLS))
+   (make-point 0 0)
+   (make-point 5 7)))
+
+; =================
+#| Functions:
+1. Signature, purpose, stub ✅
+2. Examples (aka check-expect/tests, elaborate the concrete) ❌
+  2B. if the function consumes a list, make sure a list of 2 or longer is tested❌
+3. Template(from data)?❌
+3. Code body ❌
+4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+|#
+
+#|PROBLEM A:
+Write the video game snake
+https://en.wikipedia.org/wiki/Snake_(video_game_genre)
+https://playsnake.org/
+
+Notice how the data definition steps are done and some functions have been provided for you:
+✅add-point
+✅point=?
+
+If you're struggling, write data examples of game, where the snake is eating itself, moving, etc
+
+Finish the function design steps for the folowing functions(from easiest to hardest):
+❌point-offscreen?
+❌draw-square@grid
+❌render-snake
+❌render-game
+❌update-snake
+❌ate-self?
+❌update-game
+❌handle-key
+❌game-over?(composes ate-self? and point-offscreen?)
+
+Remember big-bang mainly needs "on-tick" and "to-draw". You can comment out the rest until later
+Challenges:
+Add keeping track of a score and rendering it on the top right
+|#
+
+; add-point : (Point Point -> Point)
+; adds x & y from point2 onto point1
+(check-expect (add-point (make-point 1 2) (make-point 1 1))
+              (make-point 2 3))
+(define (add-point p1 p2)
+  (make-point (+ (point-x p1) (point-x p2))
+              (+ (point-y p1) (point-y p2))))
+
+; point=? : (Point Point -> Boolean)
+; produces true if the x & y of one point is equal to the other
+(check-expect (point=? (make-point 3 1) (make-point 3 1)) #true)
+(check-expect (point=? (make-point 3 1) (make-point 0 1)) #false)
+(define (point=? p1 p2)
+  (and (= (point-x p1) (point-x p2))
+       (= (point-y p1) (point-y p2))))
+
+; point-offscreen? : (Point -> Boolean)
+; produces if the grid-aligned point is off the screen
+; TODO
+
+; draw-square@grid : (Point Image -> Image)
+; given a grid-aligned point, draw the image at that point
+; TODO
+
+; render-snake : (ListOfPoint -> Image)
+; draws the snake on the background
+; TODO
+
+; render-game : (Game -> Image)
+; draws the food and the snake
+; <tests are omitted, this is a wapper function>
+(define (render-game gm) BACKGROUND)
+; TODO
+
+; update-snake : (ListOfPoint Point Point -> ListOfPoint)
+; moves the snake by the given velocity by adding a head and removing the last element
+; if it did collided with the food then we grow the snake(by not removing the last element)
+; TODO
+
+; ate-self? : (ListOfPoint -> Boolean)
+; produces #true if the snake head ate its body
+; TODO
+
+; update-game : (Game -> Game)
+; updates the snake and spawns new random food if it was eaten by the snake 
+; TODO
+(define (update-game gm) gm)
+
+; handle-key : (Game KeyEvent -> Game)
+; moves the snake using the arrow keys, while preventing instant 180 degree turns
+; TODO
+(define (handle-key gm kpressed)
+  (cond [(key=? kpressed "x") (... gm)]
+        [else
+         (... gm)]))
+
+; game-over? : (Game -> Boolean)
+; produces #true when the snake eats itself or hits the edges of the screen
+; <tests omitted>
+(define (game-over? gm) #false)
+
+; main: (Game -> Game)
+; start the world with (main initial-game)
+(define (main gm)
+  (big-bang gm
+    [on-key handle-key]
+    [on-tick   update-game 0.4]     ; Game -> Game
+    [to-draw   render-game]   ; Game -> Image
+    [stop-when game-over?]
+    ))
+
+(main initial-game)

@@ -186,7 +186,7 @@ Add keeping track of a score and rendering it on the top right
                     (render-snake (game-snake gm))))
 
 ; update-snake : (ListOfPoint Point Point -> ListOfPoint)
-; moves the snake by the given velocity by adding a head and removing the last element
+; moves the snake by the given velocity by adding a head with the velocity and removing the last element
 ; if it did collided with the food then we grow the snake(by not removing the last element)
 
 ; snake moving normally

@@ -153,7 +153,7 @@ Add keeping track of a score and rendering it on the top right
 (define (update-game gm) gm)
 
 ; handle-key : (Game KeyEvent -> Game)
-; moves the snake using the arrow keys, while preventing instant 180 degree turns
+; moves the snake using the arrow keys
 ; TODO
 (define (handle-key gm kpressed)
   (cond [(key=? kpressed "x") (... gm)]

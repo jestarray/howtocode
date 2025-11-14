@@ -125,8 +125,8 @@ Add keeping track of a score and rendering it on the top right
 ; TODO
 
 ; draw-square@grid : (Point Image -> Image)
-; given a grid-aligned point, draw the image at that point
-; TODO
+; draw the given grid aligned point in pixels ontop of the given background
+(define (draw-square@grid pt background) empty-image)
 
 ; render-snake : (ListOfPoint -> Image)
 ; draws the snake on the background
@@ -141,7 +141,7 @@ Add keeping track of a score and rendering it on the top right
 ; update-snake : (ListOfPoint Point Point -> ListOfPoint)
 ; moves the snake by the given velocity by adding a head with the velocity and removing the last element
 ; if it did collided with the food then we grow the snake(by not removing the last element)
-; TODO
+(define (update-snake pt-ls vel food) pt-ls)
 
 ; ate-self? : (ListOfPoint -> Boolean)
 ; produces #true if the snake head ate its body
@@ -169,10 +169,10 @@ Add keeping track of a score and rendering it on the top right
 ; start the world with (main initial-game)
 (define (main gm)
   (big-bang gm
-    [on-key handle-key]
+    ; [on-key handle-key]
     [on-tick   update-game 0.4]     ; Game -> Game
     [to-draw   render-game]   ; Game -> Image
     [stop-when game-over?]
     ))
 
-(main initial-game)
+; (main initial-game)

@@ -141,13 +141,13 @@ Add keeping track of a score and rendering it on the top right
 (check-expect (point-offscreen? (make-point (add1 WIDTH-IN-CELLS) 0)) #true) ; right edge
 (check-expect (point-offscreen? (make-point 0 (add1 HEIGHT-IN-CELLS))) #true) ; bot edge
 (define (point-offscreen? pt)
-  (or (> (point-x pt) (sub1 WIDTH-IN-CELLS)) 
-      (< (point-x pt) 0)
-      (> (point-y pt) (sub1 HEIGHT-IN-CELLS)) 
-      (< (point-y pt) 0)))
+  (or (< (point-x pt) 0)
+      (< (point-y pt) 0)
+      (>= (point-x pt) WIDTH-IN-CELLS)
+      (>= (point-y pt) HEIGHT-IN-CELLS)))
 
 ; draw-square@grid : (Point Image -> Image)
-; given a grid-aligned point, draw the image at that point
+; draw the given grid aligned point in pixels ontop of the given background
 (check-expect (draw-square@grid (make-point 5 9) BACKGROUND)
               (place-image/align SQUARE-IMG (* 5 CELL-SIZE) (* 9 CELL-SIZE)
                                  "left"
@@ -287,7 +287,7 @@ Add keeping track of a score and rendering it on the top right
 (define (main gm)
   (big-bang gm
     [on-key handle-key]
-    [on-tick   update-game 0.4]     ; Game -> Game
+    [on-tick   update-game 0.2]     ; Game -> Game
     [to-draw   render-game]   ; Game -> Image
     [stop-when game-over?]
     ))

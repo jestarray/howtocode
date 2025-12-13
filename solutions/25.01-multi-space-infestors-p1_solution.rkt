@@ -261,7 +261,8 @@ A lot of functions will break and new functions will be needed to handle multipl
 ❌menemy-hit-bottom?(modify)
 ❌enemies-hit-bottom?(new)
 ❌mbullet-hit-enemy?(modify)
-❌bullet-vs-enemies(new), plural of (mbullet-hit-enemy?)
+❌mbullet-hit-enemies?(new)
+❌kill-hit-enemies(new)
 ❌spawn-random-enemies(new)
 ❌update-game(modify) hardest/biggest change!
 |#
@@ -316,19 +317,33 @@ A lot of functions will break and new functions will be needed to handle multipl
      ; they're both points, so test their distance
      (< (distance mbullet enemy) 25)]))
 
-; bullet-vs-enemies : (ListOfEnemy MaybeBullet -> ListOfEnemy)
+; mbullet-hit-enemies? : (ListOfEnemy Bullet -> Boolean)
+; produces #true if a bullet hit an enemy
+; note: we can factor out using this if we modify "bullet-vs-enemies" instead
+(check-expect (mbullet-hit-enemies? (list (make-point 40 30) (make-point 10 10)) (make-point 10 10))
+              #true) ; a hit!
+(check-expect (mbullet-hit-enemies? (list (make-point 40 30) (make-point 10 10)) (make-point 60 10))
+              #false) ; not hit
+(define (mbullet-hit-enemies? enemy-lst mbullet)
+  (cond
+    [(empty? enemy-lst) #false]
+    [else
+     (or (mbullet-hit-enemy? mbullet (first enemy-lst))
+         (mbullet-hit-enemies? (rest enemy-lst) mbullet))]))
+
+; kill-hit-enemies : (ListOfEnemy MaybeBullet -> ListOfEnemy)
 ; removes enemies that have been hit from the given list
-(check-expect (bullet-vs-enemies empty (make-point 20 30)) empty)
-(check-expect (bullet-vs-enemies (list (make-point 23 33)) (make-point 20 30)) empty)
-(check-expect (bullet-vs-enemies (list (make-point 100 70) (make-point 21 31)) (make-point 20 30))
+(check-expect (kill-hit-enemies empty (make-point 20 30)) empty)
+(check-expect (kill-hit-enemies (list (make-point 23 33)) (make-point 20 30)) empty)
+(check-expect (kill-hit-enemies (list (make-point 100 70) (make-point 21 31)) (make-point 20 30))
               (list (make-point 100 70)))
-(define (bullet-vs-enemies enemy-lst mbullet)
+(define (kill-hit-enemies enemy-lst mbullet)
   (cond
     [(empty? enemy-lst) empty]
     [else
      (if (mbullet-hit-enemy? mbullet (first enemy-lst))
          (rest enemy-lst)
-         (cons (first enemy-lst) (bullet-vs-enemies (rest enemy-lst) mbullet)))]))
+         (cons (first enemy-lst) (kill-hit-enemies (rest enemy-lst) mbullet)))]))
 
 ; spawn-random-enemies : (Number -> ListOfEnemy)
 ; produces a bunch of enemies in random positions
@@ -390,20 +405,6 @@ A lot of functions will break and new functions will be needed to handle multipl
     [else
      gm]))
 
-; remove-dead-bullet : (ListOfEnemy Bullet -> MaybeBullet)
-; produces a dead bullet if it hit an enemy, otherwise stay the same
-; note: we can factor out using this if we modify "bullet-vs-enemies" instead
-(check-expect (remove-dead-bullet (list (make-point 40 30) (make-point 10 10)) (make-point 10 10))
-              #false) ; a hit!
-(check-expect (remove-dead-bullet (list (make-point 40 30) (make-point 10 10)) (make-point 60 10))
-              (make-point 60 10)) ; not hit
-(define (remove-dead-bullet enemy-lst mbullet)
-  (cond
-    [(empty? enemy-lst) mbullet]
-    [else
-     (if (mbullet-hit-enemy? mbullet (first enemy-lst))
-         #false
-         (remove-dead-bullet (rest enemy-lst) mbullet))]))
 
 (: update-game (Game -> Game))
 ; produces a game with the updated tank, bullet, and enemy movements
@@ -415,7 +416,7 @@ A lot of functions will break and new functions will be needed to handle multipl
 (check-random (update-game shot-hit-game)
               (make-game (update-tank (game-player shot-hit-game))
                          #false
-                         (bullet-vs-enemies (update-all-enemies (game-invader shot-hit-game)) (update-mbullet (game-shot shot-hit-game)))
+                         (kill-hit-enemies (update-all-enemies (game-invader shot-hit-game)) (update-mbullet (game-shot shot-hit-game)))
                          (+ 1 (game-score shot-hit-game))))
 
 (check-expect (update-game miss-shot-game)
@@ -429,16 +430,16 @@ A lot of functions will break and new functions will be needed to handle multipl
   (local
     [(define moved-bullet (update-mbullet (game-shot gm)))
      (define moved-enemies (update-all-enemies (game-invader gm)))
-     (define hitted-enemies
-       (bullet-vs-enemies moved-enemies moved-bullet))
-     (define not-hit-enemy? (= (length hitted-enemies) (length (game-invader gm))))]
+     (define killed-enemies
+       (kill-hit-enemies moved-enemies moved-bullet))
+     (define hit-enemy? (mbullet-hit-enemies? moved-enemies moved-bullet))]
     (make-game
      (update-tank (game-player gm))
-     (if not-hit-enemy? moved-bullet #false)
-     hitted-enemies
-     (if not-hit-enemy?
-         (game-score gm)
-         (add1 (game-score gm))))))
+     (if hit-enemy? #false moved-bullet)
+     killed-enemies
+     (if hit-enemy?
+         (add1 (game-score gm))
+         (game-score gm)))))
 
 ; main : (Game -> Game)
 (define (main gm)

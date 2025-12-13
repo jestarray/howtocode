@@ -62,6 +62,12 @@ Turn all ❌ into ✅ for each step you complete
 ; - (cons Enemy ListOfEnemy)
 ; each enemy is a point, and if they exist in the list, they are alive.
 ; otherwise, they are dead
+(define (list-enemy-temp enemy-lst)
+  (cond
+    [(empty? enemy-lst) ...]
+    [else
+     (... (first enemy-lst)
+          (list-enemy-temp (rest enemy-lst)))]))
 
 ; Bullet is (make-point Number Number)
 
@@ -258,17 +264,17 @@ Turn all ❌ into ✅ for each step you complete
 |#
 
 #|PROBLEM A:
-Carrying on from 12.03 bringing over update-tank, update-menemy, update-mbullet, update-game
-The "distance" function is given to you in this problem
-Ranked from easiest to hardest:
-Finish desinging the functions:
-can-fire-bullet?
-check-game-over?
-menemy-hit-bottom?
-bullet-hit-enemy?
-handle-key
-and finally:
-Adjust the "update-game" function to fullfill its updated purpose
+Carrying on from 25.01, expand space-infestors to behave like the original:
+Spawn enemies in a gridlike fashion,
+Move side to side before moving down,
+
+NOTE: This starter file contains spoilers of what to do.
+Challenge yourself by just copying and pasting 25.01 >:)
+❌update-menemy(modify)
+❌update-all-enemies(modify)
+❌spawn-enemies-grided(new)
+❌enemies-hit-edges?(new)
+❌update-game(modify)
 |#
 
 ; can-fire-bullet? : (MaybeBullet -> Boolean)
@@ -322,19 +328,33 @@ Adjust the "update-game" function to fullfill its updated purpose
      ; they're both points, so test their distance
      (< (distance mbullet enemy) 25)]))
 
-; bullet-vs-enemies : (ListOfEnemy MaybeBullet -> ListOfEnemy)
+; mbullet-hit-enemies? : (ListOfEnemy MaybeBullet -> Boolean)
+; produces #true if a bullet hit an enemy
+; note: we can factor out using this if we modify "bullet-vs-enemies" instead
+(check-expect (mbullet-hit-enemies? (list (make-point 40 30) (make-point 10 10)) (make-point 10 10))
+              #true) ; a hit!
+(check-expect (mbullet-hit-enemies? (list (make-point 40 30) (make-point 10 10)) (make-point 60 10))
+              #false) ; not hit
+(define (mbullet-hit-enemies? enemy-lst mbullet)
+  (cond
+    [(empty? enemy-lst) #false]
+    [else
+     (or (mbullet-hit-enemy? mbullet (first enemy-lst))
+         (mbullet-hit-enemies? (rest enemy-lst) mbullet))]))
+
+; kill-hit-enemies : (ListOfEnemy MaybeBullet -> ListOfEnemy)
 ; removes enemies that have been hit from the given list
-(check-expect (bullet-vs-enemies empty (make-point 20 30)) empty)
-(check-expect (bullet-vs-enemies (list (make-point 23 33)) (make-point 20 30)) empty)
-(check-expect (bullet-vs-enemies (list (make-point 100 70) (make-point 21 31)) (make-point 20 30))
+(check-expect (kill-hit-enemies empty (make-point 20 30)) empty)
+(check-expect (kill-hit-enemies (list (make-point 23 33)) (make-point 20 30)) empty)
+(check-expect (kill-hit-enemies (list (make-point 100 70) (make-point 21 31)) (make-point 20 30))
               (list (make-point 100 70)))
-(define (bullet-vs-enemies enemy-lst mbullet)
+(define (kill-hit-enemies enemy-lst mbullet)
   (cond
     [(empty? enemy-lst) empty]
     [else
      (if (mbullet-hit-enemy? mbullet (first enemy-lst))
          (rest enemy-lst)
-         (cons (first enemy-lst) (bullet-vs-enemies (rest enemy-lst) mbullet)))]))
+         (cons (first enemy-lst) (kill-hit-enemies (rest enemy-lst) mbullet)))]))
 
 ; spawn-random-enemies : (Number -> ListOfEnemy)
 ; produces a bunch of enemies in random positions
@@ -449,17 +469,17 @@ Adjust the "update-game" function to fullfill its updated purpose
        (update-all-enemies
         (game-invader gm)
         (make-point new-invader-vel-x y-vel)))
-     (define hitted-enemies
-       (bullet-vs-enemies moved-enemies moved-bullet))
-     (define not-hit-enemy? (= (length hitted-enemies) (length (game-invader gm))))]
+     (define killed-enemies
+       (kill-hit-enemies moved-enemies moved-bullet))
+     (define hit-enemy? (mbullet-hit-enemies? moved-enemies moved-bullet))]
     (make-game
      (update-tank (game-player gm))
-     (if not-hit-enemy? moved-bullet #false)
-     hitted-enemies
+     (if hit-enemy? #false moved-bullet)
+     killed-enemies
      new-invader-vel-x
-     (if not-hit-enemy? 
-         (game-score gm)
-         (add1 (game-score gm))))))
+     (if hit-enemy? 
+         (add1 (game-score gm))
+         (game-score gm)))))
 
 ; main : (Game -> Game)
 (define (main gm)
@@ -471,10 +491,10 @@ Adjust the "update-game" function to fullfill its updated purpose
     [stop-when check-game-over?] ; Game -> Boolean
     ))
 
-; start-game : (Number -> Game)
+(: start-game (Number -> Game))
 ; runs the game, spawning an random anount of enemies
-(define (start-game n)
-  (main (make-game centered-tank #false (spawn-random-enemies n) 1 0)))
+(define (start-game amount-enemies)
+  (main (make-game centered-tank #false (spawn-random-enemies amount-enemies) 1 0)))
 
 ; start-game-grid (Number Number -> Game)
 ; runs the game with enemies in a gridlike fashion

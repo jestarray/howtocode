@@ -317,7 +317,7 @@ A lot of functions will break and new functions will be needed to handle multipl
      ; they're both points, so test their distance
      (< (distance mbullet enemy) 25)]))
 
-; mbullet-hit-enemies? : (ListOfEnemy Bullet -> Boolean)
+; mbullet-hit-enemies? : (ListOfEnemy MaybeBullet -> Boolean)
 ; produces #true if a bullet hit an enemy
 ; note: we can factor out using this if we modify "bullet-vs-enemies" instead
 (check-expect (mbullet-hit-enemies? (list (make-point 40 30) (make-point 10 10)) (make-point 10 10))

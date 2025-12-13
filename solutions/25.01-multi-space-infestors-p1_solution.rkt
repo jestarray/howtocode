@@ -62,6 +62,12 @@ Turn all ❌ into ✅ for each step you complete
 ; - (cons Enemy ListOfEnemy)
 ; each enemy is a point, and if they exist in the list, they are alive.
 ; otherwise, they are dead
+(define (list-enemy-temp enemy-lst)
+  (cond
+    [(empty? enemy-lst) ...]
+    [else
+     (... (first enemy-lst)
+          (list-enemy-temp (rest enemy-lst)))]))
 
 ; Bullet is (make-point Number Number)
 
@@ -248,6 +254,7 @@ Think about the reprocussions of this data representation change.
 A lot of functions will break and new functions will be needed to handle multiple enemies
 ❌draw-minvader(modify)
 ❌draw-all-invaders(new)
+❌render(modify to draw all invaders)
 ❌update-menemy(modify)
 ❌update-all-enemies(new)
 ❌check-game-over?(modify)
@@ -385,19 +392,18 @@ A lot of functions will break and new functions will be needed to handle multipl
 
 ; remove-dead-bullet : (ListOfEnemy Bullet -> MaybeBullet)
 ; produces a dead bullet if it hit an enemy, otherwise stay the same
-; note: we can factor out using this
-
+; note: we can factor out using this if we modify "bullet-vs-enemies" instead
 (check-expect (remove-dead-bullet (list (make-point 40 30) (make-point 10 10)) (make-point 10 10))
               #false) ; a hit!
 (check-expect (remove-dead-bullet (list (make-point 40 30) (make-point 10 10)) (make-point 60 10))
               (make-point 60 10)) ; not hit
-(define (remove-dead-bullet enemy-ls mbullet)
+(define (remove-dead-bullet enemy-lst mbullet)
   (cond
-    [(empty? enemy-ls) mbullet]
+    [(empty? enemy-lst) mbullet]
     [else
-     (if (mbullet-hit-enemy? mbullet (first enemy-ls))
+     (if (mbullet-hit-enemy? mbullet (first enemy-lst))
          #false
-         (remove-dead-bullet (rest enemy-ls) mbullet))]))
+         (remove-dead-bullet (rest enemy-lst) mbullet))]))
 
 (: update-game (Game -> Game))
 ; produces a game with the updated tank, bullet, and enemy movements

@@ -242,17 +242,21 @@ Turn all ❌ into ✅ for each step you complete
 |#
 
 #|PROBLEM A:
-Carrying on from 12.03 bringing over update-tank, update-menemy, update-mbullet, update-game
-The "distance" function is given to you in this problem
-Ranked from easiest to hardest:
-Finish desinging the functions:
-can-fire-bullet?
-check-game-over?
-menemy-hit-bottom?
-bullet-hit-enemy?
-handle-key
-and finally:
-Adjust the "update-game" function to fullfill its updated purpose
+Carrying on from 12.04, a game with a single enemy, expand the code to handle more multiple enemies!
+To do this, "game-invader" will need to be changed to a "ListOf Enemy" instead of just MaybeEnemy
+Think about the reprocussions of this data representation change.
+A lot of functions will break and new functions will be needed to handle multiple enemies
+❌draw-minvader(modify)
+❌draw-all-invaders(new)
+❌update-menemy(modify)
+❌update-all-enemies(new)
+❌check-game-over?(modify)
+❌menemy-hit-bottom?(modify)
+❌enemies-hit-bottom?(new)
+❌mbullet-hit-enemy?(modify)
+❌bullet-vs-enemies(new), plural of (mbullet-hit-enemy?)
+❌spawn-random-enemies(new)
+❌update-game(modify) hardest/biggest change!
 |#
 
 ; can-fire-bullet? : (MaybeBullet -> Boolean)

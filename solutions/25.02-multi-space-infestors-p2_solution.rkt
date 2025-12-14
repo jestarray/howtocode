@@ -223,6 +223,15 @@ Challenge yourself by just copying and pasting 25.01 >:)
    (+ (point-x en) (point-x vel))
    (+ (point-y en) (point-y vel))))
 
+(: update-all-enemies ([ListOf Point] Point -> [ListOf Point]))
+; moves all enemies in the given list by the given velocity
+(define (update-all-enemies enemy-lst vel)
+  (cond
+    [(empty? enemy-lst) empty]
+    [else
+     (cons (update-menemy (first enemy-lst) vel)
+           (update-all-enemies (rest enemy-lst) vel))]))
+
 (: enemies-hit-edges? ([ListOf Point] -> Boolean))
 ; produces #true if any enemies in the given list touches the edges
 (check-expect (enemies-hit-edges? (list (make-point (add1 WIDTH) 0))) #true)
@@ -238,15 +247,6 @@ Challenge yourself by just copying and pasting 25.01 >:)
        (or
         (< enemy-x 0) (> (+ enemy-x ENEMY-IMG-WIDTH) WIDTH)
         (enemies-hit-edges? (rest enemy-lst))))]))
-
-(: update-all-enemies ([ListOf Point] Point -> [ListOf Point]))
-; moves all enemies in the given list by the given velocity
-(define (update-all-enemies enemy-lst vel)
-  (cond
-    [(empty? enemy-lst) empty]
-    [else
-     (cons (update-menemy (first enemy-lst) vel)
-           (update-all-enemies (rest enemy-lst) vel))]))
 
 ; update-mbullet : (MaybeBullet -> MaybeBullet)
 ; moves the bullets y position if it is alive by BULLET-SPEED

@@ -111,6 +111,30 @@ Turn all ❌ into ✅ for each step you complete
    (list-enemy-temp (game-invader gm))
    (game-score gm)))
 
+; =================
+#| Functions:
+1. Signature, purpose, stub ❌
+2. Examples (aka check-expect/tests, elaborate the concrete) ❌
+  2B. if the function consumes a list, make sure a list of 2 or longer is tested❌
+3. Template(from data)?❌
+3. Code body ❌
+4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+|#
+
+#|PROBLEM A:
+Carrying on from 25.01, expand space-infestors to behave like the original:
+Spawn enemies in a gridlike fashion,
+Move side to side before moving down,
+
+NOTE: This starter file contains spoilers of what to do.
+Challenge yourself by just copying and pasting 25.01 >:)
+❌update-menemy(modify)
+❌update-all-enemies(modify)
+❌spawn-enemies-grided(new)
+❌enemies-hit-edges?(new)
+❌update-game(modify)
+|#
+
 (: draw-minvader (Point %Image -> %Image))
 ; draws the invader at its given coordinates if it is alive on the given image(bg)
 ; otherwise produce the given image(bg)
@@ -252,30 +276,6 @@ Turn all ❌ into ✅ for each step you complete
    (+
     (expt (- (point-x p2) (point-x p1)) 2)
     (expt (- (point-y p2) (point-y p1)) 2))))
-
-; =================
-#| Functions:
-1. Signature, purpose, stub ❌
-2. Examples (aka check-expect/tests, elaborate the concrete) ❌
-  2B. if the function consumes a list, make sure a list of 2 or longer is tested❌
-3. Template(from data)?❌
-3. Code body ❌
-4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
-|#
-
-#|PROBLEM A:
-Carrying on from 25.01, expand space-infestors to behave like the original:
-Spawn enemies in a gridlike fashion,
-Move side to side before moving down,
-
-NOTE: This starter file contains spoilers of what to do.
-Challenge yourself by just copying and pasting 25.01 >:)
-❌update-menemy(modify)
-❌update-all-enemies(modify)
-❌spawn-enemies-grided(new)
-❌enemies-hit-edges?(new)
-❌update-game(modify)
-|#
 
 ; can-fire-bullet? : (MaybeBullet -> Boolean)
 ; produces #true if the bullet is dead or hit the top of the canvas

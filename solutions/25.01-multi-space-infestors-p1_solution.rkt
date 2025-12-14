@@ -130,9 +130,9 @@ A lot of functions will break and new functions will be needed to handle multipl
 ❌render(modify to draw all invaders)
 ❌update-menemy(modify)
 ❌update-all-enemies(new)
-❌check-game-over?(modify)
 ❌menemy-hit-bottom?(modify)
 ❌enemies-hit-bottom?(new)
+❌check-game-over?(modify)
 ❌mbullet-hit-enemy?(modify)
 ❌mbullet-hit-enemies?(new)
 ❌kill-hit-enemies(new)
@@ -277,14 +277,6 @@ A lot of functions will break and new functions will be needed to handle multipl
   (or (boolean? bull)
       (< (point-y bull) 0)))
 
-(: check-game-over? (Game -> Boolean))
-; produces #true if the enemy reaches the bottom of the screen
-(check-expect (check-game-over? (make-game centered-tank #false empty 0)) #false)
-(check-expect
- (check-game-over? (make-game centered-tank #false (list (make-point 50 (+ HEIGHT 1))) 0)) #true)
-(define (check-game-over? gm)
-  (enemies-hit-bottom? (game-invader gm)))
-
 (: menemy-hit-bottom? (Point -> Boolean))
 ; produces #true if the given invaders y position is > HEIGHT of the game
 (check-expect (menemy-hit-bottom? (make-point 20 50)) #false)
@@ -304,6 +296,13 @@ A lot of functions will break and new functions will be needed to handle multipl
      (or (menemy-hit-bottom? (first enemy-lst))
          (enemies-hit-bottom? (rest enemy-lst)))]))
 
+(: check-game-over? (Game -> Boolean))
+; produces #true if the enemy reaches the bottom of the screen
+(check-expect (check-game-over? (make-game centered-tank #false empty 0)) #false)
+(check-expect
+ (check-game-over? (make-game centered-tank #false (list (make-point 50 (+ HEIGHT 1))) 0)) #true)
+(define (check-game-over? gm)
+  (enemies-hit-bottom? (game-invader gm)))
 
 ; mbullet-hit-enemy? : (MaybeBullet Enemy -> Boolean)
 ; produces #true if the the MaybeBullet and Enemy touch

@@ -368,6 +368,13 @@ Challenge yourself by starting off with 25.01 solution!
 
 (: spawn-enemies-grid (Number Number -> [ListOf Point]))
 ; produces a list of enemies positioned in a grid like manner given rows & columns
+; note: the origin of enemies is their top left corners
+(check-expect (spawn-enemies-grid 2 2)
+              (list 
+                 (make-point (* 0 ENEMY-IMG-WIDTH) (* 0 ENEMY-IMG-HEIGHT))
+                 (make-point (* 1 ENEMY-IMG-WIDTH) (* 0 ENEMY-IMG-HEIGHT))
+                 (make-point (* 0 ENEMY-IMG-WIDTH) (* 1 ENEMY-IMG-HEIGHT))
+                 (make-point (* 1 ENEMY-IMG-WIDTH) (* 1 ENEMY-IMG-HEIGHT))))
 (define (spawn-enemies-grid rows columns)
   (local
     [

@@ -356,6 +356,7 @@ Challenge yourself by starting off with 25.01 solution!
 
 (: spawn-enemies-grid (Number Number -> [ListOf Point]))
 ; produces a list of enemies positioned in a grid like manner given rows & columns
+; note: the origin of enemies is their top left corners
 (define (spawn-enemies-grid rows columns) empty)
 
 ; handle-key : (Game KeyEvent -> Game)

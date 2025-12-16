@@ -84,12 +84,12 @@ Turn all ❌ into ✅ for each step you complete
      (... (point-x bull) (point-y bull))]))
 
 (define-struct game [player shot invader invader-vel-x score])
-; Game is (make-game Tank MaybeBullet ListOfEnemy Number)
+; Game is (make-game Tank MaybeBullet ListOfEnemy Number Number)
 ; interp. represents the game state
 ; player is the tank that is controlled by the user
 ; shot is the bullet that might be fired
 ; invader is the list of enemies coming down at us
-; invader-vel-x is the x-direction the invader is traveling. -1 means left, 1 means right
+; invader-vel-x is the x-direction the invaders are traveling. -1 means left, 1 means right
 ; score is how many enemies we have shot down
 ; game-player : (Game -> Tank)
 ; game-shot : (Game -> MaybeBullet)
@@ -218,12 +218,13 @@ Making the invaders move sideways requires the Game to have a "invader-vel-x", w
    (+ (tank-x tk) (tank-vel-x tk))
    (tank-vel-x tk)))
 
-(: update-menemy (Point Point -> Point))
-; moves the enemy y position by the given velocity
+; moves the enemy y position by ENEMY-SPEED
+(check-expect (update-menemy (make-point 40 30))
+              (make-point 40 (+ 30 ENEMY-SPEED)))
 (define (update-menemy en)
   (make-point
    (point-x en)
-   (point-y en)))
+   (+ (point-y en) ENEMY-SPEED)))
 
 (: update-all-enemies ([ListOf Point] -> [ListOf Point]))
 ; moves all enemies in the given list by the given velocity

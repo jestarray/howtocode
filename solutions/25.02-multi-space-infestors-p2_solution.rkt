@@ -84,12 +84,12 @@ Turn all ❌ into ✅ for each step you complete
      (... (point-x bull) (point-y bull))]))
 
 (define-struct game [player shot invader invader-vel-x score])
-; Game is (make-game Tank MaybeBullet ListOfEnemy Number)
+; Game is (make-game Tank MaybeBullet ListOfEnemy Number Number)
 ; interp. represents the game state
 ; player is the tank that is controlled by the user
 ; shot is the bullet that might be fired
 ; invader is the list of enemies coming down at us
-; invader-vel-x is the x-direction the invader is traveling. -1 means left, 1 means right
+; invader-vel-x is the x-direction the invaders are traveling. -1 means left, 1 means right
 ; score is how many enemies we have shot down
 ; game-player : (Game -> Tank)
 ; game-shot : (Game -> MaybeBullet)

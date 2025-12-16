@@ -218,6 +218,7 @@ Making the invaders move sideways requires the Game to have a "invader-vel-x", w
    (+ (tank-x tk) (tank-vel-x tk))
    (tank-vel-x tk)))
 
+(: update-menemy (Point Point -> Point))
 ; moves the enemy y position by ENEMY-SPEED
 (check-expect (update-menemy (make-point 40 30))
               (make-point 40 (+ 30 ENEMY-SPEED)))

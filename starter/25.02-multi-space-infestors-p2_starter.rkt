@@ -127,7 +127,7 @@ Spawn enemies in a gridlike fashion,
 Move side to side before moving down,
 
 NOTE: This starter file contains spoilers of what to do.
-Challenge yourself by just copying and pasting 25.01 >:)
+Challenge yourself by starting off with 25.01 solution!
 ❌update-menemy(modify)
 ❌update-all-enemies(modify)
 ❌spawn-enemies-grided(new)

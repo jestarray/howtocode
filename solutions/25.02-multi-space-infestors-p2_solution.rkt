@@ -89,6 +89,7 @@ Turn all ❌ into ✅ for each step you complete
 ; player is the tank that is controlled by the user
 ; shot is the bullet that might be fired
 ; invader is the list of enemies coming down at us
+; invader-vel-x is the x-direction the invader is traveling. -1 means left, 1 means right
 ; score is how many enemies we have shot down
 ; game-player : (Game -> Tank)
 ; game-shot : (Game -> MaybeBullet)
@@ -128,6 +129,7 @@ Move side to side before moving down,
 
 NOTE: This starter file contains spoilers of what to do.
 Challenge yourself by starting off with 25.01 solution!
+Making the invaders move sideways requires the Game to have a "invader-vel-x", which has been done for you.
 ❌update-menemy(modify)
 ❌update-all-enemies(modify)
 ❌spawn-enemies-grided(new)

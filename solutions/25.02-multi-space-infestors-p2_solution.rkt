@@ -382,12 +382,12 @@ Making the invaders move sideways requires the Game to have a "invader-vel-x", w
     [
      (define (spawn cx cy)
        (cond
-         [(>= cy columns)
+         [(>= cy rows)
           empty]
          [else
           (cons
            (make-point (* cx ENEMY-IMG-WIDTH) (* cy ENEMY-IMG-HEIGHT))
-           (if (>= cx (sub1 rows))
+           (if (>= cx (sub1 columns))
                (spawn 0 (+ cy 1))
                (spawn (+ cx 1) cy)))]))]
     (spawn 0 0)))

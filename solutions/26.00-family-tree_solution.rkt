@@ -43,8 +43,8 @@
     [(false? fam-tree) ...]
     [else
      (...
-      (person-mother fam-tree)
-      (person-father fam-tree)
+      (familytree-temp (person-mother fam-tree))
+      (familytree-temp (person-father fam-tree))
       (person-name fam-tree)
       (person-birth-year fam-tree)
       (person-eyes fam-tree))]))
@@ -165,3 +165,14 @@ that produces #true ONLY if the ANCESTORS have blue-eyes(exclude self)
      (or
       (blue-eyed-linage? (person-father fam-tree))
       (blue-eyed-linage? (person-mother fam-tree)))]))
+
+#|note on code clarity:(optional refactor):
+ONLY AFTER GRADING SUBMISSION
+
+Instead of using #false for representing no-parent,
+replace it with the following empty struct
+(define-struct no-parent [])
+This makes it so that the cond branches read more nicely
+[(false? fam-tree) ...] ; need to remember what false means or lookitup
+[(no-parent? fam-tree) ...] ; built right into the name
+|#

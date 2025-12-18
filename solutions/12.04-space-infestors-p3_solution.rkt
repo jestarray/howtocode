@@ -231,8 +231,8 @@ Turn all ❌ into ✅ for each step you complete
 2. Examples (aka check-expect/tests, elaborate the concrete) ❌
   2B. if the function consumes a list, make sure a list of 2 or longer is tested❌
 3. Template(from data)?❌
-3. Code body ❌
-4. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
+4. Code body ❌
+5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
 #|PROBLEM A:

@@ -74,6 +74,16 @@ Functions:
 Given the above family tree chart, model it with code using "make-person"
 |#
 
+; oldest generation
+(define carl ...)
+(define bettina ...)
+; middle generation
+(define adam ...)
+(define dave ...)
+(define eva ...)
+(define fred ...)
+; youngest generation
+(define gus ...)
 
 #|PROBLEM B:
 Design a function "blue-eyed-linage?"

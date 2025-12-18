@@ -87,7 +87,7 @@ Given the above family tree chart, model it with code using "make-person"
 
 #|PROBLEM B:
 Design a function "blue-eyed-linage?"
-that produces #true if the given family tree is of blue-eyed decent
+that produces #true if YOU or ANYONE else in the given FamilyTree has blue eyes
 |#
 (: blue-eyed-linage? (FamilyTree -> Boolean))
 ; produces #true if YOU or ANYONE else in the given FamilyTree has blue eyes

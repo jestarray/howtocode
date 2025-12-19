@@ -58,6 +58,11 @@ Functions:
 ; interp.
 ; eyes is the color of their eyes
 
+#|PROBLEM ZERO:
+Write a the function template "familytree-temp" that consumes a FamilyTree
+Use the template to solve Problems A to E
+|#
+
 ; familytree-temp : (FamilyTree -> ???)
 (define (familytree-temp fam-tree)
   (cond

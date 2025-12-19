@@ -58,17 +58,11 @@ Functions:
 ; interp.
 ; eyes is the color of their eyes
 
+#|PROBLEM ZERO:
+Write a the function template "familytree-temp" that consumes a FamilyTree
+Use the template to solve Problems A to E
+|#
 ; familytree-temp : (FamilyTree -> ???)
-(define (familytree-temp fam-tree)
-  (cond
-    [(false? fam-tree) ...]
-    [else
-     (...
-      (familytree-temp (person-mother fam-tree))
-      (familytree-temp (person-father fam-tree))
-      (person-name fam-tree)
-      (person-birth-year fam-tree)
-      (person-eyes fam-tree))]))
 
 #|PROBLEM A:
 Given the above family tree chart, model it with code using "make-person"

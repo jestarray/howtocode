@@ -45,7 +45,7 @@ Functions:
 
 ; An FamilyTree(FT) is one of:
 ; – #false
-; – (make-person FamilyTree FamilyTree String N String)
+; – (make-person String Number String FamilyTree FamilyTree)
 ; interp. #false means no parent
 (define FamilyTree
   (signature
@@ -53,8 +53,8 @@ Functions:
     False
     PersonSig)))
 
-(define-struct person [mother father name birth-year eyes])
-(define PersonSig (signature (PersonOf FamilyTree FamilyTree String Number String)))
+(define-struct person [name birth-year eyes mother father])
+(define PersonSig (signature (PersonOf String Number String FamilyTree FamilyTree)))
 ; interp.
 ; eyes is the color of their eyes
 

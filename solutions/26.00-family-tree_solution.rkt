@@ -45,7 +45,7 @@ Functions:
 
 ; An FamilyTree(FT) is one of:
 ; – #false
-; – (make-person FamilyTree FamilyTree String N String)
+; – (make-person String Number String FamilyTree FamilyTree)
 ; interp. #false means no parent
 (define FamilyTree
   (signature
@@ -53,8 +53,8 @@ Functions:
     False
     PersonSig)))
 
-(define-struct person [mother father name birth-year eyes])
-(define PersonSig (signature (PersonOf FamilyTree FamilyTree String Number String)))
+(define-struct person [name birth-year eyes mother father])
+(define PersonSig (signature (PersonOf String Number String FamilyTree FamilyTree)))
 ; interp.
 ; eyes is the color of their eyes
 
@@ -62,33 +62,32 @@ Functions:
 Write a the function template "familytree-temp" that consumes a FamilyTree
 Use the template to solve Problems A to E
 |#
-
 ; familytree-temp : (FamilyTree -> ???)
 (define (familytree-temp fam-tree)
   (cond
     [(false? fam-tree) ...]
     [else
      (...
-      (familytree-temp (person-mother fam-tree))
-      (familytree-temp (person-father fam-tree))
       (person-name fam-tree)
       (person-birth-year fam-tree)
-      (person-eyes fam-tree))]))
+      (person-eyes fam-tree)
+      (familytree-temp (person-mother fam-tree))
+      (familytree-temp (person-father fam-tree)))]))
 
 #|PROBLEM A:
 Given the above family tree chart, model it with code using "make-person"
 |#
 
 ; oldest generation
-(define carl (make-person #false #false "Carl" 1938 "green"))
-(define bettina (make-person #false #false "Bettina" 1938 "green"))
+(define carl (make-person "Carl" 1938 "green" #false #false))
+(define bettina (make-person "Bettina" 1938 "green" #false #false))
 ; middle generation
-(define adam (make-person bettina carl "Adam" 1962 "red"))
-(define dave (make-person bettina carl "Dave" 1962 "black"))
-(define eva (make-person bettina carl "Eva" 1977 "blue"))
-(define fred (make-person #false #false "Fred" 1978 "pink"))
+(define adam (make-person "Adam" 1962 "red" bettina carl))
+(define dave (make-person "Dave" 1962 "black" bettina carl))
+(define eva (make-person "Eva" 1977 "blue" bettina carl))
+(define fred (make-person "Fred" 1978 "pink" #false #false))
 ; youngest generation
-(define gus (make-person eva fred "Gus" 2000 "brown"))
+(define gus (make-person "Gus" 2000 "brown" eva fred))
 
 #|PROBLEM B:
 Design a function "blue-eyed-linage?"

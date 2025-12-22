@@ -106,14 +106,14 @@ Hint Use built-in "append" to concatenate the lists resulting from the recursive
 |#
 
 
-#|PROBLEM E:
+#|PROBLEM F:
 Design a function "has-blue-eyed-ancestor?"
 that produces #true ONLY if the ANCESTORS have blue-eyes(exclude self)
 |#
-(: has-blue-eyed-ancestor? (FamilyTree -> Boolean))
-(check-expect (has-blue-eyed-ancestor? eva) #false)
-(check-expect (has-blue-eyed-ancestor? gus) #true)
-(define (has-blue-eyed-ancestor? fam-tree) ...)
+; (: has-blue-eyed-ancestor? (FamilyTree -> Boolean))
+; (check-expect (has-blue-eyed-ancestor? eva) #false)
+; (check-expect (has-blue-eyed-ancestor? gus) #true)
+; (define (has-blue-eyed-ancestor? fam-tree) #false)
 
 #|note on code clarity:(optional refactor):
 ONLY AFTER GRADING SUBMISSION

@@ -175,7 +175,7 @@ Hint Use built-in "append" to concatenate the lists resulting from the recursive
       (everyones-eye-colors (person-mother fam-tree))
       (everyones-eye-colors (person-father fam-tree)))]))
 
-#|PROBLEM E:
+#|PROBLEM F:
 Design a function "has-blue-eyed-ancestor?"
 that produces #true ONLY if the ANCESTORS have blue-eyes(exclude self)
 |#

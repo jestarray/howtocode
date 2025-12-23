@@ -21,6 +21,33 @@ Functions:
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; A BinaryTree is one of:
+; – #false
+; – (make-node Number String BinaryTree)
+(define BinaryTree
+  (signature
+   (mixed
+    False
+    NodeSig)))
+
+(define-struct node [key name left right])
+(define NodeSig (signature (NodeOf Number String BinaryTree BinaryTree)))
+#|PROBLEM A:
+Write the template for "BinaryTree".
+It will come in useful to solve Problems C-F
+|#
+
+; binarytree-temp : (BinaryTree -> ???)
+(define (binarytree-temp btree)
+  (cond
+    [(false? btree) ...]
+    [else
+     (...
+      (node-key btree)
+      (node-name btree)
+      (binarytree-temp (node-left btree))
+      (binarytree-temp (node-right btree)))]))
+
 #|
 note: [key;name]
 BinaryTree drawing(A):
@@ -33,19 +60,7 @@ BinaryTree drawing(A):
        2;cy    7;ed                   99;mo
 |#
 
-; A BinaryTree is one of:
-; – #false
-; – (make-node Number String BinaryTree)
-(define BinaryTree
-  (signature
-   (mixed
-    False
-    NodeSig)))
-
-(define-struct node [key name left right])
-(define NodeSig (signature (NodeOf Number String BinaryTree BinaryTree)))
-
-#|PROBLEM A:
+#|PROBLEM B:
 Given the above drawing of a BinaryTree(A), turn it into code
 with "make-node"
 |#
@@ -63,21 +78,6 @@ with "make-node"
                                    #false
                                    (make-node 99 "mo" #false #false)))))
 
-#|PROBLEM B:
-Write the template for "BinaryTree".
-It will come in useful to solve Problems C-F
-|#
-
-; binarytree-temp : (BinaryTree -> ???)
-(define (binarytree-temp btree)
-  (cond
-    [(false? btree) ...]
-    [else
-     (...
-      (node-key btree)
-      (node-name btree)
-      (binarytree-temp (node-left btree))
-      (binarytree-temp (node-right btree)))]))
 
 #|PROBLEM C:
 Design a function "contains-bt?" which consumes a "BinaryTree"

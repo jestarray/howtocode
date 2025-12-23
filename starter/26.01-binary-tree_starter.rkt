@@ -8,29 +8,17 @@ Turn all ❌ into ✅ for each step you complete
 
 1. Data Description✅
    1B. if using define-struct, write all accessor signatures✅
-2. Interpretation✅
-3. Data Examples✅
-4. A function template that processes this data✅
+2. Interpretation❌
+3. Data Examples❌
+4. A function template that processes this data❌
 
 Functions:
-1. Signature, purpose, stub ✅
-2. Examples (aka check-expect/tests, elaborate the concrete) ✅
-  2B. if the function consumes a list, make sure a list of 2 or longer is tested✅
-3. Template(from data)?✅
-4. Code body ✅
-5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
-|#
-
-#|
-note: [key;name]
-BinaryTree drawing(A):
-                      12;an
-                     /     \
-                45;li       4;vy
-               /           /    \
-          23;bob       66;zu     31;he
-          /    \                      \
-       2;cy    7;ed                   99;mo
+1. Signature, purpose, stub ❌
+2. Examples (aka check-expect/tests, elaborate the concrete) ❌
+  2B. if the function consumes a list, make sure a list of 2 or longer is tested❌
+3. Template(from data)?❌
+4. Code body ❌
+5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
 ; A BinaryTree is one of:
@@ -44,20 +32,33 @@ BinaryTree drawing(A):
 
 (define-struct node [key name left right])
 (define NodeSig (signature (NodeOf Number String BinaryTree BinaryTree)))
-
 #|PROBLEM A:
-Given the above drawing of a BinaryTree(A), turn it into code
-with "make-node"
-|#
-
-(define TREEA ...)
-
-#|PROBLEM B:
 Write the template for "BinaryTree".
 It will come in useful to solve Problems C-F
 |#
 
 ; binarytree-temp : (BinaryTree -> ???)
+; TODO
+
+
+#|
+note: [key;name]
+BinaryTree drawing(A):
+                      12;an
+                     /     \
+                45;li       4;vy
+               /           /    \
+          23;bob       66;zu     31;he
+          /    \                      \
+       2;cy    7;ed                   99;mo
+|#
+
+#|PROBLEM B:
+Given the above drawing of a BinaryTree(A), turn it into code
+with "make-node"
+|#
+
+;(define TREEA ...)
 
 #|PROBLEM C:
 Design a function "contains-bt?" which consumes a "BinaryTree"
@@ -116,8 +117,7 @@ the numbers on the RIGHTside of each node is greater(>) than the parent
 Given the above drawing of a BinarySEARCHTree(B), turn it into code
 with "make-node"
 |#
-(define TREE-SORTED
-  ...)
+;(define TREE-SORTED ...)
 
 #|PROBLEM G:
 ; Design "lookup-bst" The function consumes a Number and a BinarySearchTree.
@@ -157,5 +157,4 @@ produces a BST by repeatedly applying "create-bst"
    (list 63 "an")))
 
 ;(: create-bst-from-list ([ListOf [ListOf (mixed Number String)]] -> BinarySearchTree))
-(check-expect (create-bst-from-list records)
-              TREE-SORTED)
+; (check-expect (create-bst-from-list records) TREE-SORTED)

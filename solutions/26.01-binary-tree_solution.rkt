@@ -151,7 +151,7 @@ Hint Use append, which concatenates lists like thus:
       (in-order (node-right btree)))]))
 
 #|
-BinarySEARCHTrees are a variant of BinaryTree but with sorted numbers
+BinarySEARCHTrees are a variant of BinaryTree BUT with a strict sorting order
 note: [key;name]
 BinarySEARCHTree drawing(B):
 

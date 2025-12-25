@@ -34,7 +34,7 @@ Functions:
 (define NodeSig (signature (NodeOf Number String BinaryTree BinaryTree)))
 #|PROBLEM A:
 Write the template for "BinaryTree".
-It will come in useful to solve Problems C-F
+It will come in useful to solve Problems C through I
 |#
 
 ; binarytree-temp : (BinaryTree -> ???)

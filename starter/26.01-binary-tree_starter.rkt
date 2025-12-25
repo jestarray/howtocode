@@ -24,6 +24,7 @@ Functions:
 ; A BinaryTree is one of:
 ; – #false
 ; – (make-node Number String BinaryTree BinaryTree)
+; interp. #false marks the "empty BinaryTree" aka none
 (define BinaryTree
   (signature
    (mixed

@@ -23,7 +23,7 @@ Functions:
 
 ; A BinaryTree is one of:
 ; – #false
-; – (make-node Number String BinaryTree)
+; – (make-node Number String BinaryTree BinaryTree)
 (define BinaryTree
   (signature
    (mixed

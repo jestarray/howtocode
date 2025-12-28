@@ -107,18 +107,19 @@ whether a given number occurs in the given BinaryTree
 #|PROBLEM D:
 Design "search-bt"
 The function consumes a number "num" and a "BinaryTree"
-If the tree contains a node structure whose key is equal to "n",
+If the tree contains a node structure whose key is equal to "num",
 the function produces the value of the name field in that node.
 Otherwise, the function produces #false.
 |#
 (: search-bt (Number BinaryTree -> (mixed String Boolean))) ;StringOrBoolean
+; produces the given name of the node if found, otherwise produces #false
 (check-expect (search-bt 0 #false) #false)
 (check-expect (search-bt 0 TREEA) #false)
 (check-expect (search-bt 99 TREEA) "mo") ; RR
 (check-expect (search-bt 2 TREEA) "cy") ; LL
 (check-expect (search-bt 7 TREEA) "ed") ; LR
 (check-expect (search-bt 66 TREEA) "zu") ; RL
-
+#;
 (define (search-bt num btree)
   (cond
     [(false? btree) #false]
@@ -133,11 +134,23 @@ Otherwise, the function produces #false.
            left-search
            right-search))]))
 
+
+(define (search-bt num btree)
+  (cond
+    [(false? btree) #false]
+    [else
+     (if (= (node-key btree) num)
+         (node-name btree)
+         (if (string? (search-bt num (node-left btree)))
+             (search-bt num (node-left btree))
+             (search-bt num (node-right btree)))
+         )]))
+
 #|PROBLEM E:
-Design the function inorder. It consumes a BinaryTree and
-produces the sequence of all the ssn numbers in the tree as they show up
+Design the function in-order. It consumes a BinaryTree and
+produces the sequence of all the numbers in the tree as they show up
 from left to right when looking at a tree drawing above
-Hint Use append, which concatenates lists like thus:
+Hint Use append, which concatenates lists
 |#
 (: in-order (BinaryTree -> [ListOf Number]))
 (check-expect (in-order TREEA) (list 2 23 7 45 12 66 4 31 99))
@@ -197,17 +210,19 @@ with "make-node"
                                    (make-node 99 "mo" #false #false)))))
 
 #|PROBLEM G:
-; Design "lookup-bst" The function consumes a Number and a BinarySearchTree.
+; Design "lookup-bst" The function consumes a BinarySearchTree and a Number.
 If the tree contains a node whose "key" field is n,
 the function produces the value of the name field in that node.
 Otherwise, the function produces #false
-The function organization must make use of the the BinearySearchTree invariant
+The function organization must make use of the the BinarySearchTree invariant
 so that the function performs as few comparisons as necessary.
 you are NOT allowed to use "search-bt", as the solution is different
 |#
 
 (: lookup-bst (BinarySearchTree Number -> (mixed String False)))
 (check-expect (lookup-bst TREE-SORTED -1) #false)
+(check-expect (lookup-bst TREE-SORTED 29) "li") ; L
+(check-expect (lookup-bst TREE-SORTED 89) "vy") ; R
 (check-expect (lookup-bst TREE-SORTED 99) "mo") ;RR
 (check-expect (lookup-bst TREE-SORTED 10) "cy") ;LL
 (check-expect (lookup-bst TREE-SORTED 24) "ed") ;LR
@@ -224,16 +239,36 @@ you are NOT allowed to use "search-bt", as the solution is different
      (lookup-bst (node-right btree) num)]))
 
 #|PROBLEM H:
-Design the function create-bst.
+Design the function "create-bst"
 It consumes a BinarySearchTree, a number, and a string.
 It produces a BST that is just like the given BinarySearchTree
-and that in place of one NONE subtree contains the node structure
-Use it to insert a number into a sorted BinarySearchTree
+and that in place of one #false subtree contains the node structure.
+Essentially inserting the given  Number into the CORRECT open slot of a BinarySearchTree
 |#
 
 (: create-bst (BinarySearchTree Number String -> BinarySearchTree))
-; inserts the given number&Symbol at the correct spot in the BinarySearchTree
-(check-expect (create-bst #false 9 "hy") (make-node 7 "hy" #false #false))
+; inserts the given number and string in the correct spot of the given BinarySearchTree
+(check-expect (create-bst #false 63 "an")
+              (make-node 63 "an" #false #false))
+(check-expect (create-bst (make-node 63 "an" #false #false) 89 "vy") ;inserting right
+              (make-node 63 "an"
+                         #false
+                         (make-node 89 "vy" #false #false)))
+(check-expect (create-bst (make-node 63 "an"
+                                     #false
+                                     (make-node 89 "vy" #false #false)) 29 "li") ;inserting left
+              (make-node 63 "an"
+                         (make-node 29 "li" #false #false)
+                         (make-node 89 "vy" #false #false)))
+(check-expect
+ (create-bst (make-node 63 "an"
+                        (make-node 29 "li" #false #false)
+                        (make-node 89 "vy" #false #false)) 77 "zu") ;inserting right, left
+ (make-node 63 "an"
+            (make-node 29 "li" #false #false)
+            (make-node 89 "vy"
+                       (make-node 77 "zu" #false #false)
+                       #false)))
 (define (create-bst btree num name)
   (cond
     [(false? btree)

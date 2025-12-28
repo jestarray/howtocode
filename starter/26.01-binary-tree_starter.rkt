@@ -71,19 +71,20 @@ whether a given number occurs in the given BinaryTree
 #|PROBLEM D:
 Design "search-bt"
 The function consumes a number "num" and a "BinaryTree"
-If the tree contains a node structure whose key is equal to "n",
+If the tree contains a node structure whose key is equal to "num",
 the function produces the value of the name field in that node.
 Otherwise, the function produces #false.
 |#
 
 #|PROBLEM E:
-Design the function inorder. It consumes a BinaryTree and
-produces the sequence of all the ssn numbers in the tree as they show up
+Design the function in-order. It consumes a BinaryTree and
+produces the sequence of all the numbers in the tree as they show up
 from left to right when looking at a tree drawing above
-Hint Use append, which concatenates lists like thus:
+Hint Use append, which concatenates lists
 |#
-;(check-expect (in-order TREEA) (list 2 23 7 45 12 66 4 31 99))
+;(: in-order (BinaryTree -> [ListOf Number]))
 ; produces the numbers of the bst from the left most to the right
+;(check-expect (in-order TREEA) (list 2 23 7 45 12 66 4 31 99))
 
 
 #|
@@ -121,21 +122,21 @@ with "make-node"
 ;(define TREE-SORTED ...)
 
 #|PROBLEM G:
-; Design "lookup-bst" The function consumes a Number and a BinarySearchTree.
+; Design "lookup-bst" The function consumes a BinarySearchTree and a Number.
 If the tree contains a node whose "key" field is n,
 the function produces the value of the name field in that node.
 Otherwise, the function produces #false
-The function organization must make use of the the BinearySearchTree invariant
+The function organization must make use of the the BinarySearchTree invariant
 so that the function performs as few comparisons as necessary.
 you are NOT allowed to use "search-bt", as the solution is different
 |#
 
 #|PROBLEM H:
-Design the function create-bst.
+Design the function "create-bst"
 It consumes a BinarySearchTree, a number, and a string.
 It produces a BST that is just like the given BinarySearchTree
-and that in place of one NONE subtree contains the node structure
-Use it to insert a number into a sorted BinarySearchTree
+and that in place of one #false subtree contains the node structure.
+Essentially inserting the given  Number into the CORRECT open slot of a BinarySearchTree
 |#
 
 

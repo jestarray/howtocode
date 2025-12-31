@@ -27,7 +27,7 @@
    (sandbox-path-permissions)))
  (sandbox-override-collection-paths (list override)))
 
-(check: :language 'lang/htdp-intermediate
+(check: :language 'lang/htdp-intermediate-lambda
 
         :requires '(2htdp/image 2htdp/universe)
         :eval? #t

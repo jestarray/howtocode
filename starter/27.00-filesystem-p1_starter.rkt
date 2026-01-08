@@ -93,7 +93,9 @@ Translate the above diagram of a directory structure into code with "make-dir"
 
 #|PROBLEM C:
 Design the function "count-files" which 
-determines how many File's a given Dir contains(including every subdirs)
+determines how many File's a given Dir contains(including Files in every subdirs)
+For example:
+Given: Documents , Produce: 8
 |#
 
 ;(: count-files (Dir -> Number))
@@ -101,7 +103,7 @@ determines how many File's a given Dir contains(including every subdirs)
 
 #|PROBLEM D:
 Design the function "count-subdirs" which determines how many directories
-there are in a given Dir. Note that we EXCLUDE ourself! 
+there are in a given Dir(including subdirs). Note that we EXCLUDE ourself! 
 So the documents dir would have 4
 |#
 
@@ -110,7 +112,8 @@ So the documents dir would have 4
 
 #|PROBLEM E:
 Design the function "count-txts" which determines 
-how many files with the ".txt" there are in a given Dir
+how many files with the ".txt" there are in a given Dir,
+including those in subdirs
 You can assume all files end in 3 letter extension names, e.g "pdf, txt, mp3, png"
 |#
 

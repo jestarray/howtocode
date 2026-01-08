@@ -28,7 +28,12 @@ So we've expanded/rewrote our data definitions
 
 File is now a struct
 Dir now stores the directories and files into two DIFFERENT lists
-Constrast this to filesystem-p1 where Dir mashed them together
+Constrast this to filesystem-p1 where "LOFD" stored both Files and Dirs
+; OLD:
+; An LOFD (short for list of files and directories) is one of:
+; – empty
+; – (cons File LOFD)
+; – (cons Dir LOFD)
 
 Write the template for File, Dir, ListOfDir, and ListOfFile
 |#

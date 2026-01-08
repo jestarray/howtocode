@@ -28,7 +28,12 @@ So we've expanded/rewrote our data definitions
 
 File is now a struct
 Dir now stores the directories and files into two DIFFERENT lists
-Constrast this to filesystem-p1 where Dir mashed them together
+Constrast this to filesystem-p1 where "LOFD" stored both Files and Dirs
+; OLD:
+; An LOFD (short for list of files and directories) is one of:
+; – empty
+; – (cons File LOFD)
+; – (cons Dir LOFD)
 
 Write the template for File, Dir, ListOfDir, and ListOfFile
 |#
@@ -106,21 +111,21 @@ Note: We're ignoring the contents of a file, so just make them an empty string "
 |#
 
 (define part1 (make-file ...))
-(define part2 (make-file ...))
-(define part3 (make-file ...))
-(define costume (make-file ...))
+(define part2 ...)
+(define part3 ...)
+(define costume ...)
 
-(define resume (make-file ...))
-(define cover (make-file ...))
+(define resume ...)
+(define cover ...)
 
-(define todo1 (make-file ...))
-(define todo-school (make-file ...))
+(define todo1 ...)
+(define todo-school ...)
 
 (define scripts (make-dir ...))
-(define work (make-dir ...))
-(define school (make-dir ...))
-(define life (make-dir ...))
-(define documents (make-dir ...))
+(define work ...)
+(define school ...)
+(define life ...)
+(define documents ...)
 
 
 #|PROBLEM C:

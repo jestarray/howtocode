@@ -28,12 +28,7 @@ So we've expanded/rewrote our data definitions
 
 File is now a struct
 Dir now stores the directories and files into two DIFFERENT lists
-Constrast this to filesystem-p1 where "LOFD" stored both Files and Dirs
-; OLD:
-; An LOFD (short for list of files and directories) is one of:
-; – empty
-; – (cons File LOFD)
-; – (cons Dir LOFD)
+Constrast this to 27.00-filesystem-p1 where "LOFD" stored both Files and Dirs
 
 Write the template for File, Dir, ListOfDir, and ListOfFile
 |#
@@ -149,8 +144,8 @@ Note: We're ignoring the contents of a file, so just make them an empty string "
 #|PROBLEM C:
 Design the function "count-files" which consumes a Dir
 and determines how many files a given Dir contains
-This is similar to 27.00-filesystem-p1, so some steps have been done for you.
-Challenge: Use abstract functions to implement the two helper functions
+This is similar to the problem in "27.00 Problem C"
+Challenge Refactor: Use abstract functions to implement the two helper functions
 |#
 
 (: count-files  (DirSig -> Number))
@@ -185,8 +180,8 @@ Challenge: Use abstract functions to implement the two helper functions
      (length (dir-files dtory))))
 
 #|PROBLEM D:
-Design "find?" The function consumes a Dir and a file name
-and determines whether or not a file with this name
+Design "find?" The function consumes a Dir and String(the filename)
+and determines whether or not the File with this name
 occurs in the directory tree.
 |#
 

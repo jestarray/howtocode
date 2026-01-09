@@ -20,6 +20,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 #| PROBLEM:
 Rankings in various games like Chess, League of Legends, Rocket League, use 
 metal names to showcase rankings. 

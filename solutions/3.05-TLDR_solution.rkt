@@ -14,6 +14,8 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 #| PROBLEM:
 Design a function named 'tldr' that consumes a string and a number that is the capacity. 
 If the string is longer than the given capacity, produce only the string up to the given capacity 

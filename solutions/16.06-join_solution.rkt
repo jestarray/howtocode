@@ -22,6 +22,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 ; NEListOfString(NonEmptyListOfString) is one of:
 ; - (cons String empty) 
 ; - (cons String NEListOfString)

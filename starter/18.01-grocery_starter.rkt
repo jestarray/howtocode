@@ -22,6 +22,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 (define-struct grocery [name price stock])
 ; Grocery is (make-grocery String Number Number)
 ; name is the name of the item

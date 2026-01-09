@@ -21,6 +21,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 #|PROBLEM A:
 Notice how the "CountDown" data definition below uses mixed types of data,
 nameley a Boolean, Numbers, and String.

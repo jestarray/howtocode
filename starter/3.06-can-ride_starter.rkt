@@ -14,6 +14,8 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #| PROBLEM:
 Design a function 'can-ride?' that consumes an age and whether or not an adult is with you.
 You can only ride this rollercoaster if you are 12 or older or have an adult with you!

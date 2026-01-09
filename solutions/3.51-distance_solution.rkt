@@ -14,6 +14,8 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #| PROBLEM: 
 Design a function named 'distance' that consumes 4 numbers: x1, y1, and x2, y2 and calculates
 the distance between the two points using the distance formula as described here:

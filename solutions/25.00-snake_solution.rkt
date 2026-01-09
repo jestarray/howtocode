@@ -90,6 +90,8 @@ Turn all ❌ into ✅ for each step you complete
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 #|PROBLEM A:
 Write the video game snake
 https://en.wikipedia.org/wiki/Snake_(video_game_genre)

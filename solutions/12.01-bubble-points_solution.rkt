@@ -107,6 +107,8 @@ Complete the Data Design steps for "BunchOfPoints"
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #|PROBLEM B:
 Finish the Function design steps for the following functions
 (in order of easiest to hardest difficulty)

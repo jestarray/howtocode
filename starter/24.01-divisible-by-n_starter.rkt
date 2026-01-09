@@ -20,6 +20,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #|PROBLEM A:
 Given a ListOf Number and a Number,
 produce only the numbers that are divisible by the given number

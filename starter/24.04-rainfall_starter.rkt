@@ -20,6 +20,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 (define-struct weather (date max-tmp avg-tmp min-tmp rain snow precip))
 ; Weather is (make-weather String Number Number Number Number Number Number)
 ; interp. Data about weather in Vancouver on some date

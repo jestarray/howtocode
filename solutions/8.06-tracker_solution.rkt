@@ -53,6 +53,8 @@ Turn all ❌ into ✅ for each step you complete
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 ; main: (Point -> Point)
 ; start the world with (main (make-point 0 0))
 (define (main pt)

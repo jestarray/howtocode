@@ -20,6 +20,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #|PROBLEM A:
 A company has a digital self order food menu tablet in their store.
 The menu has a description of how spicy some foods are. The descriptions are

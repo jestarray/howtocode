@@ -122,6 +122,8 @@ Turn all ❌ into ✅ for each step you complete
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #|PROBLEM A:
 Carrying on from 25.01, expand space-infestors to behave like the original:
 Spawn enemies in a gridlike fashion,

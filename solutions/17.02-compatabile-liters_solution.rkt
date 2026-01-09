@@ -22,6 +22,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 #|PROBLEM A:
 Design a function 'compat-blood?' that consumes a receipient and donor bloodtypes 
 and produces whether the recipient is compataible with the donors blood given the following:

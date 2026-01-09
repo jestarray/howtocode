@@ -46,6 +46,8 @@ Turn all ❌ into ✅ for each step you complete
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 ; main: (WorldState -> WorldState)
 ; start the world with ...
 ; 

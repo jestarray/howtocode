@@ -20,6 +20,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 (define-struct photo [path album favorite])
 (define PhotoSig (signature (PhotoOf String String Boolean)))
 ; a photo having a location path, belonging to an album

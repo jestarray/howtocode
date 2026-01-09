@@ -14,6 +14,8 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 #| PROBLEM: string-last
 Design a function 'string-last', which extracts the last character from a non-empty string.
 Example:

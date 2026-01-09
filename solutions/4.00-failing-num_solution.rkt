@@ -20,6 +20,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 #| PROBLEM 4.00A:
 A number grade often written in red to indicate performance on
 an assignment is a number between [0 to 100] inclusive.

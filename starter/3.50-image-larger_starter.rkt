@@ -15,6 +15,8 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #| PROBLEM: 
 Design a function named 'image-larger?' that consumes two images and produces whether the first given 
 image is larger than the second

@@ -14,6 +14,8 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #| PROBLEM: string-remove-last
 Design a function 'string-remove-last', which produces a string like the given one with the last 
 character removed.

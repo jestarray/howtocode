@@ -119,6 +119,8 @@ Turn all ❌ into ✅ for each step you complete
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #|PROBLEM A:
 Carrying on from 12.04, a game with a single enemy, expand the code to handle more multiple enemies!
 To do this, you need to change the Game data representation!

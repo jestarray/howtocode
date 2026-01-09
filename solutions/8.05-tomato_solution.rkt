@@ -61,6 +61,8 @@ Turn all ❌ into ✅ for each step you complete
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 ; main: (Tomato -> Tomato)
 ; start the world with (main (make-tomato 0 0))
 (define (main tm)

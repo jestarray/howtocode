@@ -77,6 +77,8 @@ Complete the Data Design steps for the union "Shape"
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #|PROBLEM B:
 Finish designing the functions in the following order:
 grow-shape, shape->image, render.

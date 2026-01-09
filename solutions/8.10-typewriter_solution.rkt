@@ -68,6 +68,8 @@ Turn all ❌ into ✅ for each step you complete
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 ; advance-char : (TypeWriter -> TypeWriter)
 ; produce the next character of the typewriter text
 (check-expect (advance-char castle)

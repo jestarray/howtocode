@@ -14,6 +14,8 @@ HTDF STEPS: Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #| PROBLEM: formalize
 We have provided helper functions: string-first, string-rest, from the previous problem, use them!
 

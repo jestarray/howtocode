@@ -22,6 +22,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #|PROBLEM A:
 Notice the Data Definitions for Square, Rect, and Triangle are done.
 Finish the uncompleted steps ❌ of Data Design above for "Shape"(examples and template)

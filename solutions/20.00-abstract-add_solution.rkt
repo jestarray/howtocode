@@ -20,6 +20,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 (: add1* ([ListOf Number] -> [ListOf Number]))
 ; adds 1 to each item on lst
 (check-expect (add1* (list 1 3 5)) (list 2 4 6))

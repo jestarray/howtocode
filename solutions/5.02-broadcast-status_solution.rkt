@@ -20,6 +20,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 #|PROBLEM A:
 You are designing a program to track a rocket's journey as it descends 
 100 kilometers to Earth. You are only interested in the descent from 

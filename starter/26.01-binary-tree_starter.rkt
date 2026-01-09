@@ -21,6 +21,8 @@ Functions:
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 ; A BinaryTree is one of:
 ; – #false
 ; – (make-node Number String BinaryTree BinaryTree)

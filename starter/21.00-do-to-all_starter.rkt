@@ -21,6 +21,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #| PROBLEM A:
 Design a function "square-all" that consumes a ListOfNumbers and squares the numbers
 For example (square-all (list 1 2 3)) -> (list 1 4 9)

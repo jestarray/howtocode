@@ -128,6 +128,8 @@ Finish Step 4(Template) for the "Game" struct
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #|PROBLEM B:
 Finish the function design steps for:
 draw-minvader

@@ -20,6 +20,8 @@ Turn all ❌ into ✅ for each step you complete
     5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 (: sum-nums ([ListOf Number] -> Number))
 ; sum up all the numbers in the given list
 (check-expect (sum-nums empty) 0)

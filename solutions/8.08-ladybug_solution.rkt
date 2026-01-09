@@ -63,6 +63,8 @@ Turn all ❌ into ✅ for each step you complete
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 ; main: (Lady -> Lady)
 ; start the world with (main (make-lady 0 0))
 (define (main ld)

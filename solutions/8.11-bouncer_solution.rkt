@@ -66,6 +66,8 @@ Turn all ❌ into ✅ for each step you complete
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 ; process-bouncer : (Bouncer -> Bouncer)
 ; increases the position of bouncer by slope-x and slope-y but bounces if it touches the edges of the screen
 ; normal travel

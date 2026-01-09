@@ -62,6 +62,8 @@ Turn all ❌ into ✅ for each step you complete
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
 |#
 
+; ############################################################################
+
 #|PROBLEM A:
 Notice how the data definition steps are done.
 Some parts of the 12.01 bubble-points have been brought over to this file

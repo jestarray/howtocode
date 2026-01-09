@@ -184,6 +184,8 @@ Turn all ❌ into ✅ for each step you complete
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 #|PROBLEM A:
 We've finished the draw/render functions in 12.02 which are done above.
 Finish designing the functions for:

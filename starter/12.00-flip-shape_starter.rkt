@@ -70,8 +70,6 @@ Complete the Data Design steps for the union "Shape"
 
 ; ############################################################################
 
-; ############################################################################
-
 #|PROBLEM B:
 Finish designing the functions in the following order:
 grow-shape, shape->image, render.

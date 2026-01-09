@@ -136,22 +136,44 @@ empty
     (... ls))</code></pre><p><details><summary>answer</summary><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define (swap ls)
     (cons (first (rest ls))
         (cons (first ls) empty)))</code></pre></details></p></div><p>Lists are where things start ramping up in difficulty as you’ll see shortly, so it’s very important you have an intuitive grasp of these basic list operations!</p><h3>Extra: Internals</h3><p>This is an extra section if you want to know the “internals” of lists.<br/>There is a clever trick that we can define structures such that we can chain values together. What we do is that in our data definition, we do a self reference. The <code>empty</code> is just a distinct type, <code>empty-link</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; Link is one of:
-; (make-empty-Link)
-; (make-Link Any Link)
+; - (make-empty-Link)
+; - (make-link Any Link)
 
 (define-struct empty-link []) ; has no fields
 (define-struct link [first rest])
+; (link-first Link) = "first"
+; (link-rest Link) = "rest"
 
 (make-empty-link) ; equiv to: empty or '()
-(make-link 0 (make-empty-link)) ; 1 element list
+(make-link 8 (make-empty-link)) ; 1 element list
 
-(make-link 0 (make-link 2 (make-empty-link))) ; 2 element list
+(make-link 8
+    (make-link 2 (make-empty-link))) ; 2 element list
 
-; 3 element list:
-(make-link 1
-           (make-link 2
-                      (make-link 3
-                                 (make-empty-link))))</code></pre>
+; link-temp : (Link -&gt; ???)
+(define (link-temp lnk)
+  (cond
+    [(empty-link? lnk) ...]
+    [else
+     (... (link-first lnk)
+          (link-temp (link-rest lnk)))]))</code></pre><h4>Natural Numbers as recursive types</h4><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; Natural is one of:
+; - 0
+; - (add1 Natural)
+
+(define two (add1 (add1 0)))
+
+; natural-temp : (Natural -&gt; ???)
+(define (natural-temp n)
+  (cond
+    [(= 0 n) ...]
+    [else
+     (... n (natural-temp (sub1 n)))])) ;sub1 can be thought of as "rest"</code></pre><h4>Trees</h4><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; An FamilyTree(FT) is one of:
+; - #false
+; - (make-person String Number String FamilyTree FamilyTree)
+; interp. #false means no parent
+
+(define-struct person [name birth-year eyes mother father])
+; Person is (make-person String Number String FamilyTree FamilyTree)</code></pre>
             </article>
         </main>
     </div>

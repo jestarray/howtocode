@@ -376,20 +376,52 @@ This is an extra section if you want to know the "internals" of lists.
 There is a clever trick that we can define structures such that we can chain values together. What we do is that in our data definition, we do a self reference. The ◊code{empty} is just a distinct type, ◊code{empty-link}
 ◊racket-code-block{
 ; Link is one of:
-; (make-empty-Link)
-; (make-Link Any Link)
+; - (make-empty-Link)
+; - (make-link Any Link)
 
 (define-struct empty-link []) ; has no fields
 (define-struct link [first rest])
+; (link-first Link) = "first"
+; (link-rest Link) = "rest"
 
 (make-empty-link) ; equiv to: empty or '()
-(make-link 0 (make-empty-link)) ; 1 element list
+(make-link 8 (make-empty-link)) ; 1 element list
 
-(make-link 0 (make-link 2 (make-empty-link))) ; 2 element list
+(make-link 8 
+    (make-link 2 (make-empty-link))) ; 2 element list
 
-; 3 element list:
-(make-link 1
-           (make-link 2
-                      (make-link 3
-                                 (make-empty-link))))
+; link-temp : (Link -> ???)
+(define (link-temp lnk)
+  (cond
+    [(empty-link? lnk) ...]
+    [else
+     (... (link-first lnk)
+          (link-temp (link-rest lnk)))]))
+}
+
+◊h4{Natural Numbers as recursive types}
+◊racket-code-block{
+; Natural is one of:
+; - 0
+; - (add1 Natural)
+
+(define two (add1 (add1 0)))
+
+; natural-temp : (Natural -> ???)
+(define (natural-temp n)
+  (cond
+    [(= 0 n) ...]
+    [else
+     (... n (natural-temp (sub1 n)))])) ;sub1 can be thought of as "rest"
+}
+
+◊h4{Trees}
+◊racket-code-block{
+; An FamilyTree(FT) is one of:
+; - #false
+; - (make-person String Number String FamilyTree FamilyTree)
+; interp. #false means no parent
+
+(define-struct person [name birth-year eyes mother father])
+; Person is (make-person String Number String FamilyTree FamilyTree)
 }

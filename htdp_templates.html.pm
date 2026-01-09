@@ -461,8 +461,8 @@ For more information on the ◊a[#:href "https://docs.racket-lang.org/teachpack/
   (cond [(empty? lst) ...] ; ◄────── (1) ... base case
         [else
          (... (first lst)
-              (list-temp (rest lst)))]))
-        ; ▲
+              (list-of-nums-temp (rest lst)))]))
+        ; ▲   ^ self reference
         ; │
         ; │
         ; (2) ... contribution to the base

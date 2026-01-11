@@ -100,7 +100,7 @@ NOTE: SOME NAMES ARE SHORTEND!!!
     (Roaming)        (5G Svc)
 |#
 
-#|PROBLEM A:
+#|PROBLEM B:
 Smartphones have Settings menus that themselves have submenus and commands.
 The above Diagram(A) is from my android phone.
 Translate the above diagram into code with combinations of
@@ -118,15 +118,16 @@ Translate the above diagram into code with combinations of
 (define connection ...)
 (define settings ...)
 
-#|PROBLEM A:
+#|PROBLEM C:
 Design a function "count-toggles" that consumes a Menu
 and counts how many Commands(cmd) there are in
 the given Menu(and in all nested submenus)
 For example: 
-Connections should produce 6
+Given: Connections ,    produce: 6
+Given: Mobile Networks, produce 2
 |#
 
-#|PROBLEM B:
+#|PROBLEM D:
 Design a function "has-setting?" which consumes a "Menu" and a search term(String)
 It produces #true if the given Menu(including submenus) has Entry's
 with the given search term.
@@ -134,14 +135,14 @@ NOTE: This should also be case incensitive,
 e.g all lowercase search terms should work
 For example:
 (has-setting? settings "data usage") -> #true
-(has-setting? settings "Data Usage") -> #true
+(has-setting? settings "DaTa UsAgE") -> #true
 (has-setting? settings "wifi") -> #true
-(has-setting? settings "Wifi") -> #true
+(has-setting? settings "wIfi") -> #true
 |#
 
-#|PROBLEM C:
-You want to create a "High Contrast" version of your menu.
-To do this, you need to transform the entire tree.
+#|PROBLEM E:
+You want to create a "High Contrast" version of your menu
+which capitalizes every label
 
 Design a function "all-caps-menu" that consumes a Menu and produces a Menu
 where every single label (both commands and sub-menus) has been converted to UPPERCASE.
@@ -155,12 +156,15 @@ produce:
 |#
 
 
-#|PROBLEM D(hard):
-Think of the top of your screen where it says: Settings > Connections > Wifi.
+#|PROBLEM F(hard):
+Smartphone search/help menus show the path to get to a Command/Menu
+like so:
+"Settings > Connections > Wifi"
 
 Design a function "find-path" that takes a Menu and a String
-It should return a list of strings representing the path to get there.
-Example: If you are looking for "Bluetooth" inside "Connections",
+It should return a list of strings showing the path to get there.
+For example:
+If you are looking for "Bluetooth" STARTING from "Connections",
 it should return (list "Connections" "Bluetooth").
 
 HINT: "has-setting?" from Problem B and "append" may come in useful

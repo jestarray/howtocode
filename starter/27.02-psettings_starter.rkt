@@ -36,9 +36,6 @@ Use these to solve the rest of the other problems
 ; label is the name of the action
 ; toggle is whether its on or off
 
-; cmd-temp : (Cmd -> ???)
-; TODO
-
 (define-struct menu [label entries])
 ; Menu is (make-menu String ListOfEntry)
 ; interp.
@@ -53,13 +50,6 @@ Use these to solve the rest of the other problems
 ; - (cons Entry ListOfEntry)
 
 ; list-entry-temp : (ListOfEntry -> ???)
-; TODO
-
-; A Entry is one of:
-; - (make-cmd String Boolean)
-; - (make-menu String ListOfEntry)
-
-; entry-temp : (Entry -> ???)
 ; TODO
 
 #|
@@ -131,9 +121,11 @@ Given: Mobile Networks, produce 2
 Design a function "has-setting?" which consumes a "Menu" and a search term(String)
 It produces #true if the given Menu(including submenus) has Entry's
 with the given search term.
+NOTICE that we're searching for BOTH Commands and Menu labels!
 NOTE: This should also be case incensitive,
 e.g all lowercase search terms should work
 For example:
+(check-expect (has-setting? settings "sEtTings") #true)
 (has-setting? settings "data usage") -> #true
 (has-setting? settings "DaTa UsAgE") -> #true
 (has-setting? settings "wifi") -> #true
@@ -168,4 +160,6 @@ If you are looking for "Bluetooth" STARTING from "Connections",
 it should return (list "Connections" "Bluetooth").
 
 HINT: "has-setting?" from Problem B and "append" may come in useful
+This problem originally is case sensitive, but its recomended
+you compare strings case insenetively with string-downcase
 |#

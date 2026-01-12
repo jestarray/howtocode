@@ -145,36 +145,37 @@ Note: We're ignoring the contents of a file, so just make them an empty string "
 
 #|PROBLEM C:
 Design the function "count-files" which consumes a Dir
-and determines how many files a given Dir contains
+and determines how many files a given Dir contains(including files in sub Dirs)
 This is similar to the problem in "27.00 Problem C"
 Challenge Refactor: Use abstract functions to implement the two helper functions
 |#
 
 (: count-files  (DirSig -> Number))
+; produces the count of the files in the given dir
 (check-expect (count-files work) 2)
 (check-expect (count-files scripts) 4)
 (check-expect (count-files life) 3)
 (check-expect (count-files documents) 8)
 (define (count-files dtory)
   (+
-   (count-dirs-list (dir-dirs dtory)) ; ListOfDir
-   (count-files-list (dir-files dtory)))) ; ListOfFile
+   (count-files-subdirs (dir-dirs dtory)) ; ListOfDir
+   (count-files--list (dir-files dtory)))) ; ListOfFile
 
-(: count-dirs-list ([ListOf DirSig] -> Number))
-(define (count-dirs-list dirs-lst)
+(: count-files-subdirs ([ListOf DirSig] -> Number))
+(define (count-files-subdirs dirs-lst)
   (cond
     [(empty? dirs-lst) 0]
     [else
      (+ (count-files (first dirs-lst)) ; Dir
-        (count-dirs-list (rest dirs-lst)))]))
+        (count-files-subdirs (rest dirs-lst)))]))
 
-(: count-files-list ([ListOf FileSig] -> Number))
-(define (count-files-list files-lst)
+(: count-files--list ([ListOf FileSig] -> Number))
+(define (count-files--list files-lst)
   (cond
     [(empty? files-lst) 0]
     [else
      (+ 1
-        (count-files-list (rest files-lst)))]))
+        (count-files--list (rest files-lst)))]))
 
 ; abstract version
 (define (count-files2 dtory)
@@ -197,27 +198,32 @@ occurs in the directory tree.
 (check-expect (find? life "cover.pdf") #true)
 (define (find? dtory findname)
   (or
-   (find-dirs-list? (dir-dirs dtory) findname) ; ListOfDir
-   (find-files-list? (dir-files dtory) findname))) ; ListOfFile
+   (find-subdirs (dir-dirs dtory) findname) ; ListOfDir
+   (has-file? (dir-files dtory) findname))) ; ListOfFile
 
-; find-dirs-list? : (ListOfDir String -> Boolean)
-(define (find-dirs-list? dirs-lst findname)
+; find-subdirs? : (ListOfDir String -> Boolean)
+(check-expect (find-subdirs? empty "goodbye.lol") #false)
+(check-expect (find-subdirs? (list scripts) "part2.rtf") #true)
+(check-expect (find-subdirs? (list scripts life) "cover.pdf") #true)
+(check-expect (find-subdirs? (list scripts life) "meow.png") #false)
+(define (find-subdirs dirs-lst findname)
   (cond
     [(empty? dirs-lst) #false]
     [else
      (or (find? (first dirs-lst) findname) ; Dir
-         (find-dirs-list? (rest dirs-lst) findname))]))
+         (find-subdirs (rest dirs-lst) findname))]))
 
-; find-files-list? : (ListOfFile String -> Boolean)
-(check-expect (find-files-list? empty "games.txt") #false)
-(check-expect (find-files-list? (list part1 part2 part3) "part2.rtf") #true)
-(check-expect (find-files-list? (list part1 part2 part3) "part4.rtf") #false)
-(define (find-files-list? files-lst findname)
+; has-file? : (ListOfFile String -> Boolean)
+; produces #true if the given filename is in current list of files
+(check-expect (has-file? empty "games.txt") #false)
+(check-expect (has-file? (list part1 part2 part3) "part2.rtf") #true)
+(check-expect (has-file? (list part1 part2 part3) "goodbye.rtf") #false)
+(define (has-file? files-lst findname)
   (cond
     [(empty? files-lst) #false]
     [else
      (or (string=? (file-name (first files-lst)) findname) ; File
-         (find-files-list? (rest files-lst) findname))]))
+         (has-file? (rest files-lst) findname))]))
 
 ; abstract version
 (define (find?2 dtory findname)
@@ -237,38 +243,51 @@ HINT: You will need to use "append"
               (list "life" "work" "resume.pdf" "cover.pdf" "school" "todo.txt"))
 (check-expect (show scripts)
               (list "scripts" "part1.rtf" "part2.rtf" "part3.rtf" "costume.png"))
-(check-expect
- (show documents)
- (list "Documents" "scripts" "part1.rtf" "part2.rtf" "part3.rtf" "costume.png" "life" "work" "resume.pdf" "cover.pdf" "school" "todo.txt" "todo.txt"))
+(check-expect (show documents)
+              (list "Documents" "scripts" "part1.rtf" "part2.rtf" "part3.rtf" "costume.png" "life" "work" "resume.pdf" "cover.pdf" "school" "todo.txt" "todo.txt"))
+;(define (show dtory) empty)
+
 (define (show dtory)
   (cons
    (dir-name dtory) ; String
-   (append
-    (show-list-dirs (dir-dirs dtory)) ; ListOfDir
-    (show-list-files (dir-files dtory))))) ; ListOfFile
+   (append (list-curr-dirs (dir-dirs dtory)) ; ListOfDir -> ListOfString
+           (list-curr-dir-files (dir-files dtory))))) ; ListOfFile -> ListOfString
 
-; show-list-dirs : (ListOfDir -> ListOfString)
-(define (show-list-dirs dirs-lst)
+; list-curr-dirs : (ListOfDir -> ListOfString)
+(check-expect (list-curr-dirs empty) empty)
+(check-expect (list-curr-dirs (list scripts life))
+              (list
+               "scripts"
+               "part1.rtf"
+               "part2.rtf"
+               "part3.rtf"
+               "costume.png"
+               "life"
+               "work"
+               "resume.pdf"
+               "cover.pdf"
+               "school"
+               "todo.txt"))
+(define (list-curr-dirs dirs-lst)
   (cond
     [(empty? dirs-lst) empty]
     [else
-     (append (show (first dirs-lst)) ; Dir
-             (show-list-dirs (rest dirs-lst)))]))
+     (append
+      (show (first dirs-lst)) ; Dir
+      (list-curr-dirs (rest dirs-lst)))]))
 
-; show-list-files : (ListOfFile -> ListOfString)
-(define (show-list-files files-lst)
+; list-curr-dir-files : (ListOfFile -> ListOfString)
+(check-expect (list-curr-dir-files empty) empty)
+(check-expect (list-curr-dir-files (list part1 part2 part3 costume))
+              (list "part1.rtf" "part2.rtf" "part3.rtf" "costume.png"))
+(define (list-curr-dir-files files-lst)
   (cond
     [(empty? files-lst) empty]
     [else
-     (cons (file-name (first files-lst)) ; File
-           (show-list-files (rest files-lst)))]))
+     (cons
+      (file-name (first files-lst)) ; File
+      (list-curr-dir-files (rest files-lst)))]))
 
-(define (show2 dtory)
-  (cons
-   (dir-name dtory)
-   (append
-    (foldl (lambda (subdir base) (append (show2 subdir) base)) empty (dir-dirs dtory))
-    (map file-name (dir-files dtory)))))
 
 #|PROBLEM F:
 Design the function "total" which consumes a Dir and
@@ -279,32 +298,42 @@ Note that this is not the case in the real world filesystems
 For example: (total life) -> (+ 1 1 8 2 19) = 31
 |#
 
-(: total (DirSig -> Number))
-; produces the total size of all files in the given directory tree
+(: total (Dir -> Number))
+; produces the total size of all files and dirs in the given directory
 (check-expect (total school) 19)
 (check-expect (total work) (+ 8 2))
 (check-expect (total life) (+ 1 1 8 2 19))
-(check-expect (total documents) (+ 99 52 17 100 10 8 2 19 1 1 1 1))
+(check-expect (total scripts) (+ 99 52 17 100))
+(check-expect (total documents) (+ 1 1 1 1 99 52 17 100 8 2 19 10))
+
 (define (total dtory)
   (+
-   (total-list-dirs (dir-dirs dtory)) ; ListOfDir
-   (total-list-files (dir-files dtory)))) ; ListOfFile
+   (total-subs (dir-dirs dtory)) ; ListOfDir -> Number
+   (total-file-size (dir-files dtory)))) ; ListOfFile -> Number
 
-; total-list-dirs : (ListOfDir -> Number)
-(define (total-list-dirs dirs-lst)
+; total-subs : (ListOfDir -> Number)
+(check-expect (total-subs empty) 0)
+(check-expect (total-subs (list scripts)) 269)
+(check-expect (total-subs (list life)) 32)
+(define (total-subs dirs-lst)
   (cond
     [(empty? dirs-lst) 0]
     [else
-     (+ 1 (total (first dirs-lst)) ; Dir
-        (total-list-dirs (rest dirs-lst)))]))
+     (+ 1
+      (total (first dirs-lst)) ; Dir
+      (total-subs (rest dirs-lst)))]))
 
-; total-list-files : (ListOfFile -> Number)
-(define (total-list-files files-lst)
+; total-file-size : (ListOfFile -> Number)
+; produces the total size of all the given files
+(check-expect (total-file-size empty) 0)
+(check-expect (total-file-size (list part1 part2 resume)) (+ 99 52 8))
+(define (total-file-size files-lst)
   (cond
     [(empty? files-lst) 0]
     [else
-     (+ (file-size (first files-lst)) ; File
-        (total-list-files (rest files-lst)))]))
+     (+
+      (file-size (first files-lst)) ; File
+      (total-file-size (rest files-lst)))]))
 
 ; abstract version
 (define (total2 dtory)

@@ -139,53 +139,7 @@ Design "find?" The function consumes a Dir and String(the filename)
 and determines whether or not the File with this name
 occurs in the directory tree.
 |#
-
-(: find? (Dir String -> Boolean))
-; produces #true if the given filename matches a file in the given directory tree
-(check-expect (find? scripts "game.txt") #false)
-(check-expect (find? scripts "part2.rtf") #true)
-(check-expect (find? documents "part2.rtf") #true)
-(check-expect (find? documents "cover.pdf") #true)
-(check-expect (find? documents "todo.txt") #true)
-(check-expect (find? documents "mystuff.png") #false)
-;(define (find? dtory findname) #false)
-
-#;
-(define (find? dtory findname)
-  (or
-   (ormap (lambda (subdir) (find? subdir findname)) (dir-dirs dtory))
-   (ormap (lambda (fl) (string=? (file-name fl) findname)) (dir-files dtory))))
-
-(define (find? dtory findname)
-  (or
-   (find-subdirs? (dir-dirs dtory) findname) ; ListOfDir String -> Boolean
-   (has-file? (dir-files dtory) findname))) ; ListOfFile String -> Boolean
-
-; find-subdirs? : (ListOfDir String -> Boolean)
-(check-expect (find-subdirs? empty "goodbye.lol") #false)
-(check-expect (find-subdirs? (list scripts) "part2.rtf") #true)
-(check-expect (find-subdirs? (list scripts life) "cover.pdf") #true)
-(check-expect (find-subdirs? (list scripts life) "meow.png") #false)
-(define (find-subdirs? dirs-lst findname)
-  (cond
-    [(empty? dirs-lst) #false]
-    [else
-     (or
-      (find? (first dirs-lst) findname) ; Dir String -> Boolean
-      (find-subdirs? (rest dirs-lst) findname))]))
-
-; has-file? : (ListOfFile String -> Boolean)
-; produces #true if the given filename is in current list of files
-(check-expect (has-file? empty "hello.txt") #false)
-(check-expect (has-file? (list part1 part2 part3) "goodbye.txt") #false)
-(check-expect (has-file? (list part1 part2 part3) "part3.rtf") #true)
-(define (has-file? files-lst findname)
-  (cond
-    [(empty? files-lst) #false]
-    [else
-     (or
-      (string=? (file-name (first files-lst)) findname) ; File
-      (has-file? (rest files-lst) findname))]))
+; TODO
 
 #|PROBLEM E:
 Design the function "show", which lists
@@ -193,57 +147,11 @@ the names of all files and directories in a given Dir.
 HINT: You will need to use "append"
 |#
 
-(: show (DirSig -> [ListOf String]))
+; (: show (DirSig -> [ListOf String]))
 ; lists all the names of all the files and directories in a given Dir
-(check-expect (show life)
-              (list "life" "work" "resume.pdf" "cover.pdf" "school" "todo.txt"))
-(check-expect (show scripts)
-              (list "scripts" "part1.rtf" "part2.rtf" "part3.rtf" "costume.png"))
-(check-expect (show documents)
-              (list "Documents" "scripts" "part1.rtf" "part2.rtf" "part3.rtf" "costume.png" "life" "work" "resume.pdf" "cover.pdf" "school" "todo.txt" "todo.txt"))
-;(define (show dtory) empty)
-
-(define (show dtory)
-  (cons
-   (dir-name dtory) ; String
-   (append (list-curr-dirs (dir-dirs dtory)) ; ListOfDir -> ListOfString
-           (list-curr-dir-files (dir-files dtory))))) ; ListOfFile -> ListOfString
-
-; list-curr-dirs : (ListOfDir -> ListOfString)
-(check-expect (list-curr-dirs empty) empty)
-(check-expect (list-curr-dirs (list scripts life))
-              (list
-               "scripts"
-               "part1.rtf"
-               "part2.rtf"
-               "part3.rtf"
-               "costume.png"
-               "life"
-               "work"
-               "resume.pdf"
-               "cover.pdf"
-               "school"
-               "todo.txt"))
-(define (list-curr-dirs dirs-lst)
-  (cond
-    [(empty? dirs-lst) empty]
-    [else
-     (append
-      (show (first dirs-lst)) ; Dir
-      (list-curr-dirs (rest dirs-lst)))]))
-
-; list-curr-dir-files : (ListOfFile -> ListOfString)
-(check-expect (list-curr-dir-files empty) empty)
-(check-expect (list-curr-dir-files (list part1 part2 part3 costume))
-              (list "part1.rtf" "part2.rtf" "part3.rtf" "costume.png"))
-(define (list-curr-dir-files files-lst)
-  (cond
-    [(empty? files-lst) empty]
-    [else
-     (cons
-      (file-name (first files-lst)) ; File
-      (list-curr-dir-files (rest files-lst)))]))
-
+;(check-expect (show life)
+;              (list "life" "work" "resume.pdf" "cover.pdf" "school" "todo.txt"))
+; TODO
 
 #|PROBLEM F:
 Design the function "total" which consumes a Dir and
@@ -253,40 +161,3 @@ Assume that storing a directory in a Dir structure costs 1 file storage unit.
 Note that this is not the case in the real world filesystems
 For example: (total life) -> (+ 1 1 8 2 19) = 31
 |#
-
-(: total (Dir -> Number))
-; produces the total size of all files and dirs in the given directory
-(check-expect (total school) 19)
-(check-expect (total work) (+ 8 2))
-(check-expect (total life) (+ 1 1 8 2 19))
-(check-expect (total scripts) (+ 99 52 17 100))
-(check-expect (total documents) (+ 1 1 1 1 99 52 17 100 8 2 19 10))
-
-(define (total dtory)
-  (+
-   (total-subs (dir-dirs dtory)) ; ListOfDir -> Number
-   (total-file-size (dir-files dtory)))) ; ListOfFile -> Number
-
-; total-subs : (ListOfDir -> Number)
-(check-expect (total-subs empty) 0)
-(check-expect (total-subs (list scripts)) 269)
-(check-expect (total-subs (list life)) 32)
-(define (total-subs dirs-lst)
-  (cond
-    [(empty? dirs-lst) 0]
-    [else
-     (+ 1
-      (total (first dirs-lst)) ; Dir
-      (total-subs (rest dirs-lst)))]))
-
-; total-file-size : (ListOfFile -> Number)
-; produces the total size of all the given files
-(check-expect (total-file-size empty) 0)
-(check-expect (total-file-size (list part1 part2 resume)) (+ 99 52 8))
-(define (total-file-size files-lst)
-  (cond
-    [(empty? files-lst) 0]
-    [else
-     (+
-      (file-size (first files-lst)) ; File
-      (total-file-size (rest files-lst)))]))

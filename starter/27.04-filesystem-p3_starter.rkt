@@ -21,6 +21,8 @@ Functions:
 5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 |#
 
+; ############################################################################
+
 (define-struct file [name size content])
 ; File is (make-file String Number String)
 (define FileSig (signature (FileOf String Number String))) ; for checked sigs

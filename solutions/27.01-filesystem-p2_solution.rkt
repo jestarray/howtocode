@@ -198,20 +198,20 @@ occurs in the directory tree.
 (check-expect (find? life "cover.pdf") #true)
 (define (find? dtory findname)
   (or
-   (find-subdirs (dir-dirs dtory) findname) ; ListOfDir
+   (find-subdirs? (dir-dirs dtory) findname) ; ListOfDir
    (has-file? (dir-files dtory) findname))) ; ListOfFile
 
-; find-subdirs? : (ListOfDir String -> Boolean)
+(: find-subdirs? ([ListOf Dir] String -> Boolean))
 (check-expect (find-subdirs? empty "goodbye.lol") #false)
 (check-expect (find-subdirs? (list scripts) "part2.rtf") #true)
 (check-expect (find-subdirs? (list scripts life) "cover.pdf") #true)
 (check-expect (find-subdirs? (list scripts life) "meow.png") #false)
-(define (find-subdirs dirs-lst findname)
+(define (find-subdirs? dirs-lst findname)
   (cond
     [(empty? dirs-lst) #false]
     [else
      (or (find? (first dirs-lst) findname) ; Dir
-         (find-subdirs (rest dirs-lst) findname))]))
+         (find-subdirs? (rest dirs-lst) findname))]))
 
 ; has-file? : (ListOfFile String -> Boolean)
 ; produces #true if the given filename is in current list of files
@@ -226,9 +226,10 @@ occurs in the directory tree.
          (has-file? (rest files-lst) findname))]))
 
 ; abstract version
-(define (find?2 dtory findname)
+#;
+(define (find? dtory findname)
   (or
-   (ormap (lambda (subdir) (find?2 subdir findname)) (dir-dirs dtory))
+   (ormap (lambda (subdir) (find? subdir findname)) (dir-dirs dtory))
    (ormap (lambda (fl) (string=? (file-name fl) findname)) (dir-files dtory))))
 
 #|PROBLEM E:

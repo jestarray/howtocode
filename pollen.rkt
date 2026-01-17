@@ -376,3 +376,8 @@
 (define ptree-example '((introduction.html learning_stages.html installation.html) (expressions.html exercise_pythag.html strings.html images.html rtfm.html variables.html functions.html parens_error.html stepper.html)))
 ;(generate-toc (list (list 'misc/EvolvedSimplicity.html)))
 ;(generate-toc (list (list (build-path (current-directory) "misc" "EvolvedSimplicity.html"))))
+
+(define (stack-step title . content)
+  `(div ((class "stack-tep-container"))
+        (h3 ,title)
+        (pre ((class "")) ,@content)))

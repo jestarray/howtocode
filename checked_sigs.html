@@ -94,7 +94,15 @@
     [else
      (cons
       (increase-wage (first psn-ls) n)
-      (raise-all-wages (rest psn-ls) n))]))</code></pre>
+      (raise-all-wages (rest psn-ls) n))]))
+
+; === Abstract Types ===
+; (: collapse ((%X %Y-&gt; Number) %Y [ListOf %X] -&gt; %Y))
+(define (collapse fn base lst)
+  (cond
+    [(empty? lst) base]
+    [else
+     (fn (first lst) (collapse fn base (rest lst) ))]))</code></pre>
             </article>
         </main>
     </div>

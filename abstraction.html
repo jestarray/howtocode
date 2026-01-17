@@ -266,7 +266,7 @@
 
 
 ; ========== collapse ==========
-; (: collapse ((Number -&gt; Number) Number [ListOf Number] -&gt; Number))
+; (: collapse ((Number Number -&gt; Number) Number [ListOf Number] -&gt; Number))
 (define (collapse fn base lst)
   (cond
     [(empty? lst) base]

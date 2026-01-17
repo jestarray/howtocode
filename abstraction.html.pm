@@ -306,7 +306,7 @@ Yes! You can even pass in function just like you would any old data like boolean
 
 
 ; ========== collapse ==========
-; (: collapse ((Number -> Number) Number [ListOf Number] -> Number))
+; (: collapse ((Number Number -> Number) Number [ListOf Number] -> Number))
 (define (collapse fn base lst)
   (cond
     [(empty? lst) base]

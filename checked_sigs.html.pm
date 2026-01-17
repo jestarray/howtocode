@@ -79,4 +79,12 @@ Find more types in the ◊a[#:href "https://docs.racket-lang.org/htdp-langs/inte
      (cons
       (increase-wage (first psn-ls) n)
       (raise-all-wages (rest psn-ls) n))]))
+
+; === Abstract Types ===
+; (: collapse ((%X %Y-> Number) %Y [ListOf %X] -> %Y))
+(define (collapse fn base lst)
+  (cond
+    [(empty? lst) base]
+    [else
+     (fn (first lst) (collapse fn base (rest lst) ))]))
 }

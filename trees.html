@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
+    <title>Trees</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/lambda.html"> Lambda</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+
+            <article>
+                <h1>Trees</h1><h2 id="binary_trees"><a class="anchor" href="#binary_trees">#</a>Binary Trees</h2><h2 id="mutual_recursion"><a class="anchor" href="#mutual_recursion">#</a>Mutual Recursion</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define (is-even n)
+  (if (= n 0)
+      #true
+      (is-odd (- n 1))))
+
+(define (is-odd n)
+  (if (= n 0)
+      #false
+      (is-even (- n 1))))
+
+(is-even 4) ; call
+
+; is_odd n=3
+; is_even n=2
+; is_odd n=1
+; is_even n=0 ;base case produce #true and bubbles back up ^</code></pre><p><img src="./images/is_even_stack.svg"/></p><p>Mutual Recursion mechanically speaking, is when functions call each other in a cycle.<br/>You can visualize this with <a href="https://pythontutor.com/render.html#code=def%20is_even%28n%29%3A%0A%20%20%20%20if%20n%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20return%20True%0A%20%20%20%20return%20is_odd%28n%20-%201%29%0A%0Adef%20is_odd%28n%29%3A%0A%20%20%20%20if%20n%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20return%20False%0A%20%20%20%20return%20is_even%28n%20-%201%29%0A%0A%0Ais_even%284%29&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;mode=display&amp;origin=opt-frontend.js&amp;py=311&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false">pythontutor</a> translated into python</p><h2 id="backtracking"><a class="anchor" href="#backtracking">#</a>Backtracking</h2><p>When we write functions over Trees, they “backtrack”. We don’t explicity write code that tells the function to backtrack, it just so happens that it’s how the code executes because of how function work at a mechanical level.</p><p>For example, take this arithmetic expression:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; evaluating:
+(* (+ 3 2 (/ 5 5)) (- 4 2)) ; multiplication is waiting
+(* (+ 3 2 1)       (- 4 2))
+(* 6               (- 4 2))
+(* 6 2) ; finally backtracking to do the multiplication
+12</code></pre><p>Note that <strong>calling</strong> and <strong>executing</strong> are two different things. Think of it like “calling” a taxi, it takes time to get here, or it can arrive immediately if nearby. An example of a function call that immediately executes is <code>(* 4 9)</code> because it doesn’t have any nested sub-expressions.</p><p>Starting from the left most operation to the right most, we see multiplication first!</p><ol><li><code>(* ...)</code> is <strong>called 1st</strong>, but it is <strong>executed last</strong>, becaues it needs all its operands to be values before it can run.</li><li><code>(+ 3 2 (/ 5 5))</code> is <strong>called 2nd</strong>, but it is <strong>executed later</strong></li><li><code>(/ 5 5)</code> is <strong>called 3rd</strong>, but it is <strong>executed 1st!</strong></li><li><code>(+ 3 2 1)</code> We <strong>backtrack</strong> to the + in <strong>step 2</strong> and can finally execute it to produce <code>6</code></li><li><code>(- 4 2)</code> <strong>called 4th</strong> and executed immediately since it has no sub functions</li><li><code>(* 6 2)</code> Finally we’re <strong>backtracking</strong> all the way to step 1 and can <strong>execute</strong></li></ol><h2 id="visualizing_the_stack"><a class="anchor" href="#visualizing_the_stack">#</a>Visualizing the Stack</h2><p>Programming languages keep track function mechanics by what is called a “stack”, which keeps track of</p><ol><li>what function is currently executing</li><li>the values of variables called with the function</li><li>the pending functions called but waiting to be executed</li></ol><p>The best way to visualize a stack is to think of a physical stack of plates. When you add a new plate, you place it on the very top. When you need to take a plate off, you take the one from the top—which was the last one you put there. This is called a “Last In, First Out” data structure.<br/>Everytime we call a function, we push it ontop of the stack, creating a “stack frame”.<br/>The item at the <strong>top of the stack</strong> is the operation that <strong>is the one that’s executing!</strong></p><p><img src="./images/stack-eval.svg"/></p><div class="stack-tep-container"><h3>1. The Initial Call</h3><pre class="">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ (* (+ 3 2 (/ 5 5)) (- 4 2))        ┃ &lt;--- Root Task
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛</pre></div><div class="stack-tep-container"><h3>2. Pushing the Addition</h3><pre class="">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ (+ 3 2 (/ 5 5))                    ┃ &lt;--- Pushed
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃ (* (...) (- 4 2))                  ┃ &lt;--- Pending
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛</pre></div><div class="stack-tep-container"><h3>3. Pushing the Division</h3><pre class="">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ (/ 5 5)                            ┃ &lt;--- Pushed
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃ (+ 3 2 (...))                      ┃ &lt;--- Pending
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃ (* (...) (- 4 2))                  ┃ &lt;--- Pending
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛</pre></div><div class="stack-tep-container"><h3>4. Resolving Division</h3><pre class="">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 1                                  ┃ &lt;--- Result
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃ (+ 3 2 (...))                      ┃ &lt;--- Resuming
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃ (* (...) (- 4 2))                  ┃ &lt;--- Pending
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛</pre></div><div class="stack-tep-container"><h3>5. Addition Resolved</h3><pre class="">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 6                                  ┃ &lt;--- Result
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃ (* (...) (- 4 2))                  ┃ &lt;--- Resuming
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛</pre></div><div class="stack-tep-container"><h3>6. Pushing Subtraction</h3><pre class="">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ (- 4 2)                            ┃ &lt;--- Pushed (Current Task)
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃ (* 6 (...))                        ┃ &lt;--- Now Resuming
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛</pre></div><div class="stack-tep-container"><h3>7. Resolving Subtraction</h3><pre class="">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 2                                  ┃ &lt;--- Result
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃ (* 6 (...))                        ┃ &lt;--- Current Task
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛</pre></div><div class="stack-tep-container"><h3>8. Final Result</h3><pre class="">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 12                                 ┃ &lt;--- Final Value
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛</pre></div><p>In reality, very simple functions like math operations aren’t really function calls in that they don’t push onto a stack frame because it comes with a performance cost, but for our purposes we can imagine it does to explain the mechanics of the stack.</p><p>Stack space is limited and if you have too many functions pushing onto the stack, you end up with what is called a "<strong>stack overflow</strong>”. We’ll address this problem with accumalators.</p>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

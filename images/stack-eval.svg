@@ -1,0 +1,111 @@
+<svg viewBox="0 0 550 250" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes slideShow {
+      0%, 12.4% { opacity: 1; z-index: 10; }
+      12.5%, 100% { opacity: 0; z-index: 0; }
+    }
+    
+    .step { 
+      opacity: 0; 
+      animation: slideShow 16s infinite; 
+      font-family: 'Courier New', monospace;
+    }
+    
+    #step1 { animation-delay: 0s; }
+    #step2 { animation-delay: 2s; }
+    #step3 { animation-delay: 4s; }
+    #step4 { animation-delay: 6s; }
+    #step5 { animation-delay: 8s; }
+    #step6 { animation-delay: 10s; }
+    #step7 { animation-delay: 12s; }
+    #step8 { animation-delay: 14s; }
+
+    .box { fill: #f8f9fa; stroke: #333; stroke-width: 2; }
+    .code { fill: #212529; font-size: 15px; }
+    .arrow { fill: #6c757d; font-size: 12px; font-style: italic; }
+    .title { font-weight: bold; font-size: 16px; fill: #000; }
+    
+    /* Highlight Colors */
+    .hl-text { fill: #d63384; font-weight: bold; } /* Pink for pushed/holes */
+    .result-box { fill: #e7f3ff; stroke: #0d6efd; }
+    .final-box { fill: #d4edda; stroke: #198754; }
+  </style>
+
+  <g id="step1" class="step">
+    <text x="20" y="30" class="title">1. The Initial Call</text>
+    <rect x="20" y="180" width="350" height="40" class="box"/>
+    <text x="30" y="205" class="code">(* (+ 3 2 (/ 5 5)) (- 4 2))</text>
+  </g>
+
+  <g id="step2" class="step">
+    <text x="20" y="30" class="title">2. Pushing the Addition</text>
+    <rect x="20" y="140" width="350" height="40" class="box"/>
+    <text x="30" y="165" class="code hl-text">(+ 3 2 (/ 5 5))</text>
+    <text x="380" y="165" class="arrow"> &lt;--- Pushed</text>
+    
+    <rect x="20" y="180" width="350" height="40" class="box"/>
+    <text x="30" y="205" class="code">(* <tspan class="hl-text">(...)</tspan> (- 4 2))</text>
+  </g>
+
+  <g id="step3" class="step">
+    <text x="20" y="30" class="title">3. Pushing the Division</text>
+    <rect x="20" y="100" width="350" height="40" class="box"/>
+    <text x="30" y="125" class="code hl-text">(/ 5 5)</text>
+    <text x="380" y="125" class="arrow"> &lt;--- Pushed</text>
+
+    <rect x="20" y="140" width="350" height="40" class="box"/>
+    <text x="30" y="165" class="code">(+ 3 2 <tspan class="hl-text">(...)</tspan>)</text>
+    
+    <rect x="20" y="180" width="350" height="40" class="box"/>
+    <text x="30" y="205" class="code">(* (...) (- 4 2))</text>
+  </g>
+
+  <g id="step4" class="step">
+    <text x="20" y="30" class="title">4. Resolving Division</text>
+    <rect x="20" y="100" width="350" height="40" class="box result-box"/>
+    <text x="30" y="125" class="code hl-text">1</text>
+    <text x="380" y="125" class="arrow"> &lt;--- Result</text>
+
+    <rect x="20" y="140" width="350" height="40" class="box"/>
+    <text x="30" y="165" class="code">(+ 3 2 <tspan class="hl-text">(...)</tspan>)</text>
+    
+    <rect x="20" y="180" width="350" height="40" class="box"/>
+    <text x="30" y="205" class="code">(* (...) (- 4 2))</text>
+  </g>
+
+  <g id="step5" class="step">
+    <text x="20" y="30" class="title">5. Addition Resolved</text>
+    <rect x="20" y="140" width="350" height="40" class="box result-box"/>
+    <text x="30" y="165" class="code hl-text">6</text>
+    <text x="380" y="165" class="arrow"> &lt;--- Result</text>
+    
+    <rect x="20" y="180" width="350" height="40" class="box"/>
+    <text x="30" y="205" class="code">(* <tspan class="hl-text">(...)</tspan> (- 4 2))</text>
+  </g>
+
+  <g id="step6" class="step">
+    <text x="20" y="30" class="title">6. Pushing Subtraction</text>
+    <rect x="20" y="140" width="350" height="40" class="box"/>
+    <text x="30" y="165" class="code hl-text">(- 4 2)</text>
+    <text x="380" y="165" class="arrow"> &lt;--- Pushed</text>
+
+    <rect x="20" y="180" width="350" height="40" class="box"/>
+    <text x="30" y="205" class="code">(* 6 <tspan class="hl-text">(...)</tspan>)</text>
+  </g>
+
+  <g id="step7" class="step">
+    <text x="20" y="30" class="title">7. Resolving Subtraction</text>
+    <rect x="20" y="140" width="350" height="40" class="box result-box"/>
+    <text x="30" y="165" class="code hl-text">2</text>
+    <text x="380" y="165" class="arrow"> &lt;--- Result</text>
+
+    <rect x="20" y="180" width="350" height="40" class="box"/>
+    <text x="30" y="205" class="code">(* 6 <tspan class="hl-text">(...)</tspan>)</text>
+  </g>
+
+  <g id="step8" class="step">
+    <text x="20" y="30" class="title">8. Final Result</text>
+    <rect x="20" y="180" width="350" height="40" class="box final-box"/>
+    <text x="30" y="205" class="code hl-text">12</text>
+  </g>
+</svg>

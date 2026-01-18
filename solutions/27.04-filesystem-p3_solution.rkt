@@ -142,11 +142,11 @@ A few tests have been done for you below
 (define (find-filesize dtory findname)
   (local
     [
-     (define in-curr (search-curr-files (dir-files dtory) findname)) ; ListOfFile -> NumberOrFalse
+     (define in-curr (search-curr-files (dir-files dtory) findname)) ; ListOfFile String -> NumberOrFalse
      ]
     (if (number? in-curr)
         in-curr
-        (find-filesize--subdirs (dir-dirs dtory) findname) ; ListOfDir -> Boolean
+        (find-filesize--subdirs (dir-dirs dtory) findname) ; ListOfDir String -> Boolean
         )))
 
 ; (: find-filesize-subdirs (ListOfDir String -> NumberOrFalse))

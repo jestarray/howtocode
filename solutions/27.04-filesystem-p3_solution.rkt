@@ -78,10 +78,11 @@ Functions:
 (define cover (make-file "cover.pdf" 2 ""))
 
 (define todo1 (make-file "todo.txt" 10 ""))
+(define todo-school (make-file "todo.txt" 19 ""))
 
 (define scripts (make-dir "scripts" empty (list part1 part2 part3 costume)))
 (define work (make-dir "work" empty (list resume cover)))
-(define school (make-dir "school" empty (list todo1)))
+(define school (make-dir "school" empty (list todo-school)))
 (define life (make-dir "life" (list work school) empty))
 (define documents (make-dir "Documents" (list scripts life) (list todo1)))
 
@@ -128,12 +129,12 @@ Carried over from 27.01!
 
 Design a function "find-filesize" that
 consumes a Dir an a String(the file's name) and
-produces the file size of the file
+produces the file size of the file in the given Dir
 A few tests have been done for you below
 |#
 
 ;(: find-file-size (Dir String -> NumberOrFalse))
-; produces the file size in the given Dir if found, otherwise #false
+; produces the file size in the given Dir if the is file found, otherwise #false
 (check-expect (find-filesize documents "asdf.txt") #false)
 (check-expect (find-filesize scripts "part3.rtf") 17)
 (check-expect (find-filesize documents "todo.txt") 10)
@@ -145,11 +146,14 @@ A few tests have been done for you below
      ]
     (if (number? in-curr)
         in-curr
-        (find-filesize-subdirs (dir-dirs dtory) findname) ; ListOfDir -> Boolean
+        (find-filesize--subdirs (dir-dirs dtory) findname) ; ListOfDir -> Boolean
         )))
 
 ; (: find-filesize-subdirs (ListOfDir String -> NumberOrFalse))
-(define (find-filesize-subdirs dirs-lst findname)
+(check-expect (find-filesize--subdirs empty "part1.rtf") #false)
+(check-expect (find-filesize--subdirs (list life) "todo.txt") 19)
+(check-expect (find-filesize--subdirs (list scripts life) "part1.rtf") 99)
+(define (find-filesize--subdirs dirs-lst findname)
   (cond
     [(empty? dirs-lst) #false]
     [else
@@ -159,10 +163,12 @@ A few tests have been done for you below
         ]
        (if (number? check-subs)
            check-subs
-           (find-filesize-subdirs (rest dirs-lst) findname)))]))
+           (find-filesize--subdirs (rest dirs-lst) findname)))]))
 
 ; (: search-curr-files (ListOfFile String -> NumberOrFalse))
 ; produces the size of the file we're trying to find in the given list, otherwise #false
+(check-expect (search-curr-files empty "asdf.png") #false)
+(check-expect (search-curr-files (dir-files scripts) "costume.png") 100)
 (define (search-curr-files files-lst findname)
   (cond
     [(empty? files-lst) #false]

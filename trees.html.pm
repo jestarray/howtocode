@@ -17,7 +17,6 @@
       (is-even (- n 1))))
 
 (is-even 4) ; call
-
 ; is_odd n=3
 ; is_even n=2
 ; is_odd n=1
@@ -135,3 +134,11 @@ The item at the ◊strong{top of the stack} is the operation that ◊strong{is t
 In reality, very simple functions like math operations aren't really function calls in that they don't push onto a stack frame because it comes with a performance cost, but for our purposes we can imagine it does to explain the mechanics of the stack.
 
 Stack space is limited and if you have too many functions pushing onto the stack, you end up with what is called a "◊strong{stack overflow}". We'll address this problem with accumalators.
+
+◊h2{Visualizing the stack with Debugger}
+You can visualize the stack using the racket debugger. The Advanced Student Debugger is kinda buggy though because it has a lot of random "??"", so we're going to switch to the full racket language temporarily to use the debugger. The changes to convert out ISL program to a full racket program is to replace the top line with:
+◊racket-code-block{
+#lang racket
+(require test-engine/racket-tests) ; for check expect to work
+}
+Note that you should comment out typed signatures, templates, etc

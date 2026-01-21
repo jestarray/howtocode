@@ -1,0 +1,48 @@
+#lang htdp/isl+
+(define PNAME 'take)
+#| Data definitions:
+CHEATSHEET: https://docs.racket-lang.org/htdp-langs/beginner.html
+TEMPLATES: https://howtocode.pages.dev/htdp_templates
+ASK FOR HELP: https://discord.com/invite/6Zq8sH5
+Turn all ❌ into ✅ for each step you complete
+
+1. Data Description✅
+   1B. if using define-struct, write all accessor signatures✅
+2. Interpretation✅
+3. Data Examples✅
+4. A function template that processes this data✅
+
+Functions:
+1. Signature, purpose, stub ✅
+2. Examples (aka check-expect/tests, elaborate the concrete) ✅
+  2B. if the function consumes a list, make sure a list of 2 or longer is tested✅
+3. Template(from data)?✅
+4. Code body ✅
+5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
+|#
+
+; ############################################################################
+
+#|PROBLEM A:
+Design the function "take". It consumes a list of Anything 
+and a natural number N. 
+It produces the first N items from the given list 
+or all of the list if the list is too short(smaller than N).
+For example:
+(take (list 4 9 2 7) 3)
+produces:
+(list 4 9 2)
+|#
+
+(: take ([ListOf %X] Number -> [ListOf %X]))
+; produces the first N items of the given list
+(check-expect (take empty 0) empty)
+(check-expect (take (list 8 7) 5) (list 8 7))
+(check-expect (take (list 4 9 2 7) 3) (list 4 9 2))
+(define (take lst num)
+  (cond
+    [(empty? lst) empty]
+    [(= num 0) empty]
+    [else
+     (cons (first lst)
+           (take (rest lst) (- num 1)))]))

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+    <script src="/prism_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="/prism.css" />
+    <script src="./slide_mode.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "268f8e8ed1cf4189996214dfee7b9d3e"}'></script><!-- End Cloudflare Web Analytics -->
+    <link rel="shortcut icon" type="image/jpg" href="images/htc_favicon.png"/>
+    <title>Simultaneous Processing</title>
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-wrapper">
+            <div id="prev">← <a href="/trees.html"> Trees</a></div>
+            <div id="home"><a href="/index.html">Index</a></div>
+
+            <article>
+                <h1>Simultaneous Processing</h1><p>If we visualize processing a list like a conveyor belt of values moving from right to left, there are 3 main scenarios.</p><div class="slide"><h2 id="process_only_1"><a class="anchor" href="#process_only_1">#</a>Process Only 1</h2><p><img src="./images/only_one_rate.svg"/><br/>Notice only one of the lists is processed, while the other sort of holds still</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(recursive-fn (rest lst1) lst2)</code></pre></div><div class="slide"><h2 id="lockstep_both_at_the_same_time"><a class="anchor" href="#lockstep_both_at_the_same_time">#</a>Lockstep both at the same time</h2><p><img src="./images/same_rate.svg"/><br/>Both lists being processed at the same time</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(recursive-fn (rest lst1) (rest lst2))</code></pre></div><div class="slide"><h2 id="both_at_different_rates"><a class="anchor" href="#both_at_different_rates">#</a>Both at different rates</h2><p><img src="./images/diff_rate.svg"/><br/>Lists are processed at different rates depending on some condition</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(if something?
+    (recursive-fn lst1 (rest lst2))
+    (recursive-fn (rest lst1) lst2))</code></pre></div><div class="slide"><h2 id="deducing_the_cases"><a class="anchor" href="#deducing_the_cases">#</a>Deducing the cases</h2><h3>Tables</h3><p>Do the table method over both inputs to see what cases you have to cover and think about, and then simplify from there. This results in an NxN cond that is a good first pass, but can be further simplified.</p><table><caption></caption><thead><tr><th></th> <th scope="col">(empty? lst1)</th>
+<th scope="col">(cons? lst1)</th></tr></thead>
+<tbody><tr><th scope="row">(empty? lst2)</th>
+<td>both lists are empty</td>
+<td>lst1 has items, lst2 is empty</td></tr>
+<tr><th scope="row">(cons? lst2)</th>
+<td>lst2 has items, lst1 is empty</td>
+<td>both lists have items</td></tr></tbody></table><p>You can use <a href="https://truben.no/table/#t=XQAAQACqBwAAAAAAAAA9iIhmlCK88bNBnMeko9jCKiwvfJt7hC80L1hchidRiHu4kC7gpDdGA8M6AQpzNlSgB21sXdygIbb7enYxls8znTnkruQYBjmFU-r6PZkuRnalF6cL-MhZWZ4tzVjc2lpLEQpCJDB10UpZHur6Y9y_yrImq5wOTIe6jsPwlZsaX9XaFGHs8Cj4h_HKZoQpLYhRs5v9GOu2d4z0xqhvRpPd9AyeGZHVBau_Oj_y2jLB26q7UyOVlEeEAuV-RzHrTVcAKLBg2lXwsVCiy5L2rhhYsAIcxpt55_IZUO8p8gQ1R5p6nHXDaqYoKzjZadfB96hYPuft_2h3rAAA">Truben.no</a> to fill in the table cases.</p></div><h3>Lists and Numbers</h3><p>Reminder that Natural Numbers can be viewed as a recursive type just like a List. You will encounter problems where you’ll consume a Number and a List and process them both. Typically the base case for the Number is zero, with recursive calls being <code>sub1</code> or <code>(- n 1)</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; A Natural is one of:
+; - 0
+; (add1 Natural)
+
+; natural-temp : (Natural -&gt; ???)
+(define (natural-temp n)
+  (cond
+    [(= 0 n) ...]
+    [else
+     (natural-temp (- n 1))]))</code></pre><table><caption></caption><thead><tr><th></th> <th scope="col">(empty? lst1)</th>
+<th scope="col">(cons? lst1)</th></tr></thead>
+<tbody><tr><th scope="row">(= num 0)</th>
+<td>lists are empty and num is zero</td>
+<td>lst1 has items, num is zero</td></tr>
+<tr><th scope="row">(&gt; num 0)</th>
+<td>num is non-zero, lst1 is empty</td>
+<td>num is non-zero, and lst1 is non-empty</td></tr></tbody></table>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

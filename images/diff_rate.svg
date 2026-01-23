@@ -1,0 +1,72 @@
+<svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    /* Total Cycle: 4 seconds (2s per belt) */
+
+    /* Top Belt Movement: Moves during first 15% of the 4s cycle */
+    @keyframes moveTop {
+      0% { transform: translateX(0); }
+      15% { transform: translateX(-100px); }
+      50%, 100% { transform: translateX(-100px); }
+    }
+
+    /* Bottom Belt Movement: Waits until 50%, then moves */
+    @keyframes moveBottom {
+      0%, 50% { transform: translateX(0); }
+      65% { transform: translateX(-100px); }
+      100% { transform: translateX(-100px); }
+    }
+
+    /* Top Lead Fade: Fades during its pause (20% to 40%) */
+    @keyframes fadeTop {
+      0%, 20% { opacity: 1; }
+      40%, 100% { opacity: 0; }
+    }
+
+    /* Bottom Lead Fade: Fades during its pause (70% to 90%) */
+    @keyframes fadeBottom {
+      0%, 70% { opacity: 1; }
+      90%, 100% { opacity: 0; }
+    }
+
+    .belt-top { animation: moveTop 4s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+    .fade-top { animation: fadeTop 4s infinite linear; }
+    
+    .belt-bottom { animation: moveBottom 4s infinite cubic-bezier(0.4, 0, 0.2, 1); }
+    .fade-bottom { animation: fadeBottom 4s infinite linear; }
+
+    .footer-text {
+      font-family: 'Segoe UI', sans-serif;
+      font-weight: bold;
+      font-size: 18px;
+      fill: #333;
+      text-anchor: middle;
+    }
+  </style>
+
+  <rect x="50" y="80" width="300" height="10" fill="#444" rx="5" />
+  <rect x="50" y="180" width="300" height="10" fill="#444" rx="5" />
+
+  <defs>
+    <clipPath id="beltView">
+      <rect x="48" y="0" width="304" height="240" />
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#beltView)">
+    <g class="belt-top">
+      <rect class="fade-top" x="155" y="45" width="30" height="30" fill="#d2b48c" stroke="#8b4513" stroke-width="2" />
+      <rect x="255" y="45" width="30" height="30" fill="#d2b48c" stroke="#8b4513" stroke-width="2" />
+      <rect x="355" y="45" width="30" height="30" fill="#d2b48c" stroke="#8b4513" stroke-width="2" />
+      <rect x="455" y="45" width="30" height="30" fill="#d2b48c" stroke="#8b4513" stroke-width="2" />
+    </g>
+
+    <g class="belt-bottom">
+      <rect class="fade-bottom" x="155" y="145" width="30" height="30" fill="#6495ed" stroke="#00008b" stroke-width="2" />
+      <rect x="255" y="145" width="30" height="30" fill="#6495ed" stroke="#00008b" stroke-width="2" />
+      <rect x="355" y="145" width="30" height="30" fill="#6495ed" stroke="#00008b" stroke-width="2" />
+      <rect x="455" y="145" width="30" height="30" fill="#6495ed" stroke="#00008b" stroke-width="2" />
+    </g>
+  </g>
+
+  <text x="200" y="240" class="footer-text">Different rates</text>
+</svg>

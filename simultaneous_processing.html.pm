@@ -59,6 +59,26 @@ Do the table method over both inputs to see what cases you have to cover and thi
 }
 You can use ◊a[#:href "https://truben.no/table/#t=XQAAQACqBwAAAAAAAAA9iIhmlCK88bNBnMeko9jCKiwvfJt7hC80L1hchidRiHu4kC7gpDdGA8M6AQpzNlSgB21sXdygIbb7enYxls8znTnkruQYBjmFU-r6PZkuRnalF6cL-MhZWZ4tzVjc2lpLEQpCJDB10UpZHur6Y9y_yrImq5wOTIe6jsPwlZsaX9XaFGHs8Cj4h_HKZoQpLYhRs5v9GOu2d4z0xqhvRpPd9AyeGZHVBau_Oj_y2jLB26q7UyOVlEeEAuV-RzHrTVcAKLBg2lXwsVCiy5L2rhhYsAIcxpt55_IZUO8p8gQ1R5p6nHXDaqYoKzjZadfB96hYPuft_2h3rAAA"]{Truben.no} to fill in the table cases.
 }
+
+◊slide{
+◊h3{Simultaneous Recursion Template}
+It helps writing out all the 4 cases in both the tests and templates to elaborate what the function should do
+◊racket-code-block{
+; sim-recur-temp : (ListOfX ListOfX -> ???)
+(define (sim-recur-temp lst1 lst2)
+  (cond
+    [(and (empty? lst1) (empty? lst2))
+     ...]
+    [(and (cons? lst1) (empty? lst2))
+     (... (first lst1) (rest lst1))]
+    [(and (empty? lst1) (cons? lst2))
+     (... (first lst2) (rest lst2))]
+    [(and (cons? lst1) (cons? lst2))
+     (... (first lst1) (first lst2) (rest lst1) (rest lst2))]))
+}
+}
+
+
 ◊h3{Lists and Numbers}
 Reminder that Natural Numbers can be viewed as a recursive type just like a List. You will encounter problems where you'll consume a Number and a List and process them both. Typically the base case for the Number is zero, with recursive calls being ◊code{sub1} or ◊code{(- n 1)}
 ◊racket-code-block{

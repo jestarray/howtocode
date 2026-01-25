@@ -81,6 +81,7 @@ It helps writing out all the 4 cases in both the tests and templates to elaborat
 
 ◊h3{Lists and Numbers}
 Reminder that Natural Numbers can be viewed as a recursive type just like a List. You will encounter problems where you'll consume a Number and a List and process them both. Typically the base case for the Number is zero, with recursive calls being ◊code{sub1} or ◊code{(- n 1)}
+◊slide{
 ◊racket-code-block{
 ; A Natural is one of:
 ; - 0
@@ -93,7 +94,9 @@ Reminder that Natural Numbers can be viewed as a recursive type just like a List
     [else
      (natural-temp (- n 1))]))
 }
+}
 
+◊slide{
 ◊table{
   ◊thead{
     ◊tr{
@@ -114,4 +117,23 @@ Reminder that Natural Numbers can be viewed as a recursive type just like a List
       ◊td{num is non-zero, and lst1 is non-empty}
     }
   }
+}
+}
+
+◊slide{
+The list and natural numbers(as a recursive type) looks like this:
+◊racket-code-block{
+; num-list-temp : (ListOfAny Number -> ???)
+(define (num-list-temp lst num)
+  (cond
+    [(and (empty? lst) (= num 0))
+     ...]
+    [(and (cons? lst) (= num 0))
+     (... (first lst) (num-list-temp (rest lst) num))]
+    [(and (empty? lst) (> num 0))
+     (... num (num-list-temp (rest lst) (- num 1)))]
+    [(and (cons? lst) (> num 0))
+     (... (first lst) num
+          (num-list-temp (rest lst) (- num 1)))]))
+}
 }

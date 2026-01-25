@@ -142,3 +142,6 @@ You can visualize the stack using the racket debugger. The Advanced Student Debu
 (require test-engine/racket-tests) ; for check expect to work
 }
 Note that you should comment out typed signatures, templates, etc
+
+Here are some other good resources on recursion and mutual recursion
+◊a[#:href "https://www.youtube.com/watch?v=YuaJ8x_NcLw"]{Nic Barker - Recursion, Explained Simply}

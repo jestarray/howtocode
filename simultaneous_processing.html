@@ -40,7 +40,7 @@
     [(and (empty? lst1) (cons? lst2))
      (... (first lst2) (rest lst2))]
     [(and (cons? lst1) (cons? lst2))
-     (... (first lst1) (first lst2) (rest lst1) (rest lst2))]))</code></pre></div><h3>Lists and Numbers</h3><p>Reminder that Natural Numbers can be viewed as a recursive type just like a List. You will encounter problems where you’ll consume a Number and a List and process them both. Typically the base case for the Number is zero, with recursive calls being <code>sub1</code> or <code>(- n 1)</code></p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; A Natural is one of:
+     (... (first lst1) (first lst2) (rest lst1) (rest lst2))]))</code></pre></div><h3>Lists and Numbers</h3><p>Reminder that Natural Numbers can be viewed as a recursive type just like a List. You will encounter problems where you’ll consume a Number and a List and process them both. Typically the base case for the Number is zero, with recursive calls being <code>sub1</code> or <code>(- n 1)</code></p><div class="slide"><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; A Natural is one of:
 ; - 0
 ; (add1 Natural)
 
@@ -49,14 +49,25 @@
   (cond
     [(= 0 n) ...]
     [else
-     (natural-temp (- n 1))]))</code></pre><table><caption></caption><thead><tr><th></th> <th scope="col">(empty? lst1)</th>
+     (natural-temp (- n 1))]))</code></pre></div><div class="slide"><table><caption></caption><thead><tr><th></th> <th scope="col">(empty? lst1)</th>
 <th scope="col">(cons? lst1)</th></tr></thead>
 <tbody><tr><th scope="row">(= num 0)</th>
 <td>lists are empty and num is zero</td>
 <td>lst1 has items, num is zero</td></tr>
 <tr><th scope="row">(&gt; num 0)</th>
 <td>num is non-zero, lst1 is empty</td>
-<td>num is non-zero, and lst1 is non-empty</td></tr></tbody></table>
+<td>num is non-zero, and lst1 is non-empty</td></tr></tbody></table></div><div class="slide"><p>The list and natural numbers(as a recursive type) looks like this:</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">; num-list-temp : (ListOfAny Number -&gt; ???)
+(define (num-list-temp lst num)
+  (cond
+    [(and (empty? lst) (= num 0))
+     ...]
+    [(and (cons? lst) (= num 0))
+     (... (first lst) (num-list-temp (rest lst) num))]
+    [(and (empty? lst) (&gt; num 0))
+     (... num (num-list-temp (rest lst) (- num 1)))]
+    [(and (cons? lst) (&gt; num 0))
+     (... (first lst) num
+          (num-list-temp (rest lst) (- num 1)))]))</code></pre></div>
             </article>
         </main>
     </div>

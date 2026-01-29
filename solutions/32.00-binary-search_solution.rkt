@@ -51,7 +51,8 @@ is smaller than the given data; find examples that cause the function to loop
 Design the function "linear-search". It consumes a list of Numbers
 and a natural number N which is the Number we're trying to find.
 Produce #true if the given number is in the list
-NOTE: You cannot use "member?"
+NOTE: You cannot use any of the built in functions, e.g "member?"
+This is a structural recursion problem
 |#
 
 (: linear-search ([ListOf Number] Number -> Boolean))
@@ -74,14 +75,14 @@ Produce #true if the given number is in the list.
 Note that binary-search ONLY works
 if the input list is SORTED from least to greatest
 For example:
-(binary-serach (list 5 9 10) 9) => #true
+(binary-search (list 5 9 10 13 20) 9) => #true
 
 This would be in invalid use because the list is NOT sorted
-(binary-search (list 5 10 9) 9)
+(binary-search (list 13 5 10 9 20) 9) => ???
 
 It searches a number like humans searching a word in the dictionary, in that
 you open the book approximately in the middle & flip left and right
-to get closer to what you're trying to find.
+to get closer to what you're trying to find, sort of in a zig-zag pattern.
 
 The algorithm is:
 1. Find the Middle: Look at the element in the exact center of your current range.
@@ -91,6 +92,11 @@ The algorithm is:
 Repeat: Eliminate the half where the target can't be, 
 and repeat the process on the remaining half until you find the number or run out of list.
 
+HINT: use the built in "list-ref".
+This is a generative recursion problem.
+Chances are your recursive call is not (rest lst)
+Do not use any built in search functions
+
 This animation shows how it works:
 https://en.wikipedia.org/wiki/Binary_search#/media/File:Binary-search-work.gif
 |#
@@ -99,10 +105,13 @@ https://en.wikipedia.org/wiki/Binary_search#/media/File:Binary-search-work.gif
 ; produces #true if the number exists within the given list
 ; ASSUMES the list is already sorted
 ; how?: searches it by eliminating half of the problem step
-(check-expect (binary-search empty 4) #false)
+(check-expect (binary-search empty 9) #false)
 (check-expect (binary-search (list 4) 4) #true)
+(check-expect (binary-search (list 4) -100) #false)
 (check-expect (binary-search (list 8 25) 25) #true)
-(check-expect (binary-search (list 4 7 9) 7) #true)
+(check-expect (binary-search (list 8 25) -100) #false)
+(check-expect (binary-search (list 5 9 10) 9) #true)
+(check-expect (binary-search (list 5 9 10 13 20) 9) #true)
 (define (binary-search lst find-num)
   (cond
     [(empty? lst) #false]
@@ -129,7 +138,7 @@ and see which is faster.
 Google "linear vs binray search graph"
 |#
 ; Benchmark:
-;(define bench-list-len 1000000) ; set to 100k to millions
+;(define bench-list-len 100000) ; set to 100k to millions
 ;(define bench-list (build-list bench-list-len (lambda (i) (* i 2))))
 ;(define mid-num (list-ref bench-list (/ bench-list-len 2)))
 ;(define random-num (list-ref bench-list (random bench-list-len)))
@@ -140,6 +149,7 @@ Google "linear vs binray search graph"
 
 (: take ([ListOf Number] Number -> [ListOf Number]))
 ; keeps the first n items from l if possible or everything
+(check-expect (take empty 100) empty)
 (check-expect (take (list 9 4 8) 2)
               (list 9 4))
 (define (take lst num)
@@ -150,6 +160,7 @@ Google "linear vs binray search graph"
 
 (: drop ([ListOf Number] Number -> [ListOf Number]))
 ; removes the first n items from l if possible or everything
+(check-expect (drop empty 100) empty)
 (check-expect (drop (list 9 2 4) 2)
               (list 4))
 (define (drop lst num)

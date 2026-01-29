@@ -54,3 +54,31 @@ and use the built-in function "member?".
      (if (member? (first lst) ref)
          (+ 1 (count-members (rest lst) ref))
          (count-members (rest lst) ref))]))
+
+; first pass
+#;
+(define (count-members lst ref)
+  (cond
+    [(and (empty? lst) (empty? ref))
+     0]
+    [(and (cons? lst) (empty? ref))
+     0]
+    [(and (empty? lst) (cons? ref))
+     0]
+    [(and (cons? lst) (cons? ref))
+     (if (member? (first lst) ref)
+         (+ 1 (count-members (rest lst) ref))
+         (count-members (rest lst) ref))]))
+
+; template
+#;
+(define (count-members lst ref)
+  (cond
+    [(and (empty? lst) (empty? ref))
+     ...]
+    [(and (cons? lst) (empty? ref))
+     (... (first lst) (rest lst))]
+    [(and (empty? lst) (cons? ref))
+     (... (first ref) (rest ref))]
+    [(and (cons? lst) (cons? ref))
+     (... (first lst) (first ref) (rest lst) (rest ref))]))

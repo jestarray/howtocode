@@ -89,3 +89,22 @@ You should assume both lists start off with the same length
      (if (string=? "rock" p2)
          -1
          1)]))
+
+; old first try
+#;
+(define (vs p1 p2)
+  (cond
+    ;; Rock cases
+    [(and (string=? p1 "rock") (string=? p2 "rock"))      0]
+    [(and (string=? p1 "rock") (string=? p2 "paper"))    -1]
+    [(and (string=? p1 "rock") (string=? p2 "scissors"))  1]
+
+    ;; Paper cases
+    [(and (string=? p1 "paper") (string=? p2 "paper"))     0]
+    [(and (string=? p1 "paper") (string=? p2 "rock"))      1]
+    [(and (string=? p1 "paper") (string=? p2 "scissors")) -1]
+
+    ;; Scissors cases
+    [(and (string=? p1 "scissors") (string=? p2 "scissors")) 0]
+    [(and (string=? p1 "scissors") (string=? p2 "rock"))    -1]
+    [(and (string=? p1 "scissors") (string=? p2 "paper"))    1]))

@@ -42,6 +42,7 @@ Hint: Think carefully about the values of both lists. You might see a way to
 change a cell content so that 2 cells have the same value.
 |#
 (: merge ([ListOf Number] [ListOf Number] -> [ListOf Number]))
+; merges the two sorted lists into a single list with the numbers in both lists in ascending order
 (check-expect (merge empty empty) empty)
 (check-expect (merge empty (list 1 3 5)) (list 1 3 5))
 (check-expect (merge (list 0 2 4) empty) (list 0 2 4))

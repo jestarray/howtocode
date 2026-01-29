@@ -46,3 +46,16 @@ produces:
     [else
      (cons (first lst)
            (take (rest lst) (- num 1)))]))
+
+; first try
+#;
+(define (take lst num)
+  (cond
+    [(and (empty? lst) (zero? num))
+     ...]
+    [(and (cons? lst) (zero? num))
+     (... (first lst) (rest lst))]
+    [(and (empty? lst) (> num 0))
+     (... num (- num 1))]
+    [(and (cons? lst) (> num 0))
+     (... (first lst) (rest lst) (- num 1))]))

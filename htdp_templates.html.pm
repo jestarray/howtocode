@@ -621,3 +621,16 @@ Then, because both Ball and Paddle are non-primitive types (types that you yours
     }
   }
 }
+
+◊h2{Generative Recursion}
+In contrast to structural recursion where the recursive call just falls out of the data definition template, Generative recursion functions vary but the general gist of it is that you have some trivial problem(i.e the base case), and your recursive call ◊strong{MIGHT} and often require extra insight and an ◊strong{AHA} moment.
+◊racket-code-block{
+(define (gen-rec-fn p)
+  (cond
+    [(trivial? p) (solve p)]
+    [else
+     (combine-solutions
+       p
+       (gen-rec-fn
+         (sub-problem p)))]))
+}

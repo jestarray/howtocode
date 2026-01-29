@@ -419,7 +419,14 @@ Note: form and group all templates in mutual reference cycle together</td>
 <td></td>
 <td>Call to other type's template function:
 <code>(fn-for-lod (dir-subdirs d)</code>
-<code>(fn-for-dir (first lod))</code></td></tr></tbody></table>
+<code>(fn-for-dir (first lod))</code></td></tr></tbody></table><h2 id="generative_recursion"><a class="anchor" href="#generative_recursion">#</a>Generative Recursion</h2><p>In contrast to structural recursion where the recursive call just falls out of the data definition template, Generative recursion functions vary but the general gist of it is that you have some trivial problem(i.e the base case), and your recursive call <strong>MIGHT</strong> and often require extra insight and an <strong>AHA</strong> moment.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define (gen-rec-fn p)
+  (cond
+    [(trivial? p) (solve p)]
+    [else
+     (combine-solutions
+       p
+       (gen-rec-fn
+         (sub-problem p)))]))</code></pre>
             </article>
         </main>
     </div>

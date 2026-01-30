@@ -47,13 +47,20 @@
         ;(!procedure blue-eyed-linage? 1)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
-        (set-test-max-score! 4)
+        (set-test-max-score! 9)
 
-(@test "binary-search#1" "err" (binary-search empty 4) #false 1)
-(@test "binary-search#2" "err" (binary-search (list 4) 4) #true 1)
-(@test "binary-search#3" "err" (binary-search (list 8 25) 25) #true 1)
-(@test "binary-search#4" "err" (binary-search (list 4 7 9) 7) #true 1)
-
+(@test "binary-search#1" "err" (binary-search empty 9) #false 1)
+(@test "binary-search#2" "err" (binary-search (list 4) 9) #false 1)
+(@test "binary-search#3" "err" (binary-search (list 4) 4) #true 1)
+(@test "binary-search#4" "err" (binary-search (list 8 25) 8) #true 1)
+(@test "binary-search#5" "err" (binary-search (list 8 25) 25) #true 1)
+(@test "binary-search#6" "err" (binary-search (list 8 25) -111) #false 1)
+(@test "binary-search#7" "err" (binary-search (list 8 25) 55) #false 1)
+(@test "binary-search#8" "err" (binary-search (list 5 9 10 13 20) 9) #true 1)
+(@test "binary-search#9" "err" (binary-search (list 5 9 10 13 20) 13) #true 1)
+(@test "binary-search#10" "err" (binary-search (list 5 9 10 13 20) 13) #true 1)
+(@test "binary-search#11" "err" (binary-search (list 5 9 10 13 20) 0) #false 1)
+(@test "binary-search#12" "err" (binary-search (list 5 9 10 13 20) 100) #false 1)
         )
 (post:
  (add-score-to-report!)

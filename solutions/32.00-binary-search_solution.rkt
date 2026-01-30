@@ -77,7 +77,7 @@ if the input list is SORTED from least to greatest
 For example:
 (binary-search (list 5 9 10 13 20) 9) => #true
 
-This would be in invalid use because the list is NOT sorted
+This would be an INVALID use because the list is NOT sorted
 (binary-search (list 13 5 10 9 20) 9) => ???
 
 It searches a number like humans searching a word in the dictionary, in that
@@ -85,7 +85,7 @@ you open the book approximately in the middle & flip left and right
 to get closer to what you're trying to find, sort of in a zig-zag pattern.
 
 The algorithm is:
-1. Find the Middle: Look at the element in the exact center of your current range.
+1. Find the Middle: Look at the element in the exact center of your current list. 
 2. Compare: * If the middle number is your target, you’re done!
 3. If your target is smaller than the middle, you know it must be in the left half.
 4. If your target is larger than the middle, it must be in the right half.
@@ -106,26 +106,30 @@ https://en.wikipedia.org/wiki/Binary_search#/media/File:Binary-search-work.gif
 ; ASSUMES the list is already sorted
 ; how?: searches it by eliminating half of the problem step
 (check-expect (binary-search empty 9) #false)
+(check-expect (binary-search (list 4) 9) #false)
 (check-expect (binary-search (list 4) 4) #true)
-(check-expect (binary-search (list 4) -100) #false)
+(check-expect (binary-search (list 8 25) 8) #true)
 (check-expect (binary-search (list 8 25) 25) #true)
-(check-expect (binary-search (list 8 25) -100) #false)
-(check-expect (binary-search (list 5 9 10) 9) #true)
+(check-expect (binary-search (list 8 25) -111) #false)
+(check-expect (binary-search (list 8 25) 55) #false)
 (check-expect (binary-search (list 5 9 10 13 20) 9) #true)
+(check-expect (binary-search (list 5 9 10 13 20) 13) #true)
+(check-expect (binary-search (list 5 9 10 13 20) 0) #false)
+(check-expect (binary-search (list 5 9 10 13 20) 100) #false)
 (define (binary-search lst find-num)
   (cond
     [(empty? lst) #false]
     [else
      (local
        [
-        (define mid-index (floor (/ (length lst) 2))) ; if its a decimal, floor it
+        (define mid-index (floor (/ (length lst) 2))) ; prevent decimal numbers
         (define mid-num (list-ref lst mid-index))
         ]
        (cond
          [(= mid-num find-num) #true]
-         [(> find-num mid-num)
-          (binary-search (drop lst mid-index) find-num)]
-         [(< find-num mid-num)
+         [(> find-num mid-num) ; search right half
+          (binary-search (drop lst (add1 mid-index)) find-num)]
+         [(< find-num mid-num) ; search left half
           (binary-search (take lst mid-index) find-num)]))]))
 
 #|BENCHMARK:
@@ -138,7 +142,7 @@ and see which is faster.
 Google "linear vs binray search graph"
 |#
 ; Benchmark:
-;(define bench-list-len 100000) ; set to 100k to millions
+;(define bench-list-len 10000) ; set to 100k to millions
 ;(define bench-list (build-list bench-list-len (lambda (i) (* i 2))))
 ;(define mid-num (list-ref bench-list (/ bench-list-len 2)))
 ;(define random-num (list-ref bench-list (random bench-list-len)))

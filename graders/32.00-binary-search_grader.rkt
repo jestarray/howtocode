@@ -47,7 +47,7 @@
         ;(!procedure blue-eyed-linage? 1)
 
         ; MAX SCORE SHOULD BE (N / TOTAL-UNIT-TESTS)
-        (set-test-max-score! 9)
+        (set-test-max-score! 12)
 
 (@test "binary-search#1" "err" (binary-search empty 9) #false 1)
 (@test "binary-search#2" "err" (binary-search (list 4) 9) #false 1)

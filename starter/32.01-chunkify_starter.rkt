@@ -50,7 +50,7 @@ produces:
 (list (list 9 1 2) (list 0 4))
 
 Boundary test:
-(bundle (list 9 7) 3)
+(chunkify (list 9 7) 3)
 produces:
 (list (list 9 7))
 |#

@@ -50,46 +50,65 @@ produces:
 (list (list 9 1 2) (list 0 4))
 
 Boundary test:
-(bundle (list 9 7) 3)
+(chunkify (list 9 7) 3)
 produces:
 (list (list 9 7))
 |#
 
 (: chunkify ([ListOf Number] Number -> [ListOf [ListOf Number]]))
-; bundles chunks of s into strings of length n
-; idea take n items and drop n at a time
+; bundles chunks of the given list into clumps of length N
+; how? by chopping off and grabbing the N-clumps of the list
+
+(check-expect (chunkify empty 100) empty)
 (check-expect (chunkify empty 0) empty)
 (check-expect (chunkify empty 1) empty)
-(check-expect (chunkify (list 9 4) 1)
-              (list (list 9) (list 4)))
-(check-expect (chunkify (list 9 4) 2)
-              (list (list 9 4)))
-(check-expect (chunkify (list 7 0 9) 2)
-              (list (list 7 0) (list 9)))
+(check-expect (chunkify (list 4 9) 1)
+              (list (list 4) (list 9)))
+(check-expect (chunkify (list 4 9) 2)
+              (list (list 4 9)))
+(check-expect (chunkify (list 9 7) 3)
+              (list (list 9 7)))
+(check-expect (chunkify (list 4 9 2 7 1 0) 2)
+              (list (list 4 9) (list 2 7) (list 1 0)))
+;(define (chunkify lst num) empty)
 (define (chunkify lst num)
   (cond
     [(empty? lst) empty]
     [(zero? num) empty]
     [else
-     (cons (take lst num)
-           (chunkify (drop lst num) num))]))
+     (cons (grab lst num)
+           (chunkify (chopoff lst num) num))]))
 
-(: take ([ListOf Number] Number -> [ListOf Number]))
-; keeps the first n items from l if possible or everything
-(check-expect (take (list 9 4 8) 2)
-              (list 9 4))
-(define (take lst num)
+(: grab ([ListOf Number] Number -> [ListOf Number]))
+; grabs the first N elements of the given list
+(check-expect (grab empty 0) empty)
+(check-expect (grab empty 1000) empty)
+(check-expect (grab (list 8 7 4) 2)
+              (list 8 7))
+(check-expect (grab (list 8 7 4) 10)
+              (list 8 7 4))
+(define (grab lst num)
   (cond
-    [(zero? num) empty]
     [(empty? lst) empty]
-    [else (cons (first lst) (take (rest lst) (sub1 num)))]))
+    [(zero? num) empty]
+    [else
+     (cons (first lst)
+           (grab (rest lst) (- num 1)))]))
 
-(: drop ([ListOf Number] Number -> [ListOf Number]))
-; removes the first n items from l if possible or everything
-(check-expect (drop (list 9 2 4) 2)
-              (list 4))
-(define (drop lst num)
+(: chopoff ([ListOf Number] Number -> [ListOf Number]))
+; chops off the first N elements of the given list
+(check-expect (chopoff empty 0) empty)
+(check-expect (chopoff empty 100) empty)
+(check-expect (chopoff (list 1) 100) empty)
+(check-expect (chopoff (list 8 5) 2) empty)
+(check-expect (chopoff (list 8 5) 1)
+              (list 5))
+(check-expect (chopoff (list 8 5 2 5) 2)
+              (list 2 5))
+;(define (chopoff lst num) empty)
+(define (chopoff lst num)
   (cond
+    [(empty? lst) empty]
     [(zero? num) lst]
-    [(empty? lst) lst]
-    [else (drop (rest lst) (sub1 num))]))
+    [else
+      (chopoff (rest lst) (- num 1))]))

@@ -99,13 +99,6 @@ To qsort a list, we will first make the problem
 smaller by breaking it into two lists, sort them, and then
 put them back together. 
 
-We will break it in two lists by taking the first element -- 
-which we call the PIVOT, and then filtering out two lists, one
-w/ elements less than the pivot and one w/ elements greater
-than the pivot. Once those lists are sorted, we can append
-the < list, a list consisting of just the pivot and the >
-list back back together to get the result.
-
                (list 6 8 1 9 3 7 2)
 
                /         |        \
@@ -126,31 +119,33 @@ list back back together to get the result.
     empty 2  empty
 
 
-This way of sorting is called QUICKSORT. It is a generative
-recursion.
 Steps in qsort:
 
 1) define the first item in the list as the "pivot"
-
 2) Create two lists:
     - "lower" -  all values are lower than pivot
     - "higher" - all values are higher than the pivot
-
 3) apply the qsort algorithm (steps 1 and 2) to the two created lists
    until the lists we create are empty
-
 4) append the sorted "lower" list, with a list containing the pivot
    with the sorted "higher" list
 
-You are NOT allowed to use built in sort functions, e.g quicksort, sort,
-or insertion sort
+For example in the diagram above:
+6 is the pivot, so we gather up all the numbers less than 6,
+and then all the ones greater than 6, and recursively apply those until they are just
+numbers and empty lists. Then combine them together with append.
+
+This way of sorting is called "quicksort". It is a generative
+recursion.
+
+You are NOT allowed to use builtin sort functions, e.g quicksort, sort,
+or insertion sort.
 Section in the book:
 https://htdp.org/2025-12-27/Book/part_five.html#(part._sec~3aquick-sort)
 |#
 
 (: qsort ([ListOf Number] -> [ListOf Number]))
-; produces a sorted version of lst
-; assume the numbers are all distinct
+; produces a sorted version of lst using the quicksort algorithm described above
 (check-expect (qsort empty) empty)
 (check-expect (qsort (list 7))
               (list 7))
@@ -158,21 +153,51 @@ https://htdp.org/2025-12-27/Book/part_five.html#(part._sec~3aquick-sort)
               (list 5 7))
 (check-expect (qsort (list 8 4 9 1))
               (list 1 4 8 9))
+;(define (qsort lst) empty)
 (define (qsort lst)
   (cond
     [(empty? lst) empty]
     [else
-     (local ((define pivot (first lst)))
-       (append (qsort (smallers lst pivot))
-               (list pivot)
-               (qsort (largers lst pivot))))]))
+     (local
+       [
+        (define pivot (first lst)) ; Number
+        (define lower (smaller lst pivot))
+        (define higher (larger lst pivot))
+        ]
+       (append
+        (qsort lower)
+        (list pivot)
+        (qsort higher)))]))
 
-(: smallers ([ListOf Number] Number -> [ListOf Number]))
-; produces all the numbers smaller than the given number(pivot)
-(define (smallers lst pivot)
-  (filter (lambda (val) (< val pivot)) lst))
 
-(: largers ([ListOf Number] Number -> [ListOf Number]))
-; produces all the numbers smaller than the given number(pivot)
-(define (largers lst pivot)
-  (filter (lambda (val) (< val pivot)) lst))
+(: smaller ([ListOf Number] Number -> [ListOf Number]))
+; produces all the numbers smaller than the given number(the pivot)
+(check-expect (smaller empty 5) empty)
+(check-expect (smaller (list 1 2 3 4 5 6 7 8 9) 5)
+              (list 1 2 3 4))
+(check-expect (smaller (list 9 5 2 4 0 8 2 4 1) 5)
+              (list 2 4 0 2 4 1))
+;(define (smaller lst num) empty)
+(define (smaller lst num)
+  (cond
+    [(empty? lst) empty]
+    [else
+     (if (< (first lst) num)
+         (cons (first lst) (smaller (rest lst) num))
+         (smaller (rest lst) num))]))
+
+
+(: larger ([ListOf Number] Number -> [ListOf Number]))
+; produces all the numbers larger than the given number(the pivot)
+(check-expect (larger empty 5) empty)
+(check-expect (larger (list 1 2 3 4 5 6 7 8 9) 5)
+              (list 6 7 8 9))
+(check-expect (larger (list 9 5 2 4 0 8 2 4 1) 5)
+              (list 9 8))
+(define (larger lst num)
+  (cond
+    [(empty? lst) empty]
+    [else
+     (if (> (first lst) num)
+         (cons (first lst) (larger (rest lst) num))
+         (larger (rest lst) num))]))

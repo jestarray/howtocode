@@ -58,19 +58,14 @@ https://upload.wikimedia.org/wikipedia/commons/9/9c/Insertion-sort-example.gif
 |#
 (: isort ([ListOf Number] -> [ListOf Number]))
 (define (isort lst) empty)
+
+
 #|PROBLEM B:
 Design "qsort", which implements the quick-sort algorithim as described:
 
 To qsort a list, we will first make the problem
 smaller by breaking it into two lists, sort them, and then
 put them back together. 
-
-We will break it in two lists by taking the first element -- 
-which we call the PIVOT, and then filtering out two lists, one
-w/ elements less than the pivot and one w/ elements greater
-than the pivot. Once those lists are sorted, we can append
-the < list, a list consisting of just the pivot and the >
-list back back together to get the result.
 
                (list 6 8 1 9 3 7 2)
 
@@ -92,24 +87,27 @@ list back back together to get the result.
     empty 2  empty
 
 
-This way of sorting is called QUICKSORT. It is a generative
-recursion.
 Steps in qsort:
 
 1) define the first item in the list as the "pivot"
-
 2) Create two lists:
     - "lower" -  all values are lower than pivot
     - "higher" - all values are higher than the pivot
-
 3) apply the qsort algorithm (steps 1 and 2) to the two created lists
    until the lists we create are empty
-
 4) append the sorted "lower" list, with a list containing the pivot
    with the sorted "higher" list
 
-You are NOT allowed to use built in sort functions, e.g quicksort, sort,
-or insertion sort
+For example in the diagram above:
+6 is the pivot, so we gather up all the numbers less than 6,
+and then all the ones greater than 6, and recursively apply those until they are just
+numbers and empty lists. Then combine them together with append.
+
+This way of sorting is called "quicksort". It is a generative
+recursion.
+
+You are NOT allowed to use builtin sort functions, e.g quicksort, sort,
+or insertion sort.
 Section in the book:
 https://htdp.org/2025-12-27/Book/part_five.html#(part._sec~3aquick-sort)
 |#

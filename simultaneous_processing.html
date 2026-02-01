@@ -19,7 +19,7 @@
         <main class="main-wrapper">
             <div id="prev">← <a href="/trees.html"> Trees</a></div>
             <div id="home"><a href="/index.html">Index</a></div>
-
+            <div id="next"><a href="/generative_recursion.html">What is Generative Recursion aka Algorithms?</a> →</div>
             <article>
                 <h1>Simultaneous Processing</h1><p>If we visualize processing a list like a conveyor belt of values moving from right to left, there are 3 main scenarios.</p><div class="slide"><h2 id="process_only_1"><a class="anchor" href="#process_only_1">#</a>Process Only 1</h2><p><img src="./images/only_one_rate.svg"/><br/>Notice only one of the lists is processed, while the other sort of holds still</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(recursive-fn (rest lst1) lst2)</code></pre></div><div class="slide"><h2 id="lockstep_both_at_the_same_time"><a class="anchor" href="#lockstep_both_at_the_same_time">#</a>Lockstep both at the same time</h2><p><img src="./images/same_rate.svg"/><br/>Both lists being processed at the same time</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(recursive-fn (rest lst1) (rest lst2))</code></pre></div><div class="slide"><h2 id="both_at_different_rates"><a class="anchor" href="#both_at_different_rates">#</a>Both at different rates</h2><p><img src="./images/diff_rate.svg"/><br/>Lists are processed at different rates depending on some condition</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(if something?
     (recursive-fn lst1 (rest lst2))

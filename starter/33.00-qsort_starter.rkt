@@ -35,32 +35,6 @@ is smaller than the given data; find examples that cause the function to loop
 ; ############################################################################
 
 #|PROBLEM A:
-Design "isort"(aka insertion sort) which consumes a ListOfNumber and
-produces a ListOfNumber with the number sorted from smallest to largest.
-For example:
-(isort (list 8 4 9 1))
-produces:
-(list 1 4 8 9)
-
-The function sorts the numbers in the list by checking every number and
-comparing it against every other number in the list
-and inserting it in the right place.
-
-This requires a helper function "insert" which consumes a ListOfNumber and a Number
-and assumes the list is already sorted(even though it sometimes isn't).
-It does so by inserting the given number in front of the first number it encounters
-that is greater than it
-This is a structural recursion problem!
-The function inserts the Number in what is assumed to be an already sorted list
-
-Here's a genernal visualization of how it works:
-https://upload.wikimedia.org/wikipedia/commons/9/9c/Insertion-sort-example.gif
-|#
-(: isort ([ListOf Number] -> [ListOf Number]))
-(define (isort lst) empty)
-
-
-#|PROBLEM B:
 Design "qsort", which implements the quick-sort algorithim as described:
 
 To qsort a list, we will first make the problem
@@ -113,4 +87,5 @@ https://htdp.org/2025-12-27/Book/part_five.html#(part._sec~3aquick-sort)
 |#
 
 (: qsort ([ListOf Number] -> [ListOf Number]))
+; produces the given list but sorted, using the quicksort algo described above
 (define (qsort lst) empty)

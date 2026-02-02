@@ -35,64 +35,6 @@ is smaller than the given data; find examples that cause the function to loop
 ; ############################################################################
 
 #|PROBLEM A:
-Design "isort"(aka insertion sort) which consumes a ListOfNumber and
-produces a ListOfNumber with the number sorted from smallest to largest.
-For example:
-(isort (list 8 4 9 1))
-produces:
-(list 1 4 8 9)
-
-The function sorts the numbers in the list by checking every number and
-comparing it against every other number in the list
-and inserting it in the right place.
-
-This requires a helper function "insert" which consumes a ListOfNumber and a Number
-and assumes the list is already sorted(even though it sometimes isn't).
-It does so by inserting the given number in front of the first number it encounters
-that is greater than it
-This is a structural recursion problem!
-The function inserts the Number in what is assumed to be an already sorted list
-
-Here's a genernal visualization of how it works:
-https://upload.wikimedia.org/wikipedia/commons/9/9c/Insertion-sort-example.gif
-|#
-(check-expect (isort empty) empty)
-(check-expect (isort (list 7))
-              (list 7))
-(check-expect (isort (list 8 4 9 1))
-              (list 1 4 8 9))
-(: isort ([ListOf Number] -> [ListOf Number]))
-; produces a sorted version of l
-(define (isort lst)
-  (cond
-    [(empty? lst) empty]
-    [else
-     (insert (first lst) (isort (rest lst)))]))
-
-(: insert ([ListOf Number] -> [ListOf Number]))
-; inserts the given number in the correct position of the given list
-; it does so by inserting the given number in front of the first number
-; it encounters that is greater than it
-; we assume that the given list is already sorted
-(check-expect (insert empty 94)
-              (list 94))
-(check-expect (insert (list 4) 9)
-              (list 4 9))
-(check-expect (insert (list 4) 0)
-              (list 0 4))
-(check-expect (insert (list 8 5) 6)
-              (list 8 5 6))
-(check-expect (insert (list 8 5) 1)
-              (list 1 8 5))
-(define (insert num lst)
-  (cond
-    [(empty? lst) (cons num empty)]
-    [else
-     (if (<= num (first lst))
-         (cons num lst) ; put it in front!
-         (cons (first lst) (insert num (rest lst))))]))
-
-#|PROBLEM B:
 Design "qsort", which implements the quick-sort algorithim as described:
 
 To qsort a list, we will first make the problem

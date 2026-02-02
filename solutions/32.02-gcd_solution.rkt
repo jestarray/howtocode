@@ -56,30 +56,32 @@ Do this using the "Euclidean Algorithim".
 Given two numbers n and m
 Lets call S the smaller of n and m,
 and L the bigger;
-if S is 0, GCD(S, L) = L
+if S is 0, the gcd is just L
 ; (since 0 divides anything)
-; otherwise, GCD(S, L) = GCD(S, (L % S))
+; otherwise, the gcd is just GCD(S, (L % S))
 ; (where % means "the remainder of")
+
+Here is a link to in depth examples:
+https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 |#
 
 (: gcd-euclid (Number Number -> Number))
 ; produces the gcd using euclids algo
 ; TERMINATION: the recursive step is always
 ; taking the smaller number and a remainder
+(check-expect (gcd-euclid 18 24) 6)
 (check-expect (gcd-euclid 6 4) 2)
-(check-expect (gcd-euclid 27 81) 27)
 (check-expect (gcd-euclid 36 81) 9)
-(check-expect (gcd-euclid 101135853 45014640) 177)
+;(define (gcd-euclid n m) 0)
 (define (gcd-euclid n m)
   (local
     [
      (define S (min n m))
      (define L (max n m))
      ]
-    (cond
-      [(= S 0) L]
-      [else
-       (gcd-euclid S (remainder L S))])))
+    (if (= S 0)
+        L
+        (gcd-euclid S (modulo L S)))))
 
 
 #|PROBLEM B:

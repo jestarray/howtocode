@@ -13,12 +13,12 @@ Turn all ❌ into ✅ for each step you complete
 4. A function template that processes this data✅
 
 Functions:
-1. Signature, purpose, stub ✅
-2. Examples (aka check-expect/tests, elaborate the concrete) ✅
-  2B. if the function consumes a list, make sure a list of 2 or longer is tested✅
-3. Template(from data)?✅
-4. Code body ✅
-5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ✅
+1. Signature, purpose, stub ❌
+2. Examples (aka check-expect/tests, elaborate the concrete) ❌
+  2B. if the function consumes a list, make sure a list of 2 or longer is tested❌
+3. Template(from data)?❌
+4. Code body ❌
+5. Test, review, and refactor(review all steps, ctrl+i to auto-format) ❌
 
 Generative Recursion Questions:
 1. Include "how" the function will compute the result in the purpose statement,
@@ -56,10 +56,13 @@ Do this using the "Euclidean Algorithim".
 Given two numbers n and m
 Lets call S the smaller of n and m,
 and L the bigger;
-if S is 0, GCD(S, L) = L
+if S is 0, the gcd is just L
 ; (since 0 divides anything)
-; otherwise, GCD(S, L) = GCD(S, (L % S))
+; otherwise, the gcd is just GCD(S, (L % S))
 ; (where % means "the remainder of")
+
+Here is a link to in depth examples:
+https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 |#
 
 (: gcd-euclid (Number Number -> Number))

@@ -328,7 +328,24 @@ Turn all ❌ into ✅ for each step you complete
         ; ▲   ^ self reference
         ; │
         ; │
-        ; (2) ... contribution to the base</code></pre><h2 id="data_driven_templates"><a class="anchor" href="#data_driven_templates">#</a>Data Driven Templates</h2><table><caption></caption><thead><th>Type of Data</th>
+        ; (2) ... contribution to the base</code></pre><h2 id="mutual_recursion"><a class="anchor" href="#mutual_recursion">#</a>Mutual Recursion</h2><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define-struct person [name subs])
+;Person is (make-person String ListOfPerson)
+
+; A ListOfPerson is one of:
+; - empty
+; - (cons Person ListOfPerson)
+
+#;
+(define (fn-for-person p)
+  (... (person-name p)
+       (fn-for-lop (person-subs p)))) ;mutual recursion from mutual-reference
+
+#;
+(define (fn-for-lop lop)
+  (cond [(empty? lop) ...]
+        [else
+         (... (fn-for-person (first lop)) ;mutual recursion from mutual-reference
+              (fn-for-lop (rest lop)))])) ;natural recursion from self-reference</code></pre><h2 id="data_driven_templates"><a class="anchor" href="#data_driven_templates">#</a>Data Driven Templates</h2><table><caption></caption><thead><th>Type of Data</th>
 <th>cond question (if applicable)</th>
 <th>Body or cond answer(if applicable)</th></thead>
 <tbody><tr><td><strong>Base Generic</strong>
@@ -418,7 +435,7 @@ Then, because both Ball and Paddle are non-primitive types (types that you yours
 Note: form and group all templates in mutual reference cycle together</td>
 <td></td>
 <td>Call to other type's template function:
-<code>(fn-for-lod (dir-subdirs d)</code>
+<code>(fn-for-lod (dir-subdirs d))</code>
 <code>(fn-for-dir (first lod))</code></td></tr></tbody></table><h2 id="generative_recursion"><a class="anchor" href="#generative_recursion">#</a>Generative Recursion</h2><p>In contrast to structural recursion where the recursive call just falls out of the data definition template, Generative recursion functions vary but the general gist of it is that you have some trivial problem(i.e the base case), and your recursive call <strong>MIGHT</strong> and often require extra insight and an <strong>AHA</strong> moment.</p><pre class="line-numbers match-braces rainbow-braces"><code class="language-racket">(define (gen-rec-fn p)
   (cond
     [(trivial? p) (solve p)]

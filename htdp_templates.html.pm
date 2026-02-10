@@ -468,6 +468,28 @@ For more information on the ◊a[#:href "https://docs.racket-lang.org/teachpack/
         ; (2) ... contribution to the base
 }
 
+◊h2{Mutual Recursion}
+◊racket-code-block{
+(define-struct person [name subs])
+;Person is (make-person String ListOfPerson)
+
+; A ListOfPerson is one of:
+; - empty
+; - (cons Person ListOfPerson)
+
+#;
+(define (fn-for-person p)
+  (... (person-name p)
+       (fn-for-lop (person-subs p)))) ;mutual recursion from mutual-reference
+
+#;
+(define (fn-for-lop lop)
+  (cond [(empty? lop) ...]
+        [else
+         (... (fn-for-person (first lop)) ;mutual recursion from mutual-reference
+              (fn-for-lop (rest lop)))])) ;natural recursion from self-reference
+}
+
 ◊h2{Data Driven Templates}
 ◊table{
   ◊thead{
@@ -616,7 +638,7 @@ Then, because both Ball and Paddle are non-primitive types (types that you yours
       Note: form and group all templates in mutual reference cycle together}
       ◊td{}
       ◊td{Call to other type's template function:
-      ◊code{(fn-for-lod (dir-subdirs d)}
+      ◊code{(fn-for-lod (dir-subdirs d))}
       ◊code{(fn-for-dir (first lod))}}
     }
   }

@@ -104,8 +104,9 @@ The "render-queens" function is provided for you to help visualize
 ; Board is a [ListOf Pos]
 ; interp. represents an EXISTING queen on a board
 (define no-queens empty)
-(define 1queen (list (make-pos 4 2)))
-(define 2queens (list (make-pos 4 2) (make-pos 0 0)))
+(define 1queen (list (make-pos 0 0)))
+(define 4queens-solution#1 (list (make-pos 3 2) (make-pos 2 0) (make-pos 1 3) (make-pos 0 1)))
+(define 4queens-solution#2 (list (make-pos 2 3) (make-pos 0 2) (make-pos 3 1) (make-pos 1 0)))
 
 (: render-queens (Number [ListOf Pos] -> %Image))
 ; produces the rendering of an NxN chess board with the queens placed

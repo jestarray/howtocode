@@ -160,9 +160,18 @@ The "render-queens" function is provided for you to help visualize
 (check-expect (n-queens 2) #false)
 (check-expect (n-queens 3) #false)
 (check-expect (n-queens 4)
-              (list (make-pos 3 2) (make-pos 2 0) (make-pos 1 3) (make-pos 0 1)))
+              (list
+               (make-pos 1 0)
+               (make-pos 3 1)
+               (make-pos 0 2)
+               (make-pos 2 3)))
 (check-expect (n-queens 5)
-              (list (make-pos 4 3) (make-pos 3 1) (make-pos 2 4) (make-pos 1 2) (make-pos 0 0)))
+              (list
+               (make-pos 1 0)
+               (make-pos 3 1)
+               (make-pos 0 2)
+               (make-pos 2 3)
+               (make-pos 4 4)))
 
 (define (n-queens n)
   (local
@@ -184,24 +193,39 @@ The "render-queens" function is provided for you to help visualize
      ]
     (find-solution-board empty)))
 
+(: every-pos (Number -> [ListOf Pos]))
+; produces a list of every grid coordinate
+(check-expect (every-pos 0) empty)
+(check-expect (every-pos 2)
+              (list (make-pos 1 1) (make-pos 0 1) (make-pos 1 0) (make-pos 0 0)))
+(define (every-pos n)
+  (local
+    [
+     (define (helper i)
+       (if (< i 0)
+           empty
+           (cons (make-pos (modulo i n) (floor (/ i n))) (helper (- i 1)))))
+     ]
+    (helper (- (* n n) 1))))
+
+(: filter-valid-pos ([ListOf Pos] [ListOf Pos] -> [ListOf Pos]))
+; keep only the valid positions where the list of given queens do not threaten
+(check-expect (filter-valid-pos empty (every-pos 3))
+              (every-pos 3))
+(check-expect (filter-valid-pos (list (make-pos 0 0)) (every-pos 3)) ; existing queen in top left
+              (list (make-pos 1 2) (make-pos 2 1)))
+(define (filter-valid-pos existing-queens every-pos)
+  (filter (lambda (pos)
+            (not (threatening-existing? pos existing-queens))) every-pos))
+
 (: place-queens ([ListOf Pos] Number -> [ListOf [ListOf Pos]]))
 ; generates the range of posibilities where a queen can be placed without
 ; threatening other queens
 (define (place-queens existing-queens n)
   (local
     [
-     ; -> ListOfPos
-     (define every-pos
-       (foldl
-        (lambda (x base)
-          (append base
-                  (map (lambda (y)
-                         (make-pos x y))
-                       (range 0 n 1)))) empty (range 0 n 1)))
-     ; ListOfPos
-     (define valid-queens
-       (filter (lambda (pos)
-                 (not (threatening-existing? pos existing-queens))) every-pos))
+     (define all-pos (every-pos n))
+     (define valid-queens (filter-valid-pos existing-queens all-pos))
      ]
     (map (lambda (valid)
            (cons valid existing-queens)) valid-queens)))

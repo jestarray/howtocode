@@ -134,7 +134,7 @@
 
 ;thead<tr<th>> -> xml table
 ; can take 1 heading, or list of them
-(define (table headings #:caption [caption empty] #:style [style empty] . entries )
+(define (table headings #:caption [caption empty] #:style [style empty] . entries)
   (txexpr 'table style (append (match caption
                                  [s #:when (string? caption) (list (txexpr 'caption empty (list s)))]
                                  [s #:when (and (not (empty? caption)) (symbol? (car caption))) (list (txexpr 'caption empty (list s)))]
@@ -161,20 +161,20 @@
   (define sdoc-string
     (string-append "<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/" link "?autoplay=1><img src=https://img.youtube.com/vi/" cleaned-link-for-thumbnail "/hqdefault.jpg><span>▶</span></a>"))
   (txexpr
-   'details
-   start-open
-   (list
-    (txexpr
-     'summary '((style "color:red;")) (list headline))
-    (txexpr
-     'iframe
-     `((srcdoc ,sdoc-string)
-       (allow "picture-in-picture")
-       (allowfullscreen "true")
-       (loading "lazy")
-       (width "560")
-       (height "315"))
-     empty))))
+    'details
+    start-open
+    (list
+      (txexpr
+        'summary '((style "color:red;")) (list headline))
+      (txexpr
+        'iframe
+        `((srcdoc ,sdoc-string)
+          (allow "picture-in-picture")
+          (allowfullscreen "true")
+          (loading "lazy")
+          (width "560")
+          (height "315"))
+        empty))))
 
 ; String -> String
 ; flips the bits
@@ -191,7 +191,7 @@
 ;Number -> List<Char>
 ;use padded version for padding negative numbers
 ; NEGATIVE NUMBERS HAVE TO ACCOUNT FOR BIT WIDTH
-(define (deci->binary  n #:width [width 0])
+(define (deci->binary n #:width [width 0])
   (define conv (~r #:base 2 (abs n)))
   ; Number -> Binary String
   (define (pad n)
@@ -215,13 +215,13 @@
 (define (h2 s)
   (define slug (string-downcase (string-replace s " " "_")))
   (txexpr
-   'h2
-   `((id ,slug))
-   (list
-    (txexpr 'a
-            `((class "anchor") (href ,(string-append "#" slug)))
-            '("#"))
-    s)))
+    'h2
+    `((id ,slug))
+    (list
+      (txexpr 'a
+              `((class "anchor") (href ,(string-append "#" slug)))
+              '("#"))
+      s)))
 
 
 ;for backwards compatability reasons
@@ -292,7 +292,7 @@
 
 ; string path relative to image folder, e.g "/images"
 (define (img-row #:width [width "10vh"] . paths)
-  (txexpr 'div '((class "layout-spread-row wrap")) (map (lambda (i) (txexpr 'img (list (cons 'src (cons i empty)) '(style "width: 10vh") ) empty)) paths)
+  (txexpr 'div '((class "layout-spread-row wrap")) (map (lambda (i) (txexpr 'img (list (cons 'src (cons i empty)) '(style "width: 10vh")) empty)) paths)
           ))
 
 (define (max-bit-table f caption)
@@ -315,7 +315,7 @@
     (define count (+ MAX-NEG LEN))
     (cond [(= LEN MAX) (reverse acc)]
           [else
-           (define r (deci->binary count #:width bits) )
+           (define r (deci->binary count #:width bits))
            (aux (cons (list count (cond [(negative? count) (highlight-msb (rest r))]
                                         [else (list->string r)])
 

@@ -34,16 +34,22 @@
      (exit 1)]))
 
 ; ---------------------------------------------------------------------------
-; "section" lookup
+; "section" and "resources" lookup
 ;
 ; Each problem belongs to a section of the course, and the section name is the
 ; text in parentheses at the end of the matching youtube video's title, e.g.
 ;   "how to code racket - 131 qsort(generative recursion algorithms)"
 ; has the section "generative recursion algorithms".
 ;
+; The same matching video supplies the problem's "resources" entry:
+;   (hasheq 'title "how to code racket - 131 qsort(...)"
+;           'kind "video"
+;           'url "https://youtu.be/jR7KQbr3R6s")
+;
 ; Not every video has a section in its title, and not every problem has a
 ; video at all.  Those cases are reported at the bottom of the run instead of
-; guessing, so they can be dealt with separately.
+; guessing, so they can be dealt with separately.  A problem with no video gets
+; an empty "resources" list.
 ; ---------------------------------------------------------------------------
 
 (define playlist-id "PLitFP8FdScfE5nwRovCwdhhW9RTx98q3J")
@@ -159,20 +165,19 @@
   (filter (lambda (v) (string=? (name-key (video-name (hash-ref v 'title))) wanted))
           videos))
 
-; String (listof (hash ...)) -> (hash ...) or #f
-(define (video-for-assignment assignment-name videos)
-  (define matches (videos-for-assignment assignment-name videos))
-  (and (pair? matches) (first matches)))
+; the "kind" and the url used by every "resources" entry
+(define video-resource-kind "video")
+(define video-url-prefix "https://youtu.be/")
 
 ; String (listof (hash ...)) -> String or #f
-; The section of the video whose name matches, or #f when there is no matching
-; video or the video's title has no "(section)".
-(define (section-for-assignment assignment-name videos)
+; The section of the videos that name this problem, or #f when no video named
+; it or none of their titles has a "(section)".
+; Takes the videos already matched by videos-for-assignment.
+(define (section-for-videos assignment-name videos)
   (define sections
     (remove-duplicates
      (filter values
-             (map (lambda (v) (video-section (hash-ref v 'title)))
-                  (videos-for-assignment assignment-name videos)))))
+             (map (lambda (v) (video-section (hash-ref v 'title))) videos))))
   (cond
     [(null? sections) #f]
     [(> (length sections) 1)
@@ -180,6 +185,16 @@
               assignment-name sections)
      (first sections)]
     [else (first sections)]))
+
+; (listof (hash ...)) -> (listof (hash 'title String 'kind String 'url String))
+; The videos that name this problem, as the json's "resources" entries.
+; Takes the videos already matched by videos-for-assignment, and keeps their
+; playlist order.
+(define (resources-for-videos videos)
+  (for/list ([v (in-list videos)])
+    (hasheq 'title (hash-ref v 'title "")
+            'kind video-resource-kind
+            'url (string-append video-url-prefix (hash-ref v 'videoId "")))))
 
 ; What the "section" field says when no video gave us one.
 (define no-section-placeholder "none")
@@ -654,6 +669,9 @@
 ; problems we could not find a section for, so the run can report them
 (define no-section-assignments (make-hash))
 
+; problems with no youtube video, which get an empty "resources" list
+(define no-video-assignments (make-hash))
+
 ; create the hash for the json, where we make gather the funcs used as hints
 (define valid-assignments&hints
   (map
@@ -665,15 +683,22 @@
      (define-values (all-contents err?) (read-thing-from-file solution-path))
      (define contents (first (rest (rest (rest all-contents)))))
      (define all-hint-funts (hints-from-contents contents))
-     (define found (section-for-assignment problem-name-and-number all-youtube-videos))
+     ; the playlist entries that name this problem, used for "section" and
+     ; "resources" alike
+     (define matched-videos
+       (videos-for-assignment problem-name-and-number all-youtube-videos))
+     (define found (section-for-videos problem-name-and-number matched-videos))
      (unless found
        (hash-set! no-section-assignments problem-name-and-number
-                  (video-for-assignment problem-name-and-number all-youtube-videos)))
+                  (and (pair? matched-videos) (first matched-videos))))
+     (when (null? matched-videos)
+       (hash-set! no-video-assignments problem-name-and-number #t))
      (define section (or found no-section-placeholder))
      (make-hash
       `((name ,@problem-name-and-number)
         (hints ,@all-hint-funts)
-        (section ,@section)))) has-start-sol-grader))
+        (section ,@section)
+        (resources ,@(resources-for-videos matched-videos))))) has-start-sol-grader))
 
 ; Report the problems we could not attach a real section to.  Their json entry
 ; says "none", and this says why.  Not every problem has a video, and not every
@@ -686,6 +711,14 @@
       (printf "  ~a -- its video has no \"(section)\" in the title: ~a\n"
               assignment (hash-ref video 'title))
       (printf "  ~a -- no matching youtube video\n" assignment)))
+
+; Report the problems that matched no video at all.  Their json entry has an
+; empty "resources" list, so there is nothing to show for them yet.
+(when use-youtube?
+  (printf "~a problems have no youtube video, so their \"resources\" list is empty:\n"
+          (hash-count no-video-assignments))
+  (for ([assignment (in-list (sort (hash-keys no-video-assignments) string<?))])
+    (printf "  ~a\n" assignment)))
 
 ; List<String>
 (define assignment-folders
